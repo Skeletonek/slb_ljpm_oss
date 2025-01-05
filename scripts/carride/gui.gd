@@ -2,59 +2,60 @@ extends Control
 
 signal touchscreen_move(direction: bool)
 
-@export var LabelTime: Label
-@export var LabelMilk: Label
-@onready var Speedometer: Label = $HBoxContainer3/LabelSpeed
-@onready var GameOverPanel := $PanelContainer
-@onready var ScoreLabel := $PanelContainer/MarginContainer/VBoxContainer/ScoreLabel
-@onready var PlayagainButton := $PanelContainer/MarginContainer/VBoxContainer/PlayAgainBtn
+const MINIMUM_SWIPE_DRAG = 60
+
+@export var label_time: Label
+@export var label_milk: Label
 
 var diff_time: int
-
-const MINIMUM_SWIPE_DRAG = 60
 var swipe_start: Vector2
 var stop_processing := false
 
-# Called when the node enters the scene tree for the first time.
+@onready var speedometer: Label = $HBoxContainer3/LabelSpeed
+@onready var game_over_panel := $PanelContainer
+@onready var score_label := $PanelContainer/MarginContainer/VBoxContainer/ScoreLabel
+@onready var play_again_button := $PanelContainer/MarginContainer/VBoxContainer/PlayAgainBtn
+
+
 func _ready():
 	if SettingsBus.easier_font:
-		LabelTime.label_settings.font_size = 32
+		label_time.label_settings.font_size = 32
 	diff_time = 0
 	SignalBus.enable_touchscreen_vbuttons.connect(_enable_vbuttons)
-	if SettingsBus.touchscreen_control == SettingsBus.TOUCHSCREEN_CONTROL_MODE.VButtons:
+	if SettingsBus.touchscreen_control == SettingsBus.TouchscreenControlMode.VBUTTONS:
 		_enable_vbuttons(true)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+
+func _process(_delta):
 	if not stop_processing:
-		diff_time = Time.get_ticks_msec() - owner.start_time
+		diff_time = owner.time
 		var miliseconds: int = diff_time % 1000
 		var seconds: int = (diff_time / 1000) % 60
 		var minutes: int = (diff_time / 1000) / 60
-		LabelTime.text = ("%02d:%02d:%03d" % [minutes, seconds, miliseconds])
-		Speedometer.text = ("%.3f" % [owner.speed])
+		label_time.text = ("%02d:%02d:%03d" % [minutes, seconds, miliseconds])
+		speedometer.text = ("%.3f" % [owner.speed])
 
 
 func update_points():
-	LabelMilk.text = str(owner.milks)
+	label_milk.text = str(owner.milks)
 
 
 func game_over():
 	stop_processing = true
-	ScoreLabel.text = str(owner.final_score)
-	PlayagainButton.grab_focus()
-	GameOverPanel.show()
+	score_label.text = str(owner.final_score)
+	play_again_button.grab_focus()
+	game_over_panel.show()
 
 
 func _gui_input(event):
 	if event is InputEventScreenTouch:
-		if SettingsBus.touchscreen_control == SettingsBus.TOUCHSCREEN_CONTROL_MODE.Tap:
+		if SettingsBus.touchscreen_control == SettingsBus.TouchscreenControlMode.TAP:
 			if event.pressed and event.index == 0:
 				if event.position.y > (get_viewport().get_visible_rect().size.y / 2):
 					touchscreen_move.emit(false)
 				else:
 					touchscreen_move.emit(true)
-		elif SettingsBus.touchscreen_control == SettingsBus.TOUCHSCREEN_CONTROL_MODE.Swipe:
+		elif SettingsBus.touchscreen_control == SettingsBus.TouchscreenControlMode.SWIPE:
 			if event.pressed and event.index == 0:
 				swipe_start = event.get_position()
 			elif event.index == 0:

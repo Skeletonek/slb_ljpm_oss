@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b3s4cwxn6uu8o"]
 
 [ext_resource type="Script" path="res://scripts/ui/nodes/AchievementContainer.gd" id="1_e227g"]
-[ext_resource type="Texture2D" uid="uid://dmv6us1skqn5r" path="res://images/icons/slb2icon.png" id="2_wbikk"]
+[ext_resource type="Texture2D" uid="uid://hp6lqwb7wasv" path="res://images/icons/slb2icon.png" id="2_wbikk"]
 
 [node name="AchievementContainer" type="VBoxContainer"]
 custom_minimum_size = Vector2(150, 100)

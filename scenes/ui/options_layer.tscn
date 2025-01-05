@@ -40,13 +40,17 @@ gradient = SubResource("Gradient_tecms")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pyy0l"]
 
-[node name="OptionsLayer" type="CanvasLayer" node_paths=PackedStringArray("fullscreen_button", "graphics_api_button", "graphics_api_restart", "vsync_button", "framerate_cap_input", "blur_button", "ui_scaling_slider", "master_slider", "sfx_slider", "music_slider", "master_input", "sfx_input", "music_input", "devconsole_button", "devfps_button", "tch_tap_button", "tch_swipe_button", "tch_vbuttons_button", "playername_edit", "playername_uuid", "reduced_motion_button", "easier_font_button", "fullscreen_android_info", "back_button")]
+[node name="OptionsLayer" type="CanvasLayer" node_paths=PackedStringArray("fullscreen_button", "graphics_api_button", "graphics_api_restart", "vsync_button", "vsync_info", "linux_windowing_system_button", "linux_windowing_system_restart", "linux_windowing_system_info", "framerate_cap_spinbox", "blur_button", "ui_scaling_slider", "master_slider", "sfx_slider", "music_slider", "master_input", "sfx_input", "music_input", "devconsole_button", "devfps_button", "tch_tap_button", "tch_swipe_button", "tch_vbuttons_button", "playername_edit", "playername_uuid", "reduced_motion_button", "easier_font_button", "fullscreen_android_info", "back_button")]
 script = ExtResource("1_cahn6")
 fullscreen_button = NodePath("TabContainer/Grafika/MarginContainer/VBoxContainer/FullScreen/FullScreenButton")
 graphics_api_button = NodePath("TabContainer/Grafika/MarginContainer/VBoxContainer/GraphicsAPI/GraphicsAPIButton")
 graphics_api_restart = NodePath("TabContainer/Grafika/MarginContainer/VBoxContainer/GraphicsAPI/GraphicsAPIRestartLabel")
 vsync_button = NodePath("TabContainer/Grafika/MarginContainer/VBoxContainer/VSync/VSyncButton")
-framerate_cap_input = NodePath("TabContainer/Grafika/MarginContainer/VBoxContainer/Framelimit/FramelimitButton")
+vsync_info = NodePath("TabContainer/Grafika/MarginContainer/VBoxContainer/VSync/VSyncLabelDesc")
+linux_windowing_system_button = NodePath("TabContainer/Grafika/MarginContainer/VBoxContainer/WindowingSystem/LinuxWindowingSystemButton")
+linux_windowing_system_restart = NodePath("TabContainer/Grafika/MarginContainer/VBoxContainer/WindowingSystem/LinuxWindowingSystemRestartLabel")
+linux_windowing_system_info = NodePath("TabContainer/Grafika/MarginContainer/VBoxContainer/WindowingSystem/LinuxWindowingSystemLabelDesc")
+framerate_cap_spinbox = NodePath("TabContainer/Grafika/MarginContainer/VBoxContainer/Framelimit/FramelimitSpinner")
 blur_button = NodePath("TabContainer/Grafika/MarginContainer/VBoxContainer/UIBlur/UIBlurButton")
 ui_scaling_slider = NodePath("TabContainer/Grafika/MarginContainer/VBoxContainer/UIScaling/Container/TextureRect/UIScalingSlider")
 master_slider = NodePath("TabContainer/Audio/VBoxContainer/HBoxContainer2/MasterSlider")
@@ -168,7 +172,7 @@ vertical_alignment = 1
 [node name="VSyncLabelDesc" type="Label" parent="TabContainer/Grafika/MarginContainer/VBoxContainer/VSync"]
 visible = false
 layout_mode = 2
-text = "Ustawienia pełnego ekranu są niedostępne na platformie Android"
+text = "Część ustawień jest niedostępna na platformie Android"
 label_settings = SubResource("LabelSettings_rskjs")
 horizontal_alignment = 1
 
@@ -200,12 +204,20 @@ size_flags_horizontal = 3
 text = "System wyświetlania okien:"
 vertical_alignment = 1
 
+[node name="LinuxWindowingSystemRestartLabel" type="Label" parent="TabContainer/Grafika/MarginContainer/VBoxContainer/WindowingSystem"]
+visible = false
+layout_mode = 2
+text = "Zmiana tego ustawienia wymaga restartu gry"
+label_settings = SubResource("LabelSettings_rskjs")
+horizontal_alignment = 1
+
 [node name="LinuxWindowingSystemLabelDesc" type="Label" parent="TabContainer/Grafika/MarginContainer/VBoxContainer/WindowingSystem"]
 visible = false
 layout_mode = 2
-text = "Ustawienia pełnego ekranu są niedostępne na platformie Android"
+text = "Ustawienia systemu wyświetlania okien 
+są dostępne tylko na systemach Linux"
 label_settings = SubResource("LabelSettings_rskjs")
-horizontal_alignment = 1
+horizontal_alignment = 2
 
 [node name="LinuxWindowingSystemInfoButton" type="Button" parent="TabContainer/Grafika/MarginContainer/VBoxContainer/WindowingSystem"]
 layout_mode = 2
@@ -237,13 +249,16 @@ text = "Ustawienia pełnego ekranu są niedostępne na platformie Android"
 label_settings = SubResource("LabelSettings_rskjs")
 horizontal_alignment = 1
 
-[node name="FramelimitButton" type="LineEdit" parent="TabContainer/Grafika/MarginContainer/VBoxContainer/Framelimit"]
+[node name="FramelimitSpinner" type="SpinBox" parent="TabContainer/Grafika/MarginContainer/VBoxContainer/Framelimit"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
-text = "60"
+min_value = 30.0
+max_value = 999.0
+value = 60.0
+rounded = true
 alignment = 1
 editable = false
-virtual_keyboard_type = 2
+custom_arrow_step = 5.0
 
 [node name="UIBlur" type="HBoxContainer" parent="TabContainer/Grafika/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 40)
@@ -859,8 +874,8 @@ bus = &"SFX"
 [connection signal="pressed" from="TabContainer/Grafika/MarginContainer/VBoxContainer/VSync/VSyncInfoButton" to="." method="_on_info_button_pressed" binds= ["vsync"]]
 [connection signal="item_selected" from="TabContainer/Grafika/MarginContainer/VBoxContainer/VSync/VSyncButton" to="." method="_on_v_sync_button_item_selected"]
 [connection signal="pressed" from="TabContainer/Grafika/MarginContainer/VBoxContainer/WindowingSystem/LinuxWindowingSystemInfoButton" to="." method="_on_info_button_pressed" binds= ["linux_window_sys"]]
-[connection signal="item_selected" from="TabContainer/Grafika/MarginContainer/VBoxContainer/WindowingSystem/LinuxWindowingSystemButton" to="." method="_on_v_sync_button_item_selected"]
-[connection signal="text_submitted" from="TabContainer/Grafika/MarginContainer/VBoxContainer/Framelimit/FramelimitButton" to="." method="_on_framelimit_button_text_submitted"]
+[connection signal="item_selected" from="TabContainer/Grafika/MarginContainer/VBoxContainer/WindowingSystem/LinuxWindowingSystemButton" to="." method="_on_linux_windowing_system_button_item_selected"]
+[connection signal="value_changed" from="TabContainer/Grafika/MarginContainer/VBoxContainer/Framelimit/FramelimitSpinner" to="." method="_on_framelimit_button_value_changed"]
 [connection signal="toggled" from="TabContainer/Grafika/MarginContainer/VBoxContainer/UIBlur/UIBlurButton" to="." method="_on_ui_blur_button_toggled"]
 [connection signal="value_changed" from="TabContainer/Grafika/MarginContainer/VBoxContainer/UIScaling/Container/TextureRect/UIScalingSlider" to="." method="_on_ui_scaling_slider_value_changed"]
 [connection signal="drag_ended" from="TabContainer/Audio/VBoxContainer/HBoxContainer2/MasterSlider" to="." method="_on_master_slider_drag_ended"]

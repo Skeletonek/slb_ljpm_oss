@@ -55,6 +55,8 @@ func _on_area_entered(area):
 #			process_mode = Node.PROCESS_MODE_DISABLED
 			$CrashPlayer.process_mode = Node.PROCESS_MODE_ALWAYS
 			owner.game_over()
+		if area.name.contains("OutOfBounds"):
+			AchievementSystem.call_achievement("offroad")
 
 
 func move(dir_up: bool):
@@ -63,7 +65,7 @@ func move(dir_up: bool):
 
 
 func _reduce_motion(yes):
-	if yes: 
+	if yes:
 		$LukaszczykWPandzie.stop()
 	else:
 		$LukaszczykWPandzie.play("default")

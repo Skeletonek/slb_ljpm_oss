@@ -14,13 +14,13 @@ var animation_vector := Vector2.ZERO
 var animation_timer := Timer.new()
 
 @onready
-var AchvPlayer = $AchvPlayer
+var achv_player = $AchvPlayer
 @onready
-var AchvTitle = $HBoxContainer/MarginContainer2/VBoxContainer/AchvTitleLabel
+var achv_title = $HBoxContainer/MarginContainer2/VBoxContainer/AchvTitleLabel
 @onready
-var AchvDesc = $HBoxContainer/MarginContainer2/VBoxContainer/AchvDescLabel
+var achv_desc = $HBoxContainer/MarginContainer2/VBoxContainer/AchvDescLabel
 @onready
-var AchvIcon = $HBoxContainer/MarginContainer/AchvIcon
+var achv_icon = $HBoxContainer/MarginContainer/AchvIcon
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -31,7 +31,7 @@ func _ready():
 func _process(delta):
 	if animation_state == SLIDE_DOWN or animation_state == SLIDE_UP:
 		position += animation_vector * ANIMATION_SPEED * delta
-		
+
 		# Arriving to end
 		if position.y >= anim_max_y:
 			animation_state = WAIT
@@ -49,12 +49,12 @@ func show_achievement(achievement: Array):
 	var description = achievement[ACHV_DESC]
 	var icon = achievement[ACHV_ICON]
 
-	AchvTitle.text = title
-	AchvDesc.text = description
-	AchvIcon.texture = icon
+	achv_title.text = title
+	achv_desc.text = description
+	achv_icon.texture = icon
 	animation_state = SLIDE_DOWN
 	animation_vector = Vector2.DOWN
-	AchvPlayer.play()
+	achv_player.play()
 
 
 func _wait_for_achievement_end():

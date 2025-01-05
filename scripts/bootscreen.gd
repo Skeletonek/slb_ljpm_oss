@@ -23,6 +23,8 @@ func _load_main_menu(_anim_name = ""):
 
 
 func _input(event):
-	if not block and ((event is InputEventKey) or (event is InputEventScreenTouch) or (event is InputEventMouseButton)):
+	if not block and ((event is InputEventKey) or
+			(event is InputEventScreenTouch) or
+			(event is InputEventMouseButton)):
 		block = true
 		_load_main_menu()

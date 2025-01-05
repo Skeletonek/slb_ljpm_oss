@@ -15,6 +15,7 @@ dest_files=["res://.godot/imported/Mechanical_g5Y5.otf-8c142f3ef4848ce0c0f276de0
 Rendering=null
 antialiasing=1
 generate_mipmaps=true
+disable_embedded_bitmaps=true
 multichannel_signed_distance_field=false
 msdf_pixel_range=12
 msdf_size=64

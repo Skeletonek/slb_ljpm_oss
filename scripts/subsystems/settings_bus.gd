@@ -1,20 +1,21 @@
 extends Node
 
-const DESKTOP_PLATFORM = ["Windows", "UWP", "macOS", "Linux", "FreeBSD", "NetBSD", "OpenBSD", "BSD"]
-const API_KEY = ""
-enum TOUCHSCREEN_CONTROL_MODE {
-	Tap,
-	Swipe,
-	VButtons
+enum TouchscreenControlMode {
+	TAP,
+	SWIPE,
+	VBUTTONS
 }
 
 enum AudioBus {
-	Master,
+	MASTER,
 	SFX,
-	Voice,
-	Music,
-	Narrator
+	VOICE,
+	MUSIC,
+	NARRATOR
 }
+
+const DESKTOP_PLATFORM = ["Windows", "UWP", "macOS", "Linux", "FreeBSD", "NetBSD", "OpenBSD", "BSD"]
+const API_KEY = ""
 
 var os_id = 1 if OS.get_name() == "Windows" else 0
 
@@ -26,7 +27,7 @@ var fps_max := 60
 var ui_blur := true
 var ui_scaling := 1.0
 
-var touchscreen_control := TOUCHSCREEN_CONTROL_MODE.Tap
+var touchscreen_control := TouchscreenControlMode.TAP
 var keyboard_up := KEY_W
 var keyboard_down := KEY_S
 var playername := "#" + OS.get_unique_id().substr(os_id, 8)
@@ -52,54 +53,56 @@ var godmode := false
 
 var cfg_window_mode := DisplayServer.WINDOW_MODE_WINDOWED
 var cfg_rendering_method := "gl_compatibility"
+var cfg_linux_window_system := "x11"
 var cfg = ConfigFile.new()
+
 
 func load_config() -> bool:
 	if not FileAccess.file_exists("user://config.cfg"):
 		save_config()
 		return true
-	else:
-		var file = FileAccess.open("user://config.cfg", FileAccess.READ)
-		var json_data = file.get_line()
-		var json = JSON.new() # Helper
-		var parse_result = json.parse(json_data)
-		if not parse_result == OK:
-			print("JSON Parse Error: ", json.get_error_message(), " in ", json_data, " at line ", json.get_error_line())
-			return false
-		var data: Dictionary = json.get_data()
+	var file = FileAccess.open("user://config.cfg", FileAccess.READ)
+	var json_data = file.get_line()
+	var json = JSON.new() # Helper
+	var parse_result = json.parse(json_data)
+	if not parse_result == OK:
+		print("JSON Parse Error: ", json.get_error_message(),
+				" in ", json_data, " at line ", json.get_error_line())
+		return false
+	var data: Dictionary = json.get_data()
 
-		fullscreen = data["fullscreen"]
-		vsync = data["vsync"] if data.has("vsync") else vsync
-		fps_max = data["fps_max"] if data.has("fps_max") else fps_max
-		ui_scaling = data["ui_scaling"]
-		ui_blur = data["ui_blur"] if data.has("ui_blur") else ui_blur
+	fullscreen = data["fullscreen"]
+	vsync = data["vsync"] if data.has("vsync") else vsync
+	fps_max = data["fps_max"] if data.has("fps_max") else fps_max
+	ui_scaling = data["ui_scaling"]
+	ui_blur = data["ui_blur"] if data.has("ui_blur") else ui_blur
 
-		volume[AudioBus.Master] = data["master_volume"]
-		volume[AudioBus.SFX] = data["sfx_volume"]
-		volume[AudioBus.Voice] = data["voice_volume"]
-		volume[AudioBus.Music] = data["music_volume"]
-		volume[AudioBus.Narrator] = data["narrator_volume"]
+	volume[AudioBus.MASTER] = data["master_volume"]
+	volume[AudioBus.SFX] = data["sfx_volume"]
+	volume[AudioBus.VOICE] = data["voice_volume"]
+	volume[AudioBus.MUSIC] = data["music_volume"]
+	volume[AudioBus.NARRATOR] = data["narrator_volume"]
 
-		narrator_speaking = data["narrator_speaking"]
+	narrator_speaking = data["narrator_speaking"]
 
-		skip_intro = data["skip_intro"]
-		skip_boot = data["skip_boot"] if data.has("skip_boot") else skip_boot
+	skip_intro = data["skip_intro"]
+	skip_boot = data["skip_boot"] if data.has("skip_boot") else skip_boot
 
-		reduced_motion = data["reduced_motion"]
-		easier_font = data["easier_font"]
-		touchscreen_control = data["touchscreen_control"]
-		keyboard_up = data["keyboard_up"]
-		keyboard_down = data["keyboard_down"]
-		playername = data["playername"]
+	reduced_motion = data["reduced_motion"]
+	easier_font = data["easier_font"]
+	touchscreen_control = data["touchscreen_control"]
+	keyboard_up = data["keyboard_up"]
+	keyboard_down = data["keyboard_down"]
+	playername = data["playername"]
 
-		dev_console = data["dev_console"]
-		dev_show_fps = data["dev_show_fps"] if data.has("dev_show_fps") else dev_show_fps
+	dev_console = data["dev_console"]
+	dev_show_fps = data["dev_show_fps"] if data.has("dev_show_fps") else dev_show_fps
 
-		if playername.length() > 44:
-			var playername_split = playername.split('#')
-			playername = playername_split[0].substr(0,36) + '#' + playername_split[1]
-		save_config()
-		return true
+	if playername.length() > 44:
+		var playername_split = playername.split('#')
+		playername = playername_split[0].substr(0,36) + '#' + playername_split[1]
+	save_config()
+	return true
 
 
 func save_config():
@@ -110,11 +113,11 @@ func save_config():
 		"fps_max": fps_max,
 		"ui_scaling": ui_scaling,
 		"ui_blur": ui_blur,
-		"master_volume": volume[AudioBus.Master],
+		"master_volume": volume[AudioBus.MASTER],
 		"sfx_volume": volume[AudioBus.SFX],
-		"voice_volume": volume[AudioBus.Voice],
-		"music_volume": volume[AudioBus.Music],
-		"narrator_volume": volume[AudioBus.Narrator],
+		"voice_volume": volume[AudioBus.VOICE],
+		"music_volume": volume[AudioBus.MUSIC],
+		"narrator_volume": volume[AudioBus.NARRATOR],
 		"narrator_speaking": narrator_speaking,
 		"skip_intro": skip_intro,
 		"skip_boot": skip_boot,
@@ -140,6 +143,8 @@ func load_override():
 		return
 	cfg_window_mode = cfg.get_value("display", "window/size/mode")
 	cfg_rendering_method = cfg.get_value("rendering", "renderer/rendering_method")
+	if cfg.has_section_key("display", "display_server/driver.linuxbsd"):
+		cfg_linux_window_system = cfg.get_value("display", "display_server/driver.linuxbsd")
 	if cfg.has_section_key("display", "window/vsync/vsync_mode"):
 		vsync = cfg.get_value("display", "window/vsync/vsync_mode")
 	if cfg.has_section_key("application", "run/max_fps"):
@@ -151,6 +156,7 @@ func save_override():
 	cfg.set_value("rendering", "renderer/rendering_method", cfg_rendering_method)
 	cfg.set_value("rendering", "renderer/rendering_method.mobile", cfg_rendering_method)
 	cfg.set_value("display", "window/vsync/vsync_mode", vsync)
+	cfg.set_value("display", "display_server/driver.linuxbsd", cfg_linux_window_system)
 	cfg.set_value("application", "run/max_fps", fps_max)
 	cfg.save("user://override.cfg")
 
@@ -158,27 +164,28 @@ func save_override():
 func _enter_tree():
 	load_override()
 	var result = load_config()
-	
+
 	if result == false:
 		show_os_alert("ERROR WHILE LOADING A CONFIG FILE", "Couldn't load a config file.\n" +
-				 "Game will start with default settings and override the config file.")
+				"Game will start with default settings and override the config file."
+		)
 		set_default_ui_scale()
 		save_config()
-	
+
 	_initialize_settings()
 	_initialize_debug_settings()
 	_configure_silentwolf()
 	print("DEVICE ID: %s" % OS.get_unique_id())
 
-	if OS.get_name() != "Android" and not OS.has_feature("editor"):
-		var audioload = ProjectSettings.load_resource_pack("res://Resources/SLB2_Audio.pck")
-		var videoload = ProjectSettings.load_resource_pack("res://Resources/SLB2_Video.pck")
-		var graphicsload = ProjectSettings.load_resource_pack("res://Resources/SLB2_Graphics.pck")
-		if not audioload or not videoload or not graphicsload:
-			show_os_alert("MISSING RESOURCES", "Missing resources.\n" +
-					 "Check if you have all necessary resources installed inside the Resources directory.\n" +
-					 "The game will terminate.")
-			get_tree().quit(404)
+	# if OS.get_name() != "Android" and not OS.has_feature("editor"):
+	# 	var audioload = ProjectSettings.load_resource_pack("res://Resources/SLB2_Audio.pck")
+	# 	var videoload = ProjectSettings.load_resource_pack("res://Resources/SLB2_Video.pck")
+	# 	var graphicsload = ProjectSettings.load_resource_pack("res://Resources/SLB2_Graphics.pck")
+	# 	if not audioload or not videoload or not graphicsload:
+	# 		show_os_alert("MISSING RESOURCES", "Missing resources.\n" +
+	# 				 "Check if you have all necessary resources installed inside the Resources directory.\n" +
+	# 				 "The game will terminate.")
+	# 		get_tree().quit(404)
 
 
 func _initialize_settings():
@@ -192,12 +199,14 @@ func _initialize_settings():
 		)
 	DisplayServer.window_set_mode(window_mode)
 	set_ui_shader(ui_blur)
-	if SettingsBus.vsync == DisplayServer.VSYNC_DISABLED or SettingsBus.vsync == DisplayServer.VSYNC_MAILBOX:
+	if (SettingsBus.vsync == DisplayServer.VSYNC_DISABLED or
+		SettingsBus.vsync == DisplayServer.VSYNC_MAILBOX
+	):
 		Engine.max_fps = SettingsBus.fps_max
 	else:
 		Engine.max_fps = 0
 	if not narrator_speaking:
-		set_audio_volume(AudioBus.Narrator, 0.0)
+		set_audio_volume(AudioBus.NARRATOR, 0.0)
 	if easier_font:
 		ThemeDB.get_project_theme().set_default_font(load("res://theme/fonts/OpenDyslexic-Regular.otf"))
 	var event = null

@@ -3,7 +3,7 @@ extends Control
 const ERROR_MSG_PREFIX := "USER ERROR: "
 const WARNING_MSG_PREFIX := "USER WARNING: "
 
-@export var DevErrorsLabel: RichTextLabel
+@export var dev_errors_label: RichTextLabel
 
 func _ready():
 	if OS.is_debug_build():
@@ -35,27 +35,62 @@ func toggle_errors():
 
 
 func debug_info() -> String:
-	var GPUAPI: String
-	# This function return null when using OpenGL
-	if RenderingServer.get_rendering_device() == null:
-		GPUAPI = "OpenGL"
-	else:
-		GPUAPI = "Vulkan"
-	var text = "Godot Engine " + Engine.get_version_info().string + "\n" + \
-	"OS: " + OS.get_name() + " " + OS.get_distribution_name() + " " + OS.get_version() + "\n" + \
-	"CPU: " + OS.get_processor_name() + " " + str(OS.get_processor_count()) + " threads \n" + \
-	"GPU: " + RenderingServer.get_video_adapter_vendor() + " " + RenderingServer.get_video_adapter_name() + "\n" + \
-	"GPU API: " + GPUAPI + " " + RenderingServer.get_video_adapter_api_version() + "\n" + \
-	"DISPLAY: " + DisplayServer.get_name()
-	return text
+	var godot_version = Engine.get_version_info().string
+	var os_name = OS.get_name()
+	var os_distroname = OS.get_distribution_name()
+	var os_version = OS.get_version()
+	var locale = OS.get_locale_language()
+	var cpu_name = OS.get_processor_name()
+	var cpu_corecount = str(OS.get_processor_count())
+	var mem_physical = OS.get_memory_info()['physical'] / 1048576
+	var mem_free = OS.get_memory_info()['free'] / 1048576
+	var mem_available = OS.get_memory_info()['available'] / 1048576
+	var mem_stack = OS.get_memory_info()['stack'] / 1048576
+	var gpu_vendor = RenderingServer.get_video_adapter_vendor()
+	var gpu_name = RenderingServer.get_video_adapter_name()
+	# RenderingServer.get_rendering_device returns null when using OpenGL
+	var gpuapi = ("OpenGL"
+			if RenderingServer.get_rendering_device() == null
+			else "Vulkan"
+	)
+	var gpuapi_version = RenderingServer.get_video_adapter_api_version()
+	var displayserver = DisplayServer.get_name()
+
+	return (
+		"Godot Engine {0}\n" +
+		"OS: {1} {2} {3}\n" +
+		"CPU: {4} {5} threads\n" +
+		"MEMORY: ALL:{12}M | FREE:{13}M | AVAIL:{14}M | STACK:{15}M\n"+
+		"GPU: {6} {7}\n" +
+		"GPU API: {8} {9}\n" +
+		"DISPLAY: {10}\n" +
+		"LANG: {11}"
+	).format([
+		godot_version,
+		os_name,
+		os_distroname,
+		os_version,
+		cpu_name,
+		cpu_corecount,
+		gpu_vendor,
+		gpu_name,
+		gpuapi,
+		gpuapi_version,
+		displayserver,
+		locale,
+		mem_physical,
+		mem_free,
+		mem_available,
+		mem_stack,
+	])
 
 
 func append_error(text):
-	DevErrorsLabel.append_text("[color=red][ERR] " +
+	dev_errors_label.append_text("[color=red][ERR] " +
 	text.trim_prefix(ERROR_MSG_PREFIX) + "[/color]\n")
 
 
 func append_warning(text):
-	DevErrorsLabel.append_text("[color=orange][WRN] " +
+	dev_errors_label.append_text("[color=orange][WRN] " +
 	text.trim_prefix(WARNING_MSG_PREFIX) + "[/color]\n")
 

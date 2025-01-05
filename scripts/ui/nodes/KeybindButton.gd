@@ -1,5 +1,5 @@
-extends Button
 class_name KeybindButton
+extends Button
 
 @export var action: String
 

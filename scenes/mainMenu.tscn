@@ -1,9 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://dg78sdxts17fs"]
+[gd_scene load_steps=19 format=3 uid="uid://dg78sdxts17fs"]
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_f7xwm"]
 [ext_resource type="PackedScene" uid="uid://dhg1bdg5yc1y1" path="res://scenes/ui/main_menu_anim.tscn" id="2_bk5ie"]
 [ext_resource type="Texture2D" uid="uid://cyo4rlihaqgrc" path="res://images/icons/SLB2Logo.webp" id="3_hn8g4"]
 [ext_resource type="Material" uid="uid://cqn5rkmj7io2i" path="res://shaders/panel_shader_material.tres" id="5_l01dg"]
+[ext_resource type="PackedScene" uid="uid://2sbxeymmsxu" path="res://scenes/ui/achievement_viewer.tscn" id="6_grvj1"]
 [ext_resource type="PackedScene" uid="uid://dh4tjkoemf7aj" path="res://scenes/Leaderboard.tscn" id="8_y7sgj"]
 [ext_resource type="PackedScene" uid="uid://dc3ntad11u0qu" path="res://scenes/ui/options_layer.tscn" id="9_1nt05"]
 [ext_resource type="FontFile" uid="uid://c08wcdbvxirl1" path="res://theme/fonts/NotoSans-Medium.ttf" id="10_d6dtl"]
@@ -97,6 +98,13 @@ focus_neighbor_bottom = NodePath("../CreditsButton")
 focus_previous = NodePath("../CreditsButton")
 text = "Ustawienia"
 
+[node name="AchievementsButton" type="Button" parent="MainMenuLayer/VBoxContainer"]
+custom_minimum_size = Vector2(160, 70)
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../CreditsButton")
+focus_previous = NodePath("../CreditsButton")
+text = "Osiągnięcia"
+
 [node name="HiScoreButton" type="Button" parent="MainMenuLayer/VBoxContainer"]
 custom_minimum_size = Vector2(160, 70)
 layout_mode = 2
@@ -141,6 +149,9 @@ process_thread_messages = 0
 visible = false
 
 [node name="OptionsLayer" parent="." instance=ExtResource("9_1nt05")]
+visible = false
+
+[node name="AchievementsLayer" parent="." instance=ExtResource("6_grvj1")]
 visible = false
 
 [node name="CreditsLayer" type="CanvasLayer" parent="."]
@@ -436,6 +447,7 @@ visible = false
 [connection signal="pressed" from="MainMenuLayer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="MainMenuLayer/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
 [connection signal="pressed" from="MainMenuLayer/VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="MainMenuLayer/VBoxContainer/AchievementsButton" to="." method="_on_achievements_button_pressed"]
 [connection signal="pressed" from="MainMenuLayer/VBoxContainer/HiScoreButton" to="." method="_on_hi_score_button_pressed"]
 [connection signal="pressed" from="MainMenuLayer/VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
 [connection signal="pressed" from="MainMenuLayer/UpdateButton" to="." method="_update_game"]

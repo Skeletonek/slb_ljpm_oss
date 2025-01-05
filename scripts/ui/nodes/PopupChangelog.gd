@@ -1,17 +1,18 @@
 extends CanvasLayer
 
-@onready var VersionLabel := $"Panel/VBoxContainer/HBoxContainer2/VersionLabel"
-@onready var Changelog := $"Panel/VBoxContainer/ScrollContainer/Changelog"
 var download_url: String
+
+@onready var version_label := $"Panel/VBoxContainer/HBoxContainer2/VersionLabel"
+@onready var changelog := $"Panel/VBoxContainer/ScrollContainer/Changelog"
 
 
 func update_version_data(version, url):
-	VersionLabel.text = version
+	version_label.text = version
 	download_url = url
 
 
-func update_changelog_data(changelog):
-	Changelog.text = changelog
+func update_changelog_data(data):
+	changelog.text = data
 
 
 func _on_back_button_pressed():

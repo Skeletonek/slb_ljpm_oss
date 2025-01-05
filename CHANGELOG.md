@@ -1,3 +1,22 @@
+#### 2.0-Alpha+3
+ - Upgraded Godot Engine to 4.3 stable
+ - Added trees in the background using parallax effect
+ - Added option to change linux window system
+ - Added new achievements (some are not obtainable)
+ - Added button for viewing achievements to main menu
+ - Added memory and locale info to debug
+ - Added build_info command which shows version and release type in corners of the screen
+ - Blocked linux window system option on non-linux systems
+ - Blocked Off and Adaptive options for V-sync when using Android
+ - Changed debug_info to show debug information from credits layer
+ - Changed FPS input to spinbox and clamped values from 30 to 999
+ - Decreased leaderboard max scores showing to 500 entries
+ - Fixed graphics info pop-ups showing not centered on screen
+ - Fixed game crash when returning to main menu
+ - Fixed warning about wrong asset UUID for achievement_container
+ - Fixed music play pausing when in pause menu
+ - Fixed music files showing double in music_list command
+
 #### 2.0-Alpha+2
  - Upgraded Godot Engine to 4.3-rc1
  - Added DisplayServer debug information to credits and console logs

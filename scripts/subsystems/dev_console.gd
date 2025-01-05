@@ -1,5 +1,9 @@
 extends CanvasLayer
 
+signal error_msg_received(msg: String)
+signal warning_msg_received(msg: String)
+signal info_msg_received(msg: String)
+
 const SUPPORTED_COMMANDS = [
 	# Generic commands
 	"help",
@@ -10,6 +14,7 @@ const SUPPORTED_COMMANDS = [
 	# Developer commands
 	"enable_dev_buttons",
 	"debug_info",
+	"build_info",
 	"god",
 	"sound_errors",
 	"show_errors",
@@ -37,34 +42,30 @@ const SUPPORTED_COMMANDS = [
 	"ui_blur",
 	]
 
-signal error_msg_received(msg:String)
-signal warning_msg_received(msg:String)
-signal info_msg_received(msg:String)
-
 const UPDATE_INTERVAL := 0.1
 const ERROR_MSG_PREFIX := "USER ERROR: "
 const WARNING_MSG_PREFIX := "USER WARNING: "
 const COMMAND_MSG_PREFIX := "DEV PROMPT: "
 #Any logs with three spaces at the beginning will be ignored.
-const IGNORE_PREFIX := "   " 
+const IGNORE_PREFIX := "   "
 
 var commands = {}
 var godot_log
 
 @onready var log_rich_label = $PanelContainer/MarginContainer/VBoxContainer/LogRichLabel
 @onready var prompt_edit = $PanelContainer/MarginContainer/VBoxContainer/PromptEdit
-@onready var ErrPlayer = $ERRPlayer
-@onready var WrnPlayer = $WRNPlayer
+@onready var err_player = $ERRPlayer
+@onready var wrn_player = $WRNPlayer
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	_generate_command_dict()
 	godot_log = FileAccess.open("user://logs/godot.log", FileAccess.READ)
 	SignalBus.dev_console.connect(_hide_dev_button)
-	
+
 	create_tween().set_loops(
 	).tween_callback(_read_data
 	).set_delay(UPDATE_INTERVAL)
-	
+
 	if OS.get_name() == "Android" && OS.is_debug_build():
 		$AndroidLayer.show()
 
@@ -82,22 +83,22 @@ func _read_data():
 		if new_line.begins_with(IGNORE_PREFIX):
 			continue
 		if new_line.begins_with(ERROR_MSG_PREFIX):
-			log_rich_label.append_text("[color=red][ERR] " + 
-			new_line.trim_prefix(ERROR_MSG_PREFIX) + "[/color]")
+			log_rich_label.append_text("[color=red][ERR] " +
+					new_line.trim_prefix(ERROR_MSG_PREFIX) + "[/color]")
 			if SettingsBus.dev_error_sounds:
-				ErrPlayer.play()
+				err_player.play()
 			if SettingsBus.dev_show_errors:
 				DebugInfo.append_error(new_line)
 		elif new_line.begins_with(WARNING_MSG_PREFIX):
-			log_rich_label.append_text("[color=orange][WRN] " + 
-			new_line.trim_prefix(WARNING_MSG_PREFIX) + "[/color]")
+			log_rich_label.append_text("[color=orange][WRN] " +
+					new_line.trim_prefix(WARNING_MSG_PREFIX) + "[/color]")
 			if SettingsBus.dev_error_sounds:
-				WrnPlayer.play()
+				wrn_player.play()
 			if SettingsBus.dev_show_errors:
 				DebugInfo.append_warning(new_line)
 		elif new_line.begins_with(COMMAND_MSG_PREFIX):
-			log_rich_label.append_text("[color=darkgray][CMD] " + 
-			new_line.trim_prefix(COMMAND_MSG_PREFIX) + "[/color]")
+			log_rich_label.append_text("[color=darkgray][CMD] " +
+					new_line.trim_prefix(COMMAND_MSG_PREFIX) + "[/color]")
 		else:
 			log_rich_label.append_text("[LOG] " + new_line)
 		log_rich_label.append_text("\n")
@@ -149,7 +150,7 @@ func _on_prompt_edit_text_submitted(new_text):
 	print("DEV PROMPT: " + new_text)
 	prompt_edit.grab_focus()
 	prompt_edit.clear()
-	
+
 	var command_arr = Array(new_text.split(" "))
 	if command_arr[0] not in commands:
 		push_error("Unknown command")
@@ -166,19 +167,17 @@ func _process_float(setting: float, value, min: float, max: float) -> Variant:
 	if value.is_valid_float():
 		var val = clampf(float(value), min, max)
 		return val
-	else:
-		print("Value (float): " + str(setting))
-		return null
+	print("Value (float): " + str(setting))
+	return null
 
 
 func _process_bool(setting: bool, value) -> Variant:
 	if value == "0" or value == "false":
 		return false
-	elif value == "1" or value == "true":
+	if value == "1" or value == "true":
 		return true
-	else:
-		print("Value (bool): " + str(setting))
-		return null
+	print("Value (bool): " + str(setting))
+	return null
 
 
 func _help() -> bool:
@@ -209,13 +208,18 @@ func _carride() -> bool:
 func _enable_dev_buttons() -> bool:
 	if OS.is_debug_build():
 		var node = get_node("/root/mainMenu")
-		node.emit_signal("DEBUG_DEV_BUTTONS")
+		node.emit_signal("signal_debug_dev_buttons")
 	else:
 		push_error("This command is supported only in Debug build")
 	return true
 
 
 func _debug_info() -> bool:
+	print(DebugInfo.debug_info())
+	return true
+
+
+func _build_info() -> bool:
 	DebugInfo.toggle()
 	return true
 
@@ -294,7 +298,7 @@ func _music_list() -> bool:
 		dir.list_dir_begin()
 		var file_name = dir.get_next()
 		while file_name != "":
-			if not dir.current_is_dir():
+			if not dir.current_is_dir() and file_name.ends_with(".import"):
 				print(file_name.trim_suffix(".import"))
 			file_name = dir.get_next()
 		return true
@@ -311,6 +315,11 @@ func _timeline_start(arg = null) -> bool:
 		print("Starting " + arg)
 		get_tree().change_scene_to_file("res://scenes/a1_br.tscn")
 		SignalBus.dialogic_path = "res://dialogic/timelines/" + arg
+	return true
+
+
+func _timeline_current() -> bool:
+	print("Current timeline: " + str(null))
 	return true
 
 
@@ -335,9 +344,9 @@ func _test_dialog() -> bool:
 
 
 func _volume_master(arg = "") -> bool:
-	var ret = _process_float(SettingsBus.volume[SettingsBus.AudioBus.Master], arg, 0.0, 1.0)
+	var ret = _process_float(SettingsBus.volume[SettingsBus.AudioBus.MASTER], arg, 0.0, 1.0)
 	if ret != null:
-		SettingsBus.set_audio_volume(SettingsBus.AudioBus.Master, ret)
+		SettingsBus.set_audio_volume(SettingsBus.AudioBus.MASTER, ret)
 	return true
 
 
@@ -349,31 +358,31 @@ func _volume_sfx(arg = "") -> bool:
 
 
 func _volume_voice(arg = "") -> bool:
-	var ret = _process_float(SettingsBus.volume[SettingsBus.AudioBus.Voice], arg, 0.0, 1.0)
+	var ret = _process_float(SettingsBus.volume[SettingsBus.AudioBus.VOICE], arg, 0.0, 1.0)
 	if ret != null:
-		SettingsBus.set_audio_volume(SettingsBus.AudioBus.Voice, ret)
+		SettingsBus.set_audio_volume(SettingsBus.AudioBus.VOICE, ret)
 	return true
 
 
 func _volume_music(arg = "") -> bool:
-	var ret = _process_float(SettingsBus.volume[SettingsBus.AudioBus.Music], arg, 0.0, 1.0)
+	var ret = _process_float(SettingsBus.volume[SettingsBus.AudioBus.MUSIC], arg, 0.0, 1.0)
 	if ret != null:
-		SettingsBus.set_audio_volume(SettingsBus.AudioBus.Music, ret)
+		SettingsBus.set_audio_volume(SettingsBus.AudioBus.MUSIC, ret)
 	return true
 
 
 func _volume_narrator(arg = "") -> bool:
-	var ret = _process_float(SettingsBus.volume[SettingsBus.AudioBus.Narrator], arg, 0.0, 1.0)
+	var ret = _process_float(SettingsBus.volume[SettingsBus.AudioBus.NARRATOR], arg, 0.0, 1.0)
 	if ret != null:
-		SettingsBus.set_audio_volume(SettingsBus.AudioBus.Narrator, ret)
+		SettingsBus.set_audio_volume(SettingsBus.AudioBus.NARRATOR, ret)
 	return true
 
 
 func _fullscreen() -> bool:
-	var currFullscreen = SettingsBus.fullscreen
-	SettingsBus.fullscreen=!currFullscreen
+	var current_fullscreen = SettingsBus.fullscreen
+	SettingsBus.fullscreen=!current_fullscreen
 	var window_mode = (
-		DisplayServer.WINDOW_MODE_FULLSCREEN if !currFullscreen
+		DisplayServer.WINDOW_MODE_FULLSCREEN if !current_fullscreen
 		else DisplayServer.WINDOW_MODE_WINDOWED
 		)
 	SettingsBus.cfg_window_mode = window_mode

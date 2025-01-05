@@ -5,8 +5,11 @@ extends CanvasLayer
 @export var graphics_api_button: OptionButton
 @export var graphics_api_restart: Label
 @export var vsync_button: OptionButton
+@export var vsync_info: Label
 @export var linux_windowing_system_button: OptionButton
-@export var framerate_cap_input: LineEdit
+@export var linux_windowing_system_restart: Label
+@export var linux_windowing_system_info: Label
+@export var framerate_cap_spinbox: SpinBox
 @export var blur_button: Button
 @export var ui_scaling_slider: HSlider
 
@@ -37,54 +40,67 @@ extends CanvasLayer
 @export var back_button: Button
 
 func _ready(): # I'm starting to hate this code
-	master_slider.value = SettingsBus.volume[SettingsBus.AudioBus.Master]
+	master_slider.value = SettingsBus.volume[SettingsBus.AudioBus.MASTER]
 	sfx_slider.value = SettingsBus.volume[SettingsBus.AudioBus.SFX]
-	music_slider.value = SettingsBus.volume[SettingsBus.AudioBus.Music]
+	music_slider.value = SettingsBus.volume[SettingsBus.AudioBus.MUSIC]
 	master_input.text = str(master_slider.value * 100) + "%"
 	sfx_input.text = str(sfx_slider.value * 100) + "%"
 	music_input.text = str(music_slider.value * 100) + "%"
 	ui_scaling_slider.value = SettingsBus.ui_scaling
-	framerate_cap_input.text = str(SettingsBus.fps_max)
+	framerate_cap_spinbox.value = SettingsBus.fps_max
 	match(SettingsBus.vsync):
 		DisplayServer.VSYNC_DISABLED:
 			vsync_button.selected = 0
-			framerate_cap_input.editable = true
+			framerate_cap_spinbox.editable = true
 		DisplayServer.VSYNC_ENABLED:
 			vsync_button.selected = 1
 		DisplayServer.VSYNC_ADAPTIVE:
 			vsync_button.selected = 2
 		DisplayServer.VSYNC_MAILBOX:
 			vsync_button.selected = 3
-			framerate_cap_input.editable = true
-	
+			framerate_cap_spinbox.editable = true
+	if OS.get_name() != "Linux":
+		linux_windowing_system_info.show()
+		linux_windowing_system_button.disabled = true
+	match(SettingsBus.cfg_linux_window_system):
+		"x11":
+			linux_windowing_system_button.selected = 0
+		"wayland":
+			linux_windowing_system_button.selected = 1
+
 	graphics_api_button.get_popup().id_pressed.connect(_on_graphics_api_pressed)
 	if SettingsBus.cfg_rendering_method == "gl_compatibility":
 		graphics_api_button.selected = 1
 
 	match(SettingsBus.touchscreen_control):
-		SettingsBus.TOUCHSCREEN_CONTROL_MODE.Tap:
+		SettingsBus.TouchscreenControlMode.TAP:
 			tch_tap_button.set_pressed_no_signal(true)
-		SettingsBus.TOUCHSCREEN_CONTROL_MODE.Swipe:
+		SettingsBus.TouchscreenControlMode.SWIPE:
 			tch_swipe_button.set_pressed_no_signal(true)
-		SettingsBus.TOUCHSCREEN_CONTROL_MODE.VButtons:
+		SettingsBus.TouchscreenControlMode.VBUTTONS:
 			tch_vbuttons_button.set_pressed_no_signal(true)
 	var playername_split = SettingsBus.playername.split("#")
 	playername_edit.text = playername_split[0]
 	playername_uuid.text = "#" + playername_split[1]
 	easier_font_button.set_pressed_no_signal_custom(SettingsBus.easier_font)
 	reduced_motion_button.set_pressed_no_signal_custom(SettingsBus.reduced_motion)
-	
+
 	if OS.get_name() != "Android":
 		fullscreen_button.set_pressed(SettingsBus.fullscreen)
 	else:
 		fullscreen_button.disabled = true
 		fullscreen_android_info.visible = true
-	
+		# Disable Off and Adaptive for Android as this platform most probably
+		# doesn't support it
+		vsync_button.set_item_disabled(0, true)
+		vsync_button.set_item_disabled(2, true)
+		vsync_info.show()
+
 	blur_button.set_pressed(SettingsBus.ui_blur)
-	
+
 	devconsole_button.set_pressed(SettingsBus.dev_console)
 	devfps_button.set_pressed(SettingsBus.dev_show_fps)
-	
+
 func _input(event):
 	if event.is_action_pressed("next_tab"):
 		if $TabContainer.current_tab < 3:
@@ -97,7 +113,7 @@ func _input(event):
 
 
 func _on_master_slider_value_changed(value):
-	SettingsBus.set_audio_volume(SettingsBus.AudioBus.Master, value)
+	SettingsBus.set_audio_volume(SettingsBus.AudioBus.MASTER, value)
 	master_input.text = str(value * 100) + "%"
 
 
@@ -116,7 +132,7 @@ func _on_sfx_slider_drag_ended(_value_changed):
 
 
 func _on_music_slider_value_changed(value):
-	SettingsBus.set_audio_volume(SettingsBus.AudioBus.Music, value)
+	SettingsBus.set_audio_volume(SettingsBus.AudioBus.MUSIC, value)
 	music_input.text = str(value * 100) + "%"
 
 
@@ -146,13 +162,13 @@ func _on_graphics_api_pressed(id: int):
 
 
 func _on_v_sync_button_item_selected(id: int):
-	print(Engine.max_fps)
-	framerate_cap_input.editable = false
+	print("FPSCap: " + str(Engine.max_fps))
+	framerate_cap_spinbox.editable = false
 	Engine.max_fps = 0
 	match(id):
 		0:
 			SettingsBus.vsync = DisplayServer.VSYNC_DISABLED
-			framerate_cap_input.editable = true
+			framerate_cap_spinbox.editable = true
 			Engine.max_fps = SettingsBus.fps_max
 		1:
 			SettingsBus.vsync = DisplayServer.VSYNC_ENABLED
@@ -160,7 +176,7 @@ func _on_v_sync_button_item_selected(id: int):
 			SettingsBus.vsync = DisplayServer.VSYNC_ADAPTIVE
 		3:
 			SettingsBus.vsync = DisplayServer.VSYNC_MAILBOX
-			framerate_cap_input.editable = true
+			framerate_cap_spinbox.editable = true
 			Engine.max_fps = SettingsBus.fps_max
 		_:
 			push_error("Unknown entry. V Sync Button is broken. How?")
@@ -168,8 +184,20 @@ func _on_v_sync_button_item_selected(id: int):
 	DisplayServer.window_set_vsync_mode(SettingsBus.vsync)
 
 
-func _on_framelimit_button_text_submitted(new_text):
-	SettingsBus.fps_max = int(new_text)
+func _on_linux_windowing_system_button_item_selected(id: int):
+	match(id):
+		0:
+			SettingsBus.cfg_linux_window_system = "x11"
+		1:
+			SettingsBus.cfg_linux_window_system = "wayland"
+		_:
+			push_error("Unknown entry. Linux Windowing System Button is broken. How?")
+	SettingsBus.save_override()
+	linux_windowing_system_restart.show()
+
+
+func _on_framelimit_button_value_changed(value):
+	SettingsBus.fps_max = value
 	Engine.max_fps = SettingsBus.fps_max
 
 
@@ -182,21 +210,21 @@ func _on_ui_scaling_slider_value_changed(value):
 	get_tree().root.content_scale_factor = value
 
 
-func _on_tch_tap_toggled(button_pressed):
+func _on_tch_tap_toggled(_button_pressed):
 	_unpress_tch_buttons()
-	SettingsBus.touchscreen_control = SettingsBus.TOUCHSCREEN_CONTROL_MODE.Tap
+	SettingsBus.touchscreen_control = SettingsBus.TouchscreenControlMode.TAP
 	tch_tap_button.set_pressed_no_signal(true)
 
 
-func _on_tch_swipe_toggled(button_pressed):
+func _on_tch_swipe_toggled(_button_pressed):
 	_unpress_tch_buttons()
-	SettingsBus.touchscreen_control = SettingsBus.TOUCHSCREEN_CONTROL_MODE.Swipe
+	SettingsBus.touchscreen_control = SettingsBus.TouchscreenControlMode.SWIPE
 	tch_swipe_button.set_pressed_no_signal(true)
 
 
-func _on_tch_vbuttons_toggled(button_pressed):
+func _on_tch_vbuttons_toggled(_button_pressed):
 	_unpress_tch_buttons()
-	SettingsBus.touchscreen_control = SettingsBus.TOUCHSCREEN_CONTROL_MODE.VButtons
+	SettingsBus.touchscreen_control = SettingsBus.TouchscreenControlMode.VBUTTONS
 	tch_vbuttons_button.set_pressed_no_signal(true)
 	SignalBus.enable_touchscreen_vbuttons.emit(true)
 
@@ -226,7 +254,6 @@ func _on_easier_font_button_toggled(button_pressed):
 	SettingsBus.easier_font = button_pressed
 	if button_pressed:
 		ThemeDB.get_project_theme().set_default_font(load("res://theme/fonts/OpenDyslexic-Regular.otf"))
-#		get_tree().root.add_theme_font_override("theme", load("res://theme/fonts/OpenDyslexic-Regular.otf"))
 	else:
 		ThemeDB.get_project_theme().set_default_font(load("res://theme/fonts/PixelifySans_2-Bold.ttf"))
 
@@ -243,6 +270,7 @@ func _on_show_fps_button_toggled(toggled_on):
 
 func _on_back_button_pressed():
 	SettingsBus.save_config()
+	# gdlint:ignore=private-method-call
 	$"../"._on_back_button_pressed()
 
 
@@ -298,8 +326,8 @@ Nie zaleca się włączania tej opcji podczas korzystania z sesji X11.
 Ta opcja jest eksperymentalna i może powodować problemy.
 """
 	add_child(popup)
-	popup.move_to_center()
 	popup.show()
+	popup.move_to_center()
 
 
 func _on_tab_container_tab_changed(tab):

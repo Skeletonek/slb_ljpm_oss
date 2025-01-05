@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://scripts/subsystems/audio_stream_player.gd" id="2_plxap"]
 
 [node name="GlobalMusicPlayer" type="AudioStreamPlayer"]
+process_mode = 3
 stream = ExtResource("1_4xa2s")
 autoplay = true
 bus = &"Music"

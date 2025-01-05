@@ -1,4 +1,5 @@
 extends Node
+# gdlint:disable=duplicated-load
 
 ##### Achievement schema: #####
 # Title: string
@@ -31,22 +32,52 @@ const ACHIEVEMENT_LIST = {
 		preload("res://images/icons/slb2icon.png"),
 		true
 		],
-	"paradise_island": [
-		"Ty śpiochu...",
-		"Wczuj się w rytm muzyki swojego alarmu",
-		preload("res://images/achievement_icons/paradise_island.webp"),
+	"lactose_intolerant": [
+		"Nietolerancja laktozy",
+		"Jedź przez minutę i nie zbierz żadnego mleka",
+		preload("res://images/icons/slb2icon.png"),
 		false
 		],
-	"fatty_breakfast": [
-		"Miałeś pójść po pół paczki żelek!",
-		"Zrób sobie potwornie niezdrowe śniadanie",
-		preload("res://images/achievement_icons/fatty_breakfast.webp"),
+	"milk_100": [
+		"Wróciłem z mlekiem!",
+		"Zbierz łącznie 100 sztuk mleka",
+		preload("res://images/icons/slb2icon.png"),
 		false
 		],
-	"dryer_ending": [
-		"Z każdym dniem oddalamy się od Boga...",
-		"Zorganizuj sobie trójkącik z... suszarkami? Co do k****?!",
-		preload("res://images/achievement_icons/dryer_ending.webp"),
+	"milk_500": [
+		"Mleko było na promocji!",
+		"Zbierz łącznie 500 sztuk mleka",
+		preload("res://images/icons/slb2icon.png"),
 		false
 		],
+	"milk_1000": [
+		"Otwieramy mleczarnie!",
+		"Zbierz łącznie 1000 sztuk mleka",
+		preload("res://images/icons/slb2icon.png"),
+		false
+		],
+	"speed_110": [
+		"Te auto tyle potrafi?",
+		"Osiągnij prędkość 110 km/h",
+		preload("res://images/icons/slb2icon.png"),
+		false
+		],
+	"speed_150": [
+		"Jakim cudem to się nie rozleciało?!",
+		"Osiągnij prędkość 150 km/h",
+		preload("res://images/icons/slb2icon.png"),
+		false
+		],
+	"serious_business": [
+		"Poważny biznes",
+		"Kup wszystkie skórki w sklepie",
+		preload("res://images/icons/slb2icon.png"),
+		false
+		],
+	"offroad": [
+		"Myślałem że to rajd przełajowy...",
+		"Zjedź z drogi",
+		preload("res://images/icons/slb2icon.png"),
+		false
+		]
 }

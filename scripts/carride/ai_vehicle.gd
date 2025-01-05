@@ -2,9 +2,9 @@ class_name AIVehicle
 
 extends Area2D
 
-const variants = ["blue", "green", "white", "yellow"]
+const VARIANTS = ["blue", "green", "white", "yellow"]
 var variant: String
-var anim: AnimatedSprite2D 
+var anim: AnimatedSprite2D
 
 var speed_diff = 0:
 	get:
@@ -16,7 +16,7 @@ func _ready():
 	anim = get_node_or_null("AnimatedSprite2D")
 	if anim != null:
 		var rnd = randi_range(0,3)
-		variant = variants[rnd]
+		variant = VARIANTS[rnd]
 		anim.play(variant)
 		if SettingsBus.reduced_motion:
 			$AnimatedSprite2D.stop()
@@ -30,7 +30,7 @@ func _process(delta):
 	position += Vector2(-(owner.speed + speed_diff), 0) * delta
 
 
-func _on_body_entered(body):
+func _on_body_entered(_body):
 	queue_free()
 
 

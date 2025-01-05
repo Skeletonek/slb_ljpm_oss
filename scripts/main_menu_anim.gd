@@ -1,9 +1,10 @@
 extends Camera2D
 
+@export var animation_speed: int = 800
+
 @onready var road_node: Sprite2D = $Road
 @onready var panda_node: AnimatedSprite2D = $LukaszczykWPandzie
 @onready var button: TouchScreenButton = $LukaszczykWPandzie/TouchScreenButton
-@export var animation_speed: int = 800
 
 
 func _ready():
@@ -12,8 +13,7 @@ func _ready():
 	var anim_player = panda_node.get_child(0) as AnimationPlayer
 	anim_player.play("main_menu_sway")
 	if SettingsBus.reduced_motion:
-		road_node.texture = load("res://sprites/RoadRM.png")
-		panda_node.stop()
+		_reduce_motion(true)
 
 
 func _process(delta):

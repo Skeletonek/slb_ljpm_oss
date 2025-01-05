@@ -1,18 +1,18 @@
 extends CanvasLayer
 
-
-@onready var PlayerNameEdit := $"Panel/VBoxContainer/HBoxContainer/PlayerNameEdit"
-@onready var PlayerUUID := $"Panel/VBoxContainer/HBoxContainer/PlayerUUID"
-
 signal save_button
+
+@onready var player_name_edit := $"Panel/VBoxContainer/HBoxContainer/PlayerNameEdit"
+@onready var player_uuid := $"Panel/VBoxContainer/HBoxContainer/PlayerUUID"
+
 
 
 func _ready():
 	var uuid = SettingsBus.playername.split("#")[1]
-	PlayerUUID.text = "#" + uuid
+	player_uuid.text = "#" + uuid
 
 
 func _on_save_button_pressed():
-	SettingsBus.playername = PlayerNameEdit.text.replace("\n", "") + SettingsBus.playername.right(9)
+	SettingsBus.playername = player_name_edit.text.replace("\n", "") + SettingsBus.playername.right(9)
 	hide()
 	save_button.emit()

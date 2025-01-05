@@ -1,7 +1,8 @@
 extends CanvasLayer
 
 
-@onready var resume_button = $CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ResumeButton
+@onready var resume_button = $CenterContainer/PanelContainer/MarginContainer/\
+	VBoxContainer/ResumeButton
 
 
 func _ready():
