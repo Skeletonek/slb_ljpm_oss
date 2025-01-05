@@ -6,6 +6,7 @@ offset_left = -500.0
 offset_top = -30.0
 grow_horizontal = 0
 grow_vertical = 0
+mouse_filter = 2
 
 [node name="PlayerName" type="RichTextLabel" parent="."]
 layout_mode = 1

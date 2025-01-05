@@ -5,6 +5,7 @@ extends Control
 func _ready():
 	if OS.is_debug_build():
 		$DebugInfo.visible = true
+		$DebugInfo/VersionBuildDate2.text = "Development Version"
 	$DebugInfo/VersionBuildDate.text = "SLB: LJPM\n" + \
 	"Version: " + ProjectSettings.get_setting("application/config/version") + "\n" + \
 	"Build: " + str(ProjectSettings.get_setting("application/config/build_number")) + "\n" + \

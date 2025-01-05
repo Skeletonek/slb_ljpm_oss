@@ -13,7 +13,8 @@ const SUPPORTED_COMMANDS = {
 	10: "music_list",
 	11: "carride",
 	12: "god",
-	13: "debug_info"
+	13: "debug_info",
+	14: "clear_leaderboard"
 }
 
 signal error_msg_received(msg:String)
@@ -159,12 +160,23 @@ func _on_prompt_edit_text_submitted(new_text):
 		SUPPORTED_COMMANDS[10]:
 			_get_all_musicfiles()
 		SUPPORTED_COMMANDS[11]:
-			get_tree().change_scene_to_file("res://scenes/carride.tscn")
+			if SettingsBus.playername.split("#")[0] != "":
+				get_tree().change_scene_to_file("res://scenes/carride.tscn")
+			else:
+				push_warning("Player name is not set. Head to the settings to change it")
 		SUPPORTED_COMMANDS[12]:
-			SettingsBus.godmode = !SettingsBus.godmode
-			print("Godmode " + ("enabled" if SettingsBus.godmode else "disabled"))
+			if OS.is_debug_build():
+				SettingsBus.godmode = !SettingsBus.godmode
+				print("Godmode " + ("enabled" if SettingsBus.godmode else "disabled"))
+			else:
+				push_error("This command is supported only in Debug build")
 		SUPPORTED_COMMANDS[13]:
 			DebugInfo.toggle()
+		SUPPORTED_COMMANDS[14]:
+			if OS.is_debug_build():
+				SilentWolf.Scores.wipe_leaderboard()
+			else:
+				push_error("This command is supported only in Debug build")
 		_:
 			push_error("Unknown command")
 	prompt_edit.clear()

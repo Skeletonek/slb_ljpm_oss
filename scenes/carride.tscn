@@ -242,11 +242,13 @@ horizontal_alignment = 1
 [node name="PlayAgainBtn" type="Button" parent="GUI/PanelContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
+focus_neighbor_bottom = NodePath("../MenuBtn")
 text = "Zagraj jeszcze raz"
 
 [node name="MenuBtn" type="Button" parent="GUI/PanelContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
+focus_neighbor_top = NodePath("../PlayAgainBtn")
 text = "Wróć do menu"
 
 [node name="Camera2D" type="Camera2D" parent="."]

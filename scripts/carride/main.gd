@@ -21,7 +21,7 @@ var milks: int = 0:
 		milks = value 
 		GUI.update_points()
 
-var spawn_time_limit: int = 20:
+@export var spawn_time_limit: int = 20:
 	get:
 		return spawn_time_limit
 

@@ -1,9 +1,15 @@
+class_name AIVehicle
+
 extends Area2D
 
 const variants = ["blue", "green", "white", "yellow"]
 var variant: String
-var speed_diff = 0
 var anim: AnimatedSprite2D 
+
+var speed_diff = 0:
+	get:
+		return speed_diff
+
 
 func _ready():
 	SignalBus.reduce_motion.connect(_reduce_motion)
@@ -26,6 +32,11 @@ func _process(delta):
 
 func _on_body_entered(body):
 	queue_free()
+
+
+func _on_area_entered(area):
+	if area is AIVehicle:
+		speed_diff = area.speed_diff
 
 
 func _reduce_motion(yes):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dg78sdxts17fs"]
+[gd_scene load_steps=26 format=3 uid="uid://dg78sdxts17fs"]
 
 [ext_resource type="Script" path="res://scripts/mainMenu.gd" id="1_ck7i2"]
 [ext_resource type="Script" path="res://scripts/main_menu_anim.gd" id="2_4ayhe"]
@@ -14,6 +14,9 @@
 [ext_resource type="Texture2D" uid="uid://cm8cnn2cih4wk" path="res://images/GodotLogo.png" id="11_ohnpv"]
 [ext_resource type="Texture2D" uid="uid://chmu0q4arfvtg" path="res://images/SkeletonLogoV6S.png" id="12_1eu7f"]
 [ext_resource type="Texture2D" uid="uid://bnvg8lvduxprm" path="res://images/HalembarusLogoV1.1S.jpg" id="13_6ch7m"]
+[ext_resource type="Texture2D" uid="uid://dxe6vh4w56dcl" path="res://images/silentwolf.png" id="15_s4mpv"]
+[ext_resource type="PackedScene" uid="uid://dvxnxtlpqfyh4" path="res://scenes/instances/popup_input.tscn" id="15_sfa7s"]
+[ext_resource type="PackedScene" uid="uid://dot20ht7350x6" path="res://scenes/instances/popup_changelog.tscn" id="16_jrstn"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_n03hm"]
 animations = [{
@@ -50,6 +53,9 @@ tracks/0/keys = {
 _data = {
 "main_menu_sway": SubResource("Animation_dt7n6")
 }
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bvcuf"]
+size = Vector2(70, 40)
 
 [sub_resource type="LabelSettings" id="LabelSettings_q8iax"]
 font_size = 14
@@ -102,6 +108,9 @@ flip_h = true
 libraries = {
 "": SubResource("AnimationLibrary_47kh2")
 }
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="Camera2D/LukaszczykWPandzie"]
+shape = SubResource("RectangleShape2D_bvcuf")
 
 [node name="VersionBuildDate" type="Label" parent="."]
 visible = false
@@ -244,7 +253,6 @@ alignment = 1
 [node name="VBoxContainer" type="VBoxContainer" parent="CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-alignment = 1
 
 [node name="GameLogo" type="TextureRect" parent="CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 190)
@@ -343,7 +351,7 @@ size_flags_stretch_ratio = 0.7
 theme_override_fonts/font = ExtResource("10_d6dtl")
 theme_override_font_sizes/font_size = 16
 text = "Halembarus2:
-Główny scenarzysta, Reżyser"
+Główny scenarzysta, Reżyser, Tester"
 label_settings = SubResource("LabelSettings_q8iax")
 autowrap_mode = 3
 
@@ -400,6 +408,7 @@ autowrap_mode = 2
 [node name="VBoxContainer2" type="VBoxContainer" parent="CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
 alignment = 1
 
 [node name="GameInfo" type="Label" parent="CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer2"]
@@ -433,14 +442,37 @@ autowrap_mode = 2
 [node name="AssetsInfo" type="Label" parent="CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(450, 0)
 layout_mode = 2
-size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("10_d6dtl")
 theme_override_font_sizes/font_size = 16
-text = "Część grafik użytych w grze jest udostępnionych na licencji Creative Commons lub dostępnych w domenie publicznej."
+text = "Część grafik oraz utworów użytych w grze jest udostępnionych na licencji Creative Commons lub dostępnych w domenie publicznej.
+
+"
 label_settings = SubResource("LabelSettings_xqss0")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
+
+[node name="OnlineInfo" type="Label" parent="CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(450, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("10_d6dtl")
+theme_override_font_sizes/font_size = 16
+text = "Funkcje online zapewnia: 
+"
+label_settings = SubResource("LabelSettings_xqss0")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="GameEngineLogo" type="TextureRect" parent="CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
+texture = ExtResource("15_s4mpv")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="BackButton" type="Button" parent="CreditsLayer/PanelContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 50)
@@ -451,6 +483,16 @@ text = "Powrót"
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
 timeout = 3.0
 
+[node name="HTTPRequest2" type="HTTPRequest" parent="."]
+timeout = 3.0
+
+[node name="popup_input" parent="." instance=ExtResource("15_sfa7s")]
+visible = false
+
+[node name="PopupChangelog" parent="." instance=ExtResource("16_jrstn")]
+visible = false
+
+[connection signal="pressed" from="Camera2D/LukaszczykWPandzie/TouchScreenButton" to="." method="_on_easter_egg_button_pressed"]
 [connection signal="pressed" from="MainMenuLayer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="MainMenuLayer/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
 [connection signal="pressed" from="MainMenuLayer/VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]

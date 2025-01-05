@@ -1,0 +1,82 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvxnxtlpqfyh4"]
+
+[ext_resource type="Script" path="res://scripts/nodes/PopupInput.gd" id="1_0pd75"]
+[ext_resource type="Material" uid="uid://cqn5rkmj7io2i" path="res://shaders/panel_shader_material.tres" id="1_hrths"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_6iuel"]
+font_size = 32
+
+[node name="popup_input" type="CanvasLayer"]
+script = ExtResource("1_0pd75")
+
+[node name="Container" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="."]
+material = ExtResource("1_hrths")
+custom_minimum_size = Vector2(1000, 600)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -250.0
+offset_right = 400.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+custom_minimum_size = Vector2(900, 500)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -200.0
+offset_right = 300.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 100
+
+[node name="Header" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Nazwa gracza"
+label_settings = SubResource("LabelSettings_6iuel")
+horizontal_alignment = 1
+
+[node name="Desc" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Potrzebujemy abyś zapisał tutaj swoją nazwę użytkownika
+w celu łatwiejszego odnalezienia Cię na liście najlepszych wyników"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="PlayerNameEdit" type="TextEdit" parent="Panel/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(500, 40)
+layout_mode = 2
+placeholder_text = "Podaj swoją nazwę"
+
+[node name="PlayerUUID" type="Label" parent="Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "#abcdef12"
+
+[node name="SaveButton" type="Button" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(280, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Zapisz"
+
+[connection signal="pressed" from="Panel/VBoxContainer/SaveButton" to="." method="_on_save_button_pressed"]

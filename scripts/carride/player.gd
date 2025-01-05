@@ -24,8 +24,14 @@ func _process(delta):
 
 func _input(event):
 	if event.is_action_pressed("move_up"):
+		if event is InputEventJoypadMotion:
+			if event.get_action_strength("move_up") != 1.0:
+				return
 		move(true)
 	elif event.is_action_pressed("move_down"):
+		if event is InputEventJoypadMotion:
+			if event.get_action_strength("move_down") != 1.0:
+				return
 		move(false)
 #	elif event is InputEventScreenTouch:
 #		if event.pressed and event.index == 0:

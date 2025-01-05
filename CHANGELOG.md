@@ -1,3 +1,12 @@
+#### 1.0.0
+ - Added pop up when player name is not set
+ - Added new version info pop up
+ - Adjusted debug information for release versions
+ - Fixed gamepad joystick sending too much inputs
+ - Fixed leaderboards being difficult to scroll on touch screen devices
+ - Fixed interaction between some UI elements
+ - Fixed AI Cars going through each other
+
 #### RC.7.1
  - Added icons to gamepad controls section in settings
  - Fixed dev console button in settings reporting wrong state on startup

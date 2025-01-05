@@ -3,15 +3,16 @@ extends Control
 
 @onready var options_layer = $OptionsLayer
 @onready var http_request = $HTTPRequest
+@onready var http_request_changelog = $HTTPRequest2
 @onready var update_button = $MainMenuLayer/UpdateButton
 
 @export var skeletonek_logo: Control
 @export var godot_logo: Control
 
 var build_number: int = ProjectSettings.get_setting("application/config/build_number")
-var new_build_code: String
+var version: String
 var download_url: String
-var changelog_url: String
+var changelog: String
 
 func _ready():
 	skeletonek_logo.gui_input.connect(_on_skeletonek_logo_click)
@@ -32,6 +33,7 @@ func _ready():
 	
 	# Check for update
 	http_request.request_completed.connect(_validate_update)
+	http_request_changelog.request_completed.connect(_download_changelog)
 	_check_update()
 
 
@@ -78,17 +80,24 @@ func _validate_update(result, response_code, headers, body):
 		if int(json["buildNumber"]) > build_number:
 			print("Update found!")
 			download_url = json["downloadURL"]
-			changelog_url = json["changelogURL"]
-			new_build_code = json["buildCode"]
+			version = json["buildCode"]
+			
+			var changelog_url = json["changelogURL"]
+			push_warning(changelog_url)
+			http_request_changelog.request(changelog_url)
+			
+			$PopupChangelog.update_version_data(version, download_url)
 			update_button.text = "Dostępna aktualizacja!"
 			update_button.disabled = false
 			update_button.show()
 
 
+func _download_changelog(result, response_code, headers, body):
+	$PopupChangelog.update_changelog_data(body.get_string_from_utf8())
+
+
 func _update_game():
-	OS.shell_open(download_url)
-	SettingsBus.save_config()
-	get_tree().quit()
+	$PopupChangelog.show()
 
 
 func _notification(what):
@@ -98,6 +107,10 @@ func _notification(what):
 
 
 func _on_continue_button_pressed():
+	if SettingsBus.playername.split("#")[0] == "":
+		$popup_input.show()
+		$popup_input.save_button.connect(_on_continue_button_pressed)
+		return
 	get_tree().change_scene_to_file("res://scenes/carride.tscn")
 
 

@@ -15,7 +15,7 @@ var fullscreen := true
 var touchscreen_control := TOUCHSCREEN_CONTROL_MODE.Tap
 var keyboard_up := KEY_W
 var keyboard_down := KEY_S
-var playername := "Player#" + OS.get_unique_id().substr(0, 8)
+var playername := "#" + OS.get_unique_id().substr(0, 8)
 var dev_console := false
 
 var narrator_speaking := false
@@ -144,7 +144,7 @@ func _configure_silentwolf():
 	SilentWolf.configure({
 		"api_key": "",
 		"game_id": "slbljpm",
-		"log_level": 2
+		"log_level": 2 if OS.is_debug_build() else 1
 	})
 	SilentWolf.configure_scores({
 		"open_scene_on_close": "res://scenes/mainMenu.tscn"

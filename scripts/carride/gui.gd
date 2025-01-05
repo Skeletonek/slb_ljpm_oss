@@ -7,6 +7,7 @@ signal touchscreen_move(direction: bool)
 @onready var Speedometer: Label = $HBoxContainer3/LabelSpeed
 @onready var GameOverPanel := $PanelContainer
 @onready var ScoreLabel := $PanelContainer/MarginContainer/VBoxContainer/ScoreLabel
+@onready var PlayagainButton := $PanelContainer/MarginContainer/VBoxContainer/PlayAgainBtn
 
 var diff_time: int
 
@@ -39,6 +40,7 @@ func update_points():
 func game_over():
 	stop_processing = true
 	ScoreLabel.text = str(owner.final_score)
+	PlayagainButton.grab_focus()
 	GameOverPanel.show()
 
 
