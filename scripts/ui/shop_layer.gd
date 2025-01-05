@@ -41,6 +41,7 @@ func _ready() -> void:
 	SignalBus.cr_ch_unlock_maps.connect(_update_map_panel)
 	SignalBus.cr_update_milks_count.connect(_update_milks_count)
 	_update_milks_count()
+	_check_achievement()
 
 
 func switch(i_add: int, is_skin: bool) -> void:
@@ -147,13 +148,13 @@ func _update_milks_count() -> void:
 func _check_achievement() -> void:
 	var serious_business := true
 	var globetrotter := true
-	for skin in ProfileBus.profile.skins:
+	for skin in ProfileBus.profile.skins.values():
 		if not skin:
 			serious_business = false
 			break
 	if serious_business:
 		AchievementSystem.call_achievement("serious_business")
-	for map in ProfileBus.profile.maps:
+	for map in ProfileBus.profile.maps.values():
 		if not map:
 			globetrotter = false
 			break

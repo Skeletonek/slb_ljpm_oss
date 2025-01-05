@@ -9,12 +9,12 @@ As of now, it is recommended to run the project in **Godot Engine 4.3**
 ## Supported platforms
 
 ### {- WARNING! -}
-{- As of 2.0-Alpha+6, support for ARMv7 devices with Android OS has been dropped -}
+{- As of 2.0.0, support for ARMv7 devices with Android OS has been dropped -}
 
 - Microsoft Windows x86_64
   - Windows 10 22H2+
   - Windows 11 23H2+
-- Linux x86_64 distributions with X11 or Wayland windowing system, OpenGL / Vulkan drivers and active support. (This excludes distros with only security support)
+- Linux x86_64 distributions with X11 or Wayland windowing system and free and official security support.
   - Ubuntu 20.04 Focal Fossa
   - Ubuntu 22.04 Jammy Jellyfish
   - Ubuntu 24.04 Noble Numbat
@@ -40,8 +40,6 @@ As of now, it is recommended to run the project in **Godot Engine 4.3**
   - Android 13
   - Android 14
 
-{- Windows 11 22H2 and Linux distributions such as Fedora 39 are not supported because they will go EOL before LJPM 2.0 version release -}
-
 Technically it is possible to run the game on unsupported platforms such as MacOS or BSD-family systems, but no binaries are provided and developers won't help with developing fixes for these systems.
 
 
@@ -53,10 +51,13 @@ Technically it is possible to run the game on unsupported platforms such as MacO
   - Linux: x86_64 processor with 4 threads
     - Intel Pentium G4560
     - AMD Athlon 200GE
-  - Android: x86_64 or ARM64 processor with 4 threads
-    - Qualcomm Snapdragon 400
-    - MediaTek MT6595M
-- RAM: 3 GB of hardware memory
+  - Android: x86_64 or ARM64 processor with 4 cores
+    - Qualcomm Snapdragon 625
+    - MediaTek Helio P35
+- RAM:
+  - Windows: 3 GB of hardware memory
+  - Linux: 2 GB of hardware memory
+  - Android: 3 GB of hardware memory
 - Disk: 300 MB free space
 - GPU:
   - Windows: |
@@ -64,8 +65,8 @@ Technically it is possible to run the game on unsupported platforms such as MacO
     - Intel HD Graphics 4000
     - AMD Radeon R3 Graphics
   - Android: Integrated GPU with OpenGL ES 3.0+ support
-    - Qualcomm Adreno 305
-    - PowerVR G6200
+    - Qualcomm Adreno 506
+    - PowerVR GE8320
 
 ### Recommended:
 
@@ -74,9 +75,9 @@ Technically it is possible to run the game on unsupported platforms such as MacO
   - Linux: x86_64 processor with 4 cores
     - Intel Core i5-3330
     - AMD Ryzen 3 1200
-  - Android: x86_64 or ARM64 processor with 4 cores
-    - Qualcomm Snapdragon 400
-    - MediaTek MT6595M
+  - Android: x86_64 or ARM64 processor with 8 cores
+    - Qualcomm Snapdragon 660
+    - MediaTek Helio P70
 - RAM: 4 GB of hardware memory
 - Disk: 300 MB free space
 - GPU:
@@ -85,8 +86,8 @@ Technically it is possible to run the game on unsupported platforms such as MacO
   - Android: Integrated or Dedicated GPU with Vulkan 1.0+ support
     - Intel HD Graphics 400
     - AMD Radeon Vega 3
-    - Qualcomm Adreno 505
-    - Mali-T760 MP2
+    - Qualcomm Adreno 512
+    - Mali-G72 MP3
 
 
 ## Graphics API
@@ -95,7 +96,7 @@ Game can be run with 'Forward+' backend, but it is not official.
 
 
 ## Commit push
-It is required for all commits pushed to 2_0 branch (and later master branch) to pass the pipeline.\
+It is required for all commits pushed to master branch to pass the pipeline.\
 Right now pipeline consist only of lint job.\
 If you happen to push a commit that fails the pipeline, please fix it in the next commit as soon as possible.
 
@@ -128,10 +129,10 @@ Executable files will be available from `../build/` path relative to game direct
 
 ## Copyright notice
 **Super Łukaszczyk Bros: Łukaszczyk Jedzie Po Mleko**\
-**Copyright © 2023-2024 Skeletonek & Halembarus2**\
+**Copyright © 2023-2025 Skeletonek & Halembarus2**\
 \
 Godot Engine\
-Copyright © 2007-2024 Juan Linietsky, Ariel Manzur & contributors.\
+Copyright © 2007-2025 Juan Linietsky, Ariel Manzur & contributors.\
 https://godotengine.org/
 \
 \

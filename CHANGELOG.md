@@ -1,3 +1,27 @@
+#### 2.1.0
+ - Added Fridge skin
+ - Added option to restart the game inside pause menu
+ - Added collision check to disallow blocking player from escaping from the most outer lanes
+ - Added "boot up check" for GUI car indicators at the start of the game
+ - Changed classic mode to use the same car spawning algorithm as the new improved mode
+ - Decreased the possible speed difference between AI cars
+ - Changed font color for exit buttons in pause menu
+ - Changed information popups to not allow mouse input passing
+ - Changed achievement detail popup to not allow mouse input passing
+ - Increased speed of the bootscreen animation
+ - Fixed "Serious Business" and "Globetrotter" achievements not awarding after buying all skins and maps (Achievements will be granted when starting game)
+ - Fixed pickables being sometimes pickable even if dying from another car
+ - Fixed pickables playing sound and disappearing even if its effects are not being granted due to some condition being not met (f.e. Powerups playing sound and disappearing but not activating due to player dying)
+ - Fixed stutter when loading main menu after bootscreen animation
+ - Fixed being able to turn on both direction indicators in the hud
+ - Fixed minor graphical artifacts on Lunar Rover skin texture
+ - Fixed minor graphical artifacts on Volvo skin texture
+ - Fixed shadow on Real Panda texture
+ - Fixed shadow on Semaglutide powerup texture
+ - Fixed minor graphical issues present in GUI car indicators
+ - Refactored collsion detection
+ - Refactored bootscreen animation
+
 #### 2.0.0
  - Added new, animated logo for 2.0 version
  - Added infinity music track

@@ -12,8 +12,10 @@ var variant: String
 @onready var area2d: Area2D = $Area2D
 @onready var car_collision_shape: CollisionShape2D = $Area2D/CollisionShape2D
 @onready var milk_collision_shape: CollisionShape2D = $Area2D/CollisionShape2DMilk
+@onready var ai_car_utmost_collision_shape: CollisionShape2D = \
+	$AICollisionArea2D/CollisionShape2DUtmost
 @onready var pickable_component: PickableComponent = $PickableComponent
-
+@onready var raycast: RayCast2D = $RayCast2D
 
 func _ready():
 	SignalBus.reduce_motion.connect(_reduce_motion)
@@ -23,6 +25,7 @@ func _ready():
 		variant = LC_VARIANTS[rnd]
 		if variant == "lc_rover":
 			car_animated_sprite.scale -= Vector2(0.06, 0.06)
+			car_animated_sprite.position -= Vector2(0, 12)
 	else:
 		rnd = randi_range(0,VARIANTS.size()-1)
 		variant = VARIANTS[rnd]

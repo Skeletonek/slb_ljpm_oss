@@ -2,6 +2,12 @@ extends Control
 
 signal touchscreen_move(direction: bool)
 
+enum TurnModes {
+	LEFT,
+	RIGHT,
+	OFF
+}
+
 const MINIMUM_SWIPE_DRAG = 120
 
 @export var label_time: Label
@@ -14,12 +20,15 @@ const MINIMUM_SWIPE_DRAG = 120
 @export var powerup_ending_timer: Timer
 @export var powerup_ending_player: AudioStreamPlayer
 @export var indicators: Node2D
+@export var indicator_left: Sprite2D
+@export var indicator_right: Sprite2D
 
 var diff_time: int = 0
 var swipe_start: Vector2 = Vector2.INF
 var swipe_lock := false
 var stop_processing := false
 var gauge_speed: float = -36
+var indicators_boot_up := true
 # gdlint:disable=duplicated-load
 var powerup_textures = [
 	null,
@@ -51,6 +60,13 @@ func _ready() -> void:
 		$LivesBorder.hide()
 		$PowerupBorder.hide()
 	update_points()
+	for indicator in indicators.get_children():
+		indicator.light_on()
+	await get_tree().create_timer(1).timeout
+	indicators_boot_up = false
+	for indicator in indicators.get_children():
+		if indicator.name != "ParkingLights" and indicator.name != "LowBeam":
+			indicator.light_off()
 
 
 @warning_ignore("integer_division")
@@ -73,6 +89,8 @@ func update_points() -> void:
 
 func game_over() -> void:
 	stop_processing = true
+	for indicator in indicators.get_children():
+		indicator.light_off()
 	if owner.version_2:
 		score_label.text = "Mleka: %d   Dystans: %d" % [owner.milks, (owner.distance / 33500) * 1000]
 	else:
@@ -81,15 +99,23 @@ func game_over() -> void:
 	game_over_panel.show()
 
 
-func direction_indicators(direction_right: bool, stop: bool) -> void:
-	var indicator = indicators.get_node("Right") \
-		if direction_right else \
-		indicators.get_node("Left")
-
-	if not stop:
-		indicator.start_blinking()
-	else:
-		indicator.stop_blinking()
+func direction_indicators(mode: TurnModes) -> void:
+	if not indicators_boot_up:
+		indicator_left.stop_blinking()
+		indicator_right.stop_blinking()
+		var mistake_rnd = randi_range(0, 200)
+		if mistake_rnd == 200:
+			return
+		if mode == TurnModes.LEFT:
+			if mistake_rnd >= 198:
+				indicator_right.start_blinking()
+			else:
+				indicator_left.start_blinking()
+		elif mode == TurnModes.RIGHT:
+			if mistake_rnd >= 198:
+				indicator_left.start_blinking()
+			else:
+				indicator_right.start_blinking()
 
 
 func show_powerup(powerup: PowerupClass.Powerups) -> void:

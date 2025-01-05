@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dg78sdxts17fs"]
+[gd_scene load_steps=18 format=3 uid="uid://dg78sdxts17fs"]
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_f7xwm"]
 [ext_resource type="PackedScene" uid="uid://dhg1bdg5yc1y1" path="res://scenes/ui/main_menu_anim.tscn" id="2_bk5ie"]
@@ -14,6 +14,79 @@
 [ext_resource type="PackedScene" uid="uid://dot20ht7350x6" path="res://scenes/ui/mainmenu/popup_changelog.tscn" id="16_y0ahp"]
 [ext_resource type="PackedScene" uid="uid://dvxnxtlpqfyh4" path="res://scenes/ui/mainmenu/popup_input.tscn" id="17_1ly6a"]
 [ext_resource type="PackedScene" uid="uid://db5l2vxqoia22" path="res://scenes/ui/mainmenu/popup_telemetry.tscn" id="17_474mg"]
+
+[sub_resource type="Animation" id="Animation_ta4ft"]
+resource_name = "BootAnim"
+length = 1.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MainMenuLayer/VBoxContainer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.51, 1),
+"transitions": PackedFloat32Array(0.392292, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MainMenuLayer/VBoxContainer2:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.51, 1),
+"transitions": PackedFloat32Array(0.392292, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MainMenuLayer/GameLogo:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.51, 1),
+"transitions": PackedFloat32Array(0.392292, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MainMenuLayer/UpdateButton:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.51, 1.01),
+"transitions": PackedFloat32Array(0.392292, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_03q1t"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MainMenuLayer/VBoxContainer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i71g0"]
+_data = {
+"BootAnim": SubResource("Animation_ta4ft"),
+"RESET": SubResource("Animation_03q1t")
+}
 
 [node name="mainMenu" type="Control" node_paths=PackedStringArray("focus_node")]
 layout_mode = 3
@@ -254,6 +327,7 @@ stretch_mode = 5
 
 [node name="UpdateButton" type="Button" parent="MainMenuLayer"]
 visible = false
+modulate = Color(1, 1, 1, 0.999953)
 custom_minimum_size = Vector2(160, 70)
 offset_left = 10.0
 offset_top = 10.0
@@ -319,6 +393,12 @@ visible = false
 
 [node name="PopupInput" parent="." instance=ExtResource("17_1ly6a")]
 visible = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_i71g0")
+}
+speed_scale = 0.6
 
 [connection signal="finished" from="Rick" to="." method="_on_rick_finished"]
 [connection signal="pressed" from="MainMenuLayer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

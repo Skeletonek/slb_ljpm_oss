@@ -21,6 +21,14 @@ var easter_egg_clickable := false
 @onready var player_name_input_popup = $PopupInput
 
 
+func modulate_anim():
+	$AnimationPlayer.play("BootAnim")
+
+
+func stop_modulate_anim():
+	$AnimationPlayer.seek($AnimationPlayer.current_animation_length)
+
+
 func _ready() -> void:
 	$MainMenuLayer/VBoxContainer2/AnimatedSprite2D.sprite_frames = animated_logo
 	# This is for the SLB2: TGRa, not LJPM

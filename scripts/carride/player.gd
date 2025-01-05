@@ -11,9 +11,12 @@ var joystick_lock_down := false
 var original_y_position: float
 
 var dont_collide := false
+var dead := false
 
 var explosion_tween: Tween
 var death_timer: Timer
+
+@onready var player: AudioStreamPlayer2D = $PickupPlayer
 
 func _ready() -> void:
 	SignalBus.reduce_motion.connect(_reduce_motion)
@@ -33,12 +36,12 @@ func _process(delta) -> void:
 		if position.y >= y_limit:
 			position.y = y_limit
 			move_vector = Vector2(0,0)
-			owner.gui.direction_indicators(true, true)
+			owner.gui.direction_indicators(owner.gui.TurnModes.OFF)
 	elif move_vector.y < 0:
 		if position.y <= y_limit:
 			position.y = y_limit
 			move_vector = Vector2(0,0)
-			owner.gui.direction_indicators(false, true)
+			owner.gui.direction_indicators(owner.gui.TurnModes.OFF)
 
 
 func _input(event):
@@ -73,7 +76,7 @@ func _input(event):
 
 
 func _on_area_entered(area):
-	if process_mode != Node.PROCESS_MODE_DISABLED:
+	if not dead:
 		var ar = area.get_parent()
 		if ar.is_in_group("Obstacles"):
 			_area_entered_obstacle(ar)
@@ -83,27 +86,13 @@ func _on_area_entered(area):
 			_area_entered_powerup(ar)
 
 
-func _area_entered_milk(ar):
-	if process_mode != Node.PROCESS_MODE_DISABLED:
-		if ar.is_in_group("MilkTriple"):
-			owner.milks += 3
-		else:
-			owner.milks += 1
-
-
-func _area_entered_powerup(ar):
-	owner.powerup = ar
-
-
-func _area_entered_obstacle(ar):
+func _area_entered_obstacle(ar: Node2D):
+	_check_if_clean_collision()
 	if not dont_collide or ar.is_in_group("OutOfBounds"):
-		$CrashPlayer.play()
-		if ar.is_in_group("OutOfBounds"):
-			AchievementSystem.call_achievement("offroad")
 		if not SettingsBus.godmode:
+			dead = true
 			owner.lives -= 1
-			owner.gui.direction_indicators(true, true)
-			owner.gui.direction_indicators(false, true)
+			owner.gui.direction_indicators(owner.gui.TurnModes.OFF)
 			if owner.version_2:
 				owner.gui.hide_one_live()
 				owner.powerup = null
@@ -114,6 +103,42 @@ func _area_entered_obstacle(ar):
 				owner.game_over()
 			else:
 				_respawn()
+		$CrashPlayer.play()
+		if ar.is_in_group("OutOfBounds"):
+			AchievementSystem.call_achievement("offroad")
+
+
+func _area_entered_milk(ar: Node2D):
+	if not dead and _check_if_clean_collision():
+		var sfx = ar.get_node("PickableComponent").pickup_sfx
+		player.stream = sfx
+		player.play()
+		ar.queue_free()
+
+		if ar.is_in_group("MilkTriple"):
+			owner.milks += 3
+		else:
+			owner.milks += 1
+
+
+func _area_entered_powerup(ar: Node2D):
+	if not dead and _check_if_clean_collision():
+		var sfx = ar.get_node("PickableComponent").pickup_sfx
+		player.stream = sfx
+		player.play()
+		ar.queue_free()
+
+		owner.powerup = ar
+
+
+func _check_if_clean_collision() -> bool:
+	if dont_collide or owner.powerup == PowerupClass.Powerups.MILKYWAY:
+		return true
+	for raycast in $RayCasts.get_children():
+		raycast.force_raycast_update()
+		if raycast.is_colliding():
+			return false
+	return true
 
 
 func _explode():
@@ -141,6 +166,7 @@ func _respawn():
 	call_deferred("set", "process_mode", Node.PROCESS_MODE_INHERIT)
 	owner.speed = owner.original_speed
 	$LukaszczykWPandzie.show()
+	dead = false
 
 	dont_collide = true
 	death_timer.start(1)
@@ -152,7 +178,8 @@ func move(dir_up: bool):
 	if process_mode != Node.PROCESS_MODE_DISABLED:
 		move_vector = Vector2(0, (-vertical_speed if dir_up else vertical_speed))
 		y_limit += -lane_y_diff if dir_up else lane_y_diff
-		owner.gui.direction_indicators(!dir_up, false)
+		var mode = owner.gui.TurnModes.LEFT if dir_up else owner.gui.TurnModes.RIGHT
+		owner.gui.direction_indicators(mode)
 
 
 func _powerup_semaglutide_handler(yes: bool):

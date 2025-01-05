@@ -1,3 +1,3 @@
 extends Node2D
 
-@onready var animation: Camera2D = $BGAnimation
+@export var animation: Camera2D

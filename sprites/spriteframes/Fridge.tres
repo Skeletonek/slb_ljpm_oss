@@ -1,0 +1,18 @@
+[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://w4n6de2fd1ud"]
+
+[ext_resource type="Texture2D" uid="uid://cw6hyugk7hmn1" path="res://sprites/Fridge_0001.png" id="1_rrm7c"]
+[ext_resource type="Texture2D" uid="uid://dkomuwg57th6c" path="res://sprites/Fridge_0002.png" id="2_esanu"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_rrm7c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_esanu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]

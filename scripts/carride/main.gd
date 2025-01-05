@@ -174,10 +174,10 @@ func _speed_management(delta):
 
 @warning_ignore("narrowing_conversion")
 func _spawn_car(delta):
-	if version_2:
-		spawn_time += randf() * speed * 0.17 * delta * time_scale
-	else:
-		spawn_time += randi_range(0, (1 + ((speed - 300) / 300)))
+	# if version_2:
+	spawn_time += randf() * speed * 0.175 * delta * time_scale
+	# else:
+		# spawn_time += randi_range(0, (1 + ((speed - 300) / 300)))
 	if spawn_time > spawn_time_limit:
 		var loc_rnd = randi_range(0,4)
 		var marker: Node2D = $SpawnPoints.get_child(loc_rnd)
@@ -197,6 +197,8 @@ func _spawn_car(delta):
 		var car = ai_vehicle_instance.instantiate()
 		car.position = marker.global_position
 		add_child(car)
+		if loc_rnd == 0 or loc_rnd == 4:
+			car.ai_car_utmost_collision_shape.disabled = false
 		car.owner = self
 
 

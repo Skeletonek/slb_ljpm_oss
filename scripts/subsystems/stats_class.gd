@@ -11,6 +11,7 @@ enum Skins {
 	EMO_PANDA=7,
 	LOWRIDER=8,
 	OPTIMUS_PRIME=9,
+	FRIDGE=10,
 }
 
 enum Maps {

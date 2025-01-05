@@ -152,7 +152,6 @@ func _load_achv_details(event, sender):
 				)
 			achv_details.visible = true
 			achv_details.close_button.grab_focus()
-			print("Clicked ", sender.get_node("AchievementTitle").text)
 			GlobalMusic.button_sound(true, GlobalMusic.BtnType.SWITCH)
 
 

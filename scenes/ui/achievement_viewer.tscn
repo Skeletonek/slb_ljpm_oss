@@ -75,6 +75,14 @@ layer = 51
 visible = false
 script = ExtResource("3_r5j1s")
 
+[node name="Container" type="Control" parent="AchvDetailsView"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="PanelContainer" type="Panel" parent="AchvDetailsView"]
 material = ExtResource("2_cxh46")
 custom_minimum_size = Vector2(800, 300)

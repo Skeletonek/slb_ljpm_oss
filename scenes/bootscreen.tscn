@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dmyy4lbk3kps4"]
+[gd_scene load_steps=14 format=3 uid="uid://dmyy4lbk3kps4"]
 
 [ext_resource type="Script" path="res://scripts/bootscreen.gd" id="1_a54r8"]
 [ext_resource type="Script" path="res://scripts/bootscreen_parent.gd" id="1_hquq8"]
@@ -9,10 +9,11 @@
 [ext_resource type="Texture2D" uid="uid://cw8ixdxqc450b" path="res://images/SplashScreen.png" id="4_2skfb"]
 [ext_resource type="Texture2D" uid="uid://chmu0q4arfvtg" path="res://images/SkeletonLogoV6S.png" id="4_v0hf0"]
 [ext_resource type="Texture2D" uid="uid://bnvg8lvduxprm" path="res://images/HalembarusLogoV1.1S.jpg" id="5_0q6ep"]
+[ext_resource type="PackedScene" uid="uid://dg78sdxts17fs" path="res://scenes/mainMenu.tscn" id="10_lkwf6"]
 
 [sub_resource type="Animation" id="Animation_rh7ms"]
 resource_name = "BootAnimation"
-length = 2.1
+length = 1.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -32,10 +33,10 @@ tracks/1/path = NodePath("Title screen:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1, 2),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 0.999999),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -44,8 +45,8 @@ tracks/2/path = NodePath("ColorRect:color")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1.56917, 1),
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(2, 1),
 "update": 0,
 "values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
 }
@@ -95,8 +96,9 @@ _data = {
 "RESET": SubResource("Animation_7en24")
 }
 
-[node name="Bootscreen" type="Node2D"]
+[node name="Bootscreen" type="Node2D" node_paths=PackedStringArray("animation")]
 script = ExtResource("1_hquq8")
+animation = NodePath("BGAnimation")
 
 [node name="BGAnimation" parent="." instance=ExtResource("2_l21q5")]
 
@@ -188,3 +190,5 @@ offset_right = 1273.0
 offset_bottom = 1110.0
 scale = Vector2(0.166, 0.166)
 texture = ExtResource("5_0q6ep")
+
+[node name="mainMenu" parent="." instance=ExtResource("10_lkwf6")]

@@ -49,7 +49,7 @@ shadow_size = 0
 font_size = 24
 shadow_size = 0
 
-[node name="GUI" type="Control" node_paths=PackedStringArray("label_time", "label_milk", "label_distance", "speedometer_gauge", "lives", "last_live_player", "powerup_holder", "powerup_ending_timer", "powerup_ending_player", "indicators")]
+[node name="GUI" type="Control" node_paths=PackedStringArray("label_time", "label_milk", "label_distance", "speedometer_gauge", "lives", "last_live_player", "powerup_holder", "powerup_ending_timer", "powerup_ending_player", "indicators", "indicator_left", "indicator_right")]
 z_index = 11
 layout_mode = 3
 anchors_preset = 15
@@ -72,6 +72,8 @@ powerup_holder = NodePath("PowerupBorder/PowerupHolder")
 powerup_ending_timer = NodePath("PowerupEndingTimer")
 powerup_ending_player = NodePath("PowerupEndingPlayer")
 indicators = NodePath("Indicators")
+indicator_left = NodePath("Indicators/Left")
+indicator_right = NodePath("Indicators/Right")
 
 [node name="HUDBorder" type="Sprite2D" parent="."]
 z_index = -1
@@ -361,7 +363,6 @@ texture = ExtResource("14_koqha")
 script = ExtResource("7_yskks")
 
 [node name="LowBeam" type="Sprite2D" parent="Indicators"]
-modulate = Color(0, 0.683459, 0.195007, 1)
 position = Vector2(-1529.8, -378.8)
 scale = Vector2(0.15, 0.15)
 texture = ExtResource("15_jxue3")

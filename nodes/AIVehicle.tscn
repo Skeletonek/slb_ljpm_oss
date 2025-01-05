@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dx2hxvg68wfj7"]
+[gd_scene load_steps=26 format=3 uid="uid://dx2hxvg68wfj7"]
 
 [ext_resource type="Script" path="res://scripts/carride/ai_vehicle.gd" id="1_p7m8i"]
 [ext_resource type="Texture2D" uid="uid://t6a01dojmwqe" path="res://sprites/PandaBlue_0001.png" id="2_hiln3"]
@@ -109,6 +109,9 @@ height = 60.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y8oay"]
 size = Vector2(196, 10)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7kwjg"]
+size = Vector2(178, 173)
+
 [node name="AIVehicle" type="Node2D" groups=["Car", "Obstacles"]]
 script = ExtResource("1_p7m8i")
 
@@ -143,6 +146,13 @@ collision_mask = 8
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AICollisionArea2D"]
 position = Vector2(2, 20.875)
 shape = SubResource("RectangleShape2D_y8oay")
+debug_color = Color(0.458824, 0.501961, 0.835294, 0.419608)
+
+[node name="CollisionShape2DUtmost" type="CollisionShape2D" parent="AICollisionArea2D"]
+position = Vector2(-132, 22.5)
+shape = SubResource("RectangleShape2D_7kwjg")
+disabled = true
+debug_color = Color(0.458295, 0.501962, 0.8371, 0.42)
 
 [node name="VehicleComponent" type="Node2D" parent="."]
 script = ExtResource("10_twmb7")
@@ -153,6 +163,13 @@ position = Vector2(0, 8)
 script = ExtResource("12_tikof")
 pickup_sfx = ExtResource("13_kcjjb")
 
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(0, 21)
+target_position = Vector2(110, 0)
+collision_mask = 8
+collide_with_areas = true
+collide_with_bodies = false
+
 [connection signal="area_entered" from="Area2D" to="VehicleComponent" method="_on_area_2d_area_entered"]
-[connection signal="area_entered" from="AICollisionArea2D" to="VehicleComponent" method="_on_area_2d_area_entered"]
 [connection signal="area_entered" from="AICollisionArea2D" to="VehicleComponent" method="_on_ai_collision_area_2d_area_entered"]
+[connection signal="area_entered" from="AICollisionArea2D" to="VehicleComponent" method="_on_area_2d_area_entered"]

@@ -22,6 +22,7 @@ const SUPPORTED_COMMANDS = [
 	# Achievement commands
 	"achievement_award",
 	"achievement_reset",
+	"achievement_debug_reenable",
 	# Music commands
 	"music_play",
 	"music_stop",
@@ -354,6 +355,15 @@ func _achievement_reset(arg = "") -> bool:
 	else:
 		AchievementSystem.debug_reset_test_achv_all()
 		print("All achievements have been reset")
+	return true
+
+
+func _achievement_debug_reenable() -> bool:
+	if OS.has_feature("editor"):
+		SettingsBus.cheats = false
+		push_warning("Achievements have been reenabled!")
+	else:
+		push_error("Game hasn't been run by the Godot editor!")
 	return true
 
 

@@ -122,6 +122,12 @@ const ACHIEVEMENT_LIST = {
 		preload("res://images/achievement_icons/OptimusPrime.webp"),
 		false
 		],
+	"fridge": [
+		"Nawet Makłowicz nie wyskoczy z lodówki",
+		"Ukończ jedną rozgrywkę w skórce Lodówkarza",
+		preload("res://images/achievement_icons/Fridge.webp"),
+		false
+		],
 	"serious_business": [
 		"Poważny biznes",
 		"Kup wszystkie skórki w sklepie",

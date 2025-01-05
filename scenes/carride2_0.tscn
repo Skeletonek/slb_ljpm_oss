@@ -81,10 +81,10 @@ size = Vector2(114, 16.5)
 size = Vector2(120, 40)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6het2"]
-size = Vector2(228, 40)
+size = Vector2(218, 40)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h1k2n"]
-size = Vector2(229, 40)
+size = Vector2(218, 40)
 
 [node name="Node2D" type="Node2D" node_paths=PackedStringArray("map", "player")]
 y_sort_enabled = true
@@ -135,8 +135,38 @@ shape = SubResource("RectangleShape2D_8unen")
 [node name="LukaszczykWPandzie" type="Area2D" parent="." groups=["Player"]]
 position = Vector2(-529, 43)
 scale = Vector2(1.5, 1.5)
+collision_layer = 2
 collision_mask = 7
+collision_priority = 10.0
+priority = 50
 script = ExtResource("11_lef4e")
+
+[node name="RayCasts" type="Node2D" parent="LukaszczykWPandzie"]
+
+[node name="RayCastDL" type="RayCast2D" parent="LukaszczykWPandzie/RayCasts"]
+position = Vector2(0, 26)
+target_position = Vector2(-56, 0)
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="RayCastUL" type="RayCast2D" parent="LukaszczykWPandzie/RayCasts"]
+position = Vector2(0, 11)
+target_position = Vector2(-56, 0)
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="RayCastDR" type="RayCast2D" parent="LukaszczykWPandzie/RayCasts"]
+position = Vector2(0, 26)
+target_position = Vector2(58, 0)
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="RayCastUR" type="RayCast2D" parent="LukaszczykWPandzie/RayCasts"]
+position = Vector2(0, 11)
+target_position = Vector2(58, 0)
+collide_with_areas = true
+collide_with_bodies = false
 
 [node name="LukaszczykWPandzie" type="AnimatedSprite2D" parent="LukaszczykWPandzie"]
 sprite_frames = ExtResource("12_plq4u")
@@ -176,7 +206,7 @@ one_shot = true
 position = Vector2(1010, 0)
 
 [node name="SP1" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(0, -117)
+position = Vector2(0, -113)
 gizmo_extents = 15.0
 
 [node name="Area2D" type="Area2D" parent="SpawnPoints/SP1"]
@@ -187,18 +217,18 @@ position = Vector2(-61, 30)
 shape = SubResource("RectangleShape2D_rof7r")
 
 [node name="SP2" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(0, -37)
+position = Vector2(0, -33)
 gizmo_extents = 15.0
 
 [node name="Area2D" type="Area2D" parent="SpawnPoints/SP2"]
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnPoints/SP2/Area2D"]
-position = Vector2(-115, 30)
+position = Vector2(-110, 30)
 shape = SubResource("RectangleShape2D_6het2")
 
 [node name="SP3" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(0, 43)
+position = Vector2(0, 47)
 gizmo_extents = 15.0
 
 [node name="Area2D" type="Area2D" parent="SpawnPoints/SP3"]
@@ -209,18 +239,18 @@ position = Vector2(-61, 30)
 shape = SubResource("RectangleShape2D_rof7r")
 
 [node name="SP4" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(0, 123)
+position = Vector2(0, 127)
 gizmo_extents = 15.0
 
 [node name="Area2D" type="Area2D" parent="SpawnPoints/SP4"]
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnPoints/SP4/Area2D"]
-position = Vector2(-115.5, 30)
+position = Vector2(-110, 30)
 shape = SubResource("RectangleShape2D_h1k2n")
 
 [node name="SP5" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(0, 203)
+position = Vector2(0, 207)
 gizmo_extents = 15.0
 
 [node name="Area2D" type="Area2D" parent="SpawnPoints/SP5"]

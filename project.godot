@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="SLB: LJPM"
-config/version="2.0.0"
+config/version="2.1.0"
 run/main_scene="res://scenes/bootscreen.tscn"
 config/project_settings_override="user://override.cfg"
 config/quit_on_go_back=false
@@ -20,8 +20,8 @@ run/flush_stdout_on_print=true
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/image="res://images/SplashScreen.png"
 config/icon="res://icon.svg"
-config/build_number=31
-config/date="2024-12-31 12:00"
+config/build_number=32
+config/date="2025-01-03 16:26"
 
 [autoload]
 
@@ -138,6 +138,17 @@ console_history_forward={
 [input_devices]
 
 pointing/emulate_touch_from_mouse=true
+
+[layer_names]
+
+2d_physics/layer_1="Obstacles"
+2d_physics/layer_2="Player"
+2d_physics/layer_3="Pickups"
+2d_physics/layer_4="AI Vehicles Only"
+
+[physics]
+
+2d/solver/solver_iterations=32
 
 [rendering]
 

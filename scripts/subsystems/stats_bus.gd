@@ -138,6 +138,17 @@ func get_skin_data(skin_index: int) -> Dictionary:
 				"y_pos_offset": 0.0,
 				"scale": 1.05,
 			}
+		profile.Skins.FRIDGE:
+			dict = {
+				"name": "Lodówkarz",
+				"texture": load("res://sprites/Fridge_0001.png"),
+				"spriteframe": load("res://sprites/spriteframes/Fridge.tres"),
+				"community_made": true,
+				"author": "Astro",
+				"price": 600,
+				"y_pos_offset": 0.0,
+				"scale": 1.10,
+			}
 	return dict
 
 
