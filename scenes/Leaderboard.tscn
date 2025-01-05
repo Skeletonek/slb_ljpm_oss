@@ -5,21 +5,26 @@
 [ext_resource type="PackedScene" uid="uid://clllbf6am8qdf" path="res://addons/silent_wolf/common/SWButton.tscn" id="3_7fn6n"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_qcica"]
-font_size = 48
+font_size = 36
 
 [sub_resource type="Theme" id="Theme_j1gah"]
 
-[node name="Leaderboard" type="Node2D"]
-position = Vector2(644, 318)
+[node name="Leaderboard" type="CanvasLayer"]
 script = ExtResource("1_lbvo2")
+
+[node name="Panel" type="Panel" parent="."]
+material = ExtResource("2_gcjw4")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="OldBoard" type="MarginContainer" parent="."]
 visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -29,20 +34,11 @@ size_flags_vertical = 4
 layout_mode = 2
 
 [node name="Board" type="VBoxContainer" parent="."]
-material = ExtResource("2_gcjw4")
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -640.0
-offset_top = -320.0
-offset_right = 640.0
-offset_bottom = 400.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
 theme_override_constants/separation = 16
 alignment = 1
 
@@ -51,7 +47,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="Board/TitleContainer"]
 layout_mode = 2
-text = "Leaderboard"
+text = "Tablica wyników"
 label_settings = SubResource("LabelSettings_qcica")
 horizontal_alignment = 1
 
@@ -65,7 +61,7 @@ theme_override_font_sizes/font_size = 36
 text = "Loading scores..."
 
 [node name="HighScores" type="ScrollContainer" parent="Board"]
-custom_minimum_size = Vector2(900, 500)
+custom_minimum_size = Vector2(900, 300)
 layout_mode = 2
 size_flags_horizontal = 4
 theme = SubResource("Theme_j1gah")
@@ -80,8 +76,8 @@ alignment = 1
 layout_mode = 2
 
 [node name="CloseButton" parent="Board/CloseButtonContainer" instance=ExtResource("3_7fn6n")]
-custom_minimum_size = Vector2(400, 60)
+custom_minimum_size = Vector2(300, 50)
 layout_mode = 2
-text = "Close Leaderboard"
+text = "Powrót"
 
 [connection signal="pressed" from="Board/CloseButtonContainer/CloseButton" to="." method="_on_CloseButton_pressed"]

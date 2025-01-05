@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dg78sdxts17fs"]
+[gd_scene load_steps=22 format=3 uid="uid://dg78sdxts17fs"]
 
 [ext_resource type="Script" path="res://scripts/mainMenu.gd" id="1_ck7i2"]
 [ext_resource type="Script" path="res://scripts/main_menu_anim.gd" id="2_4ayhe"]
@@ -9,6 +9,7 @@
 [ext_resource type="Material" uid="uid://cqn5rkmj7io2i" path="res://shaders/panel_shader_material.tres" id="5_l01dg"]
 [ext_resource type="Texture2D" uid="uid://1ybbxyuurtvd" path="res://sprites/Panda_0001.png" id="6_clsj2"]
 [ext_resource type="Texture2D" uid="uid://v831njlfv53m" path="res://sprites/Panda_0002.png" id="8_urfk8"]
+[ext_resource type="PackedScene" uid="uid://dh4tjkoemf7aj" path="res://scenes/Leaderboard.tscn" id="8_y7sgj"]
 [ext_resource type="FontFile" uid="uid://c08wcdbvxirl1" path="res://theme/fonts/NotoSans-Medium.ttf" id="10_d6dtl"]
 [ext_resource type="Texture2D" uid="uid://cm8cnn2cih4wk" path="res://images/GodotLogo.png" id="11_ohnpv"]
 [ext_resource type="Texture2D" uid="uid://chmu0q4arfvtg" path="res://images/SkeletonLogoV6S.png" id="12_1eu7f"]
@@ -196,6 +197,12 @@ offset_bottom = 80.0
 focus_neighbor_bottom = NodePath("../CreditsButton")
 focus_previous = NodePath("../CreditsButton")
 text = "Dostępna aktualizacja!"
+
+[node name="LeaderboardLayer" parent="." instance=ExtResource("8_y7sgj")]
+process_thread_group = 2
+process_thread_group_order = 1
+process_thread_messages = 0
+visible = false
 
 [node name="OptionsLayer" parent="." instance=ExtResource("5_ek5qx")]
 visible = false

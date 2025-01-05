@@ -7,9 +7,11 @@ extends CanvasLayer
 @onready var fullscreen_button:Button = $TabContainer/Grafika/VBoxContainer/Screen/FullScreenButton
 @onready var graphics_api_button:OptionButton = $TabContainer/Grafika/VBoxContainer/Screen2/GraphicsAPIButton
 @onready var graphics_api_restart:Label = $TabContainer/Grafika/VBoxContainer/Screen2/GraphicsAPIRestartLabel
-@onready var tch_tap_button:TextureButton = $TabContainer/Rozgrywka/VBoxContainer/TouchScreenControls/HBoxContainer/Tap/TextureButton
-@onready var tch_swipe_button:TextureButton = $TabContainer/Rozgrywka/VBoxContainer/TouchScreenControls/HBoxContainer/Swipe/TextureButton
-@onready var tch_vbuttons_button:TextureButton = $TabContainer/Rozgrywka/VBoxContainer/TouchScreenControls/HBoxContainer/VirtualButtons/TextureButton
+@onready var tch_tap_button:TextureButton = $TabContainer/Rozgrywka/ScrollContainer/VBoxContainer/TouchScreenControls/HBoxContainer/Tap/TextureButton
+@onready var tch_swipe_button:TextureButton = $TabContainer/Rozgrywka/ScrollContainer/VBoxContainer/TouchScreenControls/HBoxContainer/Swipe/TextureButton
+@onready var tch_vbuttons_button:TextureButton = $TabContainer/Rozgrywka/ScrollContainer/VBoxContainer/TouchScreenControls/HBoxContainer/VirtualButtons/TextureButton
+@onready var playername_edit:LineEdit = $TabContainer/Rozgrywka/ScrollContainer/VBoxContainer/PlayerName/HBoxContainer/PlayernameEdit
+@onready var playername_uuid:Label = $TabContainer/Rozgrywka/ScrollContainer/VBoxContainer/PlayerName/HBoxContainer/PlayernameUUID
 @onready var reduced_motion_button:Button = $"TabContainer/Dostępność/VBoxContainer/ReducedMotion/Button"
 @onready var easier_font_button:Button = $"TabContainer/Dostępność/VBoxContainer/EasierFont/Button"
 @onready var easier_font_restart:Label = $"TabContainer/Dostępność/VBoxContainer/EasierFont/RestartLabel"
@@ -36,6 +38,9 @@ func _ready():
 			tch_swipe_button.set_pressed_no_signal(true)
 		SettingsBus.TOUCHSCREEN_CONTROL_MODE.VButtons:
 			tch_vbuttons_button.set_pressed_no_signal(true)
+	var playername_split = SettingsBus.playername.split("#")
+	playername_edit.text = playername_split[0]
+	playername_uuid.text = "#" + playername_split[1]
 	easier_font_button.set_pressed_no_signal_custom(SettingsBus.easier_font)
 	reduced_motion_button.set_pressed_no_signal_custom(SettingsBus.reduced_motion)
 
@@ -120,24 +125,12 @@ func _unpress_tch_buttons():
 	SignalBus.enable_touchscreen_vbuttons.emit(false)
 
 
-func _on_kb_up_button_pressed():
-	pass # Replace with function body.
+func _on_playername_button_pressed():
+	SettingsBus.playername = playername_edit.text + SettingsBus.playername.right(9)
 
 
-func _on_kb_down_button_pressed():
-	pass # Replace with function body.
-
-
-func _on_ctr_up_button_pressed():
-	pass # Replace with function body.
-
-
-func _on_ctr_down_button_pressed():
-	pass # Replace with function body.
-
-
-func _on_dev_console_button_pressed():
-	pass # Replace with function body.
+func _on_dev_console_button_toggled(button_pressed):
+	SettingsBus.dev_console = button_pressed
 
 
 func _on_reduced_motion_button_toggled(button_pressed):

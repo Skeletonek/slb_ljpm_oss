@@ -114,7 +114,9 @@ func _on_credits_button_pressed():
 
 
 func _on_hi_score_button_pressed():
-	get_tree().change_scene_to_file("res://scenes/Leaderboard.tscn")
+	_hide_all_layers()
+	$LeaderboardLayer.show()
+	$LeaderboardLayer/Board/CloseButtonContainer/CloseButton.grab_focus()
 
 
 func _on_exit_button_pressed():
@@ -131,6 +133,7 @@ func _on_back_button_pressed():
 func _hide_all_layers():
 	$MainMenuLayer.hide()
 	$OptionsLayer.hide()
+	$LeaderboardLayer.hide()
 	$CreditsLayer.hide()
 
 

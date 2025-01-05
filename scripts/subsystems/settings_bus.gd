@@ -15,6 +15,8 @@ var fullscreen := true
 var touchscreen_control := TOUCHSCREEN_CONTROL_MODE.Tap
 var keyboard_up := KEY_W
 var keyboard_down := KEY_S
+var playername := "Player#" + OS.get_unique_id().substr(0, 8)
+var dev_console := false
 
 var narrator_speaking := false
 var reduced_motion := false
@@ -56,6 +58,8 @@ func load_config() -> bool:
 		touchscreen_control = data["touchscreen_control"]
 		keyboard_up = data["keyboard_up"]
 		keyboard_down = data["keyboard_down"]
+		playername = data["playername"]
+		dev_console = data["dev_console"]
 		return true
 
 
@@ -75,7 +79,9 @@ func save_config():
 		"easier_font": easier_font,
 		"touchscreen_control": touchscreen_control,
 		"keyboard_up": keyboard_up,
-		"keyboard_down": keyboard_down
+		"keyboard_down": keyboard_down,
+		"playername": playername,
+		"dev_console": dev_console
 	}
 	var json = JSON.stringify(config_dict)
 	file.store_line(json)

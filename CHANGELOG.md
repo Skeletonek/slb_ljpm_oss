@@ -1,3 +1,10 @@
+#### RC.7.0
+ - Added player naming setting
+ - Added disabling or enabling dev console via setting
+ - Reworked leaderboards UI
+ - Added command to hide debug info watermark
+ - Fixed leaderboards UI not scaling
+
 #### B.6.0
  - Added online leaderboards
  - Added graphical speedometer to game HUD

@@ -7,6 +7,7 @@ signal refresh_achievements_viewer
 
 signal reduce_motion(yes: bool)
 signal enable_touchscreen_vbuttons(yes: bool)
+signal dev_console(yes: bool)
 
 var dialogic_path
 

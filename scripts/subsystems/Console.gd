@@ -12,7 +12,8 @@ const SUPPORTED_COMMANDS = {
 	9: "music_play",
 	10: "music_list",
 	11: "carride",
-	12: "god"
+	12: "god",
+	13: "debug_info"
 }
 
 signal error_msg_received(msg:String)
@@ -33,12 +34,13 @@ var godot_log
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	godot_log = FileAccess.open("user://logs/godot.log", FileAccess.READ)
+	SignalBus.dev_console.connect(_hide_dev_button)
 	
 	create_tween().set_loops(
 	).tween_callback(_read_data
 	).set_delay(UPDATE_INTERVAL)
 	
-	if OS.get_name() == "Android" && OS.is_debug_build():
+	if OS.get_name() == "Android" && SettingsBus.dev_console:
 		$AndroidLayer.show()
 
 
@@ -62,25 +64,34 @@ func _read_data():
 
 
 func _input(event):
-	if event.is_action("console_toggle"):
-		prompt_edit.clear()
-	if event.is_action_pressed("console_toggle"):
-		visible = !visible
-		if visible:
-			prompt_edit.grab_focus()
-	elif event.is_action_pressed("console_autocomplete"):
-		if visible:
-			for x in SUPPORTED_COMMANDS.values():
-				if x.begins_with(prompt_edit.text):
-					prompt_edit.text = x
-					prompt_edit.caret_column = prompt_edit.text.length()
-					break
+	if SettingsBus.dev_console:
+		if event.is_action("console_toggle"):
+			prompt_edit.clear()
+		if event.is_action_pressed("console_toggle"):
+			visible = !visible
+			if visible:
+				prompt_edit.grab_focus()
+		elif event.is_action_pressed("console_autocomplete"):
+			if visible:
+				for x in SUPPORTED_COMMANDS.values():
+					if x.begins_with(prompt_edit.text):
+						prompt_edit.text = x
+						prompt_edit.caret_column = prompt_edit.text.length()
+						break
 
 
 func _on_show_button_pressed():
 	visible = !visible
 	if visible:
 		prompt_edit.grab_focus()
+
+
+func _hide_dev_button(yes: bool):
+	if OS.get_name() == "Android":
+		if yes:
+			$AndroidLayer.show()
+		else:
+			$AndroidLayer.hide()
 
 
 func _get_all_timelines():
@@ -152,6 +163,8 @@ func _on_prompt_edit_text_submitted(new_text):
 		SUPPORTED_COMMANDS[12]:
 			SettingsBus.godmode = !SettingsBus.godmode
 			print("Godmode " + ("enabled" if SettingsBus.godmode else "disabled"))
+		SUPPORTED_COMMANDS[13]:
+			DebugInfo.toggle()
 		_:
 			push_error("Unknown command")
 	prompt_edit.clear()
