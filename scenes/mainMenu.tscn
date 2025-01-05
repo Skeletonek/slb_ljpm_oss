@@ -1,0 +1,384 @@
+[gd_scene load_steps=15 format=3 uid="uid://dg78sdxts17fs"]
+
+[ext_resource type="Script" path="res://scripts/mainMenu.gd" id="1_ck7i2"]
+[ext_resource type="Texture2D" uid="uid://b30gwmqtxrewt" path="res://images/SLB2_BG.webp" id="2_4v1dl"]
+[ext_resource type="Texture2D" uid="uid://cyo4rlihaqgrc" path="res://images/icons/SLB2Logo.webp" id="3_hn8g4"]
+[ext_resource type="PackedScene" uid="uid://dc3ntad11u0qu" path="res://scenes/instances/menu_items/options_layer.tscn" id="5_ek5qx"]
+[ext_resource type="Material" uid="uid://cqn5rkmj7io2i" path="res://shaders/panel_shader_material.tres" id="5_l01dg"]
+[ext_resource type="Texture2D" uid="uid://cm8cnn2cih4wk" path="res://images/GodotLogo.png" id="11_ohnpv"]
+[ext_resource type="Texture2D" uid="uid://chmu0q4arfvtg" path="res://images/SkeletonLogoV6S.png" id="12_1eu7f"]
+[ext_resource type="Texture2D" uid="uid://bnvg8lvduxprm" path="res://images/HalembarusLogoV1.1S.jpg" id="13_6ch7m"]
+
+[sub_resource type="Gradient" id="Gradient_swht3"]
+offsets = PackedFloat32Array(0, 0.010582)
+colors = PackedColorArray(0.25098, 0.490196, 0.796078, 0.647059, 0.415686, 0.419608, 0.870588, 0.662745)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_iimxv"]
+gradient = SubResource("Gradient_swht3")
+width = 1
+height = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_q8iax"]
+font_size = 14
+
+[sub_resource type="LabelSettings" id="LabelSettings_5ceqn"]
+font_size = 14
+
+[sub_resource type="LabelSettings" id="LabelSettings_24cid"]
+font_size = 14
+
+[sub_resource type="LabelSettings" id="LabelSettings_xqss0"]
+font_size = 14
+
+[node name="mainMenu" type="Control" node_paths=PackedStringArray("skeletonek_logo", "godot_logo")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ck7i2")
+skeletonek_logo = NodePath("CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/SkeletonekContainer/Control/SkeletonekLogo")
+godot_logo = NodePath("CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/GameEngineContainer/Control/GameEngineLogo")
+
+[node name="BG" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_4v1dl")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="EasterEggButton" type="TextureButton" parent="BG"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.381
+anchor_top = 0.507
+anchor_right = 0.381
+anchor_bottom = 0.507
+offset_left = -24.68
+offset_top = -25.04
+offset_right = 25.32
+offset_bottom = 24.96
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(809, -147)
+amount = 256
+lifetime = 1.5
+preprocess = 3.0
+texture = SubResource("GradientTexture2D_iimxv")
+emission_shape = 3
+emission_rect_extents = Vector2(800, 1)
+gravity = Vector2(-400, 1000)
+angle_min = -25.0
+angle_max = -20.0
+
+[node name="VersionBuildDate" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = -104.0
+offset_right = 235.0
+grow_vertical = 0
+text = "SLB2
+Version: 0.1.3-Alpha
+Build: 9
+Date: 2023-08-18 17:45"
+uppercase = true
+
+[node name="MainMenuLayer" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenuLayer"]
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -83.0
+offset_top = 150.0
+offset_right = 83.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="ContinueButton" type="Button" parent="MainMenuLayer/VBoxContainer"]
+layout_mode = 2
+text = "Nowa gra"
+
+[node name="OptionsButton" type="Button" parent="MainMenuLayer/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../CreditsButton")
+focus_previous = NodePath("../CreditsButton")
+text = "Ustawienia"
+
+[node name="CreditsButton" type="Button" parent="MainMenuLayer/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../OptionsButton")
+focus_neighbor_bottom = NodePath("../ExitButton")
+focus_next = NodePath("../OptionsButton")
+focus_previous = NodePath("../ExitButton")
+text = "Autorzy"
+
+[node name="ExitButton" type="Button" parent="MainMenuLayer/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../CreditsButton")
+focus_next = NodePath("../CreditsButton")
+text = "Wyjście z gry"
+
+[node name="GameLogo" type="TextureRect" parent="MainMenuLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -183.5
+offset_top = 30.0
+offset_right = 183.5
+offset_bottom = 270.49
+grow_horizontal = 2
+texture = ExtResource("3_hn8g4")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="OptionsLayer" parent="." instance=ExtResource("5_ek5qx")]
+visible = false
+
+[node name="CreditsLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="PanelContainer" type="PanelContainer" parent="CreditsLayer"]
+material = ExtResource("5_l01dg")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CreditsLayer/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CreditsLayer/PanelContainer/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CreditsLayer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="GameLogo" type="TextureRect" parent="CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 190)
+layout_mode = 2
+texture = ExtResource("3_hn8g4")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="GameNameCopyright" type="Label" parent="CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Super Łukaszczyk Bros: Łukaszczyk Jedzie Po Mleko
+Copyright © 2023 - Skeletonek & Halembarus2"
+horizontal_alignment = 1
+
+[node name="CreditsLabel" type="Label" parent="CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "
+Projekt stworzono w:"
+horizontal_alignment = 1
+
+[node name="GameEngineContainer" type="HBoxContainer" parent="CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Control" type="Control" parent="CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/GameEngineContainer"]
+custom_minimum_size = Vector2(170, 70)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
+
+[node name="GameEngineLogo" type="TextureRect" parent="CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/GameEngineContainer/Control"]
+custom_minimum_size = Vector2(170, 70)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -170.0
+offset_top = -35.0
+offset_bottom = 35.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
+texture = ExtResource("11_ohnpv")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="GameEngineCredits" type="Label" parent="CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/GameEngineContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.7
+text = "Copyright © 2007-2023 Juan Linietsky, Ariel Manzur & contributors.
+Godot Engine nie jest powiązany z twórcami SLB2: TGRA.
+Więcej informacji o Godot Engine jest dostępnych na stronie https://godotengine.org/"
+label_settings = SubResource("LabelSettings_q8iax")
+autowrap_mode = 2
+
+[node name="CreditsLabel2" type="Label" parent="CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "
+Twórcy:"
+horizontal_alignment = 1
+
+[node name="SkeletonekContainer" type="HBoxContainer" parent="CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Control" type="Control" parent="CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/SkeletonekContainer"]
+custom_minimum_size = Vector2(170, 70)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
+
+[node name="SkeletonekLogo" type="TextureRect" parent="CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/SkeletonekContainer/Control"]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = -35.0
+offset_bottom = 35.0
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("12_1eu7f")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SkeletonekCredits" type="Label" parent="CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/SkeletonekContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.7
+text = "Skeletonek:
+Programista, Dyrektor artystyczny, Inżynier dźwięku, Pomoc scenarzysty"
+label_settings = SubResource("LabelSettings_q8iax")
+autowrap_mode = 3
+
+[node name="HalembarusContainer" type="HBoxContainer" parent="CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Control" type="Control" parent="CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/HalembarusContainer"]
+custom_minimum_size = Vector2(170, 70)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
+
+[node name="HalembarusLogo" type="TextureRect" parent="CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/HalembarusContainer/Control"]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = -35.0
+offset_bottom = 35.0
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("13_6ch7m")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HalembarusCredits" type="Label" parent="CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/HalembarusContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.7
+text = "Halembarus2:
+Główny scenarzysta, Reżyser"
+label_settings = SubResource("LabelSettings_q8iax")
+autowrap_mode = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="GameInfo" type="Label" parent="CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Wersja gry: <GAME_VERSION>
+
+"
+label_settings = SubResource("LabelSettings_5ceqn")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="DeviceInfo" type="Label" parent="CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Godot Engine <ENGINE_VERSION>
+<OS_TYPE> <DISTRIBUTION_NAME> <OS_VERSION>
+<CPU_NAME> <THREADS_COUNT> threads
+<GPU_VENDOR> <GPU_NAME>
+<GPU_API_VERSION>
+
+"
+label_settings = SubResource("LabelSettings_24cid")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="AssetsInfo" type="Label" parent="CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(450, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "W grze użyto grafik udostępnionych na licencji Creative Commons lub dostępnych w domenie publicznej.
+
+Obsługa systemu dialogów:
+Dialogic 2.0 Alpha 9"
+label_settings = SubResource("LabelSettings_xqss0")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="BackButton" type="Button" parent="CreditsLayer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Powrót"
+
+[connection signal="pressed" from="BG/EasterEggButton" to="." method="_on_easter_egg_button_pressed"]
+[connection signal="pressed" from="MainMenuLayer/VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="MainMenuLayer/VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="MainMenuLayer/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
+[connection signal="pressed" from="MainMenuLayer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

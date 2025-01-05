@@ -1,0 +1,172 @@
+[gd_scene load_steps=17 format=3 uid="uid://boixto1v5xtcq"]
+
+[ext_resource type="Texture2D" uid="uid://c57l262udunto" path="res://sprites/carride/Road.png" id="1_fp1p5"]
+[ext_resource type="Script" path="res://scripts/carride/main.gd" id="1_y5nnv"]
+[ext_resource type="Script" path="res://scripts/carride/gui.gd" id="2_8a32l"]
+[ext_resource type="Texture2D" uid="uid://tbi380apx87e" path="res://sprites/carride/LukaszczykWPandzie.png" id="2_i6s1l"]
+[ext_resource type="Texture2D" uid="uid://crgu0b32ok5e5" path="res://sprites/carride/CarRideBG.png" id="2_qkdoe"]
+[ext_resource type="Script" path="res://scripts/carride/road_scroll.gd" id="3_1a2x8"]
+[ext_resource type="Texture2D" uid="uid://dvimhuteeggq4" path="res://sprites/carride/PandaBlue.png" id="3_hnb4u"]
+[ext_resource type="Script" path="res://scripts/carride/player.gd" id="4_sxi6f"]
+[ext_resource type="PackedScene" uid="uid://lugeuc8kewl3" path="res://scenes/instances/pause_menu.tscn" id="5_2qleg"]
+[ext_resource type="AudioStream" uid="uid://dw6573okuao6h" path="res://audio/sfx/Car Crash Short.wav" id="6_dtkok"]
+[ext_resource type="Script" path="res://scripts/carride/ai_vehicle.gd" id="6_dvn5r"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_64r8c"]
+font_size = 24
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_1ehfg"]
+font_size = 24
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lr1qs"]
+size = Vector2(1500, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8unen"]
+size = Vector2(20, 300)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jfarv"]
+size = Vector2(114, 15.5)
+
+[node name="Node2D" type="Node2D"]
+y_sort_enabled = true
+texture_filter = 1
+script = ExtResource("1_y5nnv")
+metadata/_edit_vertical_guides_ = [-221.0]
+
+[node name="GUI" type="Control" parent="." node_paths=PackedStringArray("LabelTime")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1280.0
+offset_bottom = 720.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_8a32l")
+LabelTime = NodePath("HBoxContainer/LabelTime")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -93.5
+offset_right = 93.5
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="GUI/HBoxContainer"]
+layout_mode = 2
+text = "Time elapsed: "
+label_settings = SubResource("LabelSettings_64r8c")
+uppercase = true
+
+[node name="LabelTime" type="Label" parent="GUI/HBoxContainer"]
+layout_mode = 2
+text = "00:00.000"
+label_settings = SubResource("LabelSettings_1ehfg")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(639, 359)
+scale = Vector2(2, 2)
+zoom = Vector2(1.4, 1.4)
+
+[node name="Background" type="Sprite2D" parent="Camera2D"]
+z_index = -2
+scale = Vector2(0.55, 0.55)
+texture = ExtResource("2_qkdoe")
+
+[node name="Road" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(639, 388)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("1_fp1p5")
+script = ExtResource("3_1a2x8")
+
+[node name="OutOfBoundsLeft" type="Area2D" parent="Road"]
+position = Vector2(-4, -76.8)
+scale = Vector2(0.8, 0.8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Road/OutOfBoundsLeft"]
+shape = SubResource("RectangleShape2D_lr1qs")
+
+[node name="OutOfBoundsRight" type="Area2D" parent="Road"]
+position = Vector2(-2.40002, 229.6)
+scale = Vector2(0.8, 0.8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Road/OutOfBoundsRight"]
+shape = SubResource("RectangleShape2D_lr1qs")
+
+[node name="OutOfBounds" type="StaticBody2D" parent="Road"]
+position = Vector2(-720, 84.8)
+scale = Vector2(0.8, 0.8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Road/OutOfBounds"]
+shape = SubResource("RectangleShape2D_8unen")
+
+[node name="LukaszczykWPandzie" type="Area2D" parent="."]
+position = Vector2(129, 450)
+scale = Vector2(2, 2)
+script = ExtResource("4_sxi6f")
+
+[node name="Sprite2D" type="Sprite2D" parent="LukaszczykWPandzie"]
+texture = ExtResource("2_i6s1l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LukaszczykWPandzie"]
+position = Vector2(1, 18.25)
+shape = SubResource("RectangleShape2D_jfarv")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="LukaszczykWPandzie"]
+position = Vector2(-64.5, -225)
+scale = Vector2(0.5, 0.5)
+stream = ExtResource("6_dtkok")
+bus = &"SFX"
+
+[node name="PandaBlue" type="Area2D" parent="."]
+position = Vector2(1450, 350)
+scale = Vector2(2, 2)
+script = ExtResource("6_dvn5r")
+speed = 800
+
+[node name="Sprite2D" type="Sprite2D" parent="PandaBlue"]
+texture = ExtResource("3_hnb4u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PandaBlue"]
+position = Vector2(-1, 19)
+shape = SubResource("RectangleShape2D_jfarv")
+
+[node name="PandaBlue2" type="Area2D" parent="."]
+position = Vector2(1788, 450)
+scale = Vector2(2, 2)
+script = ExtResource("6_dvn5r")
+speed = 800
+
+[node name="Sprite2D" type="Sprite2D" parent="PandaBlue2"]
+texture = ExtResource("3_hnb4u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PandaBlue2"]
+position = Vector2(-1, 19)
+shape = SubResource("RectangleShape2D_jfarv")
+
+[node name="PandaBlue3" type="Area2D" parent="."]
+position = Vector2(2327, 550)
+scale = Vector2(2, 2)
+script = ExtResource("6_dvn5r")
+speed = 800
+
+[node name="Sprite2D" type="Sprite2D" parent="PandaBlue3"]
+texture = ExtResource("3_hnb4u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PandaBlue3"]
+position = Vector2(-1, 19)
+shape = SubResource("RectangleShape2D_jfarv")
+
+[node name="PauseLayer" parent="." instance=ExtResource("5_2qleg")]
+
+[connection signal="area_entered" from="LukaszczykWPandzie" to="LukaszczykWPandzie" method="_on_area_entered"]
+[connection signal="body_entered" from="LukaszczykWPandzie" to="LukaszczykWPandzie" method="_on_body_entered"]
+[connection signal="body_entered" from="PandaBlue" to="PandaBlue" method="_on_body_entered"]
+[connection signal="body_entered" from="PandaBlue2" to="PandaBlue2" method="_on_body_entered"]
+[connection signal="body_entered" from="PandaBlue3" to="PandaBlue3" method="_on_body_entered"]

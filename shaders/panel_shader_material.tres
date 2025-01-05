@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cqn5rkmj7io2i"]
+
+[ext_resource type="Shader" path="res://shaders/panel.gdshader" id="1_jox1b"]
+
+[resource]
+shader = ExtResource("1_jox1b")
+shader_parameter/blur_amount = 4.0
+shader_parameter/mix_amount = 0.6
+shader_parameter/color_over = Vector4(0, 0, 0, 5)

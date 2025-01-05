@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://co54u54uke0d2"]
+
+[ext_resource type="AudioStream" uid="uid://bmwcbpwkt3lk7" path="res://music/freedoom-d2e7.ogg" id="1_hm7pm"]
+
+[node name="GlobalMusicPlayer" type="AudioStreamPlayer"]
+stream = ExtResource("1_hm7pm")
+bus = &"Music"

@@ -1,0 +1,73 @@
+[gd_scene load_steps=4 format=3 uid="uid://cpflnflljjt0o"]
+
+[ext_resource type="Script" path="res://scripts/subsystems/Console.gd" id="1_qthys"]
+[ext_resource type="Material" uid="uid://cqn5rkmj7io2i" path="res://shaders/panel_shader_material.tres" id="2_m05yq"]
+[ext_resource type="FontFile" uid="uid://bp02gos6qbie1" path="res://theme/fonts/NotoSansMono-Regular.ttf" id="2_xpadb"]
+
+[node name="ConsoleLayer" type="CanvasLayer"]
+layer = 101
+visible = false
+script = ExtResource("1_qthys")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+material = ExtResource("2_m05yq")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="LogRichLabel" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/normal_font = ExtResource("2_xpadb")
+theme_override_fonts/bold_font = ExtResource("2_xpadb")
+theme_override_fonts/italics_font = ExtResource("2_xpadb")
+theme_override_fonts/bold_italics_font = ExtResource("2_xpadb")
+theme_override_fonts/mono_font = ExtResource("2_xpadb")
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/bold_font_size = 12
+theme_override_font_sizes/italics_font_size = 12
+theme_override_font_sizes/bold_italics_font_size = 12
+theme_override_font_sizes/mono_font_size = 12
+scroll_following = true
+
+[node name="PromptEdit" type="LineEdit" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_xpadb")
+theme_override_font_sizes/font_size = 12
+caret_blink = true
+
+[node name="AndroidLayer" type="CanvasLayer" parent="."]
+layer = 102
+visible = false
+
+[node name="ShowButton" type="Button" parent="AndroidLayer"]
+custom_minimum_size = Vector2(0, 40)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -89.0
+offset_top = -100.0
+offset_right = -20.0
+offset_bottom = -60.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Console"
+
+[connection signal="text_submitted" from="PanelContainer/MarginContainer/VBoxContainer/PromptEdit" to="." method="_on_prompt_edit_text_submitted"]
+[connection signal="pressed" from="AndroidLayer/ShowButton" to="." method="_on_show_button_pressed"]

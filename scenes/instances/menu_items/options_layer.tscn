@@ -1,0 +1,286 @@
+[gd_scene load_steps=9 format=3 uid="uid://dc3ntad11u0qu"]
+
+[ext_resource type="Script" path="res://scripts/nodes/options_layer.gd" id="1_cahn6"]
+[ext_resource type="Material" uid="uid://cqn5rkmj7io2i" path="res://shaders/panel_shader_material.tres" id="2_4i7gj"]
+[ext_resource type="Script" path="res://scripts/nodes/SwitchButton.gd" id="3_uq6y0"]
+[ext_resource type="AudioStream" uid="uid://bdg6rdgg5xxrc" path="res://audio/sfx/Upsilon.ogg" id="4_5hsqm"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_rskjs"]
+font_size = 14
+
+[sub_resource type="Gradient" id="Gradient_tecms"]
+interpolation_mode = 2
+interpolation_color_space = 1
+offsets = PackedFloat32Array(0, 0.524887, 1)
+colors = PackedColorArray(1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8ausc"]
+gradient = SubResource("Gradient_tecms")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pyy0l"]
+
+[node name="OptionsLayer" type="CanvasLayer"]
+script = ExtResource("1_cahn6")
+
+[node name="TabContainer" type="TabContainer" parent="."]
+material = ExtResource("2_4i7gj")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+tab_alignment = 1
+
+[node name="Grafika" type="Control" parent="TabContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Grafika"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -73.0
+offset_top = -30.5
+offset_right = 73.0
+offset_bottom = 30.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Screen" type="VBoxContainer" parent="TabContainer/Grafika/VBoxContainer"]
+layout_mode = 2
+
+[node name="FullScreenLabel" type="Label" parent="TabContainer/Grafika/VBoxContainer/Screen"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Pełny ekran:"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="FullScreenButton" type="Button" parent="TabContainer/Grafika/VBoxContainer/Screen"]
+layout_mode = 2
+toggle_mode = true
+text = "Wyłączony"
+script = ExtResource("3_uq6y0")
+
+[node name="FullScreenLabelDesc" type="Label" parent="TabContainer/Grafika/VBoxContainer/Screen"]
+visible = false
+layout_mode = 2
+text = "Ustawienia pełnego ekranu są niedostępne na platformie Android"
+label_settings = SubResource("LabelSettings_rskjs")
+horizontal_alignment = 1
+
+[node name="Screen2" type="VBoxContainer" parent="TabContainer/Grafika/VBoxContainer"]
+layout_mode = 2
+
+[node name="GraphicsAPILabel" type="Label" parent="TabContainer/Grafika/VBoxContainer/Screen2"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "API graficzne:"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="GraphicsAPIButton" type="MenuButton" parent="TabContainer/Grafika/VBoxContainer/Screen2"]
+layout_mode = 2
+text = "Vulkan"
+item_count = 2
+popup/item_0/text = "Vulkan"
+popup/item_0/id = 0
+popup/item_1/text = "OpenGL"
+popup/item_1/id = 1
+
+[node name="GraphicsAPIRestartLabel" type="Label" parent="TabContainer/Grafika/VBoxContainer/Screen2"]
+visible = false
+layout_mode = 2
+text = "Zmiana tego ustawienia wymaga restartu gry"
+label_settings = SubResource("LabelSettings_rskjs")
+horizontal_alignment = 1
+
+[node name="UIScaling" type="VBoxContainer" parent="TabContainer/Grafika/VBoxContainer"]
+layout_mode = 2
+
+[node name="UIScalingLabel" type="Label" parent="TabContainer/Grafika/VBoxContainer/UIScaling"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Skalowanie UI:"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Container" type="Control" parent="TabContainer/Grafika/VBoxContainer/UIScaling"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="TabContainer/Grafika/VBoxContainer/UIScaling/Container"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+offset_top = 4.0
+offset_right = 600.0
+offset_bottom = 9.0
+size_flags_horizontal = 3
+texture = SubResource("GradientTexture1D_8ausc")
+
+[node name="UIScalingSlider" type="HSlider" parent="TabContainer/Grafika/VBoxContainer/UIScaling/Container/TextureRect"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/slider = SubResource("StyleBoxEmpty_pyy0l")
+min_value = 0.7
+max_value = 1.3
+step = 0.1
+value = 1.0
+tick_count = 7
+ticks_on_borders = true
+
+[node name="Label" type="Label" parent="TabContainer/Grafika/VBoxContainer/UIScaling/Container/TextureRect/UIScalingSlider"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 1
+offset_left = -8.0
+offset_right = 24.0
+offset_bottom = 50.0
+text = "0.7x"
+vertical_alignment = 2
+
+[node name="Label2" type="Label" parent="TabContainer/Grafika/VBoxContainer/UIScaling/Container/TextureRect/UIScalingSlider"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -16.0
+offset_right = 16.0
+offset_bottom = 50.0
+grow_horizontal = 2
+text = "1.0x"
+vertical_alignment = 2
+
+[node name="Label3" type="Label" parent="TabContainer/Grafika/VBoxContainer/UIScaling/Container/TextureRect/UIScalingSlider"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -28.0
+offset_right = 13.0
+offset_bottom = 50.0
+grow_horizontal = 0
+text = "1.3x*"
+vertical_alignment = 2
+
+[node name="UIScalingLabel2" type="Label" parent="TabContainer/Grafika/VBoxContainer/UIScaling"]
+layout_mode = 2
+text = "*Może spowodować że część elementów interfejsu zostanie umieszczona poza ekranem"
+label_settings = SubResource("LabelSettings_rskjs")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Audio" type="Control" parent="TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Audio"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -73.0
+offset_right = 150.0
+offset_bottom = 73.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MasterSliderLabel" type="Label" parent="TabContainer/Audio/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Główny"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="MasterSlider" type="HSlider" parent="TabContainer/Audio/VBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="SFXSliderLabel" type="Label" parent="TabContainer/Audio/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Efekty dźwiękowe"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="SFXSlider" type="HSlider" parent="TabContainer/Audio/VBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 0.8
+
+[node name="MusicSliderLabel" type="Label" parent="TabContainer/Audio/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Muzyka"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="MusicSlider" type="HSlider" parent="TabContainer/Audio/VBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 0.5
+
+[node name="Rozgrywka" type="Control" parent="TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Dostępność" type="Control" parent="TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(0, 100)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = -100.0
+offset_right = 150.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="BackButton" type="Button" parent="MarginContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_vertical = 4
+text = "Zapisz i wróć"
+
+[node name="SFXTest" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_5hsqm")
+bus = &"SFX"
+
+[connection signal="toggled" from="TabContainer/Grafika/VBoxContainer/Screen/FullScreenButton" to="." method="_on_full_screen_button_toggled"]
+[connection signal="value_changed" from="TabContainer/Grafika/VBoxContainer/UIScaling/Container/TextureRect/UIScalingSlider" to="." method="_on_ui_scaling_slider_value_changed"]
+[connection signal="drag_ended" from="TabContainer/Audio/VBoxContainer/MasterSlider" to="." method="_on_master_slider_drag_ended"]
+[connection signal="value_changed" from="TabContainer/Audio/VBoxContainer/MasterSlider" to="." method="_on_master_slider_value_changed"]
+[connection signal="drag_ended" from="TabContainer/Audio/VBoxContainer/SFXSlider" to="." method="_on_sfx_slider_drag_ended"]
+[connection signal="value_changed" from="TabContainer/Audio/VBoxContainer/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
+[connection signal="value_changed" from="TabContainer/Audio/VBoxContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="pressed" from="MarginContainer/BackButton" to="." method="_on_back_button_pressed"]

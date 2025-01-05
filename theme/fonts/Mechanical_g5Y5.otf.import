@@ -1,0 +1,39 @@
+[remap]
+
+importer="font_data_dynamic"
+type="FontFile"
+uid="uid://brhpt8oec3wsy"
+path="res://.godot/imported/Mechanical_g5Y5.otf-8c142f3ef4848ce0c0f276de0e027b8e.fontdata"
+
+[deps]
+
+source_file="res://theme/fonts/Mechanical_g5Y5.otf"
+dest_files=["res://.godot/imported/Mechanical_g5Y5.otf-8c142f3ef4848ce0c0f276de0e027b8e.fontdata"]
+
+[params]
+
+Rendering=null
+antialiasing=1
+generate_mipmaps=true
+multichannel_signed_distance_field=false
+msdf_pixel_range=12
+msdf_size=64
+allow_system_fallback=true
+force_autohinter=false
+hinting=1
+subpixel_positioning=3
+oversampling=0.0
+Fallbacks=null
+fallbacks=[]
+Compress=null
+compress=true
+preload=[{
+"chars": [],
+"glyphs": [],
+"name": "Nowa konfiguracja",
+"size": Vector2i(16, 0),
+"variation_embolden": 0.0
+}]
+language_support={}
+script_support={}
+opentype_features={}

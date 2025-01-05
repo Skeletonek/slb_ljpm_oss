@@ -1,0 +1,39 @@
+[remap]
+
+importer="font_data_dynamic"
+type="FontFile"
+uid="uid://bp02gos6qbie1"
+path="res://.godot/imported/NotoSansMono-Regular.ttf-986f0f49df9d6424c6617fcf1263cffb.fontdata"
+
+[deps]
+
+source_file="res://theme/fonts/NotoSansMono-Regular.ttf"
+dest_files=["res://.godot/imported/NotoSansMono-Regular.ttf-986f0f49df9d6424c6617fcf1263cffb.fontdata"]
+
+[params]
+
+Rendering=null
+antialiasing=1
+generate_mipmaps=false
+multichannel_signed_distance_field=true
+msdf_pixel_range=8
+msdf_size=64
+allow_system_fallback=true
+force_autohinter=false
+hinting=1
+subpixel_positioning=1
+oversampling=0.0
+Fallbacks=null
+fallbacks=[]
+Compress=null
+compress=true
+preload=[{
+"chars": [],
+"glyphs": [],
+"name": "Nowa konfiguracja",
+"size": Vector2i(16, 0),
+"variation_embolden": 0.0
+}]
+language_support={}
+script_support={}
+opentype_features={}
