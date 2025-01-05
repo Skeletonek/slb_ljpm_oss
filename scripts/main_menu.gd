@@ -47,6 +47,8 @@ func _ready():
 	http_request_changelog.request_completed.connect(_download_changelog)
 	_check_update()
 
+	get_parent().animation.button.pressed.connect(_on_easter_egg_button_pressed)
+
 
 func _on_global_music_finished():
 	var date = int(Time.get_unix_time_from_system()) % 2
@@ -167,4 +169,3 @@ func _on_godot_logo_click(event):
 func _on_easter_egg_button_pressed():
 	if $MainMenuLayer.visible && not $popup_input.visible && not $PopupChangelog.visible:
 		OS.shell_open("https://youtu.be/dQw4w9WgXcQ")
-

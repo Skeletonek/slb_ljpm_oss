@@ -1,3 +1,16 @@
+#### 2.0-Alpha+2
+ - Upgraded Godot Engine to 4.3-rc1
+ - Added DisplayServer debug information to credits and console logs
+ - Added interface for changing Linux windowing system
+ - Added Pigtank skin
+ - Added animation for booting up game
+ - Bumped scoreboard limit to 1000
+ - Changed to using bootscreen from SLB Frameworks
+ - Updated bootscreen to adapt to SLB: LJPM
+ - Removed restart notice when changing easier font settings
+ - Fixed using wrong font version when disabled easier font setting
+ - Fixed achievement glow being not visible
+
 #### 2.0-Alpha+1
  - Updated SLB Frameworks
  - Added Achievements system

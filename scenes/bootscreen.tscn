@@ -1,18 +1,18 @@
-[gd_scene load_steps=15 format=3 uid="uid://dmyy4lbk3kps4"]
+[gd_scene load_steps=13 format=3 uid="uid://dmyy4lbk3kps4"]
 
 [ext_resource type="Texture2D" uid="uid://cw8ixdxqc450b" path="res://images/SplashScreen.png" id="1_2mf53"]
 [ext_resource type="Script" path="res://scripts/bootscreen.gd" id="1_a54r8"]
+[ext_resource type="Script" path="res://scripts/bootscreen_parent.gd" id="1_hquq8"]
 [ext_resource type="Texture2D" uid="uid://cyo4rlihaqgrc" path="res://images/icons/SLB2Logo.webp" id="2_kdni4"]
-[ext_resource type="FontFile" uid="uid://c08wcdbvxirl1" path="res://ui/fonts/NotoSans-Medium.ttf" id="2_wmtol"]
+[ext_resource type="PackedScene" uid="uid://dhg1bdg5yc1y1" path="res://scenes/ui/main_menu_anim.tscn" id="2_l21q5"]
 [ext_resource type="LabelSettings" uid="uid://psuxi7wo86gd" path="res://scenes/ui/bootscreen_copyright_labelsettings.tres" id="3_1oduf"]
 [ext_resource type="Texture2D" uid="uid://cm8cnn2cih4wk" path="res://images/GodotLogo.png" id="3_ekstb"]
 [ext_resource type="Texture2D" uid="uid://chmu0q4arfvtg" path="res://images/SkeletonLogoV6S.png" id="4_v0hf0"]
 [ext_resource type="Texture2D" uid="uid://bnvg8lvduxprm" path="res://images/HalembarusLogoV1.1S.jpg" id="5_0q6ep"]
-[ext_resource type="PackedScene" uid="uid://h678uhylraqv" path="res://scenes/ui/save_notify.tscn" id="8_jo1sn"]
 
 [sub_resource type="Animation" id="Animation_rh7ms"]
 resource_name = "BootAnimation"
-length = 13.0
+length = 2.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -35,93 +35,19 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 1, 2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Copyright disclaimer:visible")
+tracks/2/path = NodePath("ColorRect:color")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(1, 2, 5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [false, true, false]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Copyright disclaimer:modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(1, 2, 3, 4, 5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1.56917, 1),
 "update": 0,
-"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Save disclaimer:visible")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(1, 5, 10),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [false, true, false]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Save disclaimer:modulate")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(1, 5, 6, 9, 10),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("Satire disclaimer:visible")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(1, 10, 13),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [false, true, false]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("Satire disclaimer:modulate")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(1, 10, 11, 12, 13),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
-}
-tracks/8/type = "method"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("Save disclaimer/SaveNotify")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(6.5),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"show_save_icon"
-}]
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_7en24"]
@@ -153,74 +79,14 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Copyright disclaimer:visible")
+tracks/2/path = NodePath("ColorRect:color")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Copyright disclaimer:modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Save disclaimer:visible")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Save disclaimer:modulate")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("Satire disclaimer:visible")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("Satire disclaimer:modulate")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
+"values": [Color(0, 0, 0, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mgbvt"]
@@ -229,17 +95,12 @@ _data = {
 "RESET": SubResource("Animation_7en24")
 }
 
-[sub_resource type="LabelSettings" id="LabelSettings_ntecm"]
-line_spacing = 2.0
-font = ExtResource("2_wmtol")
-font_size = 14
+[node name="Bootscreen" type="Node2D"]
+script = ExtResource("1_hquq8")
 
-[sub_resource type="LabelSettings" id="LabelSettings_1grgd"]
-line_spacing = 2.0
-font = ExtResource("2_wmtol")
-font_size = 14
+[node name="BGAnimation" parent="." instance=ExtResource("2_l21q5")]
 
-[node name="Control" type="Control"]
+[node name="Splashscreen" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -248,29 +109,27 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_a54r8")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Splashscreen"]
 libraries = {
 "": SubResource("AnimationLibrary_mgbvt")
 }
 autoplay = "BootAnimation"
-speed_scale = 0.65
+speed_scale = 0.6
 
-[node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="ColorRect" type="ColorRect" parent="Splashscreen"]
+custom_minimum_size = Vector2(1280, 720)
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
 color = Color(0, 0, 0, 1)
 
-[node name="[TEST]SplashScreen" type="Sprite2D" parent="."]
+[node name="[TEST]SplashScreen" type="Sprite2D" parent="Splashscreen"]
 visible = false
 position = Vector2(639, 361)
 scale = Vector2(0.333, 0.333)
 texture = ExtResource("1_2mf53")
 
-[node name="Title screen" type="Control" parent="."]
+[node name="Title screen" type="Control" parent="Splashscreen"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -278,155 +137,50 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="GameLogo" type="TextureRect" parent="Title screen"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -260.0
-offset_top = -184.0
-offset_right = 1660.0
-offset_bottom = 1188.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.27, 0.27)
+[node name="GameLogo" type="TextureRect" parent="Splashscreen/Title screen"]
+layout_mode = 0
+offset_left = 383.0
+offset_top = 180.0
+offset_right = 2303.0
+offset_bottom = 1536.0
+scale = Vector2(0.266, 0.266)
 texture = ExtResource("2_kdni4")
 
-[node name="CopyrightLabel" type="Label" parent="Title screen"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -593.5
-offset_top = -35.0
-offset_right = 593.5
-grow_horizontal = 2
-grow_vertical = 0
-text = "Super Łukaszczyk Bros 2: The Greatest Rescue, again [SLB2: TGRa] - Copyright © 2023-2024 - Skeletonek & Halembarus2
-Godot Engine - Copyright © 2007-2024 Juan Linietsky, Ariel Manzur & contributors. Godot Engine nie jest powiązany z twórcami SLB2: TGRA. Więcej informacji o Godot Engine jest dostępnych na stronie https://godotengine.org/"
+[node name="CopyrightLabel" type="Label" parent="Splashscreen/Title screen"]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 684.0
+offset_right = 1238.0
+offset_bottom = 719.0
+text = "Super Łukaszczyk Bros: Łukaszczyk Jedzie Po Mleko [SLB: LJPM] - Copyright © 2023-2024 - Skeletonek & Halembarus2
+Godot Engine - Copyright © 2007-2024 Juan Linietsky, Ariel Manzur & contributors. Godot Engine nie jest powiązany z twórcami SLB: LJPM. Więcej informacji o Godot Engine jest dostępnych na stronie https://godotengine.org/"
 label_settings = ExtResource("3_1oduf")
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="GodotLogo" type="TextureRect" parent="Title screen"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -212.0
-offset_top = -122.0
-offset_right = 1055.0
-offset_bottom = 390.0
-grow_horizontal = 2
-grow_vertical = 0
+[node name="GodotLogo" type="TextureRect" parent="Splashscreen/Title screen"]
+layout_mode = 0
+offset_left = 428.0
+offset_top = 598.0
+offset_right = 1695.0
+offset_bottom = 1110.0
 scale = Vector2(0.166, 0.166)
 texture = ExtResource("3_ekstb")
 
-[node name="SkeletonekLogo" type="TextureRect" parent="Title screen"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = 17.0
-offset_top = -122.0
-offset_right = 529.0
-offset_bottom = 390.0
-grow_horizontal = 2
-grow_vertical = 0
+[node name="SkeletonekLogo" type="TextureRect" parent="Splashscreen/Title screen"]
+layout_mode = 0
+offset_left = 657.0
+offset_top = 598.0
+offset_right = 1169.0
+offset_bottom = 1110.0
 scale = Vector2(0.166, 0.166)
 texture = ExtResource("4_v0hf0")
 
-[node name="HalembarusLogo" type="TextureRect" parent="Title screen"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = 121.0
-offset_top = -122.0
-offset_right = 633.0
-offset_bottom = 390.0
-grow_horizontal = 2
-grow_vertical = 0
+[node name="HalembarusLogo" type="TextureRect" parent="Splashscreen/Title screen"]
+layout_mode = 0
+offset_left = 761.0
+offset_top = 598.0
+offset_right = 1273.0
+offset_bottom = 1110.0
 scale = Vector2(0.166, 0.166)
 texture = ExtResource("5_0q6ep")
-
-[node name="Copyright disclaimer" type="Control" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="MusicCopyrightLabel" type="Label" parent="Copyright disclaimer"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -1.0
-offset_right = -1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Gra zawiera utwory muzyczne chronione prawami autorskimi"
-label_settings = SubResource("LabelSettings_ntecm")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Save disclaimer" type="Control" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Label" type="Label" parent="Save disclaimer"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 80.0
-offset_right = 80.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Gra automatycznie zapisuje stan rozgrywki, w niektórych momentach gry.
-
-Momenty w których następuje zapis oznaczone są animacją wyświetlaną po prawej stronie, 
-oraz odpowiednim efektem dźwiękowym."
-label_settings = SubResource("LabelSettings_1grgd")
-vertical_alignment = 1
-
-[node name="SaveNotify" parent="Save disclaimer" instance=ExtResource("8_jo1sn")]
-
-[node name="Satire disclaimer" type="Control" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="SatireLabel" type="Label" parent="Satire disclaimer"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Niniejsze dzieło fikcji zostało stworzone tylko i wyłącznie w celach humorystycznych"
-label_settings = SubResource("LabelSettings_ntecm")
-horizontal_alignment = 1
-vertical_alignment = 1

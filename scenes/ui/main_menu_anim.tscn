@@ -1,0 +1,78 @@
+[gd_scene load_steps=10 format=3 uid="uid://dhg1bdg5yc1y1"]
+
+[ext_resource type="Script" path="res://scripts/main_menu_anim.gd" id="1_lo1uh"]
+[ext_resource type="Texture2D" uid="uid://crgu0b32ok5e5" path="res://sprites/CarRideBG.png" id="2_kd3ss"]
+[ext_resource type="Texture2D" uid="uid://c57l262udunto" path="res://sprites/Road.png" id="3_d1hdh"]
+[ext_resource type="Texture2D" uid="uid://1ybbxyuurtvd" path="res://sprites/Panda_0001.png" id="4_8r73h"]
+[ext_resource type="Texture2D" uid="uid://v831njlfv53m" path="res://sprites/Panda_0002.png" id="5_efkri"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_llikq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_8r73h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_efkri")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="Animation" id="Animation_dt7n6"]
+resource_name = "main_menu_sway"
+length = 9.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 3.5, 6, 9),
+"transitions": PackedFloat32Array(1.27456, 0.870551, 1, 1, 1.93187),
+"update": 0,
+"values": [Vector2(-79.5, 30), Vector2(47.205, 20.425), Vector2(5.875, 31.83), Vector2(-40.825, 9.095), Vector2(-79.5, 30)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_47kh2"]
+_data = {
+"main_menu_sway": SubResource("Animation_dt7n6")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_io2uc"]
+size = Vector2(70, 40)
+
+[node name="MainMenuAnim" type="Camera2D"]
+texture_filter = 1
+position = Vector2(640, 360)
+scale = Vector2(2, 2)
+script = ExtResource("1_lo1uh")
+animation_speed = 400
+
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -10
+scale = Vector2(0.52, 0.52)
+texture = ExtResource("2_kd3ss")
+
+[node name="Road" type="Sprite2D" parent="."]
+z_index = -9
+position = Vector2(35, 42.5)
+texture = ExtResource("3_d1hdh")
+
+[node name="LukaszczykWPandzie" type="AnimatedSprite2D" parent="."]
+position = Vector2(-79.5, 30)
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_llikq")
+autoplay = "default"
+flip_h = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="LukaszczykWPandzie"]
+libraries = {
+"": SubResource("AnimationLibrary_47kh2")
+}
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="LukaszczykWPandzie"]
+shape = SubResource("RectangleShape2D_io2uc")

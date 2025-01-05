@@ -1,40 +1,40 @@
 extends CanvasLayer
 
 @export_category("Graphics")
-@export var fullscreen_button:Button
-@export var graphics_api_button:OptionButton
-@export var graphics_api_restart:Label
-@export var vsync_button:OptionButton
-@export var framerate_cap_input:LineEdit
-@export var blur_button:Button
-@export var ui_scaling_slider:HSlider
+@export var fullscreen_button: Button
+@export var graphics_api_button: OptionButton
+@export var graphics_api_restart: Label
+@export var vsync_button: OptionButton
+@export var linux_windowing_system_button: OptionButton
+@export var framerate_cap_input: LineEdit
+@export var blur_button: Button
+@export var ui_scaling_slider: HSlider
 
 @export_category("Audio")
-@export var master_slider:HSlider
-@export var sfx_slider:HSlider
-@export var music_slider:HSlider
-@export var master_input:LineEdit
-@export var sfx_input:LineEdit
-@export var music_input:LineEdit
+@export var master_slider: HSlider
+@export var sfx_slider: HSlider
+@export var music_slider: HSlider
+@export var master_input: LineEdit
+@export var sfx_input: LineEdit
+@export var music_input: LineEdit
 
 @export_category("Gameplay")
-@export var devconsole_button:Button
-@export var devfps_button:Button
-@export var tch_tap_button:TextureButton
-@export var tch_swipe_button:TextureButton
-@export var tch_vbuttons_button:TextureButton
-@export var playername_edit:LineEdit
-@export var playername_uuid:Label
+@export var devconsole_button: Button
+@export var devfps_button: Button
+@export var tch_tap_button: TextureButton
+@export var tch_swipe_button: TextureButton
+@export var tch_vbuttons_button: TextureButton
+@export var playername_edit: LineEdit
+@export var playername_uuid: Label
 
 @export_category("Accesibility")
-@export var narrator_button:Button
-@export var reduced_motion_button:Button
-@export var easier_font_button:Button
-@export var easier_font_restart:Label
+@export var narrator_button: Button
+@export var reduced_motion_button: Button
+@export var easier_font_button: Button
 
 @export_category("Miscellaneous")
-@export var fullscreen_android_info:Label
-@export var back_button:Button
+@export var fullscreen_android_info: Label
+@export var back_button: Button
 
 func _ready(): # I'm starting to hate this code
 	master_slider.value = SettingsBus.volume[SettingsBus.AudioBus.Master]
@@ -228,8 +228,7 @@ func _on_easier_font_button_toggled(button_pressed):
 		ThemeDB.get_project_theme().set_default_font(load("res://theme/fonts/OpenDyslexic-Regular.otf"))
 #		get_tree().root.add_theme_font_override("theme", load("res://theme/fonts/OpenDyslexic-Regular.otf"))
 	else:
-		ThemeDB.get_project_theme().set_default_font(load("res://theme/fonts/PixelifySans-Bold.ttf"))
-	easier_font_restart.show()
+		ThemeDB.get_project_theme().set_default_font(load("res://theme/fonts/PixelifySans_2-Bold.ttf"))
 
 
 func _on_show_console_button_toggled(toggled_on):
@@ -285,6 +284,19 @@ Vulkan - Nowsze API, dostępne tylko na nowszych urządzeniach.
 Pozwala poprawić jakość grafiki, oraz potencjalnie uzyskać lepszą wydajność.
 Może spowodować, że gra się nie uruchomi na urządzeniach, które nie wspierają API Vulkan.
 """
+		"linux_window_sys":
+			popup.title = "System wyświetlania okien"
+			popup.dialog_text = """
+Ta opcja działa tylko na systemach Linux
+
+X11 - Starszy system wyświetlania okien. Kompatybilny z większością urządzeń.
+
+Wayland - Nowszy system wyświetlania okien, wspierany lepiej na nowszych systemach.
+Korzystanie z tego systemu może wymusić włączenie synchronizacji pionowej, w zależności
+od posiadanego kompozytora okien, wersji sterowników graficznych oraz jądra systemu.
+Nie zaleca się włączania tej opcji podczas korzystania z sesji X11.
+Ta opcja jest eksperymentalna i może powodować problemy.
+"""
 	add_child(popup)
 	popup.move_to_center()
 	popup.show()
@@ -301,11 +313,3 @@ func _on_tab_container_tab_changed(tab):
 		3:
 			back_button.focus_neighbor_top = easier_font_button.get_path()
 	back_button.grab_focus()
-
-
-func _on_easier_font_button_toggle(toggled_on):
-	pass # Replace with function body.
-
-
-func _on_tchv_buttons_toggled(toggled_on):
-	pass # Replace with function body.

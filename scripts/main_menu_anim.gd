@@ -2,6 +2,7 @@ extends Camera2D
 
 @onready var road_node: Sprite2D = $Road
 @onready var panda_node: AnimatedSprite2D = $LukaszczykWPandzie
+@onready var button: TouchScreenButton = $LukaszczykWPandzie/TouchScreenButton
 @export var animation_speed: int = 800
 
 

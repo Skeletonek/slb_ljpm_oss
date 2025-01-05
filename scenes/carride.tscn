@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://boixto1v5xtcq"]
+[gd_scene load_steps=27 format=3 uid="uid://boixto1v5xtcq"]
 
 [ext_resource type="Texture2D" uid="uid://c57l262udunto" path="res://sprites/Road.png" id="1_fp1p5"]
 [ext_resource type="Script" path="res://scripts/carride/main.gd" id="1_y5nnv"]
@@ -7,17 +7,16 @@
 [ext_resource type="Script" path="res://scripts/carride/road_scroll.gd" id="3_1a2x8"]
 [ext_resource type="Texture2D" uid="uid://dwcu034i1bbii" path="res://images/touchscreen_vbuttons/UpTouch.png" id="4_5gjce"]
 [ext_resource type="Script" path="res://scripts/carride/player.gd" id="4_sxi6f"]
-[ext_resource type="PackedScene" uid="uid://lugeuc8kewl3" path="res://scenes/instances/pause_menu.tscn" id="5_2qleg"]
+[ext_resource type="PackedScene" uid="uid://lugeuc8kewl3" path="res://scenes/ui/pause_menu.tscn" id="5_2qleg"]
 [ext_resource type="Texture2D" uid="uid://b04pu01i85qfb" path="res://images/touchscreen_vbuttons/UpTouchPressed.png" id="5_neflp"]
 [ext_resource type="AudioStream" uid="uid://dw6573okuao6h" path="res://audio/sfx/Car Crash Short.wav" id="6_dtkok"]
 [ext_resource type="Texture2D" uid="uid://dfyn51j8mmknf" path="res://images/touchscreen_vbuttons/DownTouch.png" id="6_o2i3l"]
 [ext_resource type="Material" uid="uid://cqn5rkmj7io2i" path="res://shaders/panel_shader_material.tres" id="7_5jy3v"]
 [ext_resource type="Texture2D" uid="uid://y4ytw7cfk6aw" path="res://images/touchscreen_vbuttons/DownTouchPressed.png" id="7_6r6ct"]
-[ext_resource type="Texture2D" uid="uid://1ybbxyuurtvd" path="res://sprites/Panda_0001.png" id="7_x3frt"]
 [ext_resource type="Texture2D" uid="uid://dvhou5wmxufck" path="res://sprites/Speedometer.png" id="8_0puha"]
 [ext_resource type="Texture2D" uid="uid://gixvapofe1qx" path="res://sprites/SpeedometerArrow.png" id="9_ioopi"]
 [ext_resource type="AudioStream" uid="uid://d2lim2blo57e" path="res://audio/sfx/Inventory Shiny Things A.wav" id="9_kk7c3"]
-[ext_resource type="Texture2D" uid="uid://v831njlfv53m" path="res://sprites/Panda_0002.png" id="9_vinbh"]
+[ext_resource type="SpriteFrames" uid="uid://ceithbaik2wml" path="res://sprites/spriteframes/Pigtank.tres" id="14_2x2r3"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_s0jls"]
 font_size = 36
@@ -44,20 +43,6 @@ size = Vector2(1500, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8unen"]
 size = Vector2(54.2857, 300)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_krrht"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("7_x3frt")
-}, {
-"duration": 1.0,
-"texture": ExtResource("9_vinbh")
-}],
-"loop": true,
-"name": &"default",
-"speed": 2.0
-}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jfarv"]
 size = Vector2(114, 15.5)
@@ -327,8 +312,9 @@ script = ExtResource("4_sxi6f")
 speed = 400
 
 [node name="LukaszczykWPandzie" type="AnimatedSprite2D" parent="LukaszczykWPandzie"]
-sprite_frames = SubResource("SpriteFrames_krrht")
+sprite_frames = ExtResource("14_2x2r3")
 autoplay = "default"
+frame_progress = 0.752942
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LukaszczykWPandzie"]

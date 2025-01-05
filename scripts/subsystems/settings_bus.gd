@@ -1,8 +1,12 @@
 extends Node
 
 const DESKTOP_PLATFORM = ["Windows", "UWP", "macOS", "Linux", "FreeBSD", "NetBSD", "OpenBSD", "BSD"]
-enum TOUCHSCREEN_CONTROL_MODE {Tap, Swipe, VButtons}
-var os_id = 1 if OS.get_name() == "Windows" else 0
+const API_KEY = ""
+enum TOUCHSCREEN_CONTROL_MODE {
+	Tap,
+	Swipe,
+	VButtons
+}
 
 enum AudioBus {
 	Master,
@@ -11,6 +15,8 @@ enum AudioBus {
 	Music,
 	Narrator
 }
+
+var os_id = 1 if OS.get_name() == "Windows" else 0
 
 var ui_shader_material_instance := preload("res://shaders/panel_shader_material.tres")
 
@@ -238,13 +244,15 @@ func _notification(what):
 
 func _configure_silentwolf():
 	SilentWolf.configure({
-		"api_key": "",
+		"api_key": Marshalls.base64_to_utf8(API_KEY).strip_escapes(),
 		"game_id": "slbljpm",
-		"log_level": 2 if OS.is_debug_build() else 1
+		"log_level": 2 if OS.is_debug_build() else 1,
+		"max_scores": 1000
 	})
 	SilentWolf.configure_scores({
 		"open_scene_on_close": "res://scenes/mainMenu.tscn"
 	})
+
 
 func set_default_ui_scale():
 	if OS.get_name() == "Android":

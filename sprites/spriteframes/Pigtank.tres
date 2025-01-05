@@ -1,0 +1,18 @@
+[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://ceithbaik2wml"]
+
+[ext_resource type="Texture2D" uid="uid://0grbm0nc086p" path="res://sprites/Pigtank_0001.png" id="1_kxhua"]
+[ext_resource type="Texture2D" uid="uid://cumfacpkiafqr" path="res://sprites/Pigtank_0002.png" id="2_lf6kv"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_kxhua")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_lf6kv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]

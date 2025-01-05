@@ -40,7 +40,7 @@ gradient = SubResource("Gradient_tecms")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pyy0l"]
 
-[node name="OptionsLayer" type="CanvasLayer" node_paths=PackedStringArray("fullscreen_button", "graphics_api_button", "graphics_api_restart", "vsync_button", "framerate_cap_input", "blur_button", "ui_scaling_slider", "master_slider", "sfx_slider", "music_slider", "master_input", "sfx_input", "music_input", "devconsole_button", "devfps_button", "tch_tap_button", "tch_swipe_button", "tch_vbuttons_button", "playername_edit", "playername_uuid", "reduced_motion_button", "easier_font_button", "easier_font_restart", "fullscreen_android_info", "back_button")]
+[node name="OptionsLayer" type="CanvasLayer" node_paths=PackedStringArray("fullscreen_button", "graphics_api_button", "graphics_api_restart", "vsync_button", "framerate_cap_input", "blur_button", "ui_scaling_slider", "master_slider", "sfx_slider", "music_slider", "master_input", "sfx_input", "music_input", "devconsole_button", "devfps_button", "tch_tap_button", "tch_swipe_button", "tch_vbuttons_button", "playername_edit", "playername_uuid", "reduced_motion_button", "easier_font_button", "fullscreen_android_info", "back_button")]
 script = ExtResource("1_cahn6")
 fullscreen_button = NodePath("TabContainer/Grafika/MarginContainer/VBoxContainer/FullScreen/FullScreenButton")
 graphics_api_button = NodePath("TabContainer/Grafika/MarginContainer/VBoxContainer/GraphicsAPI/GraphicsAPIButton")
@@ -64,7 +64,6 @@ playername_edit = NodePath("TabContainer/Rozgrywka/ScrollContainer/VBoxContainer
 playername_uuid = NodePath("TabContainer/Rozgrywka/ScrollContainer/VBoxContainer/PlayerName/HBoxContainer/PlayernameUUID")
 reduced_motion_button = NodePath("TabContainer/Dostępność/VBoxContainer/ReducedMotion/ReducedMotionButton")
 easier_font_button = NodePath("TabContainer/Dostępność/VBoxContainer/EasierFont/EasierFontButton")
-easier_font_restart = NodePath("TabContainer/Dostępność/VBoxContainer/EasierFont/EasierFontRestartLabel")
 fullscreen_android_info = NodePath("TabContainer/Grafika/MarginContainer/VBoxContainer/FullScreen/FullScreenLabelDesc")
 back_button = NodePath("MarginContainer/BackButton")
 
@@ -77,11 +76,11 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 4
 tab_alignment = 1
-current_tab = 2
+current_tab = 0
 
 [node name="Grafika" type="Control" parent="TabContainer"]
-visible = false
 layout_mode = 2
+metadata/_tab_index = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="TabContainer/Grafika"]
 layout_mode = 1
@@ -149,10 +148,9 @@ text = "?"
 [node name="GraphicsAPIButton" type="OptionButton" parent="TabContainer/Grafika/MarginContainer/VBoxContainer/GraphicsAPI"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
-item_count = 2
 selected = 0
+item_count = 2
 popup/item_0/text = "Vulkan"
-popup/item_0/id = 0
 popup/item_1/text = "OpenGL"
 popup/item_1/id = 1
 
@@ -181,16 +179,46 @@ text = "?"
 [node name="VSyncButton" type="OptionButton" parent="TabContainer/Grafika/MarginContainer/VBoxContainer/VSync"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
-item_count = 4
 selected = 1
+item_count = 4
 popup/item_0/text = "Wyłączony"
-popup/item_0/id = 0
 popup/item_1/text = "Włączony"
 popup/item_1/id = 1
 popup/item_2/text = "Adaptacyjny"
 popup/item_2/id = 2
 popup/item_3/text = "Mailbox"
 popup/item_3/id = 3
+
+[node name="WindowingSystem" type="HBoxContainer" parent="TabContainer/Grafika/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="LinuxWindowingSystemLabel" type="Label" parent="TabContainer/Grafika/MarginContainer/VBoxContainer/WindowingSystem"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "System wyświetlania okien:"
+vertical_alignment = 1
+
+[node name="LinuxWindowingSystemLabelDesc" type="Label" parent="TabContainer/Grafika/MarginContainer/VBoxContainer/WindowingSystem"]
+visible = false
+layout_mode = 2
+text = "Ustawienia pełnego ekranu są niedostępne na platformie Android"
+label_settings = SubResource("LabelSettings_rskjs")
+horizontal_alignment = 1
+
+[node name="LinuxWindowingSystemInfoButton" type="Button" parent="TabContainer/Grafika/MarginContainer/VBoxContainer/WindowingSystem"]
+layout_mode = 2
+text = "?"
+
+[node name="LinuxWindowingSystemButton" type="OptionButton" parent="TabContainer/Grafika/MarginContainer/VBoxContainer/WindowingSystem"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+selected = 0
+item_count = 2
+popup/item_0/text = "X11"
+popup/item_1/text = "Wayland"
+popup/item_1/id = 1
 
 [node name="Framelimit" type="HBoxContainer" parent="TabContainer/Grafika/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 40)
@@ -335,6 +363,7 @@ vertical_alignment = 2
 [node name="Audio" type="Control" parent="TabContainer"]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Audio"]
 custom_minimum_size = Vector2(600, 0)
@@ -433,9 +462,11 @@ editable = false
 virtual_keyboard_type = 2
 
 [node name="Rozgrywka" type="Control" parent="TabContainer"]
+visible = false
 layout_mode = 2
 focus_neighbor_left = NodePath("../Audio")
 focus_neighbor_right = NodePath("../Dostępność")
+metadata/_tab_index = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Rozgrywka"]
 custom_minimum_size = Vector2(600, 0)
@@ -726,6 +757,7 @@ visible = false
 layout_mode = 2
 focus_neighbor_left = NodePath("../Rozgrywka")
 focus_neighbor_right = NodePath("../Zgłoś błąd")
+metadata/_tab_index = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Dostępność"]
 custom_minimum_size = Vector2(600, 0)
@@ -792,16 +824,11 @@ text = "Zastępuje domyślną czcionkę gry na OpenDyslexia"
 label_settings = SubResource("LabelSettings_rskjs")
 horizontal_alignment = 1
 
-[node name="EasierFontRestartLabel" type="Label" parent="TabContainer/Dostępność/VBoxContainer/EasierFont"]
-visible = false
-layout_mode = 2
-text = "Zmiana tego ustawienia wymaga restartu gry"
-horizontal_alignment = 1
-
 [node name="Zgłoś błąd" type="Control" parent="TabContainer"]
 visible = false
 layout_mode = 2
 focus_neighbor_left = NodePath("../Dostępność")
+metadata/_tab_index = 4
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 custom_minimum_size = Vector2(0, 100)
@@ -831,6 +858,8 @@ bus = &"SFX"
 [connection signal="item_selected" from="TabContainer/Grafika/MarginContainer/VBoxContainer/GraphicsAPI/GraphicsAPIButton" to="." method="_on_graphics_api_pressed"]
 [connection signal="pressed" from="TabContainer/Grafika/MarginContainer/VBoxContainer/VSync/VSyncInfoButton" to="." method="_on_info_button_pressed" binds= ["vsync"]]
 [connection signal="item_selected" from="TabContainer/Grafika/MarginContainer/VBoxContainer/VSync/VSyncButton" to="." method="_on_v_sync_button_item_selected"]
+[connection signal="pressed" from="TabContainer/Grafika/MarginContainer/VBoxContainer/WindowingSystem/LinuxWindowingSystemInfoButton" to="." method="_on_info_button_pressed" binds= ["linux_window_sys"]]
+[connection signal="item_selected" from="TabContainer/Grafika/MarginContainer/VBoxContainer/WindowingSystem/LinuxWindowingSystemButton" to="." method="_on_v_sync_button_item_selected"]
 [connection signal="text_submitted" from="TabContainer/Grafika/MarginContainer/VBoxContainer/Framelimit/FramelimitButton" to="." method="_on_framelimit_button_text_submitted"]
 [connection signal="toggled" from="TabContainer/Grafika/MarginContainer/VBoxContainer/UIBlur/UIBlurButton" to="." method="_on_ui_blur_button_toggled"]
 [connection signal="value_changed" from="TabContainer/Grafika/MarginContainer/VBoxContainer/UIScaling/Container/TextureRect/UIScalingSlider" to="." method="_on_ui_scaling_slider_value_changed"]

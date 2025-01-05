@@ -1,13 +1,9 @@
-[gd_scene load_steps=26 format=3 uid="uid://dg78sdxts17fs"]
+[gd_scene load_steps=18 format=3 uid="uid://dg78sdxts17fs"]
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_f7xwm"]
-[ext_resource type="Script" path="res://scripts/main_menu_anim.gd" id="2_4ayhe"]
-[ext_resource type="Texture2D" uid="uid://crgu0b32ok5e5" path="res://sprites/CarRideBG.png" id="2_5jhyx"]
+[ext_resource type="PackedScene" uid="uid://dhg1bdg5yc1y1" path="res://scenes/ui/main_menu_anim.tscn" id="2_bk5ie"]
 [ext_resource type="Texture2D" uid="uid://cyo4rlihaqgrc" path="res://images/icons/SLB2Logo.webp" id="3_hn8g4"]
-[ext_resource type="Texture2D" uid="uid://c57l262udunto" path="res://sprites/Road.png" id="3_ihnal"]
 [ext_resource type="Material" uid="uid://cqn5rkmj7io2i" path="res://shaders/panel_shader_material.tres" id="5_l01dg"]
-[ext_resource type="Texture2D" uid="uid://1ybbxyuurtvd" path="res://sprites/Panda_0001.png" id="6_clsj2"]
-[ext_resource type="Texture2D" uid="uid://v831njlfv53m" path="res://sprites/Panda_0002.png" id="8_urfk8"]
 [ext_resource type="PackedScene" uid="uid://dh4tjkoemf7aj" path="res://scenes/Leaderboard.tscn" id="8_y7sgj"]
 [ext_resource type="PackedScene" uid="uid://dc3ntad11u0qu" path="res://scenes/ui/options_layer.tscn" id="9_1nt05"]
 [ext_resource type="FontFile" uid="uid://c08wcdbvxirl1" path="res://theme/fonts/NotoSans-Medium.ttf" id="10_d6dtl"]
@@ -17,45 +13,6 @@
 [ext_resource type="Texture2D" uid="uid://dxe6vh4w56dcl" path="res://images/silentwolf.png" id="15_s4mpv"]
 [ext_resource type="PackedScene" uid="uid://dot20ht7350x6" path="res://scenes/ui/mainmenu/popup_changelog.tscn" id="16_y0ahp"]
 [ext_resource type="PackedScene" uid="uid://dvxnxtlpqfyh4" path="res://scenes/ui/mainmenu/popup_input.tscn" id="17_1ly6a"]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_n03hm"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("6_clsj2")
-}, {
-"duration": 1.0,
-"texture": ExtResource("8_urfk8")
-}],
-"loop": true,
-"name": &"default",
-"speed": 2.0
-}]
-
-[sub_resource type="Animation" id="Animation_dt7n6"]
-resource_name = "main_menu_sway"
-length = 9.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 2, 3.5, 6, 9),
-"transitions": PackedFloat32Array(1.27456, 0.870551, 1, 1, 1.93187),
-"update": 0,
-"values": [Vector2(-79.5, 30), Vector2(47.205, 20.425), Vector2(5.875, 31.83), Vector2(-40.825, 9.095), Vector2(-79.5, 30)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_47kh2"]
-_data = {
-"main_menu_sway": SubResource("Animation_dt7n6")
-}
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bvcuf"]
-size = Vector2(70, 40)
 
 [sub_resource type="LabelSettings" id="LabelSettings_q8iax"]
 font_size = 14
@@ -80,37 +37,7 @@ script = ExtResource("1_f7xwm")
 skeletonek_logo = NodePath("CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/SkeletonekContainer/Control/SkeletonekLogo")
 godot_logo = NodePath("CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/GameEngineContainer/Control/GameEngineLogo")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-texture_filter = 1
-position = Vector2(640, 360)
-scale = Vector2(2, 2)
-script = ExtResource("2_4ayhe")
-animation_speed = 400
-
-[node name="Background" type="Sprite2D" parent="Camera2D"]
-z_index = -10
-scale = Vector2(0.52, 0.52)
-texture = ExtResource("2_5jhyx")
-
-[node name="Road" type="Sprite2D" parent="Camera2D"]
-z_index = -9
-position = Vector2(35, 42.5)
-texture = ExtResource("3_ihnal")
-
-[node name="LukaszczykWPandzie" type="AnimatedSprite2D" parent="Camera2D"]
-position = Vector2(0.5, 30)
-scale = Vector2(0.75, 0.75)
-sprite_frames = SubResource("SpriteFrames_n03hm")
-autoplay = "default"
-flip_h = true
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera2D/LukaszczykWPandzie"]
-libraries = {
-"": SubResource("AnimationLibrary_47kh2")
-}
-
-[node name="TouchScreenButton" type="TouchScreenButton" parent="Camera2D/LukaszczykWPandzie"]
-shape = SubResource("RectangleShape2D_bvcuf")
+[node name="MenuAnim" parent="." instance=ExtResource("2_bk5ie")]
 
 [node name="VersionBuildDate" type="Label" parent="."]
 visible = false
@@ -489,9 +416,15 @@ size_flags_horizontal = 4
 text = "Powrót"
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
+process_thread_group = 2
+process_thread_group_order = 0
+process_thread_messages = 0
 timeout = 3.0
 
 [node name="HTTPRequest2" type="HTTPRequest" parent="."]
+process_thread_group = 2
+process_thread_group_order = 0
+process_thread_messages = 0
 timeout = 3.0
 
 [node name="PopupChangelog" parent="." instance=ExtResource("16_y0ahp")]
@@ -500,7 +433,6 @@ visible = false
 [node name="popup_input" parent="." instance=ExtResource("17_1ly6a")]
 visible = false
 
-[connection signal="pressed" from="Camera2D/LukaszczykWPandzie/TouchScreenButton" to="." method="_on_easter_egg_button_pressed"]
 [connection signal="pressed" from="MainMenuLayer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="MainMenuLayer/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
 [connection signal="pressed" from="MainMenuLayer/VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]

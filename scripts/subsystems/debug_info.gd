@@ -45,7 +45,8 @@ func debug_info() -> String:
 	"OS: " + OS.get_name() + " " + OS.get_distribution_name() + " " + OS.get_version() + "\n" + \
 	"CPU: " + OS.get_processor_name() + " " + str(OS.get_processor_count()) + " threads \n" + \
 	"GPU: " + RenderingServer.get_video_adapter_vendor() + " " + RenderingServer.get_video_adapter_name() + "\n" + \
-	"GPU API: " + GPUAPI + " " + RenderingServer.get_video_adapter_api_version()
+	"GPU API: " + GPUAPI + " " + RenderingServer.get_video_adapter_api_version() + "\n" + \
+	"DISPLAY: " + DisplayServer.get_name()
 	return text
 
 

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/subsystems/dev_console.gd" id="1_qthys"]
 [ext_resource type="Material" uid="uid://cqn5rkmj7io2i" path="res://shaders/panel_shader_material.tres" id="2_m05yq"]
-[ext_resource type="FontFile" uid="uid://bp02gos6qbie1" path="res://ui/fonts/NotoSansMono-Regular.ttf" id="2_xpadb"]
+[ext_resource type="FontFile" uid="uid://bp02gos6qbie1" path="res://theme/fonts/NotoSansMono-Regular.ttf" id="2_xpadb"]
 [ext_resource type="AudioStream" uid="uid://c2fmw5lra0gxs" path="res://audio/sfx/Error.ogg" id="4_fcqaq"]
 [ext_resource type="AudioStream" uid="uid://c4xtsbbjdc8xk" path="res://audio/sfx/Warning.ogg" id="5_hfi6l"]
 
@@ -34,15 +34,15 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_fonts/normal_font = ExtResource("2_xpadb")
-theme_override_fonts/bold_font = ExtResource("2_xpadb")
+theme_override_fonts/mono_font = ExtResource("2_xpadb")
 theme_override_fonts/italics_font = ExtResource("2_xpadb")
 theme_override_fonts/bold_italics_font = ExtResource("2_xpadb")
-theme_override_fonts/mono_font = ExtResource("2_xpadb")
+theme_override_fonts/bold_font = ExtResource("2_xpadb")
+theme_override_font_sizes/bold_italics_font_size = 12
+theme_override_font_sizes/italics_font_size = 12
+theme_override_font_sizes/mono_font_size = 12
 theme_override_font_sizes/normal_font_size = 12
 theme_override_font_sizes/bold_font_size = 12
-theme_override_font_sizes/italics_font_size = 12
-theme_override_font_sizes/bold_italics_font_size = 12
-theme_override_font_sizes/mono_font_size = 12
 scroll_following = true
 
 [node name="PromptEdit" type="LineEdit" parent="PanelContainer/MarginContainer/VBoxContainer"]
