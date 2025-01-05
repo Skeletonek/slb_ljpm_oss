@@ -1,25 +1,43 @@
-[gd_scene load_steps=20 format=3 uid="uid://boixto1v5xtcq"]
+[gd_scene load_steps=29 format=3 uid="uid://boixto1v5xtcq"]
 
 [ext_resource type="Texture2D" uid="uid://c57l262udunto" path="res://sprites/Road.png" id="1_fp1p5"]
 [ext_resource type="Script" path="res://scripts/carride/main.gd" id="1_y5nnv"]
 [ext_resource type="Script" path="res://scripts/carride/gui.gd" id="2_8a32l"]
 [ext_resource type="Texture2D" uid="uid://crgu0b32ok5e5" path="res://sprites/CarRideBG.png" id="2_qkdoe"]
 [ext_resource type="Script" path="res://scripts/carride/road_scroll.gd" id="3_1a2x8"]
-[ext_resource type="FontFile" uid="uid://d0e5brm2npeqe" path="res://theme/fonts/PressStart2P_Regular.ttf" id="3_7ecbp"]
+[ext_resource type="Texture2D" uid="uid://dwcu034i1bbii" path="res://images/touchscreen_vbuttons/UpTouch.png" id="4_5gjce"]
 [ext_resource type="Script" path="res://scripts/carride/player.gd" id="4_sxi6f"]
 [ext_resource type="PackedScene" uid="uid://lugeuc8kewl3" path="res://scenes/instances/pause_menu.tscn" id="5_2qleg"]
+[ext_resource type="Texture2D" uid="uid://b04pu01i85qfb" path="res://images/touchscreen_vbuttons/UpTouchPressed.png" id="5_neflp"]
 [ext_resource type="AudioStream" uid="uid://dw6573okuao6h" path="res://audio/sfx/Car Crash Short.wav" id="6_dtkok"]
+[ext_resource type="Texture2D" uid="uid://dfyn51j8mmknf" path="res://images/touchscreen_vbuttons/DownTouch.png" id="6_o2i3l"]
+[ext_resource type="Material" uid="uid://cqn5rkmj7io2i" path="res://shaders/panel_shader_material.tres" id="7_5jy3v"]
+[ext_resource type="Texture2D" uid="uid://y4ytw7cfk6aw" path="res://images/touchscreen_vbuttons/DownTouchPressed.png" id="7_6r6ct"]
 [ext_resource type="Texture2D" uid="uid://1ybbxyuurtvd" path="res://sprites/Panda_0001.png" id="7_x3frt"]
+[ext_resource type="Texture2D" uid="uid://dvhou5wmxufck" path="res://sprites/Speedometer.png" id="8_0puha"]
+[ext_resource type="Texture2D" uid="uid://gixvapofe1qx" path="res://sprites/SpeedometerArrow.png" id="9_ioopi"]
 [ext_resource type="AudioStream" uid="uid://d2lim2blo57e" path="res://audio/sfx/Inventory Shiny Things A.wav" id="9_kk7c3"]
 [ext_resource type="Texture2D" uid="uid://v831njlfv53m" path="res://sprites/Panda_0002.png" id="9_vinbh"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_64r8c"]
-font_size = 24
-font_color = Color(0, 0, 0, 1)
+[sub_resource type="LabelSettings" id="LabelSettings_s0jls"]
+font_size = 36
+shadow_size = 0
 
-[sub_resource type="LabelSettings" id="LabelSettings_1ehfg"]
-font_size = 24
-font_color = Color(0, 0, 0, 1)
+[sub_resource type="Gradient" id="Gradient_dndjk"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_hvxgf"]
+gradient = SubResource("Gradient_dndjk")
+width = 640
+height = 128
+
+[sub_resource type="Gradient" id="Gradient_cp8fb"]
+colors = PackedColorArray(0.34902, 0.34902, 0.34902, 1, 0.34902, 0.34902, 0.34902, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_n110a"]
+gradient = SubResource("Gradient_cp8fb")
+width = 638
+height = 128
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lr1qs"]
 size = Vector2(1500, 20)
@@ -58,15 +76,13 @@ metadata/_edit_vertical_guides_ = [-221.0, -650.0]
 [node name="GUI" type="Control" parent="." node_paths=PackedStringArray("LabelTime", "LabelMilk")]
 z_index = 10
 layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -640.0
-offset_top = -360.0
-offset_right = 640.0
-offset_bottom = 360.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -650.0
+offset_top = -260.0
+offset_right = 630.0
+offset_bottom = 460.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_8a32l")
@@ -75,54 +91,58 @@ LabelMilk = NodePath("HBoxContainer2/LabelMilk")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="GUI"]
 layout_mode = 1
-offset_left = 40.0
-offset_top = 20.0
-offset_right = 596.0
-offset_bottom = 60.0
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 195.0
+offset_top = -99.9999
+offset_right = 472.0
+offset_bottom = -52.9999
+grow_vertical = 0
 
 [node name="Label" type="Label" parent="GUI/HBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_7ecbp")
 theme_override_font_sizes/font_size = 12
-text = "Time elapsed: "
-label_settings = SubResource("LabelSettings_64r8c")
+text = "CZAS: "
+label_settings = SubResource("LabelSettings_s0jls")
 uppercase = true
 
 [node name="LabelTime" type="Label" parent="GUI/HBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_7ecbp")
 theme_override_font_sizes/font_size = 12
 text = "00:00.000"
-label_settings = SubResource("LabelSettings_1ehfg")
+label_settings = SubResource("LabelSettings_s0jls")
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="GUI"]
 layout_mode = 1
-anchors_preset = 1
+anchors_preset = 3
 anchor_left = 1.0
+anchor_top = 1.0
 anchor_right = 1.0
-offset_left = -212.0
-offset_top = 20.0
-offset_right = -40.0
-offset_bottom = 47.0
+anchor_bottom = 1.0
+offset_left = -470.0
+offset_top = -99.9999
+offset_right = -20.0
+offset_bottom = -52.9999
 grow_horizontal = 0
+grow_vertical = 0
 
 [node name="Label" type="Label" parent="GUI/HBoxContainer2"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_7ecbp")
 theme_override_font_sizes/font_size = 12
-text = "Milks:"
-label_settings = SubResource("LabelSettings_64r8c")
+text = "MLEKA: "
+label_settings = SubResource("LabelSettings_s0jls")
 uppercase = true
 
 [node name="LabelMilk" type="Label" parent="GUI/HBoxContainer2"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_7ecbp")
 theme_override_font_sizes/font_size = 12
 text = "0
 "
-label_settings = SubResource("LabelSettings_1ehfg")
+label_settings = SubResource("LabelSettings_s0jls")
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="GUI"]
+visible = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -130,30 +150,54 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -86.0
-offset_top = -46.0
+offset_top = -42.0
 offset_right = 86.0
-offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 0
-
-[node name="Label" type="Label" parent="GUI/HBoxContainer3"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_7ecbp")
-theme_override_font_sizes/font_size = 12
-text = "Speed:"
-label_settings = SubResource("LabelSettings_64r8c")
-uppercase = true
+alignment = 1
 
 [node name="LabelSpeed" type="Label" parent="GUI/HBoxContainer3"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_7ecbp")
 theme_override_font_sizes/font_size = 12
 text = "0
 "
-label_settings = SubResource("LabelSettings_1ehfg")
+label_settings = SubResource("LabelSettings_s0jls")
+
+[node name="VButtonsContainer" type="VBoxContainer" parent="GUI"]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -160.0
+offset_top = -290.0
+offset_right = -32.0
+offset_bottom = -30.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/separation = 32
+
+[node name="Up" type="TextureButton" parent="GUI/VButtonsContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture_normal = ExtResource("4_5gjce")
+texture_pressed = ExtResource("5_neflp")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Down" type="TextureButton" parent="GUI/VButtonsContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture_normal = ExtResource("6_o2i3l")
+texture_pressed = ExtResource("7_6r6ct")
+ignore_texture_size = true
+stretch_mode = 5
 
 [node name="PanelContainer" type="PanelContainer" parent="GUI"]
 visible = false
+material = ExtResource("7_5jy3v")
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -185,6 +229,16 @@ layout_mode = 2
 text = "Spowodowałeś wypadek!"
 horizontal_alignment = 1
 
+[node name="Label2" type="Label" parent="GUI/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Wynik:"
+horizontal_alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="GUI/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "000000"
+horizontal_alignment = 1
+
 [node name="PlayAgainBtn" type="Button" parent="GUI/PanelContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
@@ -196,12 +250,37 @@ layout_mode = 2
 text = "Wróć do menu"
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-10, 97)
 scale = Vector2(2, 2)
 
 [node name="Background" type="Sprite2D" parent="Camera2D"]
 z_index = -10
+position = Vector2(0, -57)
 scale = Vector2(0.52, 0.52)
 texture = ExtResource("2_qkdoe")
+
+[node name="HUDBorder" type="Sprite2D" parent="Camera2D"]
+z_index = -10
+position = Vector2(0, 190)
+texture = SubResource("GradientTexture2D_hvxgf")
+
+[node name="HUD" type="Sprite2D" parent="Camera2D"]
+z_index = -10
+position = Vector2(0, 192)
+texture = SubResource("GradientTexture2D_n110a")
+
+[node name="Speedometer" type="Sprite2D" parent="Camera2D"]
+z_index = 5
+position = Vector2(0, 180)
+scale = Vector2(0.65, 0.65)
+texture = ExtResource("8_0puha")
+offset = Vector2(0, -64)
+
+[node name="SpeedometerGauge" type="Sprite2D" parent="Camera2D/Speedometer"]
+position = Vector2(0, -1)
+rotation = -0.628319
+texture = ExtResource("9_ioopi")
+offset = Vector2(0, -63)
 
 [node name="OutOfBounds" type="Node2D" parent="."]
 position = Vector2(70, 85)
@@ -329,6 +408,8 @@ shape = SubResource("RectangleShape2D_r5kkt")
 autostart = true
 
 [connection signal="touchscreen_move" from="GUI" to="LukaszczykWPandzie" method="move"]
+[connection signal="button_down" from="GUI/VButtonsContainer/Up" to="GUI" method="_on_up_button_down"]
+[connection signal="button_down" from="GUI/VButtonsContainer/Down" to="GUI" method="_on_down_button_down"]
 [connection signal="pressed" from="GUI/PanelContainer/MarginContainer/VBoxContainer/PlayAgainBtn" to="GUI" method="_on_play_again_btn_pressed"]
 [connection signal="pressed" from="GUI/PanelContainer/MarginContainer/VBoxContainer/MenuBtn" to="GUI" method="_on_menu_btn_pressed"]
 [connection signal="area_entered" from="LukaszczykWPandzie" to="LukaszczykWPandzie" method="_on_area_entered"]

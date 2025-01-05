@@ -7,7 +7,7 @@ const SWLogger = preload("res://addons/silent_wolf/utils/SWLogger.gd")
 var list_index = 0
 # Replace the leaderboard name if you're not using the default leaderboard
 var ld_name = "main"
-var max_scores = 10
+var max_scores = 100
 
 
 func _ready():
@@ -24,7 +24,7 @@ func _ready():
 	else:
 		# use a signal to notify when the high scores have been returned, and show a "loading" animation until it's the case...
 		add_loading_scores_message()
-		var sw_result = await SilentWolf.Scores.get_scores().sw_get_scores_complete
+		var sw_result = await SilentWolf.Scores.get_scores(max_scores).sw_get_scores_complete
 		scores = sw_result.scores
 		hide_message()
 		render_board(scores, local_scores)

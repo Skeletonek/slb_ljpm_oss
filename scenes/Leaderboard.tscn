@@ -1,14 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://b2h8ok8yfc7wb"]
+[gd_scene load_steps=6 format=3 uid="uid://dh4tjkoemf7aj"]
 
-[ext_resource type="Script" path="res://addons/silent_wolf/Scores/Leaderboard.gd" id="1"]
-[ext_resource type="Theme" uid="uid://d2eakbmaefnt6" path="res://addons/silent_wolf/assets/themes/sw_theme.tres" id="2_ixaq4"]
-[ext_resource type="PackedScene" uid="uid://clllbf6am8qdf" path="res://addons/silent_wolf/common/SWButton.tscn" id="4"]
+[ext_resource type="Script" path="res://addons/silent_wolf/Scores/Leaderboard.gd" id="1_lbvo2"]
+[ext_resource type="Material" uid="uid://cqn5rkmj7io2i" path="res://shaders/panel_shader_material.tres" id="2_gcjw4"]
+[ext_resource type="PackedScene" uid="uid://clllbf6am8qdf" path="res://addons/silent_wolf/common/SWButton.tscn" id="3_7fn6n"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_qcica"]
+font_size = 48
 
 [sub_resource type="Theme" id="Theme_j1gah"]
 
 [node name="Leaderboard" type="Node2D"]
 position = Vector2(644, 318)
-script = ExtResource("1")
+script = ExtResource("1_lbvo2")
 
 [node name="OldBoard" type="MarginContainer" parent="."]
 visible = false
@@ -26,21 +29,21 @@ size_flags_vertical = 4
 layout_mode = 2
 
 [node name="Board" type="VBoxContainer" parent="."]
+material = ExtResource("2_gcjw4")
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -753.0
-offset_top = -533.5
-offset_right = 753.0
-offset_bottom = 533.5
+offset_left = -640.0
+offset_top = -320.0
+offset_right = 640.0
+offset_bottom = 400.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource("2_ixaq4")
-theme_override_constants/separation = 48
+theme_override_constants/separation = 16
 alignment = 1
 
 [node name="TitleContainer" type="CenterContainer" parent="Board"]
@@ -48,8 +51,8 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="Board/TitleContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 72
 text = "Leaderboard"
+label_settings = SubResource("LabelSettings_qcica")
 horizontal_alignment = 1
 
 [node name="MessageContainer" type="CenterContainer" parent="Board"]
@@ -61,20 +64,24 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 36
 text = "Loading scores..."
 
-[node name="HighScores" type="CenterContainer" parent="Board"]
+[node name="HighScores" type="ScrollContainer" parent="Board"]
+custom_minimum_size = Vector2(900, 500)
 layout_mode = 2
+size_flags_horizontal = 4
 theme = SubResource("Theme_j1gah")
 
 [node name="ScoreItemContainer" type="VBoxContainer" parent="Board/HighScores"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
 
 [node name="CloseButtonContainer" type="CenterContainer" parent="Board"]
 layout_mode = 2
 
-[node name="CloseButton" parent="Board/CloseButtonContainer" instance=ExtResource("4")]
-custom_minimum_size = Vector2(600, 80)
+[node name="CloseButton" parent="Board/CloseButtonContainer" instance=ExtResource("3_7fn6n")]
+custom_minimum_size = Vector2(400, 60)
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
 text = "Close Leaderboard"
 
 [connection signal="pressed" from="Board/CloseButtonContainer/CloseButton" to="." method="_on_CloseButton_pressed"]

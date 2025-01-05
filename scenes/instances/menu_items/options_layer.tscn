@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dc3ntad11u0qu"]
+[gd_scene load_steps=26 format=3 uid="uid://dc3ntad11u0qu"]
 
 [ext_resource type="Script" path="res://scripts/nodes/options_layer.gd" id="1_cahn6"]
 [ext_resource type="Material" uid="uid://cqn5rkmj7io2i" path="res://shaders/panel_shader_material.tres" id="2_4i7gj"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://dp8j3be6ryho6" path="res://images/touchscreen_controls/Swipe_Disable.png" id="12_o58bl"]
 [ext_resource type="Texture2D" uid="uid://6pndjir8go15" path="res://images/touchscreen_controls/VirtualButtons_Hover.png" id="16_0xix8"]
 [ext_resource type="Texture2D" uid="uid://74xypfu5iawx" path="res://images/touchscreen_controls/VirtualButtons_Disable.png" id="17_jrv5o"]
+[ext_resource type="Script" path="res://scripts/nodes/KeybindButton.gd" id="19_7a5jm"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_rskjs"]
 font_size = 14
@@ -62,10 +63,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -73.0
-offset_top = -30.5
-offset_right = 73.0
-offset_bottom = 30.5
+offset_left = -308.5
+offset_top = -187.0
+offset_right = 308.5
+offset_bottom = 147.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -218,10 +219,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -150.0
-offset_top = -73.0
-offset_right = 150.0
-offset_bottom = 73.0
+offset_left = -300.0
+offset_top = -144.0
+offset_right = 300.0
+offset_bottom = 74.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -279,10 +280,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -300.0
-offset_top = -20.0
-offset_right = 300.0
-offset_bottom = 20.0
+offset_left = -380.0
+offset_top = -265.0
+offset_right = 380.0
+offset_bottom = 235.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -290,7 +291,6 @@ grow_vertical = 2
 layout_mode = 2
 
 [node name="Label" type="Label" parent="TabContainer/Rozgrywka/VBoxContainer/TouchScreenControls"]
-custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 text = "Sposób sterowania dotykowego:"
 horizontal_alignment = 1
@@ -307,7 +307,7 @@ layout_mode = 2
 alignment = 1
 
 [node name="TextureButton" type="TextureButton" parent="TabContainer/Rozgrywka/VBoxContainer/TouchScreenControls/HBoxContainer/Tap"]
-custom_minimum_size = Vector2(128, 128)
+custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("4_fo16v")
@@ -329,7 +329,7 @@ layout_mode = 2
 alignment = 1
 
 [node name="TextureButton" type="TextureButton" parent="TabContainer/Rozgrywka/VBoxContainer/TouchScreenControls/HBoxContainer/Swipe"]
-custom_minimum_size = Vector2(128, 128)
+custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("5_ts1gr")
@@ -351,9 +351,8 @@ layout_mode = 2
 alignment = 1
 
 [node name="TextureButton" type="TextureButton" parent="TabContainer/Rozgrywka/VBoxContainer/TouchScreenControls/HBoxContainer/VirtualButtons"]
-custom_minimum_size = Vector2(128, 128)
+custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
-disabled = true
 toggle_mode = true
 texture_normal = ExtResource("6_pcisq")
 texture_pressed = ExtResource("11_ysk3p")
@@ -378,6 +377,119 @@ text = "Klawiszologia:"
 horizontal_alignment = 1
 vertical_alignment = 2
 
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Rozgrywka/VBoxContainer/Keybindings"]
+layout_mode = 2
+alignment = 1
+
+[node name="Keyboard" type="VBoxContainer" parent="TabContainer/Rozgrywka/VBoxContainer/Keybindings/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="TabContainer/Rozgrywka/VBoxContainer/Keybindings/HBoxContainer/Keyboard"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Klawiatura"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Up" type="HBoxContainer" parent="TabContainer/Rozgrywka/VBoxContainer/Keybindings/HBoxContainer/Keyboard"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="TabContainer/Rozgrywka/VBoxContainer/Keybindings/HBoxContainer/Keyboard/Up"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Góra"
+
+[node name="KBUpButton" type="Button" parent="TabContainer/Rozgrywka/VBoxContainer/Keybindings/HBoxContainer/Keyboard/Up"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+text = "W"
+script = ExtResource("19_7a5jm")
+action = "move_up"
+
+[node name="Down" type="HBoxContainer" parent="TabContainer/Rozgrywka/VBoxContainer/Keybindings/HBoxContainer/Keyboard"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="TabContainer/Rozgrywka/VBoxContainer/Keybindings/HBoxContainer/Keyboard/Down"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Dół"
+
+[node name="KBDownButton" type="Button" parent="TabContainer/Rozgrywka/VBoxContainer/Keybindings/HBoxContainer/Keyboard/Down"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+text = "S"
+script = ExtResource("19_7a5jm")
+action = "move_down"
+
+[node name="Controller" type="VBoxContainer" parent="TabContainer/Rozgrywka/VBoxContainer/Keybindings/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="TabContainer/Rozgrywka/VBoxContainer/Keybindings/HBoxContainer/Controller"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Kontroler"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Up" type="HBoxContainer" parent="TabContainer/Rozgrywka/VBoxContainer/Keybindings/HBoxContainer/Controller"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="TabContainer/Rozgrywka/VBoxContainer/Keybindings/HBoxContainer/Controller/Up"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Góra"
+
+[node name="Label2" type="Label" parent="TabContainer/Rozgrywka/VBoxContainer/Keybindings/HBoxContainer/Controller/Up"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "JoyUp"
+
+[node name="Label3" type="Label" parent="TabContainer/Rozgrywka/VBoxContainer/Keybindings/HBoxContainer/Controller/Up"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "DpadUp"
+
+[node name="Down" type="HBoxContainer" parent="TabContainer/Rozgrywka/VBoxContainer/Keybindings/HBoxContainer/Controller"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="TabContainer/Rozgrywka/VBoxContainer/Keybindings/HBoxContainer/Controller/Down"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Dół"
+
+[node name="Label2" type="Label" parent="TabContainer/Rozgrywka/VBoxContainer/Keybindings/HBoxContainer/Controller/Down"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "JoyDown"
+
+[node name="Label3" type="Label" parent="TabContainer/Rozgrywka/VBoxContainer/Keybindings/HBoxContainer/Controller/Down"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "DpadDown"
+
+[node name="DevConsole" type="VBoxContainer" parent="TabContainer/Rozgrywka/VBoxContainer"]
+layout_mode = 2
+
+[node name="DevConsoleLabel" type="Label" parent="TabContainer/Rozgrywka/VBoxContainer/DevConsole"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Konsola deweloperska:"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="DevConsoleButton" type="Button" parent="TabContainer/Rozgrywka/VBoxContainer/DevConsole"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+toggle_mode = true
+text = "Wyłączony"
+script = ExtResource("3_uq6y0")
+
 [node name="Dostępność" type="Control" parent="TabContainer"]
 visible = false
 layout_mode = 2
@@ -391,9 +503,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -300.0
-offset_top = -96.0
+offset_top = -145.0
 offset_right = 300.0
-offset_bottom = 96.0
+offset_bottom = 115.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -451,18 +563,24 @@ text = "Zmiana tego ustawienia wymaga restartu gry"
 label_settings = SubResource("LabelSettings_44h5e")
 horizontal_alignment = 1
 
+[node name="Zgłoś błąd" type="Control" parent="TabContainer"]
+visible = false
+layout_mode = 2
+
 [node name="MarginContainer" type="MarginContainer" parent="."]
-custom_minimum_size = Vector2(0, 100)
+custom_minimum_size = Vector2(300, 0)
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -150.0
-offset_top = -100.0
-offset_right = 150.0
+offset_left = -76.0
+offset_top = -50.0
+offset_right = 76.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_bottom = 8
 
 [node name="BackButton" type="Button" parent="MarginContainer"]
 custom_minimum_size = Vector2(0, 50)
@@ -474,6 +592,7 @@ text = "Zapisz i wróć"
 stream = ExtResource("4_5hsqm")
 bus = &"SFX"
 
+[connection signal="tab_clicked" from="TabContainer" to="." method="_on_report_bug_pressed"]
 [connection signal="toggled" from="TabContainer/Grafika/VBoxContainer/Screen/FullScreenButton" to="." method="_on_full_screen_button_toggled"]
 [connection signal="value_changed" from="TabContainer/Grafika/VBoxContainer/UIScaling/Container/TextureRect/UIScalingSlider" to="." method="_on_ui_scaling_slider_value_changed"]
 [connection signal="drag_ended" from="TabContainer/Audio/VBoxContainer/MasterSlider" to="." method="_on_master_slider_drag_ended"]
@@ -484,6 +603,9 @@ bus = &"SFX"
 [connection signal="toggled" from="TabContainer/Rozgrywka/VBoxContainer/TouchScreenControls/HBoxContainer/Tap/TextureButton" to="." method="_on_tch_tap_toggled"]
 [connection signal="toggled" from="TabContainer/Rozgrywka/VBoxContainer/TouchScreenControls/HBoxContainer/Swipe/TextureButton" to="." method="_on_tch_swipe_toggled"]
 [connection signal="toggled" from="TabContainer/Rozgrywka/VBoxContainer/TouchScreenControls/HBoxContainer/VirtualButtons/TextureButton" to="." method="_on_tch_vbuttons_toggled"]
+[connection signal="pressed" from="TabContainer/Rozgrywka/VBoxContainer/Keybindings/HBoxContainer/Keyboard/Up/KBUpButton" to="." method="_on_kb_up_button_pressed"]
+[connection signal="pressed" from="TabContainer/Rozgrywka/VBoxContainer/Keybindings/HBoxContainer/Keyboard/Down/KBDownButton" to="." method="_on_kb_down_button_pressed"]
+[connection signal="pressed" from="TabContainer/Rozgrywka/VBoxContainer/DevConsole/DevConsoleButton" to="." method="_on_dev_console_button_pressed"]
 [connection signal="toggled" from="TabContainer/Dostępność/VBoxContainer/ReducedMotion/Button" to="." method="_on_reduced_motion_button_toggled"]
 [connection signal="toggled" from="TabContainer/Dostępność/VBoxContainer/EasierFont/Button" to="." method="_on_easier_font_button_toggled"]
 [connection signal="pressed" from="MarginContainer/BackButton" to="." method="_on_back_button_pressed"]

@@ -6,7 +6,8 @@ signal touchscreen_move(direction: bool)
 @export var LabelMilk: Label
 @onready var Speedometer: Label = $HBoxContainer3/LabelSpeed
 @onready var GameOverPanel := $PanelContainer
-var start_time: int
+@onready var ScoreLabel := $PanelContainer/MarginContainer/VBoxContainer/ScoreLabel
+
 var diff_time: int
 
 const MINIMUM_SWIPE_DRAG = 60
@@ -15,14 +16,15 @@ var stop_processing := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	start_time = Time.get_ticks_msec()
 	diff_time = 0
-
+	SignalBus.enable_touchscreen_vbuttons.connect(_enable_vbuttons)
+	if SettingsBus.touchscreen_control == SettingsBus.TOUCHSCREEN_CONTROL_MODE.VButtons:
+		_enable_vbuttons(true)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if not stop_processing:
-		diff_time = Time.get_ticks_msec() - start_time
+		diff_time = Time.get_ticks_msec() - owner.start_time
 		var miliseconds: int = diff_time % 1000
 		var seconds: int = (diff_time / 1000) % 60
 		var minutes: int = (diff_time / 1000) / 60
@@ -36,6 +38,7 @@ func update_points():
 
 func game_over():
 	stop_processing = true
+	ScoreLabel.text = str(owner.final_score)
 	GameOverPanel.show()
 
 
@@ -65,9 +68,24 @@ func _calculate_swipe(swipe_end: Vector2):
 			touchscreen_move.emit(true)
 
 
+func _enable_vbuttons(yes: bool):
+	if yes:
+		$VButtonsContainer.show()
+	else:
+		$VButtonsContainer.hide()
+
+
 func _on_play_again_btn_pressed():
 	get_tree().change_scene_to_file("res://scenes/carride.tscn")
 
 
 func _on_menu_btn_pressed():
 	get_tree().change_scene_to_file("res://scenes/mainMenu.tscn")
+
+
+func _on_up_button_down():
+	touchscreen_move.emit(true)
+
+
+func _on_down_button_down():
+	touchscreen_move.emit(false)

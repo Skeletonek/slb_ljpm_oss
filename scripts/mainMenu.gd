@@ -113,6 +113,10 @@ func _on_credits_button_pressed():
 	$CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/BackButton.grab_focus()
 
 
+func _on_hi_score_button_pressed():
+	get_tree().change_scene_to_file("res://scenes/Leaderboard.tscn")
+
+
 func _on_exit_button_pressed():
 	SettingsBus.save_config()
 	get_tree().quit()
@@ -144,3 +148,4 @@ func _on_godot_logo_click(event):
 
 func _on_easter_egg_button_pressed():
 	OS.shell_open("https://youtu.be/dQw4w9WgXcQ?si=FRObNjwf145_svmv")
+

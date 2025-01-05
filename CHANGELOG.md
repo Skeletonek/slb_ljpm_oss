@@ -1,3 +1,16 @@
+#### B.6.0
+ - Added online leaderboards
+ - Added graphical speedometer to game HUD
+ - Reorganized game HUD
+ - Added virtual buttons as a new input method for touchscreen devices
+ - Added customizing keyboard keybindings
+ - Audio mastering
+ - Changed UI theme of sliders, scrollbars and panels
+ - Slightly adjusted options panel
+ - Enabled MSDF for OpenDyslexia font
+ - Changed font in game scene
+ - Added button to report bugs
+
 #### B.5.1
  - Improved spawning algorithm curve
  - Changed Android Adaptive Icons files

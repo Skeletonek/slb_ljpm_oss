@@ -110,12 +110,34 @@ func _on_tch_vbuttons_toggled(button_pressed):
 	_unpress_tch_buttons()
 	SettingsBus.touchscreen_control = SettingsBus.TOUCHSCREEN_CONTROL_MODE.VButtons
 	tch_vbuttons_button.set_pressed_no_signal(true)
+	SignalBus.enable_touchscreen_vbuttons.emit(true)
 
 
 func _unpress_tch_buttons():
 	tch_tap_button.set_pressed_no_signal(false)
 	tch_swipe_button.set_pressed_no_signal(false)
 	tch_vbuttons_button.set_pressed_no_signal(false)
+	SignalBus.enable_touchscreen_vbuttons.emit(false)
+
+
+func _on_kb_up_button_pressed():
+	pass # Replace with function body.
+
+
+func _on_kb_down_button_pressed():
+	pass # Replace with function body.
+
+
+func _on_ctr_up_button_pressed():
+	pass # Replace with function body.
+
+
+func _on_ctr_down_button_pressed():
+	pass # Replace with function body.
+
+
+func _on_dev_console_button_pressed():
+	pass # Replace with function body.
 
 
 func _on_reduced_motion_button_toggled(button_pressed):
@@ -136,3 +158,9 @@ func _on_easier_font_button_toggled(button_pressed):
 func _on_back_button_pressed():
 	SettingsBus.save_config()
 	$"../"._on_back_button_pressed()
+
+
+func _on_report_bug_pressed(tab):
+	if tab == 4:
+		OS.shell_open("https://forms.gle/94hffgvFiSXHfA529")
+		$TabContainer.current_tab = 0

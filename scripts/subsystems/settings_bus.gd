@@ -13,6 +13,8 @@ var ui_scaling := 1.0
 var fullscreen := true
 
 var touchscreen_control := TOUCHSCREEN_CONTROL_MODE.Tap
+var keyboard_up := KEY_W
+var keyboard_down := KEY_S
 
 var narrator_speaking := false
 var reduced_motion := false
@@ -52,6 +54,8 @@ func load_config() -> bool:
 		reduced_motion = data["reduced_motion"]
 		easier_font = data["easier_font"]
 		touchscreen_control = data["touchscreen_control"]
+		keyboard_up = data["keyboard_up"]
+		keyboard_down = data["keyboard_down"]
 		return true
 
 
@@ -69,7 +73,9 @@ func save_config():
 		"skip_intro": skip_intro,
 		"reduced_motion": reduced_motion,
 		"easier_font": easier_font,
-		"touchscreen_control": touchscreen_control
+		"touchscreen_control": touchscreen_control,
+		"keyboard_up": keyboard_up,
+		"keyboard_down": keyboard_down
 	}
 	var json = JSON.stringify(config_dict)
 	file.store_line(json)
@@ -108,6 +114,7 @@ func _enter_tree():
 
 
 func _initialize_settings():
+	print(OS.get_model_name())
 	AudioServer.set_bus_volume_db(0, linear_to_db(master_volume)*2)
 	AudioServer.set_bus_volume_db(1, linear_to_db(sfx_volume)*2)
 	AudioServer.set_bus_volume_db(2, linear_to_db(voice_volume)*2)
@@ -119,21 +126,38 @@ func _initialize_settings():
 		AudioServer.set_bus_volume_db(4, linear_to_db(0))
 	if easier_font:
 		ThemeDB.get_project_theme().set_default_font(load("res://theme/fonts/OpenDyslexic-Regular.otf"))
+	var event = null
+	for action in ["move_up", "move_down"]:
+		event = InputEventKey.new()
+		event.keycode = keyboard_up if action == "move_up" else keyboard_down
+		InputMap.action_erase_event(action, InputMap.action_get_events(action)[2])
+		InputMap.action_add_event(action, event)
 
 
 func _configure_silentwolf():
 	SilentWolf.configure({
 		"api_key": "",
-		"game_id": "SLB:LJPM",
-		"log_level": 1
+		"game_id": "slbljpm",
+		"log_level": 2
 	})
-
-#	SilentWolf.configure_scores({
-#		"open_scene_on_close": "res://scenes/MainPage.tscn"
-#	})
+	SilentWolf.configure_scores({
+		"open_scene_on_close": "res://scenes/mainMenu.tscn"
+	})
 
 func set_default_ui_scale():
 	if OS.get_name() == "Android":
 		ui_scaling = 1.2
 	else:
 		ui_scaling = 1.0
+
+
+func modify_keybindings(action, key):
+	match(action):
+		"move_up":
+			keyboard_up = key
+			print(action)
+		"move_down":
+			keyboard_down = key
+			print(action)
+		_:
+			push_error("Unknown action! Can't set keybinding!")

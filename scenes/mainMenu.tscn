@@ -165,7 +165,6 @@ custom_minimum_size = Vector2(160, 70)
 layout_mode = 2
 focus_neighbor_bottom = NodePath("../CreditsButton")
 focus_previous = NodePath("../CreditsButton")
-disabled = true
 text = "Tablica
 wyników"
 
@@ -448,6 +447,7 @@ timeout = 3.0
 [connection signal="pressed" from="MainMenuLayer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="MainMenuLayer/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
 [connection signal="pressed" from="MainMenuLayer/VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="MainMenuLayer/VBoxContainer/HiScoreButton" to="." method="_on_hi_score_button_pressed"]
 [connection signal="pressed" from="MainMenuLayer/VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
 [connection signal="pressed" from="MainMenuLayer/UpdateButton" to="." method="_update_game"]
 [connection signal="pressed" from="CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

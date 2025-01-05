@@ -1,10 +1,12 @@
-[gd_resource type="Theme" load_steps=6 format=3 uid="uid://1gm1t5npvg1b"]
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://1gm1t5npvg1b"]
 
 [ext_resource type="StyleBox" uid="uid://dhhkp4qyw3sii" path="res://theme/style_box_flat.tres" id="1_mg7kw"]
 [ext_resource type="StyleBox" uid="uid://c4381l4nshdt8" path="res://theme/style_box_flat_focused.tres" id="2_tukea"]
 [ext_resource type="StyleBox" uid="uid://beouu0raqpik5" path="res://theme/style_box_flat_hover.tres" id="3_xtdnp"]
 [ext_resource type="StyleBox" uid="uid://cp1tbuafgojja" path="res://theme/style_box_flat_pressed.tres" id="4_yvq0w"]
-[ext_resource type="FontFile" path="res://theme/fonts/PixelifySans-Bold.ttf" id="5_8o6v7"]
+[ext_resource type="FontFile" uid="uid://bldge4o8plp5o" path="res://theme/fonts/PixelifySans-Bold.ttf" id="5_8o6v7"]
+[ext_resource type="StyleBox" uid="uid://cao42a6b8audp" path="res://theme/style_box_flat_no_border.tres" id="5_i0kmv"]
+[ext_resource type="StyleBox" uid="uid://cbeisib500lr6" path="res://theme/panel.tres" id="6_ygc60"]
 
 [resource]
 default_font = ExtResource("5_8o6v7")
@@ -14,3 +16,22 @@ Button/styles/focus = ExtResource("2_tukea")
 Button/styles/hover = ExtResource("3_xtdnp")
 Button/styles/normal = ExtResource("1_mg7kw")
 Button/styles/pressed = ExtResource("4_yvq0w")
+HSlider/styles/grabber_area = ExtResource("1_mg7kw")
+HSlider/styles/grabber_area_highlight = ExtResource("3_xtdnp")
+HSlider/styles/slider = ExtResource("5_i0kmv")
+Panel/styles/panel = ExtResource("6_ygc60")
+PanelContainer/styles/panel = ExtResource("6_ygc60")
+TabBar/styles/button_highlight = ExtResource("3_xtdnp")
+TabBar/styles/button_pressed = ExtResource("4_yvq0w")
+TabBar/styles/tab_hovered = ExtResource("3_xtdnp")
+TabBar/styles/tab_selected = ExtResource("4_yvq0w")
+TabBar/styles/tab_unselected = ExtResource("1_mg7kw")
+TabContainer/styles/panel = ExtResource("6_ygc60")
+TabContainer/styles/tab_hovered = ExtResource("3_xtdnp")
+TabContainer/styles/tab_selected = ExtResource("4_yvq0w")
+TabContainer/styles/tab_unselected = ExtResource("1_mg7kw")
+VScrollBar/styles/grabber = ExtResource("1_mg7kw")
+VScrollBar/styles/grabber_highlight = ExtResource("3_xtdnp")
+VScrollBar/styles/grabber_pressed = ExtResource("4_yvq0w")
+VScrollBar/styles/scroll = ExtResource("5_i0kmv")
+VScrollBar/styles/scroll_focus = ExtResource("5_i0kmv")
