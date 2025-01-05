@@ -12,6 +12,7 @@ extends CanvasLayer
 @onready var tch_vbuttons_button:TextureButton = $TabContainer/Rozgrywka/ScrollContainer/VBoxContainer/TouchScreenControls/HBoxContainer/VirtualButtons/TextureButton
 @onready var playername_edit:LineEdit = $TabContainer/Rozgrywka/ScrollContainer/VBoxContainer/PlayerName/HBoxContainer/PlayernameEdit
 @onready var playername_uuid:Label = $TabContainer/Rozgrywka/ScrollContainer/VBoxContainer/PlayerName/HBoxContainer/PlayernameUUID
+@onready var dev_console_button:Button = $TabContainer/Rozgrywka/ScrollContainer/VBoxContainer/DevConsole/DevConsoleButton
 @onready var reduced_motion_button:Button = $"TabContainer/Dostępność/VBoxContainer/ReducedMotion/Button"
 @onready var easier_font_button:Button = $"TabContainer/Dostępność/VBoxContainer/EasierFont/Button"
 @onready var easier_font_restart:Label = $"TabContainer/Dostępność/VBoxContainer/EasierFont/RestartLabel"
@@ -26,6 +27,7 @@ func _ready():
 	if OS.get_name() != "Android":
 		fullscreen_button.set_pressed_no_signal_custom(SettingsBus.fullscreen)
 	else:
+		fullscreen_button.set_pressed_no_signal_custom(true)
 		fullscreen_button.disabled = true
 		fullscreen_android_info.visible = true
 	graphics_api_button.get_popup().id_pressed.connect(_on_graphics_api_pressed)
@@ -41,6 +43,7 @@ func _ready():
 	var playername_split = SettingsBus.playername.split("#")
 	playername_edit.text = playername_split[0]
 	playername_uuid.text = "#" + playername_split[1]
+	dev_console_button.set_pressed_no_signal_custom(SettingsBus.dev_console)
 	easier_font_button.set_pressed_no_signal_custom(SettingsBus.easier_font)
 	reduced_motion_button.set_pressed_no_signal_custom(SettingsBus.reduced_motion)
 
@@ -131,6 +134,7 @@ func _on_playername_button_pressed():
 
 func _on_dev_console_button_toggled(button_pressed):
 	SettingsBus.dev_console = button_pressed
+	SignalBus.dev_console.emit(button_pressed)
 
 
 func _on_reduced_motion_button_toggled(button_pressed):

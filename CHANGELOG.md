@@ -1,3 +1,9 @@
+#### RC.7.1
+ - Added icons to gamepad controls section in settings
+ - Fixed dev console button in settings reporting wrong state on startup
+ - Fixed fullscreen button being "off" on Android where fullscreen is always on
+ - Fixed touchscreen console dev button not showing on Android right after changing setting
+
 #### RC.7.0
  - Added player naming setting
  - Added disabling or enabling dev console via setting

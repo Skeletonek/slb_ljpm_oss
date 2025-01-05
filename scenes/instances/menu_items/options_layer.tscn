@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dc3ntad11u0qu"]
+[gd_scene load_steps=30 format=3 uid="uid://dc3ntad11u0qu"]
 
 [ext_resource type="Script" path="res://scripts/nodes/options_layer.gd" id="1_cahn6"]
 [ext_resource type="Material" uid="uid://cqn5rkmj7io2i" path="res://shaders/panel_shader_material.tres" id="2_4i7gj"]
@@ -20,6 +20,10 @@
 [ext_resource type="Texture2D" uid="uid://6pndjir8go15" path="res://images/touchscreen_controls/VirtualButtons_Hover.png" id="16_0xix8"]
 [ext_resource type="Texture2D" uid="uid://74xypfu5iawx" path="res://images/touchscreen_controls/VirtualButtons_Disable.png" id="17_jrv5o"]
 [ext_resource type="Script" path="res://scripts/nodes/KeybindButton.gd" id="19_7a5jm"]
+[ext_resource type="Texture2D" uid="uid://dsiepk63hqv21" path="res://images/gamepad_controls/JoyUp.png" id="20_ivpag"]
+[ext_resource type="Texture2D" uid="uid://34qot3tm0xfr" path="res://images/gamepad_controls/DPadUp.png" id="21_p61gg"]
+[ext_resource type="Texture2D" uid="uid://bbyp5mnkdt3ai" path="res://images/gamepad_controls/JoyDown.png" id="22_hr6iv"]
+[ext_resource type="Texture2D" uid="uid://blipcw147emwl" path="res://images/gamepad_controls/DPadDown.png" id="23_6rl4w"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_rskjs"]
 font_size = 14
@@ -447,15 +451,19 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Góra"
 
-[node name="Label2" type="Label" parent="TabContainer/Rozgrywka/ScrollContainer/VBoxContainer/Keybindings/HBoxContainer/Controller/Up"]
-custom_minimum_size = Vector2(100, 0)
+[node name="JoyUpIcon" type="TextureRect" parent="TabContainer/Rozgrywka/ScrollContainer/VBoxContainer/Keybindings/HBoxContainer/Controller/Up"]
+custom_minimum_size = Vector2(96, 48)
 layout_mode = 2
-text = "JoyUp"
+texture = ExtResource("20_ivpag")
+expand_mode = 3
+stretch_mode = 5
 
-[node name="Label3" type="Label" parent="TabContainer/Rozgrywka/ScrollContainer/VBoxContainer/Keybindings/HBoxContainer/Controller/Up"]
-custom_minimum_size = Vector2(100, 0)
+[node name="DpadUpIcon" type="TextureRect" parent="TabContainer/Rozgrywka/ScrollContainer/VBoxContainer/Keybindings/HBoxContainer/Controller/Up"]
+custom_minimum_size = Vector2(96, 48)
 layout_mode = 2
-text = "DpadUp"
+texture = ExtResource("21_p61gg")
+expand_mode = 3
+stretch_mode = 5
 
 [node name="Down" type="HBoxContainer" parent="TabContainer/Rozgrywka/ScrollContainer/VBoxContainer/Keybindings/HBoxContainer/Controller"]
 layout_mode = 2
@@ -466,15 +474,19 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Dół"
 
-[node name="Label2" type="Label" parent="TabContainer/Rozgrywka/ScrollContainer/VBoxContainer/Keybindings/HBoxContainer/Controller/Down"]
-custom_minimum_size = Vector2(100, 0)
+[node name="JoyDownIcon" type="TextureRect" parent="TabContainer/Rozgrywka/ScrollContainer/VBoxContainer/Keybindings/HBoxContainer/Controller/Down"]
+custom_minimum_size = Vector2(96, 48)
 layout_mode = 2
-text = "JoyDown"
+texture = ExtResource("22_hr6iv")
+expand_mode = 3
+stretch_mode = 5
 
-[node name="Label3" type="Label" parent="TabContainer/Rozgrywka/ScrollContainer/VBoxContainer/Keybindings/HBoxContainer/Controller/Down"]
-custom_minimum_size = Vector2(100, 0)
+[node name="DpadDownIcon" type="TextureRect" parent="TabContainer/Rozgrywka/ScrollContainer/VBoxContainer/Keybindings/HBoxContainer/Controller/Down"]
+custom_minimum_size = Vector2(96, 48)
 layout_mode = 2
-text = "DpadDown"
+texture = ExtResource("23_6rl4w")
+expand_mode = 3
+stretch_mode = 5
 
 [node name="PlayerName" type="VBoxContainer" parent="TabContainer/Rozgrywka/ScrollContainer/VBoxContainer"]
 layout_mode = 2
