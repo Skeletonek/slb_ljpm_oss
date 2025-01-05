@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://co54u54uke0d2"]
+
+[ext_resource type="AudioStream" uid="uid://ca6jwt3gr62en" path="res://audio/music/bloo-stricken_commision.ogg" id="1_4xa2s"]
+[ext_resource type="Script" path="res://scripts/subsystems/audio_stream_player.gd" id="2_plxap"]
+
+[node name="GlobalMusicPlayer" type="AudioStreamPlayer"]
+stream = ExtResource("1_4xa2s")
+autoplay = true
+bus = &"Music"
+script = ExtResource("2_plxap")

@@ -11,27 +11,28 @@ config_version=5
 [application]
 
 config/name="SLB: LJPM"
+config/version="2.0-alpha+1"
 run/main_scene="res://scenes/mainMenu.tscn"
 config/project_settings_override="user://override.cfg"
 config/quit_on_go_back=false
-config/features=PackedStringArray("4.1", "Mobile")
+config/features=PackedStringArray("4.2", "Mobile")
 run/flush_stdout_on_print=true
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/image="res://images/SplashScreen.png"
 config/icon="res://icon.svg"
 boot_splash/minimum_display_time=1000
-config/version="1.1.1"
-config/build_number=15
-config/date="2023-12-06 21:00"
+config/build_number=16
+config/date="2024-07-28 21:49"
 
 [autoload]
 
-SignalBus="*res://scripts/signal_bus.gd"
-DebugInfo="*res://scenes/instances/debug_info.tscn"
-Console="res://scenes/instances/console_scene.tscn"
+GlobalMusic="*res://scenes/autoload/audio_stream_player.tscn"
+DebugInfo="*res://scenes/autoload/debug_info.tscn"
 SettingsBus="*res://scripts/subsystems/settings_bus.gd"
+SignalBus="*res://scripts/subsystems/signal_bus.gd"
+AchievementSystem="*res://scenes/ui/achievement/achievement_scene.tscn"
+DevConsole="*res://scenes/autoload/console_scene.tscn"
 SilentWolf="*res://addons/silent_wolf/SilentWolf.gd"
-GlobalMusic="*res://scenes/instances/audio_stream_player.tscn"
 
 [debug]
 
@@ -46,6 +47,13 @@ window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="canvas_items"
 window/size/mode.editor=0
+
+[editor]
+
+movie_writer/mjpeg_quality=1.0
+movie_writer/movie_file="/home/skeletonek/Pulpit/file.avi"
+movie_writer/disable_vsync=true
+movie_writer/fps=30
 
 [gui]
 

@@ -1,0 +1,112 @@
+[gd_scene load_steps=6 format=3 uid="uid://cjhj2b2jopy14"]
+
+[ext_resource type="FontFile" uid="uid://bp02gos6qbie1" path="res://ui/fonts/NotoSansMono-Regular.ttf" id="1_ny1i1"]
+[ext_resource type="Script" path="res://scripts/subsystems/debug_info.gd" id="1_s8h6l"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_tjnbd"]
+font = ExtResource("1_ny1i1")
+font_size = 14
+
+[sub_resource type="LabelSettings" id="LabelSettings_sah47"]
+font = ExtResource("1_ny1i1")
+font_size = 14
+
+[sub_resource type="LabelSettings" id="LabelSettings_jtopa"]
+font = ExtResource("1_ny1i1")
+font_size = 22
+
+[node name="debug_info" type="Control" node_paths=PackedStringArray("DevErrorsLabel")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_s8h6l")
+DevErrorsLabel = NodePath("DebugInfo/DevErrors")
+
+[node name="DebugInfo" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="Version" type="Control" parent="DebugInfo"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VersionBuildDate" type="Label" parent="DebugInfo/Version"]
+top_level = true
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = -109.0
+offset_right = 235.0
+offset_bottom = -5.0
+grow_vertical = 0
+text = "SLB2: TGRa
+Version: <VERSION>
+Build: <BUILD_NUMBER>
+Date: <DATE>"
+label_settings = SubResource("LabelSettings_tjnbd")
+vertical_alignment = 2
+uppercase = true
+
+[node name="VersionBuildDate2" type="Label" parent="DebugInfo/Version"]
+top_level = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -235.0
+offset_top = -109.0
+offset_right = -5.0
+offset_bottom = -5.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Release Version"
+label_settings = SubResource("LabelSettings_sah47")
+horizontal_alignment = 2
+vertical_alignment = 2
+uppercase = true
+
+[node name="FPS" type="Label" parent="DebugInfo"]
+visible = false
+top_level = true
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -230.0
+offset_bottom = 104.0
+grow_horizontal = 0
+text = "FPS: n/a"
+label_settings = SubResource("LabelSettings_jtopa")
+horizontal_alignment = 2
+uppercase = true
+
+[node name="DevErrors" type="RichTextLabel" parent="DebugInfo"]
+visible = false
+custom_minimum_size = Vector2(0, 100)
+anchors_preset = 10
+anchor_right = 1.0
+offset_right = -280.0
+offset_bottom = 100.0
+grow_horizontal = 2
+size_flags_vertical = 0
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("1_ny1i1")
+theme_override_fonts/bold_font = ExtResource("1_ny1i1")
+theme_override_fonts/italics_font = ExtResource("1_ny1i1")
+theme_override_fonts/bold_italics_font = ExtResource("1_ny1i1")
+theme_override_fonts/mono_font = ExtResource("1_ny1i1")
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/bold_font_size = 12
+theme_override_font_sizes/italics_font_size = 12
+theme_override_font_sizes/bold_italics_font_size = 12
+theme_override_font_sizes/mono_font_size = 12
+bbcode_enabled = true
+scroll_following = true

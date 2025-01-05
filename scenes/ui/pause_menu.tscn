@@ -1,0 +1,103 @@
+[gd_scene load_steps=5 format=3 uid="uid://lugeuc8kewl3"]
+
+[ext_resource type="Script" path="res://scripts/ui/pause_menu.gd" id="1_sgyxx"]
+[ext_resource type="PackedScene" uid="uid://2sbxeymmsxu" path="res://scenes/ui/achievement_viewer.tscn" id="2_a1new"]
+[ext_resource type="Material" uid="uid://cqn5rkmj7io2i" path="res://shaders/panel_shader_material.tres" id="2_uyiwd"]
+[ext_resource type="PackedScene" uid="uid://dc3ntad11u0qu" path="res://scenes/ui/options_layer.tscn" id="3_qu7qd"]
+
+[node name="PauseLayer" type="CanvasLayer"]
+process_mode = 3
+process_priority = 1
+layer = 50
+visible = false
+script = ExtResource("1_sgyxx")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
+material = ExtResource("2_uyiwd")
+custom_minimum_size = Vector2(250, 350)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="ResumeButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Wznów grę"
+
+[node name="SaveButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+disabled = true
+text = "Zapisz grę"
+
+[node name="AchievementsButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Osiągnięcia"
+
+[node name="SettingsButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Ustawienia"
+
+[node name="MainMenuButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Wróć do menu głównego"
+
+[node name="ExitButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Wyjdź z gry"
+
+[node name="AchievementsLayer" parent="." instance=ExtResource("2_a1new")]
+layer = 50
+visible = false
+
+[node name="OptionsLayer" parent="." instance=ExtResource("3_qu7qd")]
+layer = 50
+visible = false
+
+[node name="AndroidPauseLayer" type="CanvasLayer" parent="."]
+layer = 50
+visible = false
+
+[node name="PauseButton" type="Button" parent="AndroidPauseLayer"]
+custom_minimum_size = Vector2(50, 50)
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 60.0
+offset_bottom = 60.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "||"
+
+[connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/SaveButton" to="." method="_on_save_button_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/AchievementsButton" to="." method="_on_achievements_button_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="AndroidPauseLayer/PauseButton" to="." method="_on_pause_button_pressed"]

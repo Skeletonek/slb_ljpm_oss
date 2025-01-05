@@ -1,3 +1,11 @@
+#### 2.0-Alpha+1
+ - Updated SLB Frameworks
+ - Added Achievements system
+ - Fixed misalignment in a container inside CreditsLayer
+ - Update panels tint to be more blueish
+ - Refactored file structure
+ - Updated copyright notice
+
 #### 1.1.1
  - Modified '5', 'Z' and 'T' characters in default font
  - Fixed leaderboards scrolling being diffcult on touch screen devices, again

@@ -1,0 +1,97 @@
+[gd_scene load_steps=5 format=3 uid="uid://dot20ht7350x6"]
+
+[ext_resource type="Script" path="res://scripts/ui/nodes/PopupChangelog.gd" id="1_xunu4"]
+[ext_resource type="Material" uid="uid://cqn5rkmj7io2i" path="res://shaders/panel_shader_material.tres" id="2_ji0uw"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_6iuel"]
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_1ud2d"]
+font_size = 24
+
+[node name="PopupChangelog" type="CanvasLayer"]
+script = ExtResource("1_xunu4")
+
+[node name="Container" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="."]
+material = ExtResource("2_ji0uw")
+custom_minimum_size = Vector2(1000, 600)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -250.0
+offset_right = 400.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+custom_minimum_size = Vector2(900, 500)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -200.0
+offset_right = 300.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 32
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Header" type="Label" parent="Panel/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Wersja "
+label_settings = SubResource("LabelSettings_6iuel")
+horizontal_alignment = 1
+
+[node name="VersionLabel" type="Label" parent="Panel/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "<version>"
+label_settings = SubResource("LabelSettings_1ud2d")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+vertical_scroll_mode = 2
+
+[node name="Changelog" type="RichTextLabel" parent="Panel/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="BackButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(280, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Wróć"
+
+[node name="UpdateButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(280, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Aktualizuj"
+
+[connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer/UpdateButton" to="." method="_on_update_button_pressed"]

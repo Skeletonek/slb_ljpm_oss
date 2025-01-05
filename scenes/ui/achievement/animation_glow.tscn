@@ -1,0 +1,425 @@
+[gd_scene load_steps=102 format=3 uid="uid://drvetg5bx87fk"]
+
+[ext_resource type="Texture2D" uid="uid://dm3wwb0srr6ir" path="res://images/achievement_glow/Frame 00.webp" id="1_etsbp"]
+[ext_resource type="Texture2D" uid="uid://5f8ot55cchbr" path="res://images/achievement_glow/Frame 01.webp" id="2_rbywr"]
+[ext_resource type="Texture2D" uid="uid://bn6lp8aa8jlad" path="res://images/achievement_glow/Frame 02.webp" id="3_fpbww"]
+[ext_resource type="Texture2D" uid="uid://dkyy8fn7hi1xe" path="res://images/achievement_glow/Frame 03.webp" id="4_dmrfe"]
+[ext_resource type="Texture2D" uid="uid://1jjjpqsu4lqm" path="res://images/achievement_glow/Frame 04.webp" id="5_housh"]
+[ext_resource type="Texture2D" uid="uid://ujhlfmdr0bt4" path="res://images/achievement_glow/Frame 05.webp" id="6_cuutx"]
+[ext_resource type="Texture2D" uid="uid://7tkmkigp36ip" path="res://images/achievement_glow/Frame 06.webp" id="7_ly84x"]
+[ext_resource type="Texture2D" uid="uid://c7n1dmn3x2ebt" path="res://images/achievement_glow/Frame 07.webp" id="8_rhcqi"]
+[ext_resource type="Texture2D" uid="uid://cvx17keujvkpl" path="res://images/achievement_glow/Frame 08.webp" id="9_8nyj3"]
+[ext_resource type="Texture2D" uid="uid://cgwb27g03tu7c" path="res://images/achievement_glow/Frame 09.webp" id="10_6dnw1"]
+[ext_resource type="Texture2D" uid="uid://bte0qmok0073l" path="res://images/achievement_glow/Frame 10.webp" id="11_ipmo1"]
+[ext_resource type="Texture2D" uid="uid://ynh2itgh65g" path="res://images/achievement_glow/Frame 11.webp" id="12_4iwme"]
+[ext_resource type="Texture2D" uid="uid://cvfkhh7jblyio" path="res://images/achievement_glow/Frame 12.webp" id="13_6s0g1"]
+[ext_resource type="Texture2D" uid="uid://c3k3sucoj4xv8" path="res://images/achievement_glow/Frame 13.webp" id="14_vfb8s"]
+[ext_resource type="Texture2D" uid="uid://ckk2723gq527g" path="res://images/achievement_glow/Frame 14.webp" id="15_n5dcx"]
+[ext_resource type="Texture2D" uid="uid://cs44xbcxi42tb" path="res://images/achievement_glow/Frame 15.webp" id="16_h26p8"]
+[ext_resource type="Texture2D" uid="uid://lkk00q1ve5wg" path="res://images/achievement_glow/Frame 16.webp" id="17_olxci"]
+[ext_resource type="Texture2D" uid="uid://cvbb4uglrnwte" path="res://images/achievement_glow/Frame 17.webp" id="18_un1rv"]
+[ext_resource type="Texture2D" uid="uid://sk0ociq5b852" path="res://images/achievement_glow/Frame 18.webp" id="19_i1eha"]
+[ext_resource type="Texture2D" uid="uid://css2h44nd5648" path="res://images/achievement_glow/Frame 19.webp" id="20_eu8no"]
+[ext_resource type="Texture2D" uid="uid://yrhumyotj1td" path="res://images/achievement_glow/Frame 20.webp" id="21_6oa27"]
+[ext_resource type="Texture2D" uid="uid://dx4j8unmf2yn0" path="res://images/achievement_glow/Frame 21.webp" id="22_xremr"]
+[ext_resource type="Texture2D" uid="uid://bntk4aoyecttv" path="res://images/achievement_glow/Frame 22.webp" id="23_tlg1p"]
+[ext_resource type="Texture2D" uid="uid://d2xl7hxee1rfg" path="res://images/achievement_glow/Frame 23.webp" id="24_xh1hu"]
+[ext_resource type="Texture2D" uid="uid://xllg2y2636b2" path="res://images/achievement_glow/Frame 24.webp" id="25_2q7p2"]
+[ext_resource type="Texture2D" uid="uid://biyc3em81s4wg" path="res://images/achievement_glow/Frame 25.webp" id="26_6nhb3"]
+[ext_resource type="Texture2D" uid="uid://b7r5r2g6rph5e" path="res://images/achievement_glow/Frame 26.webp" id="27_24kwo"]
+[ext_resource type="Texture2D" uid="uid://dkjd6o0cq8xhv" path="res://images/achievement_glow/Frame 27.webp" id="28_kmh0o"]
+[ext_resource type="Texture2D" uid="uid://ditn1c6dtj05c" path="res://images/achievement_glow/Frame 28.webp" id="29_jqh78"]
+[ext_resource type="Texture2D" uid="uid://dfkjfyc65c05q" path="res://images/achievement_glow/Frame 29.webp" id="30_57xqp"]
+[ext_resource type="Texture2D" uid="uid://bebuf6gwx2itu" path="res://images/achievement_glow/Frame 30.webp" id="31_hg7lc"]
+[ext_resource type="Texture2D" uid="uid://ke5confbrix4" path="res://images/achievement_glow/Frame 31.webp" id="32_mijhh"]
+[ext_resource type="Texture2D" uid="uid://dlo512emm05j3" path="res://images/achievement_glow/Frame 32.webp" id="33_76jgm"]
+[ext_resource type="Texture2D" uid="uid://br0ws0mklltbx" path="res://images/achievement_glow/Frame 33.webp" id="34_qtnvb"]
+[ext_resource type="Texture2D" uid="uid://dxjq8imwqnnyc" path="res://images/achievement_glow/Frame 34.webp" id="35_vlib1"]
+[ext_resource type="Texture2D" uid="uid://c3fmgh3yu5jxc" path="res://images/achievement_glow/Frame 35.webp" id="36_afk81"]
+[ext_resource type="Texture2D" uid="uid://ccngeoew16re2" path="res://images/achievement_glow/Frame 36.webp" id="37_janws"]
+[ext_resource type="Texture2D" uid="uid://dfv1suqrbge36" path="res://images/achievement_glow/Frame 37.webp" id="38_8a1nv"]
+[ext_resource type="Texture2D" uid="uid://bc215hqs37fwq" path="res://images/achievement_glow/Frame 38.webp" id="39_yg3yw"]
+[ext_resource type="Texture2D" uid="uid://b02wd07ao7nej" path="res://images/achievement_glow/Frame 39.webp" id="40_tcxqd"]
+[ext_resource type="Texture2D" uid="uid://bnqdxa51vsvvh" path="res://images/achievement_glow/Frame 40.webp" id="41_lmh68"]
+[ext_resource type="Texture2D" uid="uid://m3v4t8ca1w8w" path="res://images/achievement_glow/Frame 41.webp" id="42_twa5i"]
+[ext_resource type="Texture2D" uid="uid://cmbhgyueb4467" path="res://images/achievement_glow/Frame 42.webp" id="43_wcuev"]
+[ext_resource type="Texture2D" uid="uid://cedlcdrn7kowd" path="res://images/achievement_glow/Frame 43.webp" id="44_nnqk1"]
+[ext_resource type="Texture2D" uid="uid://b2h34pbcnrf44" path="res://images/achievement_glow/Frame 44.webp" id="45_nni04"]
+[ext_resource type="Texture2D" uid="uid://d3bg1f0lvba4v" path="res://images/achievement_glow/Frame 45.webp" id="46_0txyl"]
+[ext_resource type="Texture2D" uid="uid://d070m6wnhch4t" path="res://images/achievement_glow/Frame 46.webp" id="47_1gu1c"]
+[ext_resource type="Texture2D" uid="uid://wecsl31vttba" path="res://images/achievement_glow/Frame 47.webp" id="48_0j6l2"]
+[ext_resource type="Texture2D" uid="uid://d4gd2vtwgktwx" path="res://images/achievement_glow/Frame 48.webp" id="49_3mdf4"]
+[ext_resource type="Texture2D" uid="uid://co5iq65eckek7" path="res://images/achievement_glow/Frame 49.webp" id="50_nq211"]
+[ext_resource type="Texture2D" uid="uid://h04cxnvn076f" path="res://images/achievement_glow/Frame 50.webp" id="51_wiai8"]
+[ext_resource type="Texture2D" uid="uid://dqiprcy5t4evl" path="res://images/achievement_glow/Frame 51.webp" id="52_2uavw"]
+[ext_resource type="Texture2D" uid="uid://dqc437k76u7t1" path="res://images/achievement_glow/Frame 52.webp" id="53_4bby3"]
+[ext_resource type="Texture2D" uid="uid://dwxki2cpd5dj2" path="res://images/achievement_glow/Frame 53.webp" id="54_dk05e"]
+[ext_resource type="Texture2D" uid="uid://csrgqysbvxgvg" path="res://images/achievement_glow/Frame 54.webp" id="55_xfs01"]
+[ext_resource type="Texture2D" uid="uid://c10sa6dt7a2im" path="res://images/achievement_glow/Frame 55.webp" id="56_1vhjs"]
+[ext_resource type="Texture2D" uid="uid://djuvcqqy0o7x4" path="res://images/achievement_glow/Frame 56.webp" id="57_gmbuj"]
+[ext_resource type="Texture2D" uid="uid://cm36pxiepgt6j" path="res://images/achievement_glow/Frame 57.webp" id="58_5brlr"]
+[ext_resource type="Texture2D" uid="uid://cd0t6u0tm3kcj" path="res://images/achievement_glow/Frame 58.webp" id="59_b8s0g"]
+[ext_resource type="Texture2D" uid="uid://dic3d1m67jddg" path="res://images/achievement_glow/Frame 59.webp" id="60_octdo"]
+[ext_resource type="Texture2D" uid="uid://bdqgxpxr5ovmp" path="res://images/achievement_glow/Frame 60.webp" id="61_nxarw"]
+[ext_resource type="Texture2D" uid="uid://d0y70ne4ri2tr" path="res://images/achievement_glow/Frame 61.webp" id="62_fchkj"]
+[ext_resource type="Texture2D" uid="uid://bt52y71sjh5e" path="res://images/achievement_glow/Frame 62.webp" id="63_d8obq"]
+[ext_resource type="Texture2D" uid="uid://bqm0uel4pr3up" path="res://images/achievement_glow/Frame 63.webp" id="64_mg00p"]
+[ext_resource type="Texture2D" uid="uid://dfgfqbd8qvp6x" path="res://images/achievement_glow/Frame 64.webp" id="65_yh5ns"]
+[ext_resource type="Texture2D" uid="uid://dpeu3q71rqvx3" path="res://images/achievement_glow/Frame 65.webp" id="66_hlxum"]
+[ext_resource type="Texture2D" uid="uid://dbol0w13inj24" path="res://images/achievement_glow/Frame 66.webp" id="67_c41li"]
+[ext_resource type="Texture2D" uid="uid://ba0vgksdj1wu4" path="res://images/achievement_glow/Frame 67.webp" id="68_j241f"]
+[ext_resource type="Texture2D" uid="uid://m1hllt40e433" path="res://images/achievement_glow/Frame 68.webp" id="69_hi51o"]
+[ext_resource type="Texture2D" uid="uid://n32xkg0m6qf2" path="res://images/achievement_glow/Frame 69.webp" id="70_80fpd"]
+[ext_resource type="Texture2D" uid="uid://dhgfkpoit7gxf" path="res://images/achievement_glow/Frame 70.webp" id="71_wwcod"]
+[ext_resource type="Texture2D" uid="uid://cqwxyu43kgj3m" path="res://images/achievement_glow/Frame 71.webp" id="72_c5fhe"]
+[ext_resource type="Texture2D" uid="uid://qxfvjvca7ay3" path="res://images/achievement_glow/Frame 72.webp" id="73_mj6as"]
+[ext_resource type="Texture2D" uid="uid://lxgbna1xwq1c" path="res://images/achievement_glow/Frame 73.webp" id="74_t2f3k"]
+[ext_resource type="Texture2D" uid="uid://b7323jcwy35g" path="res://images/achievement_glow/Frame 74.webp" id="75_un4ul"]
+[ext_resource type="Texture2D" uid="uid://d1twgj8snomj5" path="res://images/achievement_glow/Frame 75.webp" id="76_xk4gh"]
+[ext_resource type="Texture2D" uid="uid://bkqswlulqhy5h" path="res://images/achievement_glow/Frame 76.webp" id="77_nhlf4"]
+[ext_resource type="Texture2D" uid="uid://d1olwgtueal7e" path="res://images/achievement_glow/Frame 77.webp" id="78_wu4ov"]
+[ext_resource type="Texture2D" uid="uid://ciieabp0ei4od" path="res://images/achievement_glow/Frame 78.webp" id="79_agknp"]
+[ext_resource type="Texture2D" uid="uid://b56r5mmvrnwfg" path="res://images/achievement_glow/Frame 79.webp" id="80_tnnfi"]
+[ext_resource type="Texture2D" uid="uid://c84m5iy6ubgmq" path="res://images/achievement_glow/Frame 80.webp" id="81_br8i4"]
+[ext_resource type="Texture2D" uid="uid://511mdgbmibvi" path="res://images/achievement_glow/Frame 81.webp" id="82_olb0u"]
+[ext_resource type="Texture2D" uid="uid://dbb2y2cxxugy1" path="res://images/achievement_glow/Frame 82.webp" id="83_yxle7"]
+[ext_resource type="Texture2D" uid="uid://c35sldc6k206k" path="res://images/achievement_glow/Frame 83.webp" id="84_wr06j"]
+[ext_resource type="Texture2D" uid="uid://bkrqaavuud3yc" path="res://images/achievement_glow/Frame 84.webp" id="85_y4gss"]
+[ext_resource type="Texture2D" uid="uid://dallqmmkqas8y" path="res://images/achievement_glow/Frame 85.webp" id="86_n8lxk"]
+[ext_resource type="Texture2D" uid="uid://d34lq1finbson" path="res://images/achievement_glow/Frame 86.webp" id="87_y5hof"]
+[ext_resource type="Texture2D" uid="uid://dkwkla3u5nlqo" path="res://images/achievement_glow/Frame 87.webp" id="88_k04o7"]
+[ext_resource type="Texture2D" uid="uid://7e6xm5nvuqa1" path="res://images/achievement_glow/Frame 88.webp" id="89_xw6h6"]
+[ext_resource type="Texture2D" uid="uid://keaxxj8hggqf" path="res://images/achievement_glow/Frame 89.webp" id="90_gk8m1"]
+[ext_resource type="Texture2D" uid="uid://cs3uvoso3xcx7" path="res://images/achievement_glow/Frame 90.webp" id="91_2hwa1"]
+[ext_resource type="Texture2D" uid="uid://cwx3848mp3b1i" path="res://images/achievement_glow/Frame 91.webp" id="92_6cbwp"]
+[ext_resource type="Texture2D" uid="uid://bfkr6ql4gsju4" path="res://images/achievement_glow/Frame 92.webp" id="93_2difb"]
+[ext_resource type="Texture2D" uid="uid://c0qsvulityk0x" path="res://images/achievement_glow/Frame 93.webp" id="94_bqwpn"]
+[ext_resource type="Texture2D" uid="uid://dyt1pihqw4sfr" path="res://images/achievement_glow/Frame 94.webp" id="95_7lfkm"]
+[ext_resource type="Texture2D" uid="uid://bdrgv4k8vi40j" path="res://images/achievement_glow/Frame 95.webp" id="96_6dm0x"]
+[ext_resource type="Texture2D" uid="uid://c5m06s0f30vvs" path="res://images/achievement_glow/Frame 96.webp" id="97_p6kis"]
+[ext_resource type="Texture2D" uid="uid://g5kx8d3a6p1l" path="res://images/achievement_glow/Frame 97.webp" id="98_x8una"]
+[ext_resource type="Texture2D" uid="uid://d03c2ckny3pkd" path="res://images/achievement_glow/Frame 98.webp" id="99_1vg3n"]
+[ext_resource type="Script" path="res://scripts/ui/nodes/AnimationGlow.gd" id="100_gbi3w"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w88xj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_etsbp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_rbywr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_fpbww")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_dmrfe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_housh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_cuutx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ly84x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_rhcqi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_8nyj3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_6dnw1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ipmo1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4iwme")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_6s0g1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_vfb8s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_n5dcx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_h26p8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_olxci")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_un1rv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_i1eha")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_eu8no")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_6oa27")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_xremr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_tlg1p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_xh1hu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_2q7p2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_6nhb3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_24kwo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_kmh0o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_jqh78")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_57xqp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_hg7lc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_mijhh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_76jgm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_qtnvb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_vlib1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_afk81")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_janws")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_8a1nv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_yg3yw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_tcxqd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_lmh68")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_twa5i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_wcuev")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44_nnqk1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_nni04")
+}, {
+"duration": 1.0,
+"texture": ExtResource("46_0txyl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("47_1gu1c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("48_0j6l2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("49_3mdf4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("50_nq211")
+}, {
+"duration": 1.0,
+"texture": ExtResource("51_wiai8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("52_2uavw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("53_4bby3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("54_dk05e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("55_xfs01")
+}, {
+"duration": 1.0,
+"texture": ExtResource("56_1vhjs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("57_gmbuj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("58_5brlr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("59_b8s0g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("60_octdo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("61_nxarw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("62_fchkj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("63_d8obq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("64_mg00p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("65_yh5ns")
+}, {
+"duration": 1.0,
+"texture": ExtResource("66_hlxum")
+}, {
+"duration": 1.0,
+"texture": ExtResource("67_c41li")
+}, {
+"duration": 1.0,
+"texture": ExtResource("68_j241f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("69_hi51o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("70_80fpd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("71_wwcod")
+}, {
+"duration": 1.0,
+"texture": ExtResource("72_c5fhe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("73_mj6as")
+}, {
+"duration": 1.0,
+"texture": ExtResource("74_t2f3k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("75_un4ul")
+}, {
+"duration": 1.0,
+"texture": ExtResource("76_xk4gh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("77_nhlf4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("78_wu4ov")
+}, {
+"duration": 1.0,
+"texture": ExtResource("79_agknp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("80_tnnfi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("81_br8i4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("82_olb0u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("83_yxle7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("84_wr06j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("85_y4gss")
+}, {
+"duration": 1.0,
+"texture": ExtResource("86_n8lxk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("87_y5hof")
+}, {
+"duration": 1.0,
+"texture": ExtResource("88_k04o7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("89_xw6h6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("90_gk8m1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("91_2hwa1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("92_6cbwp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("93_2difb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("94_bqwpn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("95_7lfkm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("96_6dm0x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("97_p6kis")
+}, {
+"duration": 1.0,
+"texture": ExtResource("98_x8una")
+}, {
+"duration": 1.0,
+"texture": ExtResource("99_1vg3n")
+}],
+"loop": true,
+"name": &"default",
+"speed": 30.0
+}]
+
+[node name="animation_glow" type="Control"]
+show_behind_parent = true
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.19, 0.19)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_w88xj")
+script = ExtResource("100_gbi3w")

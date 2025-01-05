@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://cafyg5srmlbd2"]
+
+[ext_resource type="Script" path="res://scripts/subsystems/achievement_system.gd" id="1_ioqjd"]
+[ext_resource type="PackedScene" uid="uid://brxdmi1q7jobr" path="res://scenes/ui/achievement/achievement_panel_container.tscn" id="2_43icr"]
+[ext_resource type="Script" path="res://scripts/subsystems/achievements_list.gd" id="3_5msqw"]
+
+[node name="achievement_scene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ioqjd")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 99
+
+[node name="AchievementPanelContainer" parent="CanvasLayer" instance=ExtResource("2_43icr")]
+
+[node name="AchievementPanelContainer2" parent="CanvasLayer" instance=ExtResource("2_43icr")]
+anim_max_y = 85
+
+[node name="AchievementPanelContainer3" parent="CanvasLayer" instance=ExtResource("2_43icr")]
+anim_max_y = 170
+
+[node name="AchvList" type="Node" parent="."]
+script = ExtResource("3_5msqw")

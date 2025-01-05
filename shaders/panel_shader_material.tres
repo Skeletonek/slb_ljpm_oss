@@ -4,6 +4,8 @@
 
 [resource]
 shader = ExtResource("1_jox1b")
+shader_parameter/apply = true
 shader_parameter/blur_amount = 4.0
 shader_parameter/mix_amount = 0.7
-shader_parameter/color_over = Vector4(0, 0, 0, 5)
+shader_parameter/color_over = Vector4(0, 0, 0.1, 5)
+shader_parameter/color_not_applied = Vector4(0, 0, 0.1, 0.9)

@@ -1,22 +1,22 @@
 [gd_scene load_steps=26 format=3 uid="uid://dg78sdxts17fs"]
 
-[ext_resource type="Script" path="res://scripts/mainMenu.gd" id="1_ck7i2"]
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_f7xwm"]
 [ext_resource type="Script" path="res://scripts/main_menu_anim.gd" id="2_4ayhe"]
 [ext_resource type="Texture2D" uid="uid://crgu0b32ok5e5" path="res://sprites/CarRideBG.png" id="2_5jhyx"]
 [ext_resource type="Texture2D" uid="uid://cyo4rlihaqgrc" path="res://images/icons/SLB2Logo.webp" id="3_hn8g4"]
 [ext_resource type="Texture2D" uid="uid://c57l262udunto" path="res://sprites/Road.png" id="3_ihnal"]
-[ext_resource type="PackedScene" uid="uid://dc3ntad11u0qu" path="res://scenes/instances/menu_items/options_layer.tscn" id="5_ek5qx"]
 [ext_resource type="Material" uid="uid://cqn5rkmj7io2i" path="res://shaders/panel_shader_material.tres" id="5_l01dg"]
 [ext_resource type="Texture2D" uid="uid://1ybbxyuurtvd" path="res://sprites/Panda_0001.png" id="6_clsj2"]
 [ext_resource type="Texture2D" uid="uid://v831njlfv53m" path="res://sprites/Panda_0002.png" id="8_urfk8"]
 [ext_resource type="PackedScene" uid="uid://dh4tjkoemf7aj" path="res://scenes/Leaderboard.tscn" id="8_y7sgj"]
+[ext_resource type="PackedScene" uid="uid://dc3ntad11u0qu" path="res://scenes/ui/options_layer.tscn" id="9_1nt05"]
 [ext_resource type="FontFile" uid="uid://c08wcdbvxirl1" path="res://theme/fonts/NotoSans-Medium.ttf" id="10_d6dtl"]
 [ext_resource type="Texture2D" uid="uid://cm8cnn2cih4wk" path="res://images/GodotLogo.png" id="11_ohnpv"]
 [ext_resource type="Texture2D" uid="uid://chmu0q4arfvtg" path="res://images/SkeletonLogoV6S.png" id="12_1eu7f"]
 [ext_resource type="Texture2D" uid="uid://bnvg8lvduxprm" path="res://images/HalembarusLogoV1.1S.jpg" id="13_6ch7m"]
 [ext_resource type="Texture2D" uid="uid://dxe6vh4w56dcl" path="res://images/silentwolf.png" id="15_s4mpv"]
-[ext_resource type="PackedScene" uid="uid://dvxnxtlpqfyh4" path="res://scenes/instances/popup_input.tscn" id="15_sfa7s"]
-[ext_resource type="PackedScene" uid="uid://dot20ht7350x6" path="res://scenes/instances/popup_changelog.tscn" id="16_jrstn"]
+[ext_resource type="PackedScene" uid="uid://dot20ht7350x6" path="res://scenes/ui/mainmenu/popup_changelog.tscn" id="16_y0ahp"]
+[ext_resource type="PackedScene" uid="uid://dvxnxtlpqfyh4" path="res://scenes/ui/mainmenu/popup_input.tscn" id="17_1ly6a"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_n03hm"]
 animations = [{
@@ -76,7 +76,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_ck7i2")
+script = ExtResource("1_f7xwm")
 skeletonek_logo = NodePath("CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/SkeletonekContainer/Control/SkeletonekLogo")
 godot_logo = NodePath("CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/GameEngineContainer/Control/GameEngineLogo")
 
@@ -98,7 +98,7 @@ position = Vector2(35, 42.5)
 texture = ExtResource("3_ihnal")
 
 [node name="LukaszczykWPandzie" type="AnimatedSprite2D" parent="Camera2D"]
-position = Vector2(-79.5, 30)
+position = Vector2(0.5, 30)
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_n03hm")
 autoplay = "default"
@@ -208,12 +208,12 @@ focus_previous = NodePath("../CreditsButton")
 text = "Dostępna aktualizacja!"
 
 [node name="LeaderboardLayer" parent="." instance=ExtResource("8_y7sgj")]
-process_thread_group = 2
-process_thread_group_order = 1
+process_thread_group = 1
+process_thread_group_order = 2
 process_thread_messages = 0
 visible = false
 
-[node name="OptionsLayer" parent="." instance=ExtResource("5_ek5qx")]
+[node name="OptionsLayer" parent="." instance=ExtResource("9_1nt05")]
 visible = false
 
 [node name="CreditsLayer" type="CanvasLayer" parent="."]
@@ -253,6 +253,7 @@ alignment = 1
 [node name="VBoxContainer" type="VBoxContainer" parent="CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+alignment = 1
 
 [node name="GameLogo" type="TextureRect" parent="CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 190)
@@ -266,7 +267,7 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("10_d6dtl")
 theme_override_font_sizes/font_size = 16
 text = "Super Łukaszczyk Bros: Łukaszczyk Jedzie Po Mleko
-Copyright © 2023 - Skeletonek & Halembarus2"
+Copyright © 2023-2024 - Skeletonek & Halembarus2"
 horizontal_alignment = 1
 
 [node name="CreditsLabel2" type="Label" parent="CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer"]
@@ -399,7 +400,7 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.7
 theme_override_fonts/font = ExtResource("10_d6dtl")
 theme_override_font_sizes/font_size = 16
-text = "Copyright © 2007-2023 Juan Linietsky, Ariel Manzur & contributors.
+text = "Copyright © 2007-2024 Juan Linietsky, Ariel Manzur & contributors.
 Godot Engine nie jest powiązany z twórcami SLB: LJPM
 Więcej informacji o Godot Engine jest dostępnych na stronie https://godotengine.org/"
 label_settings = SubResource("LabelSettings_q8iax")
@@ -493,10 +494,10 @@ timeout = 3.0
 [node name="HTTPRequest2" type="HTTPRequest" parent="."]
 timeout = 3.0
 
-[node name="popup_input" parent="." instance=ExtResource("15_sfa7s")]
+[node name="PopupChangelog" parent="." instance=ExtResource("16_y0ahp")]
 visible = false
 
-[node name="PopupChangelog" parent="." instance=ExtResource("16_jrstn")]
+[node name="popup_input" parent="." instance=ExtResource("17_1ly6a")]
 visible = false
 
 [connection signal="pressed" from="Camera2D/LukaszczykWPandzie/TouchScreenButton" to="." method="_on_easter_egg_button_pressed"]

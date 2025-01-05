@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://psuxi7wo86gd"]
+
+[ext_resource type="FontFile" uid="uid://c08wcdbvxirl1" path="res://ui/fonts/NotoSans-Medium.ttf" id="1_2c55u"]
+
+[resource]
+line_spacing = 0.0
+font = ExtResource("1_2c55u")
+font_size = 10

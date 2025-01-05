@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dx6lk8w3i74qo"]
+
+[ext_resource type="Shader" path="res://shaders/desaturation.gdshader" id="1_p51qg"]
+
+[resource]
+shader = ExtResource("1_p51qg")
+shader_parameter/saturation = null
