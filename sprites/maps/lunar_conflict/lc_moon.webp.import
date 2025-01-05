@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://blvdg3xb6wyi6"
-path="res://.godot/imported/CarRideBG_ForestParallax2.webp-2695e3cfe0b32351d7b9c24431b7589a.ctex"
+uid="uid://hr87nowgadrt"
+path="res://.godot/imported/lc_moon.webp-5f6d78c9a0b0725e9145c6ad76dcb2f8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/CarRideBG_ForestParallax2.webp"
-dest_files=["res://.godot/imported/CarRideBG_ForestParallax2.webp-2695e3cfe0b32351d7b9c24431b7589a.ctex"]
+source_file="res://sprites/maps/lunar_conflict/lc_moon.webp"
+dest_files=["res://.godot/imported/lc_moon.webp-5f6d78c9a0b0725e9145c6ad76dcb2f8.ctex"]
 
 [params]
 

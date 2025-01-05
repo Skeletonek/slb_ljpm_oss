@@ -16,16 +16,16 @@ var data: Dictionary
 var completed: Dictionary
 var recently_completed: Dictionary
 
-@onready var achievement_panel = $CanvasLayer/AchievementPanelContainer
-@onready var achievement_panel2 = $CanvasLayer/AchievementPanelContainer2
-@onready var achievement_panel3 = $CanvasLayer/AchievementPanelContainer3
-@onready var achievement_list = $AchvList
+@onready var achievement_panel := $CanvasLayer/AchievementPanelContainer
+@onready var achievement_panel2 := $CanvasLayer/AchievementPanelContainer2
+@onready var achievement_panel3 := $CanvasLayer/AchievementPanelContainer3
+@onready var achievement_list := $AchvList
 # var achievements_delay_timer := Timer.new()
 
-func _ready():
+func _ready() -> void:
 	data = achievement_list.ACHIEVEMENT_LIST
-	completed = generate_achv_completed_array()
-	recently_completed = generate_achv_recently_completed_array()
+	completed = _generate_achv_completed_array()
+	recently_completed = _generate_achv_recently_completed_array()
 	if not load_achievements():
 		save_achievements()
 
@@ -52,7 +52,7 @@ func load_achievements() -> bool:
 	return true
 
 
-func save_achievements():
+func save_achievements() -> void:
 	var file = FileAccess.open("user://achievements.dat", FileAccess.WRITE)
 	file.store_var(completed, true)
 	file.close()
@@ -62,7 +62,7 @@ func save_achievements():
 #	file.store_line(json)
 
 
-func generate_achv_completed_array() -> Dictionary:
+func _generate_achv_completed_array() -> Dictionary:
 	var dict = {}
 	var arr = [false, "n/a"]
 	for x in data:
@@ -70,14 +70,14 @@ func generate_achv_completed_array() -> Dictionary:
 	return dict
 
 
-func generate_achv_recently_completed_array() -> Dictionary:
+func _generate_achv_recently_completed_array() -> Dictionary:
 	var dict = {}
 	for x in data:
 		dict[x] = false
 	return dict
 
 
-func call_achievement(achievement: String):
+func call_achievement(achievement: String) -> bool:
 	if completed[achievement][ACHV_COMPLETE]:
 		return true
 	if SettingsBus.cheats:
@@ -96,7 +96,7 @@ func call_achievement(achievement: String):
 	return true
 
 
-func _play_achievement(achievement: String):
+func _play_achievement(achievement: String) -> void:
 	# achievements_delay_timer.stop()
 	if achievement_panel.animation_state == achievement_panel.IDLE:
 		achievement_panel.show_achievement(
@@ -111,12 +111,24 @@ func _play_achievement(achievement: String):
 			data[achievement]
 			)
 	else:
-		await get_tree().create_timer(6).timeout
+		await get_tree().create_timer(7).timeout
 		_play_achievement(achievement)
 
 
-func debug_reset_test_achv():
+func debug_award_achv_all() -> void:
+	for x in data:
+		call_achievement(x)
+
+
+func debug_reset_test_achv_all() -> void:
 	for x in data:
 		completed[x][ACHV_COMPLETE] = false
+	SignalBus.emit_signal("refresh_achievements_viewer")
+	save_achievements()
+
+
+func debug_reset_test_achv(achievement: String) -> void:
+	completed[achievement][ACHV_COMPLETE] = false
+	completed[achievement][ACHV_DATE] = "n/a"
 	SignalBus.emit_signal("refresh_achievements_viewer")
 	save_achievements()

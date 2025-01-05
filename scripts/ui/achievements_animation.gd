@@ -7,7 +7,10 @@ enum {IDLE, SLIDE_DOWN, SLIDE_UP, WAIT}
 const ANIMATION_SPEED := 300
 const ANIMATION_WAIT := 5
 
+## In seconds
+@export var player_delay := 0.0
 @export var anim_max_y := 0
+
 var anim_min_y: float
 
 var animation_state := IDLE
@@ -56,6 +59,7 @@ func show_achievement(achievement: Array):
 	achv_icon.texture = icon
 	animation_state = SLIDE_DOWN
 	animation_vector = Vector2.DOWN
+	await get_tree().create_timer(player_delay).timeout
 	achv_player.play()
 
 

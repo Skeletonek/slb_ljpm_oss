@@ -1,12 +1,12 @@
 [gd_scene load_steps=9 format=3 uid="uid://7vvoan13ljn"]
 
-[ext_resource type="Texture2D" uid="uid://bduar3walg2o0" path="res://sprites/CarRideBG_ForestParallax1.webp" id="1_gbirs"]
+[ext_resource type="Texture2D" uid="uid://bduar3walg2o0" path="res://sprites/maps/forest/CarRideBG_ForestParallax1.webp" id="1_gbirs"]
 [ext_resource type="Script" path="res://scripts/carride/map_node.gd" id="1_txrnv"]
 [ext_resource type="Script" path="res://scripts/carride/road_scroll.gd" id="2_apygt"]
-[ext_resource type="Texture2D" uid="uid://blvdg3xb6wyi6" path="res://sprites/CarRideBG_ForestParallax2.webp" id="3_a8fk0"]
-[ext_resource type="Texture2D" uid="uid://b6suagxemrthg" path="res://sprites/CarRideBG_ForestParallax3.webp" id="4_7rj0b"]
+[ext_resource type="Texture2D" uid="uid://blvdg3xb6wyi6" path="res://sprites/maps/forest/CarRideBG_ForestParallax2.webp" id="3_a8fk0"]
+[ext_resource type="Texture2D" uid="uid://b6suagxemrthg" path="res://sprites/maps/forest/CarRideBG_ForestParallax3.webp" id="4_7rj0b"]
 [ext_resource type="Texture2D" uid="uid://c57l262udunto" path="res://sprites/Road.png" id="6_3sg2p"]
-[ext_resource type="Texture2D" uid="uid://ddivj5kfowxni" path="res://sprites/CarRideBG.webp" id="7_inapx"]
+[ext_resource type="Texture2D" uid="uid://ddivj5kfowxni" path="res://sprites/maps/forest/CarRideBG.webp" id="7_inapx"]
 [ext_resource type="Texture2D" uid="uid://btqhaxxyw1tvd" path="res://sprites/RoadRM.png" id="8_mwxxo"]
 
 [node name="ForestMap" type="Node2D"]

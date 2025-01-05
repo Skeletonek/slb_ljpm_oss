@@ -461,16 +461,20 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("10_d6dtl")
 theme_override_font_sizes/font_size = 16
 text = "Część grafik oraz utworów użytych w grze jest udostępnionych na licencji Creative Commons lub innej wolnej licencji:
-pngimg.com - Milk bottle PNG
-Bloo - \"Stricken Commision\" Ultimidi MIDI Pack
-Freedoom Contributors - \"dead-ahead.ogg\", \"hard-trouble.ogg\" (BSD 3-Clause)
-ansimuz - Explosion Animations Pack
+Milk bottle PNG - pngimg.com
+Stricken Commision - Bloo
+Good Luck - Bloo
+\"dead-ahead.ogg\" - Freedoom Contributors
+\"hard-trouble.ogg\" - Freedoom Contributors
+Explosion Animations Pack - ansimuz
 
 Czcionki użyte w grze zostały udostępnione na licencji Open Font:
-Stefie Justprince - Pixelify Sans
-Abbie Gonzalez - OpenDyslexic
+Pixelify Sans - Stefie Justprince
+OpenDyslexic - Abbie Gonzalez
 
-"
+W grze zostały wykorzystane grafiki z gry Lunar Conflict
+Lunar Conflict - Copyright © 2023 Coco Jambo on a Century Old Organs
+https://skeletonek.com/aplikacje/archiwum/lunar-conflict"
 label_settings = SubResource("LabelSettings_xqss0")
 horizontal_alignment = 1
 vertical_alignment = 1

@@ -5,6 +5,10 @@ Spin-off game to Super Łukaszczyk Bros series, where Michał rides his car to c
 As of now, it is recommended to run the project in **Godot Engine 4.3**
 
 ## Supported platforms
+
+{- WARNING! -}
+{- As of 2.0-Alpha+6, support for ARMv7 devices with Android OS has been dropped -}
+
 - Microsoft Windows x86_64
   - Windows 10 22H2+
   - Windows 11 22H2+
@@ -14,7 +18,7 @@ As of now, it is recommended to run the project in **Godot Engine 4.3**
   - Linux Mint 21 'Vanessa'
   - Fedora 40
   - Arch Linux
-- Android ARMv7, ARMv8a or x86_64
+- Android ARMv8a or x86_64
   - Android 7.0 Nougat
   - Android 8.0 Oreo
   - Android 8.1 Oreo

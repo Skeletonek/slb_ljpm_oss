@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://crgu0b32ok5e5"
-path="res://.godot/imported/CarRideBG.png-7753e79736b6b412a18d8123f7e6c840.ctex"
+uid="uid://bghfvqiko56cn"
+path="res://.godot/imported/Speed150.webp-2fcfab66db2e71ede6f25b43f6a8a5f0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/CarRideBG.png"
-dest_files=["res://.godot/imported/CarRideBG.png-7753e79736b6b412a18d8123f7e6c840.ctex"]
+source_file="res://images/achievement_icons/Speed150.webp"
+dest_files=["res://.godot/imported/Speed150.webp-2fcfab66db2e71ede6f25b43f6a8a5f0.ctex"]
 
 [params]
 

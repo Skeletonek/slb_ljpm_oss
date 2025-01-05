@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dc3ntad11u0qu"]
+[gd_scene load_steps=30 format=3 uid="uid://dc3ntad11u0qu"]
 
 [ext_resource type="Script" path="res://scripts/ui/options_layer.gd" id="1_cahn6"]
 [ext_resource type="Material" uid="uid://cqn5rkmj7io2i" path="res://shaders/panel_shader_material.tres" id="2_4i7gj"]
@@ -40,7 +40,10 @@ gradient = SubResource("Gradient_tecms")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pyy0l"]
 
-[node name="OptionsLayer" type="CanvasLayer" node_paths=PackedStringArray("fullscreen_button", "graphics_api_button", "graphics_api_restart", "vsync_button", "vsync_info", "linux_windowing_system_button", "linux_windowing_system_restart", "linux_windowing_system_info", "framerate_cap_spinbox", "blur_button", "ui_scaling_slider", "master_slider", "sfx_slider", "music_slider", "master_input", "sfx_input", "music_input", "devconsole_button", "devfps_button", "tch_tap_button", "tch_swipe_button", "tch_vbuttons_button", "playername_edit", "playername_uuid", "reduced_motion_button", "easier_font_button", "fullscreen_android_info", "back_button")]
+[sub_resource type="LabelSettings" id="LabelSettings_6iuel"]
+font_size = 24
+
+[node name="OptionsLayer" type="CanvasLayer" node_paths=PackedStringArray("fullscreen_button", "graphics_api_button", "graphics_api_restart", "vsync_button", "vsync_info", "linux_windowing_system_button", "linux_windowing_system_restart", "linux_windowing_system_info", "framerate_cap_spinbox", "blur_button", "ui_scaling_slider", "master_slider", "sfx_slider", "music_slider", "master_input", "sfx_input", "music_input", "devconsole_button", "devfps_button", "tch_tap_button", "tch_swipe_button", "tch_vbuttons_button", "playername_edit", "playername_uuid", "reduced_motion_button", "easier_font_button", "fullscreen_android_info", "back_button", "info_popup", "info_popup_title", "info_popup_content")]
 script = ExtResource("1_cahn6")
 fullscreen_button = NodePath("TabContainer/Grafika/MarginContainer/VBoxContainer/FullScreen/FullScreenButton")
 graphics_api_button = NodePath("TabContainer/Grafika/MarginContainer/VBoxContainer/GraphicsAPI/GraphicsAPIButton")
@@ -70,6 +73,9 @@ reduced_motion_button = NodePath("TabContainer/Dostępność/VBoxContainer/Reduc
 easier_font_button = NodePath("TabContainer/Dostępność/VBoxContainer/EasierFont/EasierFontButton")
 fullscreen_android_info = NodePath("TabContainer/Grafika/MarginContainer/VBoxContainer/FullScreen/FullScreenLabelDesc")
 back_button = NodePath("MarginContainer/BackButton")
+info_popup = NodePath("PopupInfo")
+info_popup_title = NodePath("PopupInfo/Panel/VBoxContainer/HBoxContainer2/PopupInfoTitle")
+info_popup_content = NodePath("PopupInfo/Panel/VBoxContainer/PopupInfoRichLabel")
 
 [node name="TabContainer" type="TabContainer" parent="."]
 material = ExtResource("2_4i7gj")
@@ -835,7 +841,7 @@ script = ExtResource("3_uq6y0")
 
 [node name="EasierFontLabelDesc" type="Label" parent="TabContainer/Dostępność/VBoxContainer/EasierFont"]
 layout_mode = 2
-text = "Zastępuje domyślną czcionkę gry na OpenDyslexia"
+text = "Zastępuje domyślną czcionkę gry na OpenDyslexic"
 label_settings = SubResource("LabelSettings_rskjs")
 horizontal_alignment = 1
 
@@ -868,6 +874,67 @@ text = "Zapisz i wróć"
 stream = ExtResource("4_5hsqm")
 bus = &"SFX"
 
+[node name="PopupInfo" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Panel" type="Panel" parent="PopupInfo"]
+material = ExtResource("2_4i7gj")
+custom_minimum_size = Vector2(1000, 600)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -250.0
+offset_right = 400.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PopupInfo/Panel"]
+custom_minimum_size = Vector2(950, 550)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -450.0
+offset_top = -250.0
+offset_right = 450.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 32
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PopupInfo/Panel/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="PopupInfoTitle" type="Label" parent="PopupInfo/Panel/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "<Title>"
+label_settings = SubResource("LabelSettings_6iuel")
+horizontal_alignment = 1
+
+[node name="PopupInfoRichLabel" type="RichTextLabel" parent="PopupInfo/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PopupInfo/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="AcceptButton" type="Button" parent="PopupInfo/Panel/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(240, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Ok"
+
 [connection signal="tab_changed" from="TabContainer" to="." method="_on_tab_container_tab_changed"]
 [connection signal="toggled" from="TabContainer/Grafika/MarginContainer/VBoxContainer/FullScreen/FullScreenButton" to="." method="_on_full_screen_button_toggled"]
 [connection signal="pressed" from="TabContainer/Grafika/MarginContainer/VBoxContainer/GraphicsAPI/GraphicsAPIInfoButton" to="." method="_on_info_button_pressed" binds= ["api"]]
@@ -893,3 +960,4 @@ bus = &"SFX"
 [connection signal="toggled" from="TabContainer/Dostępność/VBoxContainer/ReducedMotion/ReducedMotionButton" to="." method="_on_reduced_motion_button_toggled"]
 [connection signal="toggled" from="TabContainer/Dostępność/VBoxContainer/EasierFont/EasierFontButton" to="." method="_on_easier_font_button_toggled"]
 [connection signal="pressed" from="MarginContainer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="PopupInfo/Panel/VBoxContainer/HBoxContainer/AcceptButton" to="PopupInfo" method="hide"]

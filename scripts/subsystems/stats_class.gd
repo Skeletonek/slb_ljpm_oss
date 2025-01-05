@@ -5,11 +5,13 @@ enum Skins {
 	VOLVO_COMBI,
 	REAL_PANDA,
 	PIGTANK,
+	LUNAR_ROVER,
 }
 
 enum Maps {
 	FOREST,
 	SAHARA,
+	LUNAR_CONFLICT
 }
 
 var milks_total: int

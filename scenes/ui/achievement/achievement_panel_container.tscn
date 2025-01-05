@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://brxdmi1q7jobr"]
+[gd_scene load_steps=7 format=3 uid="uid://brxdmi1q7jobr"]
 
 [ext_resource type="Script" path="res://scripts/ui/achievements_animation.gd" id="1_c4v05"]
 [ext_resource type="Material" uid="uid://cqn5rkmj7io2i" path="res://shaders/panel_shader_material.tres" id="1_lhons"]
@@ -9,9 +9,13 @@
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_b10hj"]
 gradient = SubResource("Gradient_x57p1")
 
+[sub_resource type="LabelSettings" id="LabelSettings_ctvsf"]
+line_spacing = 0.0
+font_size = 18
+
 [node name="AchievementPanelContainer" type="PanelContainer"]
 material = ExtResource("1_lhons")
-custom_minimum_size = Vector2(320, 85)
+custom_minimum_size = Vector2(400, 85)
 offset_top = -85.0
 offset_right = 310.0
 script = ExtResource("1_c4v05")
@@ -52,11 +56,16 @@ theme_override_constants/separation = 3
 [node name="AchvGetLabel" type="Label" parent="HBoxContainer/MarginContainer2/VBoxContainer"]
 layout_mode = 2
 text = "Odblokowano osiągnięcie!"
+horizontal_alignment = 1
 
 [node name="AchvTitleLabel" type="Label" parent="HBoxContainer/MarginContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 text = "#AchievementTitle"
+label_settings = SubResource("LabelSettings_ctvsf")
 vertical_alignment = 2
+clip_text = true
+text_overrun_behavior = 3
 
 [node name="AchvDescLabel" type="Label" parent="HBoxContainer/MarginContainer2/VBoxContainer"]
 layout_mode = 2

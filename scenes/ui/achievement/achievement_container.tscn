@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://b3s4cwxn6uu8o"]
+[gd_scene load_steps=4 format=3 uid="uid://b3s4cwxn6uu8o"]
 
 [ext_resource type="Script" path="res://scripts/ui/nodes/AchievementContainer.gd" id="1_e227g"]
 [ext_resource type="Texture2D" uid="uid://hp6lqwb7wasv" path="res://images/icons/slb2icon.png" id="2_wbikk"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_o3od6"]
+line_spacing = 0.0
+font_size = 20
 
 [node name="AchievementContainer" type="VBoxContainer"]
 custom_minimum_size = Vector2(150, 100)
@@ -19,7 +23,9 @@ texture = ExtResource("2_wbikk")
 expand_mode = 1
 
 [node name="AchievementTitle" type="Label" parent="."]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 text = "TestAchievement"
+label_settings = SubResource("LabelSettings_o3od6")
 horizontal_alignment = 1
 autowrap_mode = 3

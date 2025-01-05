@@ -39,6 +39,12 @@ extends CanvasLayer
 @export var fullscreen_android_info: Label
 @export var back_button: Button
 
+@export_category("PopupInfo")
+@export var info_popup: CanvasLayer
+@export var info_popup_title: Label
+@export var info_popup_content: RichTextLabel
+
+
 func _ready(): # I'm starting to hate this code
 	master_slider.value = SettingsBus.volume[SettingsBus.AudioBus.MASTER]
 	sfx_slider.value = SettingsBus.volume[SettingsBus.AudioBus.SFX]
@@ -280,57 +286,59 @@ func _on_back_button_pressed():
 	# gdlint:ignore=private-method-call
 	$"../"._on_back_button_pressed()
 
-
+# gdlint:disable=max-line-length
 func _on_info_button_pressed(info):
-	var popup = AcceptDialog.new();
 	match(info):
 		"vsync":
-			popup.title = "Synchronizacja pionowa (V-sync)"
-			popup.dialog_text = """
-Wyłączony - Klatki są renderowane tak szybko jak pozwala na to sprzęt.
+			info_popup_title.text = "Synchronizacja pionowa (V-sync)"
+			info_popup_content.text = """
+Wyłączony
+[indent]Klatki są renderowane tak szybko jak pozwala na to sprzęt.
 Mogą pojawić się rwania obrazu. Umożliwia ustawienie własnego limitu klatek.
-Opcja nie działa na urządzeniach z systemem Android.
+Opcja nie działa na urządzeniach z systemem Android.[/indent]
 
-Włączony - Obraz jest wyświetlany w synchronizacji z częstotliwością odświeżania ekranu.
+Włączony
+[indent]Obraz jest wyświetlany w synchronizacji z częstotliwością odświeżania ekranu.
 Klatki są ograniczone do częstotliwości ekranu.
-Mogą pojawić się niewielkie opóźnienia obrazu.
+Mogą pojawić się niewielkie opóźnienia obrazu.[/indent]
 
-Adaptacyjny - Synchronizacja jest włączona, chyba że sprzęt nie będzie w stanie
-renderować dostateczenie szybko klatek. Wtedy synchronizacja zostaje wyłączona, aby
-ograniczyć ewentualne przycięcia obrazu.
-Opcja nie działa na urządzeniach z systemem Android, oraz systemach Linux z systemem
-okien Wayland.
+Adaptacyjny
+[indent]Synchronizacja jest włączona, chyba że sprzęt nie będzie w stanie
+renderować dostateczenie szybko klatek. Wtedy synchronizacja zostaje wyłączona, aby ograniczyć ewentualne przycięcia obrazu.
+Opcja nie działa na urządzeniach z systemem Android, oraz systemach Linux z systemem okien Wayland.[/indent]
 
-Mailbox - Wyświetla najnowszą klatkę w momencie odświeżenia ekranu.
-Nie powinien powodować rwania obrazu, a klatki mogą być renderowane tak szybko
-jak pozwala na to sprzęt. Umożliwia ustawienie własnego limitu klatek.
+Mailbox
+[indent]Wyświetla najnowszą klatkę w momencie odświeżenia ekranu.
+Nie powinien powodować rwania obrazu, a klatki mogą być renderowane tak szybko jak pozwala na to sprzęt.
+Umożliwia ustawienie własnego limitu klatek.[/indent]
 """
 		"api":
-			popup.title = "API Graficzne"
-			popup.dialog_text = """
-OpenGL - Starsze API, kompatybilne z większością urządzeń.
+			info_popup_title.text = "API Graficzne"
+			info_popup_content.text = """
+OpenGL
+[indent]Starsze API, kompatybilne z większością urządzeń.[/indent]
 
-Vulkan - Nowsze API, dostępne tylko na nowszych urządzeniach.
+Vulkan
+[indent]Nowsze API, dostępne tylko na nowszych urządzeniach.
 Pozwala poprawić jakość grafiki, oraz potencjalnie uzyskać lepszą wydajność.
-Może spowodować, że gra się nie uruchomi na urządzeniach, które nie wspierają API Vulkan.
+Może spowodować, że gra się nie uruchomi na urządzeniach, które nie wspierają API Vulkan.[/indent]
 """
 		"linux_window_sys":
-			popup.title = "System wyświetlania okien"
-			popup.dialog_text = """
-Ta opcja działa tylko na systemach Linux
+			info_popup_title.text = "System wyświetlania okien"
+			info_popup_content.text = """
+[u]Ta opcja działa tylko na systemach Linux[/u]
 
-X11 - Starszy system wyświetlania okien. Kompatybilny z większością urządzeń.
+X11
+[indent]Starszy system wyświetlania okien. Kompatybilny z większością urządzeń.[/indent]
 
-Wayland - Nowszy system wyświetlania okien, wspierany lepiej na nowszych systemach.
-Korzystanie z tego systemu może wymusić włączenie synchronizacji pionowej, w zależności
-od posiadanego kompozytora okien, wersji sterowników graficznych oraz jądra systemu.
+Wayland
+[indent]Nowszy system wyświetlania okien, wspierany lepiej na nowszych systemach.
+Korzystanie z tego systemu może wymusić włączenie synchronizacji pionowej, w zależności od posiadanego kompozytora okien, wersji sterowników graficznych oraz jądra systemu.
 Nie zaleca się włączania tej opcji podczas korzystania z sesji X11.
-Ta opcja jest eksperymentalna i może powodować problemy.
+Ta opcja jest eksperymentalna i może powodować problemy.[/indent]
 """
-	add_child(popup)
-	popup.show()
-	popup.move_to_center()
-
+	info_popup.show()
+# gdlint:enable=max-line-length
 
 func _on_tab_container_tab_changed(tab):
 	match tab:

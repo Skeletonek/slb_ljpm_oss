@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvr1x8gyv0thn"
-path="res://.godot/imported/CarRideBG_ForestParallax4.webp-9c89c4560a94dcd5b9dbc6428fe03e25.ctex"
+uid="uid://1ey3rhd4gdhb"
+path="res://.godot/imported/RickRoll.webp-fab752bc9b6da5f1dd5083f5a95191ff.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/CarRideBG_ForestParallax4.webp"
-dest_files=["res://.godot/imported/CarRideBG_ForestParallax4.webp-9c89c4560a94dcd5b9dbc6428fe03e25.ctex"]
+source_file="res://images/achievement_icons/RickRoll.webp"
+dest_files=["res://.godot/imported/RickRoll.webp-fab752bc9b6da5f1dd5083f5a95191ff.ctex"]
 
 [params]
 

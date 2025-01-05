@@ -12,6 +12,7 @@ func _ready():
 	_set_skin()
 	if SettingsBus.reduced_motion:
 		$LukaszczykWPandzie.stop()
+	SignalBus.cr_skin.connect(_set_skin)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

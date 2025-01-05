@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://boixto1v5xtcq"]
+[gd_scene load_steps=36 format=3 uid="uid://boixto1v5xtcq"]
 
 [ext_resource type="Script" path="res://scripts/carride/main.gd" id="1_y5nnv"]
 [ext_resource type="Script" path="res://scripts/carride/gui.gd" id="2_8a32l"]
@@ -11,9 +11,11 @@
 [ext_resource type="Material" uid="uid://cqn5rkmj7io2i" path="res://shaders/panel_shader_material.tres" id="7_5jy3v"]
 [ext_resource type="Texture2D" uid="uid://y4ytw7cfk6aw" path="res://images/touchscreen_vbuttons/DownTouchPressed.png" id="7_6r6ct"]
 [ext_resource type="Texture2D" uid="uid://dvhou5wmxufck" path="res://sprites/Speedometer.png" id="8_0puha"]
-[ext_resource type="PackedScene" uid="uid://7vvoan13ljn" path="res://nodes/ForestMap.tscn" id="8_6spys"]
+[ext_resource type="PackedScene" uid="uid://7vvoan13ljn" path="res://nodes/Maps/ForestMap.tscn" id="8_6spys"]
 [ext_resource type="Texture2D" uid="uid://gixvapofe1qx" path="res://sprites/SpeedometerArrow.png" id="9_ioopi"]
 [ext_resource type="AudioStream" uid="uid://d2lim2blo57e" path="res://audio/sfx/Inventory Shiny Things A.wav" id="9_kk7c3"]
+[ext_resource type="PackedScene" uid="uid://bg5cxgxkbsi03" path="res://nodes/Maps/SaharaMap.tscn" id="11_cq4tg"]
+[ext_resource type="PackedScene" uid="uid://c7njf8rte5rfr" path="res://nodes/Maps/LunarConflictMap.tscn" id="11_mftrq"]
 [ext_resource type="SpriteFrames" uid="uid://boenmxlf17kxm" path="res://sprites/spriteframes/Panda.tres" id="12_w7l5f"]
 [ext_resource type="Texture2D" uid="uid://w5khp7bco2co" path="res://sprites/Explosion.png" id="13_6vstm"]
 
@@ -321,6 +323,16 @@ texture = ExtResource("9_ioopi")
 offset = Vector2(0, -63)
 
 [node name="ForestMap" parent="." node_paths=PackedStringArray("root_node") instance=ExtResource("8_6spys")]
+position = Vector2(-10, 174)
+root_node = NodePath("..")
+
+[node name="SaharaMap" parent="." node_paths=PackedStringArray("root_node") instance=ExtResource("11_cq4tg")]
+visible = false
+position = Vector2(-10, 174)
+root_node = NodePath("..")
+
+[node name="LunarConflictMap" parent="." node_paths=PackedStringArray("root_node") instance=ExtResource("11_mftrq")]
+visible = false
 position = Vector2(-10, 174)
 root_node = NodePath("..")
 

@@ -44,6 +44,7 @@ const SUPPORTED_COMMANDS = [
 	"cr_speedometer_value",
 	"cr_playername",
 	"cr_skin",
+	"cr_map",
 	]
 
 const UPDATE_INTERVAL := 0.1
@@ -54,6 +55,8 @@ const COMMAND_MSG_PREFIX := "DEV PROMPT: "
 const IGNORE_PREFIX := "   "
 
 var commands = {}
+var command_history = []
+var history_index = 0
 var godot_log
 
 @onready var log_rich_label = $PanelContainer/MarginContainer/VBoxContainer/LogRichLabel
@@ -118,6 +121,10 @@ func _input(event):
 				prompt_edit.grab_focus()
 		elif event.is_action_pressed("console_autocomplete"):
 			_autocomplete()
+		elif event.is_action_pressed("console_history_back"):
+			_history(true)
+		elif event.is_action_pressed("console_history_forward"):
+			_history(false)
 
 
 func _autocomplete():
@@ -130,10 +137,21 @@ func _autocomplete():
 					prompt_edit.caret_column = prompt_edit.text.length()
 					break
 		else:
-			if index >= commands.size():
+			if index >= commands.size()-1:
 				prompt_edit.text = commands.keys()[0]
 			else:
 				prompt_edit.text = commands.keys()[index+1]
+
+
+func _history(backward: bool):
+	if visible and not command_history.is_empty():
+		prompt_edit.text = command_history[history_index-1]
+		if backward:
+			if history_index > 1:
+				history_index -= 1
+		else:
+			if history_index < command_history.size():
+				history_index += 1
 
 
 func _on_show_button_pressed():
@@ -154,6 +172,8 @@ func _on_prompt_edit_text_submitted(new_text):
 	print("DEV PROMPT: " + new_text)
 	prompt_edit.grab_focus()
 	prompt_edit.clear()
+	command_history.push_back(new_text)
+	history_index = command_history.size()
 
 	var command_arr = Array(new_text.split(" "))
 	if command_arr[0] not in commands:
@@ -281,18 +301,26 @@ func _show_fps(arg = "") -> bool:
 # DO NOT SET DEFAULT VALUE FOR ARG
 func _achievement_award(arg) -> bool:
 	if OS.is_debug_build():
-		print("Awarding \"" + arg + "\"")
-		var status = AchievementSystem.call_achievement(arg)
-		if status != true:
-			push_error("Awarding failed!")
+		if arg.to_lower() == "all":
+			print("Awarding all achievements!!! \\o/")
+			AchievementSystem.debug_award_achv_all()
+		else:
+			print("Awarding \"" + arg + "\"")
+			var status = AchievementSystem.call_achievement(arg)
+			if status != true:
+				push_error("Awarding failed!")
 	else:
-		push_error("This command is supported only in Debug build")
+		push_error("This comman	d is supported only in Debug build")
 	return true
 
 
-func _achievement_reset() -> bool:
-	AchievementSystem.debug_reset_test_achv()
-	print("All achievements have been reset")
+func _achievement_reset(arg = "") -> bool:
+	if arg != "":
+		AchievementSystem.debug_reset_test_achv(arg)
+		print(arg + " achievement has been reset")
+	else:
+		AchievementSystem.debug_reset_test_achv_all()
+		print("All achievements have been reset")
 	return true
 
 
@@ -443,7 +471,26 @@ func _cr_playername(arg="") -> bool:
 
 
 func _cr_skin(arg="") -> bool:
-	var ret = _process_int(ProfileBus.profile.chosen_skin, arg, 0, 3)
+	var ret = _process_int(
+		ProfileBus.profile.chosen_skin,
+		arg,
+		0,
+		ProfileBus.profile.Skins.size()-1
+	)
 	if ret != null:
 		ProfileBus.profile.chosen_skin = ret
+		SignalBus.cr_skin.emit()
+	return true
+
+
+func _cr_map(arg="") -> bool:
+	var ret = _process_int(
+		ProfileBus.profile.chosen_map,
+		arg,
+		0,
+		ProfileBus.profile.Maps.size()-1
+	)
+	if ret != null:
+		ProfileBus.profile.chosen_map = ret
+		SignalBus.cr_map.emit()
 	return true

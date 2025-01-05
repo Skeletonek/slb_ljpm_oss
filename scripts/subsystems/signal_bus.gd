@@ -11,6 +11,8 @@ signal call_achievement(name)
 signal dev_console(yes: bool)
 
 signal cr_speedometer_value(yes: bool)
+signal cr_skin
+signal cr_map
 
 var dialogic_path
 

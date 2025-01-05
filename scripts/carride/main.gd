@@ -47,8 +47,10 @@ var final_score: int:
 
 func _ready():
 	_change_scale_factor()
+	_set_map()
 	vehicle_reached_oob.connect(_respawn_vehicle)
 	GlobalMusic.change_track()
+	SignalBus.cr_map.connect(_set_map)
 
 
 func _process(delta):
@@ -82,11 +84,12 @@ func _physics_process(_delta):
 
 
 func game_over():
-	final_score = (milks * 100000) + roundi((time) * 0.01)
+	final_score = (milks * 100000) + roundi((time) * 0.00001)
 	gui.game_over()
 	$PauseLayer.process_mode = Node.PROCESS_MODE_DISABLED
 	stop_processing = true
 	milk_spawner.stop()
+	_check_game_over_achievements()
 	if not SettingsBus.cheats:
 		ProfileBus.profile.add_milks(milks)
 		ProfileBus.profile.add_time(time)
@@ -116,6 +119,19 @@ func _respawn_vehicle(): # Is this needed anymore?
 	$"PandaBlue".position = marker.position
 
 
+func _set_map():
+	$ForestMap.hide()
+	$SaharaMap.hide()
+	$LunarConflictMap.hide()
+	match(ProfileBus.profile.chosen_map):
+		Profile.Maps.FOREST:
+			$ForestMap.show()
+		Profile.Maps.SAHARA:
+			$SaharaMap.show()
+		Profile.Maps.LUNAR_CONFLICT:
+			$LunarConflictMap.show()
+
+
 func _achievement_check():
 	if speed > 800:
 		AchievementSystem.call_achievement("speed_110")
@@ -123,3 +139,20 @@ func _achievement_check():
 		AchievementSystem.call_achievement("speed_150")
 	if time > 60000000 and milks == 0:
 		AchievementSystem.call_achievement("lactose_intolerant")
+
+
+func _check_game_over_achievements():
+	match(ProfileBus.profile.chosen_skin):
+		ProfileBus.profile.Skins.VOLVO_COMBI:
+			AchievementSystem.call_achievement("volvo_combi")
+		ProfileBus.profile.Skins.REAL_PANDA:
+			AchievementSystem.call_achievement("real_panda")
+		ProfileBus.profile.Skins.PIGTANK:
+			AchievementSystem.call_achievement("pigtank")
+		# ProfileBus.profile.Skins.LUNAR_ROVER:
+		# 	AchievementSystem.call_achievement("lunar_rover")
+	match(ProfileBus.profile.chosen_map):
+		ProfileBus.profile.Maps.SAHARA:
+			AchievementSystem.call_achievement("sahara")
+		ProfileBus.profile.Maps.LUNAR_CONFLICT:
+			AchievementSystem.call_achievement("lunar_conflict")

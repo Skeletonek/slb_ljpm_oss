@@ -1,3 +1,34 @@
+#### 2.0-Alpha+6
+ - Added Lunar Conflict map
+ - Added Sahara map
+ - Added cr_map command to change maps
+ - Currently chosen skins and maps are now displayed as a dynamic background in main menu
+ - Added icons for some achievements
+ - Added new achievements connected to completing one game with new skin / map
+ - Added option to specify which achievement to reset with achievement_reset command
+ - Added "all" option to achievement_award command
+ - Added custom info popup in option layer in place of Godot default
+ - Added command history for dev console that can be cycled with up and down keys
+ - Improved achievement popup layout
+ - Adjusted default font size
+ - Fixed score calculation
+ - Dropped support for ARM-v7 Android devices
+
+#### 2.0-Alpha+5
+ - Added profile system
+ - Added statistics panel
+ - Added sahara music to playlist
+ - Added basic skin management system
+ - Added cr_skin command
+ - Implemented milk total count achievements
+ - Changed main menu layout
+ - Changed milk collision shape to circle
+ - Removed test achievements
+ - Improved performance by deffering scores loading to after scoreboard button click
+ - Improved game start speed
+ - Fixed virtual buttons not working
+ - Fixed parallax not working properly on forest map load
+
 #### 2.0-Alpha+4
  - Added enhanced version of forest map as the new main menu background
  - Android builds are now built with custom engine build (ARM64 Release for now only)

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ddivj5kfowxni"
-path="res://.godot/imported/CarRideBG.webp-da4d80a0d18ef700e2407a8b49e4486e.ctex"
+uid="uid://bduar3walg2o0"
+path="res://.godot/imported/CarRideBG_ForestParallax1.webp-c000a80ed04152f6e7ab75729a2fbfcb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/CarRideBG.webp"
-dest_files=["res://.godot/imported/CarRideBG.webp-da4d80a0d18ef700e2407a8b49e4486e.ctex"]
+source_file="res://sprites/maps/forest/CarRideBG_ForestParallax1.webp"
+dest_files=["res://.godot/imported/CarRideBG_ForestParallax1.webp-c000a80ed04152f6e7ab75729a2fbfcb.ctex"]
 
 [params]
 

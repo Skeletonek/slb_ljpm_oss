@@ -11,6 +11,7 @@
 [resource]
 default_font = ExtResource("7_j3kit")
 default_font_size = 22
+Button/font_sizes/font_size = 20
 Button/styles/disabled = ExtResource("1_mg7kw")
 Button/styles/focus = ExtResource("2_tukea")
 Button/styles/hover = ExtResource("3_xtdnp")

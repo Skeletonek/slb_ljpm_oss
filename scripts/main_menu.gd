@@ -34,8 +34,8 @@ func _ready():
 
 	# signal_debug_dev_buttons.connect(_enable_dev_buttons)
 	# Developer console is inaccessible on Android, unless you have plugged in a keyboard
-	if OS.get_name() == "Android" and OS.is_debug_build():
-		$MainMenuLayer/DevButtons.visible = true
+	# if OS.get_name() == "Android" and OS.is_debug_build():
+		# $MainMenuLayer/DevButtons.visible = true
 
 	var device_info_label = $CreditsLayer/PanelContainer/MarginContainer/\
 		VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer2/DeviceInfo
@@ -69,7 +69,8 @@ func _on_global_music_finished():
 
 
 func _enable_dev_buttons():
-	$MainMenuLayer/DevButtons.visible = true
+	pass
+	# $MainMenuLayer/DevButtons.visible = true
 
 
 func _check_update():
@@ -111,7 +112,8 @@ func _update_game():
 
 
 func _notification(what):
-	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+	if what == NOTIFICATION_WM_CLOSE_REQUEST || \
+			what == NOTIFICATION_WM_GO_BACK_REQUEST:
 		SettingsBus.save_config()
 		ProfileBus.save_profile_to_file()
 		get_tree().quit() # default behavior
@@ -191,4 +193,5 @@ func _on_godot_logo_click(event):
 
 func _on_easter_egg_button_pressed():
 	if $MainMenuLayer.visible && not $popup_input.visible && not $PopupChangelog.visible:
+		AchievementSystem.call_achievement("rick_roll")
 		OS.shell_open("https://youtu.be/dQw4w9WgXcQ")

@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=3 uid="uid://c7njf8rte5rfr"]
+
+[ext_resource type="Script" path="res://scripts/carride/map_node.gd" id="1_rv12j"]
+[ext_resource type="Texture2D" uid="uid://bviwggjeiqqyd" path="res://sprites/maps/lunar_conflict/lc_space.webp" id="2_ka1v2"]
+[ext_resource type="Script" path="res://scripts/carride/road_scroll.gd" id="3_xi0xh"]
+[ext_resource type="Texture2D" uid="uid://hr87nowgadrt" path="res://sprites/maps/lunar_conflict/lc_moon.webp" id="6_2dp6s"]
+[ext_resource type="Texture2D" uid="uid://c57l262udunto" path="res://sprites/Road.png" id="7_lv3le"]
+[ext_resource type="Texture2D" uid="uid://btqhaxxyw1tvd" path="res://sprites/RoadRM.png" id="8_jl5oq"]
+
+[node name="LunarConflictMap" type="Node2D"]
+script = ExtResource("1_rv12j")
+
+[node name="Parallax1" type="Sprite2D" parent="."]
+z_index = -11
+position = Vector2(0, -129)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_ka1v2")
+script = ExtResource("3_xi0xh")
+jump_point = -1536
+parallax_multiplier = 0.1
+mr_parallax_multiplier = 0.01
+
+[node name="Parallax1" type="Sprite2D" parent="Parallax1"]
+position = Vector2(1920, 0)
+texture = ExtResource("2_ka1v2")
+
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -10
+z_as_relative = false
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("6_2dp6s")
+script = ExtResource("3_xi0xh")
+jump_point = -1344
+mr_parallax_multiplier = 0.01
+
+[node name="Background" type="Sprite2D" parent="Background"]
+z_index = -10
+z_as_relative = false
+position = Vector2(3840, 0)
+texture = ExtResource("6_2dp6s")
+
+[node name="Background2" type="Sprite2D" parent="Background"]
+z_index = -10
+z_as_relative = false
+position = Vector2(7680, 0)
+texture = ExtResource("6_2dp6s")
+
+[node name="Road" type="Sprite2D" parent="."]
+z_index = -9
+position = Vector2(10, -5)
+scale = Vector2(2, 2)
+texture = ExtResource("7_lv3le")
+script = ExtResource("3_xi0xh")
+mr_sprite = ExtResource("8_jl5oq")
+
+[node name="Road" type="Sprite2D" parent="Road"]
+position = Vector2(720, 0)
+texture = ExtResource("7_lv3le")
