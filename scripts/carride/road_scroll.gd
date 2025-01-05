@@ -3,7 +3,8 @@ extends Sprite2D
 @export var speed_increment = 300 #Obsolete?
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	if SettingsBus.reduced_motion:
+		texture = load("res://sprites/RoadRM.png")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

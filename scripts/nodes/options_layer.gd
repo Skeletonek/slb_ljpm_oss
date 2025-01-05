@@ -1,6 +1,5 @@
 extends CanvasLayer
 
-
 @onready var master_slider:HSlider = $TabContainer/Audio/VBoxContainer/MasterSlider
 @onready var sfx_slider:HSlider = $TabContainer/Audio/VBoxContainer/SFXSlider
 @onready var music_slider:HSlider = $TabContainer/Audio/VBoxContainer/MusicSlider
@@ -8,6 +7,12 @@ extends CanvasLayer
 @onready var fullscreen_button:Button = $TabContainer/Grafika/VBoxContainer/Screen/FullScreenButton
 @onready var graphics_api_button:OptionButton = $TabContainer/Grafika/VBoxContainer/Screen2/GraphicsAPIButton
 @onready var graphics_api_restart:Label = $TabContainer/Grafika/VBoxContainer/Screen2/GraphicsAPIRestartLabel
+@onready var tch_tap_button:TextureButton = $TabContainer/Rozgrywka/VBoxContainer/TouchScreenControls/HBoxContainer/Tap/TextureButton
+@onready var tch_swipe_button:TextureButton = $TabContainer/Rozgrywka/VBoxContainer/TouchScreenControls/HBoxContainer/Swipe/TextureButton
+@onready var tch_vbuttons_button:TextureButton = $TabContainer/Rozgrywka/VBoxContainer/TouchScreenControls/HBoxContainer/VirtualButtons/TextureButton
+@onready var reduced_motion_button:Button = $"TabContainer/Dostępność/VBoxContainer/ReducedMotion/Button"
+@onready var easier_font_button:Button = $"TabContainer/Dostępność/VBoxContainer/EasierFont/Button"
+@onready var easier_font_restart:Label = $"TabContainer/Dostępność/VBoxContainer/EasierFont/RestartLabel"
 @onready var fullscreen_android_info:Label = $TabContainer/Grafika/VBoxContainer/Screen/FullScreenLabelDesc
 @onready var back_button:Button = $MarginContainer/BackButton
 
@@ -17,13 +22,22 @@ func _ready():
 	music_slider.value = SettingsBus.music_volume
 	ui_scaling_slider.value = SettingsBus.ui_scaling
 	if OS.get_name() != "Android":
-		fullscreen_button.set_pressed(SettingsBus.fullscreen)
+		fullscreen_button.set_pressed_no_signal_custom(SettingsBus.fullscreen)
 	else:
 		fullscreen_button.disabled = true
 		fullscreen_android_info.visible = true
 	graphics_api_button.get_popup().id_pressed.connect(_on_graphics_api_pressed)
 	if SettingsBus.cfg_rendering_method == "gl_compatibility":
 		graphics_api_button.selected = 1
+	match(SettingsBus.touchscreen_control):
+		SettingsBus.TOUCHSCREEN_CONTROL_MODE.Tap:
+			tch_tap_button.set_pressed_no_signal(true)
+		SettingsBus.TOUCHSCREEN_CONTROL_MODE.Swipe:
+			tch_swipe_button.set_pressed_no_signal(true)
+		SettingsBus.TOUCHSCREEN_CONTROL_MODE.VButtons:
+			tch_vbuttons_button.set_pressed_no_signal(true)
+	easier_font_button.set_pressed_no_signal_custom(SettingsBus.easier_font)
+	reduced_motion_button.set_pressed_no_signal_custom(SettingsBus.reduced_motion)
 
 
 func _on_master_slider_value_changed(value):
@@ -78,6 +92,45 @@ func _on_graphics_api_pressed(id: int):
 func _on_ui_scaling_slider_value_changed(value):
 	SettingsBus.ui_scaling = value
 	get_tree().root.content_scale_factor = value
+
+
+func _on_tch_tap_toggled(button_pressed):
+	_unpress_tch_buttons()
+	SettingsBus.touchscreen_control = SettingsBus.TOUCHSCREEN_CONTROL_MODE.Tap
+	tch_tap_button.set_pressed_no_signal(true)
+
+
+func _on_tch_swipe_toggled(button_pressed):
+	_unpress_tch_buttons()
+	SettingsBus.touchscreen_control = SettingsBus.TOUCHSCREEN_CONTROL_MODE.Swipe
+	tch_swipe_button.set_pressed_no_signal(true)
+
+
+func _on_tch_vbuttons_toggled(button_pressed):
+	_unpress_tch_buttons()
+	SettingsBus.touchscreen_control = SettingsBus.TOUCHSCREEN_CONTROL_MODE.VButtons
+	tch_vbuttons_button.set_pressed_no_signal(true)
+
+
+func _unpress_tch_buttons():
+	tch_tap_button.set_pressed_no_signal(false)
+	tch_swipe_button.set_pressed_no_signal(false)
+	tch_vbuttons_button.set_pressed_no_signal(false)
+
+
+func _on_reduced_motion_button_toggled(button_pressed):
+	SettingsBus.reduced_motion = button_pressed
+	SignalBus.reduce_motion.emit(button_pressed)
+
+
+func _on_easier_font_button_toggled(button_pressed):
+	SettingsBus.easier_font = button_pressed
+	if button_pressed:
+		ThemeDB.get_project_theme().set_default_font(load("res://theme/fonts/OpenDyslexic-Regular.otf"))
+#		get_tree().root.add_theme_font_override("theme", load("res://theme/fonts/OpenDyslexic-Regular.otf"))
+	else:
+		ThemeDB.get_project_theme().set_default_font(load("res://theme/fonts/PixelifySans-Bold.ttf"))
+	easier_font_restart.show()
 
 
 func _on_back_button_pressed():

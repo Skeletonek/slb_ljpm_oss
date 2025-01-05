@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dg78sdxts17fs"]
+[gd_scene load_steps=21 format=3 uid="uid://dg78sdxts17fs"]
 
 [ext_resource type="Script" path="res://scripts/mainMenu.gd" id="1_ck7i2"]
 [ext_resource type="Script" path="res://scripts/main_menu_anim.gd" id="2_4ayhe"]
@@ -9,6 +9,7 @@
 [ext_resource type="Material" uid="uid://cqn5rkmj7io2i" path="res://shaders/panel_shader_material.tres" id="5_l01dg"]
 [ext_resource type="Texture2D" uid="uid://1ybbxyuurtvd" path="res://sprites/Panda_0001.png" id="6_clsj2"]
 [ext_resource type="Texture2D" uid="uid://v831njlfv53m" path="res://sprites/Panda_0002.png" id="8_urfk8"]
+[ext_resource type="FontFile" uid="uid://c08wcdbvxirl1" path="res://theme/fonts/NotoSans-Medium.ttf" id="10_d6dtl"]
 [ext_resource type="Texture2D" uid="uid://cm8cnn2cih4wk" path="res://images/GodotLogo.png" id="11_ohnpv"]
 [ext_resource type="Texture2D" uid="uid://chmu0q4arfvtg" path="res://images/SkeletonLogoV6S.png" id="12_1eu7f"]
 [ext_resource type="Texture2D" uid="uid://bnvg8lvduxprm" path="res://images/HalembarusLogoV1.1S.jpg" id="13_6ch7m"]
@@ -93,6 +94,7 @@ texture = ExtResource("3_ihnal")
 position = Vector2(-79.5, 30)
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_n03hm")
+autoplay = "default"
 flip_h = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Camera2D/LukaszczykWPandzie"]
@@ -140,7 +142,6 @@ focus_neighbor_top = NodePath("../CreditsButton")
 focus_next = NodePath("../CreditsButton")
 theme_override_colors/font_color = Color(1, 0.45098, 0.384314, 1)
 text = "Wyjście
-
 z gry"
 
 [node name="CreditsButton" type="Button" parent="MainMenuLayer/VBoxContainer"]
@@ -166,7 +167,6 @@ focus_neighbor_bottom = NodePath("../CreditsButton")
 focus_previous = NodePath("../CreditsButton")
 disabled = true
 text = "Tablica
-
 wyników"
 
 [node name="ContinueButton" type="Button" parent="MainMenuLayer/VBoxContainer"]
@@ -238,12 +238,16 @@ stretch_mode = 5
 
 [node name="GameNameCopyright" type="Label" parent="CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("10_d6dtl")
+theme_override_font_sizes/font_size = 16
 text = "Super Łukaszczyk Bros: Łukaszczyk Jedzie Po Mleko
 Copyright © 2023 - Skeletonek & Halembarus2"
 horizontal_alignment = 1
 
 [node name="CreditsLabel2" type="Label" parent="CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("10_d6dtl")
+theme_override_font_sizes/font_size = 16
 text = "
 Twórcy:"
 horizontal_alignment = 1
@@ -280,6 +284,8 @@ stretch_mode = 5
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.7
+theme_override_fonts/font = ExtResource("10_d6dtl")
+theme_override_font_sizes/font_size = 16
 text = "Skeletonek:
 Programista, Dyrektor artystyczny, Inżynier dźwięku, Pomoc scenarzysty"
 label_settings = SubResource("LabelSettings_q8iax")
@@ -317,6 +323,8 @@ stretch_mode = 5
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.7
+theme_override_fonts/font = ExtResource("10_d6dtl")
+theme_override_font_sizes/font_size = 16
 text = "Halembarus2:
 Główny scenarzysta, Reżyser"
 label_settings = SubResource("LabelSettings_q8iax")
@@ -324,6 +332,8 @@ autowrap_mode = 3
 
 [node name="CreditsLabel" type="Label" parent="CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("10_d6dtl")
+theme_override_font_sizes/font_size = 16
 text = "
 Projekt stworzono w:"
 horizontal_alignment = 1
@@ -362,6 +372,8 @@ stretch_mode = 5
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.7
+theme_override_fonts/font = ExtResource("10_d6dtl")
+theme_override_font_sizes/font_size = 16
 text = "Copyright © 2007-2023 Juan Linietsky, Ariel Manzur & contributors.
 Godot Engine nie jest powiązany z twórcami SLB: LJPM
 Więcej informacji o Godot Engine jest dostępnych na stronie https://godotengine.org/"
@@ -375,6 +387,8 @@ alignment = 1
 
 [node name="GameInfo" type="Label" parent="CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("10_d6dtl")
+theme_override_font_sizes/font_size = 16
 text = "Wersja gry: <GAME_VERSION>
 
 "
@@ -385,6 +399,8 @@ autowrap_mode = 2
 
 [node name="DeviceInfo" type="Label" parent="CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("10_d6dtl")
+theme_override_font_sizes/font_size = 16
 text = "Godot Engine <ENGINE_VERSION>
 <OS_TYPE> <DISTRIBUTION_NAME> <OS_VERSION>
 <CPU_NAME> <THREADS_COUNT> threads
@@ -401,6 +417,8 @@ autowrap_mode = 2
 custom_minimum_size = Vector2(450, 0)
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("10_d6dtl")
+theme_override_font_sizes/font_size = 16
 text = "Część grafik użytych w grze jest udostępnionych na licencji Creative Commons lub dostępnych w domenie publicznej."
 label_settings = SubResource("LabelSettings_xqss0")
 horizontal_alignment = 1

@@ -5,6 +5,8 @@
 [ext_resource type="FontFile" uid="uid://bp02gos6qbie1" path="res://theme/fonts/NotoSansMono-Regular.ttf" id="2_xpadb"]
 
 [node name="ConsoleLayer" type="CanvasLayer"]
+process_mode = 3
+process_priority = 1
 layer = 101
 visible = false
 script = ExtResource("1_qthys")

@@ -1,12 +1,31 @@
-[gd_scene load_steps=9 format=3 uid="uid://dc3ntad11u0qu"]
+[gd_scene load_steps=25 format=3 uid="uid://dc3ntad11u0qu"]
 
 [ext_resource type="Script" path="res://scripts/nodes/options_layer.gd" id="1_cahn6"]
 [ext_resource type="Material" uid="uid://cqn5rkmj7io2i" path="res://shaders/panel_shader_material.tres" id="2_4i7gj"]
 [ext_resource type="Script" path="res://scripts/nodes/SwitchButton.gd" id="3_uq6y0"]
 [ext_resource type="AudioStream" uid="uid://bdg6rdgg5xxrc" path="res://audio/sfx/Upsilon.ogg" id="4_5hsqm"]
+[ext_resource type="Texture2D" uid="uid://d1q6ski8nlaho" path="res://images/touchscreen_controls/Tap.png" id="4_fo16v"]
+[ext_resource type="Texture2D" uid="uid://b03xoie8yvxyd" path="res://images/touchscreen_controls/Tap_Pressed.png" id="5_s46va"]
+[ext_resource type="Texture2D" uid="uid://g308f5suvywb" path="res://images/touchscreen_controls/Swipe.png" id="5_ts1gr"]
+[ext_resource type="Texture2D" uid="uid://b6dk5btlcfrre" path="res://images/touchscreen_controls/Tap_Focus.png" id="6_bfxs0"]
+[ext_resource type="Texture2D" uid="uid://bsk63y3k0w8kw" path="res://images/touchscreen_controls/VirtualButtons.png" id="6_pcisq"]
+[ext_resource type="Texture2D" uid="uid://ha8cngh130pe" path="res://images/touchscreen_controls/Tap_Hover.png" id="6_qbjox"]
+[ext_resource type="Texture2D" uid="uid://0l1lf78avopb" path="res://images/touchscreen_controls/Tap_Disable.png" id="7_jat2b"]
+[ext_resource type="Texture2D" uid="uid://cpkxs840jg1a4" path="res://images/touchscreen_controls/Swipe_Pressed.png" id="8_8b5bw"]
+[ext_resource type="Texture2D" uid="uid://o1r8kfbx74yx" path="res://images/touchscreen_controls/Swipe_Focus.png" id="9_tbmhw"]
+[ext_resource type="Texture2D" uid="uid://dbye23w4a1vp4" path="res://images/touchscreen_controls/VirtualButtons_Pressed.png" id="11_ysk3p"]
+[ext_resource type="Texture2D" uid="uid://bepg7lvcbsdjh" path="res://images/touchscreen_controls/Swipe_Hover.png" id="11_yxxnk"]
+[ext_resource type="Texture2D" uid="uid://dkfj8c4oqihum" path="res://images/touchscreen_controls/VirtualButtons_Focus.png" id="12_dslu1"]
+[ext_resource type="Texture2D" uid="uid://dp8j3be6ryho6" path="res://images/touchscreen_controls/Swipe_Disable.png" id="12_o58bl"]
+[ext_resource type="Texture2D" uid="uid://6pndjir8go15" path="res://images/touchscreen_controls/VirtualButtons_Hover.png" id="16_0xix8"]
+[ext_resource type="Texture2D" uid="uid://74xypfu5iawx" path="res://images/touchscreen_controls/VirtualButtons_Disable.png" id="17_jrv5o"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_rskjs"]
 font_size = 14
+
+[sub_resource type="LabelSettings" id="LabelSettings_44h5e"]
+font_size = 14
+font_color = Color(1, 0.745098, 0, 1)
 
 [sub_resource type="Gradient" id="Gradient_tecms"]
 interpolation_mode = 2
@@ -98,7 +117,7 @@ popup/item_1/id = 1
 visible = false
 layout_mode = 2
 text = "Zmiana tego ustawienia wymaga restartu gry"
-label_settings = SubResource("LabelSettings_rskjs")
+label_settings = SubResource("LabelSettings_44h5e")
 horizontal_alignment = 1
 
 [node name="UIScaling" type="VBoxContainer" parent="TabContainer/Grafika/VBoxContainer"]
@@ -117,10 +136,11 @@ layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="TabContainer/Grafika/VBoxContainer/UIScaling/Container"]
 custom_minimum_size = Vector2(0, 5)
-layout_mode = 2
-offset_top = 4.0
-offset_right = 600.0
-offset_bottom = 9.0
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
 size_flags_horizontal = 3
 texture = SubResource("GradientTexture1D_8ausc")
 
@@ -251,9 +271,185 @@ value = 0.5
 visible = false
 layout_mode = 2
 
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Rozgrywka"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -20.0
+offset_right = 300.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TouchScreenControls" type="VBoxContainer" parent="TabContainer/Rozgrywka/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/Rozgrywka/VBoxContainer/TouchScreenControls"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Sposób sterowania dotykowego:"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Rozgrywka/VBoxContainer/TouchScreenControls"]
+layout_mode = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="Tap" type="VBoxContainer" parent="TabContainer/Rozgrywka/VBoxContainer/TouchScreenControls/HBoxContainer"]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="TextureButton" type="TextureButton" parent="TabContainer/Rozgrywka/VBoxContainer/TouchScreenControls/HBoxContainer/Tap"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("4_fo16v")
+texture_pressed = ExtResource("5_s46va")
+texture_hover = ExtResource("6_qbjox")
+texture_disabled = ExtResource("7_jat2b")
+texture_focused = ExtResource("6_bfxs0")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="TabContainer/Rozgrywka/VBoxContainer/TouchScreenControls/HBoxContainer/Tap"]
+layout_mode = 2
+text = "Dotknij"
+horizontal_alignment = 1
+
+[node name="Swipe" type="VBoxContainer" parent="TabContainer/Rozgrywka/VBoxContainer/TouchScreenControls/HBoxContainer"]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="TextureButton" type="TextureButton" parent="TabContainer/Rozgrywka/VBoxContainer/TouchScreenControls/HBoxContainer/Swipe"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("5_ts1gr")
+texture_pressed = ExtResource("8_8b5bw")
+texture_hover = ExtResource("11_yxxnk")
+texture_disabled = ExtResource("12_o58bl")
+texture_focused = ExtResource("9_tbmhw")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="TabContainer/Rozgrywka/VBoxContainer/TouchScreenControls/HBoxContainer/Swipe"]
+layout_mode = 2
+text = "Przewiń"
+horizontal_alignment = 1
+
+[node name="VirtualButtons" type="VBoxContainer" parent="TabContainer/Rozgrywka/VBoxContainer/TouchScreenControls/HBoxContainer"]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="TextureButton" type="TextureButton" parent="TabContainer/Rozgrywka/VBoxContainer/TouchScreenControls/HBoxContainer/VirtualButtons"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+disabled = true
+toggle_mode = true
+texture_normal = ExtResource("6_pcisq")
+texture_pressed = ExtResource("11_ysk3p")
+texture_hover = ExtResource("16_0xix8")
+texture_disabled = ExtResource("17_jrv5o")
+texture_focused = ExtResource("12_dslu1")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="TabContainer/Rozgrywka/VBoxContainer/TouchScreenControls/HBoxContainer/VirtualButtons"]
+layout_mode = 2
+text = "Wirtualne przyciski"
+vertical_alignment = 1
+
+[node name="Keybindings" type="VBoxContainer" parent="TabContainer/Rozgrywka/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/Rozgrywka/VBoxContainer/Keybindings"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Klawiszologia:"
+horizontal_alignment = 1
+vertical_alignment = 2
+
 [node name="Dostępność" type="Control" parent="TabContainer"]
 visible = false
 layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Dostępność"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -96.0
+offset_right = 300.0
+offset_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ReducedMotion" type="VBoxContainer" parent="TabContainer/Dostępność/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/Dostępność/VBoxContainer/ReducedMotion"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Redukcja ruchu:"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Button" type="Button" parent="TabContainer/Dostępność/VBoxContainer/ReducedMotion"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+toggle_mode = true
+text = "Wyłączony"
+script = ExtResource("3_uq6y0")
+
+[node name="LabelDesc" type="Label" parent="TabContainer/Dostępność/VBoxContainer/ReducedMotion"]
+layout_mode = 2
+text = "Podmienia niektóre grafiki lub wyłącza animacje aby wizualnie
+zredukować ruch na ekranie"
+label_settings = SubResource("LabelSettings_rskjs")
+horizontal_alignment = 1
+
+[node name="EasierFont" type="VBoxContainer" parent="TabContainer/Dostępność/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/Dostępność/VBoxContainer/EasierFont"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Prostsza czcionka:"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Button" type="Button" parent="TabContainer/Dostępność/VBoxContainer/EasierFont"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+toggle_mode = true
+text = "Wyłączony"
+script = ExtResource("3_uq6y0")
+
+[node name="LabelDesc" type="Label" parent="TabContainer/Dostępność/VBoxContainer/EasierFont"]
+layout_mode = 2
+text = "Zastępuje domyślną czcionkę gry na OpenDyslexia"
+label_settings = SubResource("LabelSettings_rskjs")
+horizontal_alignment = 1
+
+[node name="RestartLabel" type="Label" parent="TabContainer/Dostępność/VBoxContainer/EasierFont"]
+visible = false
+layout_mode = 2
+text = "Zmiana tego ustawienia wymaga restartu gry"
+label_settings = SubResource("LabelSettings_44h5e")
+horizontal_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 custom_minimum_size = Vector2(0, 100)
@@ -285,4 +481,9 @@ bus = &"SFX"
 [connection signal="drag_ended" from="TabContainer/Audio/VBoxContainer/SFXSlider" to="." method="_on_sfx_slider_drag_ended"]
 [connection signal="value_changed" from="TabContainer/Audio/VBoxContainer/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
 [connection signal="value_changed" from="TabContainer/Audio/VBoxContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="toggled" from="TabContainer/Rozgrywka/VBoxContainer/TouchScreenControls/HBoxContainer/Tap/TextureButton" to="." method="_on_tch_tap_toggled"]
+[connection signal="toggled" from="TabContainer/Rozgrywka/VBoxContainer/TouchScreenControls/HBoxContainer/Swipe/TextureButton" to="." method="_on_tch_swipe_toggled"]
+[connection signal="toggled" from="TabContainer/Rozgrywka/VBoxContainer/TouchScreenControls/HBoxContainer/VirtualButtons/TextureButton" to="." method="_on_tch_vbuttons_toggled"]
+[connection signal="toggled" from="TabContainer/Dostępność/VBoxContainer/ReducedMotion/Button" to="." method="_on_reduced_motion_button_toggled"]
+[connection signal="toggled" from="TabContainer/Dostępność/VBoxContainer/EasierFont/Button" to="." method="_on_easier_font_button_toggled"]
 [connection signal="pressed" from="MarginContainer/BackButton" to="." method="_on_back_button_pressed"]

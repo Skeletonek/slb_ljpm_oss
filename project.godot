@@ -19,9 +19,9 @@ boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/image="res://images/SplashScreen.png"
 config/icon="res://icon.svg"
 boot_splash/minimum_display_time=1000
-config/version="B.3.0"
-config/build_number=4
-config/date="2023-11-12 22:39"
+config/version="B.4.0"
+config/build_number=5
+config/date="2023-11-13 22:15"
 
 [autoload]
 
@@ -30,6 +30,7 @@ GlobalMusic="*res://scenes/instances/audio_stream_player.tscn"
 DebugInfo="*res://scenes/instances/debug_info.tscn"
 Console="res://scenes/instances/console_scene.tscn"
 SettingsBus="*res://scripts/subsystems/settings_bus.gd"
+SilentWolf="*res://addons/silent_wolf/SilentWolf.gd"
 
 [debug]
 
@@ -39,7 +40,6 @@ file_logging/enable_file_logging=true
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
-window/size/mode=3
 window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="canvas_items"
@@ -114,6 +114,10 @@ console_autocomplete={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194306,"key_label":0,"unicode":0,"echo":false,"script":null)
 ]
 }
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
 
 [rendering]
 

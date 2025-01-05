@@ -1,14 +1,14 @@
 [gd_resource type="Theme" load_steps=6 format=3 uid="uid://1gm1t5npvg1b"]
 
-[ext_resource type="FontFile" uid="uid://d0e5brm2npeqe" path="res://theme/fonts/PressStart2P_Regular.ttf" id="1_d4itp"]
 [ext_resource type="StyleBox" uid="uid://dhhkp4qyw3sii" path="res://theme/style_box_flat.tres" id="1_mg7kw"]
 [ext_resource type="StyleBox" uid="uid://c4381l4nshdt8" path="res://theme/style_box_flat_focused.tres" id="2_tukea"]
 [ext_resource type="StyleBox" uid="uid://beouu0raqpik5" path="res://theme/style_box_flat_hover.tres" id="3_xtdnp"]
 [ext_resource type="StyleBox" uid="uid://cp1tbuafgojja" path="res://theme/style_box_flat_pressed.tres" id="4_yvq0w"]
+[ext_resource type="FontFile" path="res://theme/fonts/PixelifySans-Bold.ttf" id="5_8o6v7"]
 
 [resource]
-Button/font_sizes/font_size = 13
-Button/fonts/font = ExtResource("1_d4itp")
+default_font = ExtResource("5_8o6v7")
+default_font_size = 22
 Button/styles/disabled = ExtResource("1_mg7kw")
 Button/styles/focus = ExtResource("2_tukea")
 Button/styles/hover = ExtResource("3_xtdnp")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://boixto1v5xtcq"]
+[gd_scene load_steps=36 format=3 uid="uid://boixto1v5xtcq"]
 
 [ext_resource type="Texture2D" uid="uid://c57l262udunto" path="res://sprites/Road.png" id="1_fp1p5"]
 [ext_resource type="Script" path="res://scripts/carride/main.gd" id="1_y5nnv"]
@@ -12,11 +12,16 @@
 [ext_resource type="Script" path="res://scripts/carride/ai_vehicle.gd" id="6_dvn5r"]
 [ext_resource type="Texture2D" uid="uid://1ybbxyuurtvd" path="res://sprites/Panda_0001.png" id="7_x3frt"]
 [ext_resource type="AudioStream" uid="uid://d2lim2blo57e" path="res://audio/sfx/Inventory Shiny Things A.wav" id="9_kk7c3"]
+[ext_resource type="Texture2D" uid="uid://v831njlfv53m" path="res://sprites/Panda_0002.png" id="9_vinbh"]
 [ext_resource type="Texture2D" uid="uid://bogskfkkkked4" path="res://sprites/PandaGreen_0001.png" id="11_87sgt"]
 [ext_resource type="Texture2D" uid="uid://t6a01dojmwqe" path="res://sprites/PandaBlue_0001.png" id="11_baqkq"]
 [ext_resource type="Texture2D" uid="uid://dxkix3qrn84re" path="res://sprites/PandaWhite_0001.png" id="12_64cf7"]
 [ext_resource type="Texture2D" uid="uid://d0y7a6yrpxcv2" path="res://sprites/PandaYellow_0001.png" id="13_eq01d"]
 [ext_resource type="Texture2D" uid="uid://b1bqnsurkpd3o" path="res://sprites/Milk.png" id="14_2a3f6"]
+[ext_resource type="Texture2D" uid="uid://b05hnorid4i0t" path="res://sprites/PandaBlue_0002.png" id="14_e8w48"]
+[ext_resource type="Texture2D" uid="uid://b81s8jbal2ixi" path="res://sprites/PandaGreen_0002.png" id="16_33n1u"]
+[ext_resource type="Texture2D" uid="uid://cabeb1ppt0x18" path="res://sprites/PandaWhite_0002.png" id="18_brttv"]
+[ext_resource type="Texture2D" uid="uid://dn1fuyl4oep7a" path="res://sprites/PandaYellow_0002.png" id="20_aouye"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_64r8c"]
 font_size = 24
@@ -32,8 +37,106 @@ size = Vector2(1500, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8unen"]
 size = Vector2(54.2857, 300)
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_krrht"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_x3frt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_vinbh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jfarv"]
 size = Vector2(114, 15.5)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rs6kl"]
+animations = [{
+"frames": [{
+"duration": 1.4,
+"texture": ExtResource("11_baqkq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_e8w48")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5jwxj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_87sgt")
+}, {
+"duration": 1.1,
+"texture": ExtResource("16_33n1u")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nrhsq"]
+animations = [{
+"frames": [{
+"duration": 1.2,
+"texture": ExtResource("12_64cf7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_brttv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bfyj1"]
+animations = [{
+"frames": [{
+"duration": 0.9,
+"texture": ExtResource("11_baqkq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_e8w48")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7c84r"]
+animations = [{
+"frames": [{
+"duration": 1.3,
+"texture": ExtResource("13_eq01d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_aouye")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jm4s4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_64cf7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_brttv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qmsv7"]
 size = Vector2(52, 51)
@@ -189,8 +292,9 @@ scale = Vector2(1.5, 1.5)
 script = ExtResource("4_sxi6f")
 speed = 400
 
-[node name="Sprite2D" type="Sprite2D" parent="LukaszczykWPandzie"]
-texture = ExtResource("7_x3frt")
+[node name="LukaszczykWPandzie" type="AnimatedSprite2D" parent="LukaszczykWPandzie"]
+sprite_frames = SubResource("SpriteFrames_krrht")
+autoplay = "default"
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LukaszczykWPandzie"]
@@ -214,8 +318,10 @@ position = Vector2(940, -20)
 scale = Vector2(1.5, 1.5)
 script = ExtResource("6_dvn5r")
 
-[node name="Sprite2D" type="Sprite2D" parent="PandaBlue"]
-texture = ExtResource("11_baqkq")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PandaBlue"]
+sprite_frames = SubResource("SpriteFrames_rs6kl")
+autoplay = "default"
+frame_progress = 0.897002
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PandaBlue"]
@@ -227,8 +333,10 @@ position = Vector2(1200, 60)
 scale = Vector2(1.5, 1.5)
 script = ExtResource("6_dvn5r")
 
-[node name="Sprite2D" type="Sprite2D" parent="PandaBlue2"]
-texture = ExtResource("11_87sgt")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PandaBlue2"]
+sprite_frames = SubResource("SpriteFrames_5jwxj")
+autoplay = "default"
+frame_progress = 0.211462
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PandaBlue2"]
@@ -240,8 +348,10 @@ position = Vector2(1500, 140)
 scale = Vector2(1.5, 1.5)
 script = ExtResource("6_dvn5r")
 
-[node name="Sprite2D" type="Sprite2D" parent="PandaBlue3"]
-texture = ExtResource("12_64cf7")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PandaBlue3"]
+sprite_frames = SubResource("SpriteFrames_nrhsq")
+autoplay = "default"
+frame_progress = 0.464614
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PandaBlue3"]
@@ -253,8 +363,10 @@ position = Vector2(1770, 60)
 scale = Vector2(1.5, 1.5)
 script = ExtResource("6_dvn5r")
 
-[node name="Sprite2D" type="Sprite2D" parent="PandaBlue4"]
-texture = ExtResource("11_baqkq")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PandaBlue4"]
+sprite_frames = SubResource("SpriteFrames_bfyj1")
+autoplay = "default"
+frame_progress = 0.861107
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PandaBlue4"]
@@ -266,8 +378,10 @@ position = Vector2(2050, -100)
 scale = Vector2(1.5, 1.5)
 script = ExtResource("6_dvn5r")
 
-[node name="Sprite2D" type="Sprite2D" parent="PandaBlue5"]
-texture = ExtResource("13_eq01d")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PandaBlue5"]
+sprite_frames = SubResource("SpriteFrames_7c84r")
+autoplay = "default"
+frame_progress = 0.630228
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PandaBlue5"]
@@ -279,8 +393,10 @@ position = Vector2(2350, 220)
 scale = Vector2(1.5, 1.5)
 script = ExtResource("6_dvn5r")
 
-[node name="Sprite2D" type="Sprite2D" parent="PandaBlue6"]
-texture = ExtResource("12_64cf7")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PandaBlue6"]
+sprite_frames = SubResource("SpriteFrames_jm4s4")
+autoplay = "default"
+frame_progress = 0.0820787
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PandaBlue6"]
@@ -289,7 +405,7 @@ shape = SubResource("RectangleShape2D_jfarv")
 
 [node name="Milk" type="Area2D" parent="." groups=["Milk"]]
 z_index = -1
-position = Vector2(2043, 60)
+position = Vector2(1760, -20)
 script = ExtResource("6_dvn5r")
 speed_increment = 300
 
@@ -301,11 +417,25 @@ texture = ExtResource("14_2a3f6")
 position = Vector2(0, 5)
 shape = SubResource("RectangleShape2D_qmsv7")
 
+[node name="Milk2" type="Area2D" parent="." groups=["Milk"]]
+z_index = -1
+position = Vector2(2551, 220)
+script = ExtResource("6_dvn5r")
+speed_increment = 300
+
+[node name="Sprite2D" type="Sprite2D" parent="Milk2"]
+position = Vector2(0, 10)
+texture = ExtResource("14_2a3f6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Milk2"]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_qmsv7")
+
 [node name="PauseLayer" parent="." instance=ExtResource("5_2qleg")]
 
+[connection signal="touchscreen_move" from="GUI" to="LukaszczykWPandzie" method="move"]
 [connection signal="area_entered" from="LukaszczykWPandzie" to="LukaszczykWPandzie" method="_on_area_entered"]
 [connection signal="body_entered" from="LukaszczykWPandzie" to="LukaszczykWPandzie" method="_on_body_entered"]
-[connection signal="reset_position" from="LukaszczykWPandzie" to="Milk" method="_on_body_entered"]
 [connection signal="body_entered" from="PandaBlue" to="PandaBlue" method="_on_body_entered"]
 [connection signal="body_entered" from="PandaBlue2" to="PandaBlue2" method="_on_body_entered"]
 [connection signal="body_entered" from="PandaBlue3" to="PandaBlue3" method="_on_body_entered"]
@@ -313,3 +443,4 @@ shape = SubResource("RectangleShape2D_qmsv7")
 [connection signal="body_entered" from="PandaBlue5" to="PandaBlue5" method="_on_body_entered"]
 [connection signal="body_entered" from="PandaBlue6" to="PandaBlue6" method="_on_body_entered"]
 [connection signal="body_entered" from="Milk" to="Milk" method="_on_body_entered"]
+[connection signal="body_entered" from="Milk2" to="Milk2" method="_on_body_entered"]

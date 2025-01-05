@@ -10,6 +10,10 @@ func _process(delta):
 
 
 func _on_body_entered(body):
+	reset_postion()
+
+
+func reset_postion():
 	var y = -100
 	y += 80 * randi_range(0,4)
 	position = Vector2(940, y)
