@@ -1,12 +1,12 @@
 [gd_scene load_steps=17 format=3 uid="uid://boixto1v5xtcq"]
 
-[ext_resource type="Texture2D" uid="uid://c57l262udunto" path="res://sprites/carride/Road.png" id="1_fp1p5"]
+[ext_resource type="Texture2D" uid="uid://c57l262udunto" path="res://sprites/Road.png" id="1_fp1p5"]
 [ext_resource type="Script" path="res://scripts/carride/main.gd" id="1_y5nnv"]
 [ext_resource type="Script" path="res://scripts/carride/gui.gd" id="2_8a32l"]
-[ext_resource type="Texture2D" uid="uid://tbi380apx87e" path="res://sprites/carride/LukaszczykWPandzie.png" id="2_i6s1l"]
-[ext_resource type="Texture2D" uid="uid://crgu0b32ok5e5" path="res://sprites/carride/CarRideBG.png" id="2_qkdoe"]
+[ext_resource type="Texture2D" uid="uid://tbi380apx87e" path="res://sprites/LukaszczykWPandzie.png" id="2_i6s1l"]
+[ext_resource type="Texture2D" uid="uid://crgu0b32ok5e5" path="res://sprites/CarRideBG.png" id="2_qkdoe"]
 [ext_resource type="Script" path="res://scripts/carride/road_scroll.gd" id="3_1a2x8"]
-[ext_resource type="Texture2D" uid="uid://dvimhuteeggq4" path="res://sprites/carride/PandaBlue.png" id="3_hnb4u"]
+[ext_resource type="Texture2D" uid="uid://dvimhuteeggq4" path="res://sprites/PandaBlue.png" id="3_hnb4u"]
 [ext_resource type="Script" path="res://scripts/carride/player.gd" id="4_sxi6f"]
 [ext_resource type="PackedScene" uid="uid://lugeuc8kewl3" path="res://scenes/instances/pause_menu.tscn" id="5_2qleg"]
 [ext_resource type="AudioStream" uid="uid://dw6573okuao6h" path="res://audio/sfx/Car Crash Short.wav" id="6_dtkok"]
@@ -138,7 +138,7 @@ position = Vector2(-1, 19)
 shape = SubResource("RectangleShape2D_jfarv")
 
 [node name="PandaBlue2" type="Area2D" parent="."]
-position = Vector2(1788, 450)
+position = Vector2(1998, 450)
 scale = Vector2(2, 2)
 script = ExtResource("6_dvn5r")
 speed = 800
@@ -151,7 +151,7 @@ position = Vector2(-1, 19)
 shape = SubResource("RectangleShape2D_jfarv")
 
 [node name="PandaBlue3" type="Area2D" parent="."]
-position = Vector2(2327, 550)
+position = Vector2(2438, 550)
 scale = Vector2(2, 2)
 script = ExtResource("6_dvn5r")
 speed = 800

@@ -22,13 +22,22 @@ func _process(delta):
 
 func _input(event):
 	if event.is_action_pressed("move_up"):
-		move_vector = Vector2(0, -speed)
-		y_limit -= 100
-	if event.is_action_pressed("move_down"):
-		move_vector = Vector2(0, +speed)
-		y_limit += 100
+		_move(true)
+	elif event.is_action_pressed("move_down"):
+		_move(false)
+	elif event is InputEventScreenTouch:
+		if event.pressed and event.index == 0:
+			if event.position.y > (get_viewport().get_visible_rect().size.y / 2):
+				_move(false)
+			else:
+				_move(true)
 
 
 func _on_area_entered(area):
 	$AudioStreamPlayer2D.play()
 	get_tree().change_scene_to_file("res://scenes/carride.tscn")
+
+
+func _move(dir_up: bool):
+	move_vector = Vector2(0, (-speed if dir_up else speed))
+	y_limit += -100 if dir_up else 100

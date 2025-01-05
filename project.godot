@@ -19,9 +19,9 @@ boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/image="res://images/SplashScreen.png"
 config/icon="res://icon.svg"
 boot_splash/minimum_display_time=1000
-config/version="A.1.0"
-config/build_number=1
-config/date="2023-11-04 21:38"
+config/version="A.1.1"
+config/build_number=2
+config/date="2023-11-07 22:46"
 
 [autoload]
 
@@ -114,3 +114,4 @@ console_autocomplete={
 [rendering]
 
 renderer/rendering_method="mobile"
+textures/vram_compression/import_etc2_astc=true
