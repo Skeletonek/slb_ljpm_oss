@@ -17,9 +17,10 @@ const SPEED_INCREMENT := 300
 
 var _sprite := texture
 var _stop := false
-var _p_mul := parallax_multiplier
+var _p_mul: float
 
 func _ready():
+	_p_mul = parallax_multiplier
 	SignalBus.reduce_motion.connect(_reduce_motion)
 	if mr_parallax_multiplier == 0.0:
 		mr_parallax_multiplier = parallax_multiplier

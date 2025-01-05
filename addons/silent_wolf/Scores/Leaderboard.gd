@@ -10,7 +10,7 @@ var ld_name = "dev" if OS.is_debug_build() else "main"
 var max_scores = 500
 
 
-func _ready():
+func boot():
 	print("SilentWolf.Scores.leaderboards: " + str(SilentWolf.Scores.leaderboards))
 	print("SilentWolf.Scores.ldboard_config: " + str(SilentWolf.Scores.ldboard_config))
 	var scores = SilentWolf.Scores.scores

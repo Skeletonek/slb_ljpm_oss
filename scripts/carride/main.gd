@@ -32,11 +32,7 @@ var spawn_rnd_max: int = 1:
 	get:
 		return spawn_rnd_max + ((speed - 300) / 300)
 
-var start_time: int:
-	get:
-		return start_time
-
-var time: int:
+var time: int = 0:
 	get:
 		return time
 
@@ -50,7 +46,6 @@ var final_score: int:
 
 
 func _ready():
-	start_time = Time.get_ticks_msec()
 	_change_scale_factor()
 	vehicle_reached_oob.connect(_respawn_vehicle)
 	GlobalMusic.change_track()
@@ -59,7 +54,7 @@ func _ready():
 func _process(delta):
 	_change_scale_factor() #FIXME: Find better solution
 	if not stop_processing:
-		time = Time.get_ticks_msec() - start_time
+		time += delta * 1000000
 		if speed < 1560:
 			speed += delta * speed_increment
 			gauge_speed = (speed / 10) - 66
@@ -87,12 +82,15 @@ func _physics_process(_delta):
 
 
 func game_over():
-	final_score = (milks * 100000) + roundi((Time.get_ticks_msec() - start_time) * 0.01)
+	final_score = (milks * 100000) + roundi((time) * 0.01)
 	gui.game_over()
 	$PauseLayer.process_mode = Node.PROCESS_MODE_DISABLED
 	stop_processing = true
 	milk_spawner.stop()
 	if not SettingsBus.cheats:
+		ProfileBus.profile.add_milks(milks)
+		ProfileBus.profile.add_time(time)
+		ProfileBus.profile.add_speed(speed)
 		var leaderboard_name = "dev" if OS.is_debug_build() else "main"
 		SilentWolf.Scores.save_score(SettingsBus.playername, final_score, leaderboard_name)
 
@@ -123,5 +121,5 @@ func _achievement_check():
 		AchievementSystem.call_achievement("speed_110")
 	if speed > 1200:
 		AchievementSystem.call_achievement("speed_150")
-	if time > 60000 and milks == 0:
+	if time > 60000000 and milks == 0:
 		AchievementSystem.call_achievement("lactose_intolerant")

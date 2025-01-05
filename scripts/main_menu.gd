@@ -4,6 +4,7 @@ signal signal_debug_dev_buttons
 
 @export var skeletonek_logo: Control
 @export var godot_logo: Control
+@export var focus_node: Control
 
 var build_number: int = ProjectSettings.get_setting("application/config/build_number")
 var version: String
@@ -29,9 +30,9 @@ func _ready():
 #	GlobalMusic.finished.connect(_on_global_music_finished)
 #	if not GlobalMusic.is_playing():
 #		_on_global_music_finished()
-	$MainMenuLayer/VBoxContainer/ContinueButton.grab_focus()
+	focus_node.grab_focus()
 
-	signal_debug_dev_buttons.connect(_enable_dev_buttons)
+	# signal_debug_dev_buttons.connect(_enable_dev_buttons)
 	# Developer console is inaccessible on Android, unless you have plugged in a keyboard
 	if OS.get_name() == "Android" and OS.is_debug_build():
 		$MainMenuLayer/DevButtons.visible = true
@@ -112,6 +113,7 @@ func _update_game():
 func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		SettingsBus.save_config()
+		ProfileBus.save_profile_to_file()
 		get_tree().quit() # default behavior
 
 
@@ -141,7 +143,14 @@ func _on_achievements_button_pressed():
 	$AchievementsLayer/PanelContainer/VBoxContainer/MarginContainer2/BackButton.grab_focus()
 
 
+func _on_statistics_button_pressed():
+	_hide_all_layers()
+	$ProfileLayer.show()
+	$ProfileLayer/PanelContainer/VBoxContainer/MarginContainer2/BackButton.grab_focus()
+
+
 func _on_hi_score_button_pressed():
+	$LeaderboardLayer.boot()
 	_hide_all_layers()
 	$LeaderboardLayer.show()
 	$LeaderboardLayer/Board/CloseButtonContainer/CloseButton.grab_focus()
@@ -149,13 +158,14 @@ func _on_hi_score_button_pressed():
 
 func _on_exit_button_pressed():
 	SettingsBus.save_config()
+	ProfileBus.save_profile_to_file()
 	get_tree().quit()
 
 
 func _on_back_button_pressed():
 	_hide_all_layers()
 	$MainMenuLayer.show()
-	$MainMenuLayer/VBoxContainer/ContinueButton.grab_focus()
+	focus_node.grab_focus()
 
 
 func _hide_all_layers():
@@ -164,6 +174,7 @@ func _hide_all_layers():
 	$LeaderboardLayer.hide()
 	$AchievementsLayer.hide()
 	$CreditsLayer.hide()
+	$ProfileLayer.hide()
 
 
 func _on_skeletonek_logo_click(event):

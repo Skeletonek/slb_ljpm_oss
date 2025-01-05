@@ -9,6 +9,7 @@ var y_limit := position.y
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	SignalBus.reduce_motion.connect(_reduce_motion)
+	_set_skin()
 	if SettingsBus.reduced_motion:
 		$LukaszczykWPandzie.stop()
 
@@ -49,6 +50,7 @@ func _on_area_entered(area):
 			area.queue_free()
 			owner.milks += 1
 			$MilkPlayer.play()
+			_milk_achievement_check()
 	elif area.is_in_group("Obstacles"):
 		$CrashPlayer.play()
 		if not SettingsBus.godmode:
@@ -73,8 +75,30 @@ func move(dir_up: bool):
 	y_limit += -lane_y_diff if dir_up else lane_y_diff
 
 
+func _set_skin():
+	var skin
+	match(ProfileBus.profile.chosen_skin):
+		Profile.Skins.FIAT_PANDA:
+			skin = load("res://sprites/spriteframes/Panda.tres")
+		Profile.Skins.PIGTANK:
+			skin = load("res://sprites/spriteframes/Pigtank.tres")
+	$LukaszczykWPandzie.sprite_frames = skin
+	$LukaszczykWPandzie.play()
+
+
 func _reduce_motion(yes):
 	if yes:
 		$LukaszczykWPandzie.stop()
 	else:
 		$LukaszczykWPandzie.play("default")
+
+
+func _milk_achievement_check():
+	var stats_milk = ProfileBus.profile.milks_total
+	if stats_milk + owner.milks >= 1000:
+		AchievementSystem.call_achievement("milk_1000")
+	if stats_milk + owner.milks >= 500:
+		AchievementSystem.call_achievement("milk_500")
+	if stats_milk + owner.milks >= 100:
+		AchievementSystem.call_achievement("milk_100")
+

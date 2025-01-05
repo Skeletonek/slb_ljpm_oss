@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="SLB: LJPM"
-config/version="2.0-alpha+4"
+config/version="2.0-alpha+5"
 run/main_scene="res://scenes/bootscreen.tscn"
 config/project_settings_override="user://override.cfg"
 config/quit_on_go_back=false
@@ -20,9 +20,8 @@ run/flush_stdout_on_print=true
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/image="res://images/SplashScreen.png"
 config/icon="res://icon.svg"
-boot_splash/minimum_display_time=1000
-config/build_number=19
-config/date="2024-09-12 20:47"
+config/build_number=20
+config/date="2024-09-15 19:06"
 
 [autoload]
 
@@ -33,6 +32,7 @@ SignalBus="*res://scripts/subsystems/signal_bus.gd"
 AchievementSystem="*res://scenes/ui/achievement/achievement_scene.tscn"
 DevConsole="*res://scenes/autoload/console_scene.tscn"
 SilentWolf="*res://addons/silent_wolf/SilentWolf.gd"
+ProfileBus="*res://scripts/subsystems/stats_bus.gd"
 
 [debug]
 

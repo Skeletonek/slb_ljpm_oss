@@ -6,7 +6,8 @@ var musicfiles = [
 	preload("res://audio/music/digitist.ogg"),
 	preload("res://audio/music/tech-junkie.ogg"),
 	preload("res://audio/music/dead-ahead.ogg"),
-	preload("res://audio/music/hard-trouble.ogg")
+	preload("res://audio/music/hard-trouble.ogg"),
+	preload("res://audio/music/sahara.ogg"),
 ]
 var stricken_remastered = preload("res://audio/music/stricken_commision_remastered.ogg")
 var random: int = 0
@@ -28,7 +29,7 @@ func change_track():
 			play()
 			seek(pos)
 			return
-	random = randi_range(0,5)
+	random = randi_range(0,len(musicfiles)-1)
 	stream = musicfiles[random]
 	play()
 

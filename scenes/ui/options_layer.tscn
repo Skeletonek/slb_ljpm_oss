@@ -886,7 +886,7 @@ bus = &"SFX"
 [connection signal="value_changed" from="TabContainer/Audio/VBoxContainer/HBoxContainer4/MusicSlider" to="." method="_on_music_slider_value_changed"]
 [connection signal="toggled" from="TabContainer/Rozgrywka/ScrollContainer/VBoxContainer/TouchScreenControls/HBoxContainer/Tap/TCHTap" to="." method="_on_tch_tap_toggled"]
 [connection signal="toggled" from="TabContainer/Rozgrywka/ScrollContainer/VBoxContainer/TouchScreenControls/HBoxContainer/Swipe/TCHSwipe" to="." method="_on_tch_swipe_toggled"]
-[connection signal="toggled" from="TabContainer/Rozgrywka/ScrollContainer/VBoxContainer/TouchScreenControls/HBoxContainer/VirtualButtons/TCHVButtons" to="." method="_on_tchv_buttons_toggled"]
+[connection signal="toggled" from="TabContainer/Rozgrywka/ScrollContainer/VBoxContainer/TouchScreenControls/HBoxContainer/VirtualButtons/TCHVButtons" to="." method="_on_tch_vbuttons_toggled"]
 [connection signal="pressed" from="TabContainer/Rozgrywka/ScrollContainer/VBoxContainer/PlayerName/HBoxContainer/PlayernameButton" to="." method="_on_playername_button_pressed"]
 [connection signal="toggled" from="TabContainer/Rozgrywka/ScrollContainer/VBoxContainer/ShowConsole/ShowConsoleButton" to="." method="_on_show_console_button_toggled"]
 [connection signal="toggled" from="TabContainer/Rozgrywka/ScrollContainer/VBoxContainer/ShowFPS/ShowFPSButton" to="." method="_on_show_fps_button_toggled"]

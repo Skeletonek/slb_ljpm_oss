@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://scripts/carride/ai_vehicle.gd" id="1_nocqf"]
 [ext_resource type="Texture2D" uid="uid://b1bqnsurkpd3o" path="res://sprites/Milk.png" id="2_j6qcp"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qmsv7"]
-size = Vector2(52, 51)
+[sub_resource type="CircleShape2D" id="CircleShape2D_ayeeq"]
+radius = 30.0
 
 [node name="Milk" type="Area2D" groups=["Milk"]]
 z_index = -1
@@ -17,6 +17,6 @@ texture = ExtResource("2_j6qcp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 5)
-shape = SubResource("RectangleShape2D_qmsv7")
+shape = SubResource("CircleShape2D_ayeeq")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

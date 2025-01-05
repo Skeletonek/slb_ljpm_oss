@@ -43,6 +43,7 @@ const SUPPORTED_COMMANDS = [
 	# Carride commands
 	"cr_speedometer_value",
 	"cr_playername",
+	"cr_skin",
 	]
 
 const UPDATE_INTERVAL := 0.1
@@ -166,6 +167,14 @@ func _on_prompt_edit_text_submitted(new_text):
 
 # The 'setting' property is only for showing the value
 # In GDScript it's imposssible to pass a primitive type as an reference
+func _process_int(setting: int, value, min: int, max: int) -> Variant:
+	if value.is_valid_int():
+		var val = clampi(int(value), min, max)
+		return val
+	print("Value (int): " + str(setting))
+	return null
+
+
 func _process_float(setting: float, value, min: float, max: float) -> Variant:
 	if value.is_valid_float():
 		var val = clampf(float(value), min, max)
@@ -213,7 +222,7 @@ func _gamemap() -> bool:
 func _carride() -> bool:
 	if SettingsBus.playername.split("#")[0] == "":
 		push_error("Your name is not set! " +
-			 "Set your playername in gameplay page of game settings or via cr_playername command! ")
+			"Set your playername in gameplay page of game settings or via cr_playername command! ")
 		return true
 	get_tree().change_scene_to_file("res://scenes/carride.tscn")
 	return true
@@ -430,4 +439,11 @@ func _cr_playername(arg="") -> bool:
 	var ret = _process_string(SettingsBus.playername.split("#")[0], arg)
 	if ret != null:
 		SettingsBus.playername = arg.replace("\n", "") + SettingsBus.playername.right(9)
+	return true
+
+
+func _cr_skin(arg="") -> bool:
+	var ret = _process_int(ProfileBus.profile.chosen_skin, arg, 0, 3)
+	if ret != null:
+		ProfileBus.profile.chosen_skin = ret
 	return true

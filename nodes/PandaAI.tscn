@@ -69,7 +69,6 @@ script = ExtResource("1_rr0dr")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_dpywc")
 animation = &"blue"
-frame_progress = 0.0460272
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

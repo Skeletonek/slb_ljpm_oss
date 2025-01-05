@@ -8,30 +8,6 @@ extends Node
 # Is hidden?: boolean
 
 const ACHIEVEMENT_LIST = {
-	"test": [
-		"Testowe osiągnięcie",
-		"To jest testowe osiągnięcie",
-		preload("res://images/icons/slb2icon.png"),
-		false
-		],
-	"test2": [
-		"Testowe osiągnięcie 2",
-		"To jest drugie testowe osiągnięcie bo jedno to było za mało",
-		preload("res://images/icons/slb2icon.png"),
-		false
-		],
-	"test3": [
-		"Testowe osiągnięcie 3",
-		"To jest trzecie testowe osiągnięcie bo tak",
-		preload("res://images/icons/slb2icon.png"),
-		false
-		],
-	"hidden": [
-		"Testowe ukryte osiągnięcie",
-		"To jest testowe osiągnięcie które jest ukryte",
-		preload("res://images/icons/slb2icon.png"),
-		true
-		],
 	"lactose_intolerant": [
 		"Nietolerancja laktozy",
 		"Jedź przez minutę i nie zbierz żadnego mleka",

@@ -7,7 +7,7 @@ const MINIMUM_SWIPE_DRAG = 60
 @export var label_time: Label
 @export var label_milk: Label
 
-var diff_time: int
+var diff_time: int = 0
 var swipe_start: Vector2
 var stop_processing := false
 
@@ -20,7 +20,6 @@ var stop_processing := false
 func _ready() -> void:
 	if SettingsBus.easier_font:
 		label_time.label_settings.font_size = 32
-	diff_time = 0
 	SignalBus.enable_touchscreen_vbuttons.connect(_enable_vbuttons)
 	SignalBus.cr_speedometer_value.connect(_cr_speedometer_value)
 	_cr_speedometer_value(SettingsBus.cr_speedometer_label)
@@ -28,12 +27,13 @@ func _ready() -> void:
 		_enable_vbuttons(true)
 
 
+@warning_ignore("integer_division")
 func _process(_delta: float) -> void:
 	if not stop_processing:
 		diff_time = owner.time
-		var miliseconds: int = diff_time % 1000
-		var seconds: int = (diff_time / 1000) % 60
-		var minutes: int = (diff_time / 1000) / 60
+		var miliseconds: int = (diff_time / 1000) % 1000
+		var seconds: int = (diff_time / 1000000) % 60
+		var minutes: int = (diff_time / 1000000) / 60
 		label_time.text = ("%02d:%02d:%03d" % [minutes, seconds, miliseconds])
 		speedometer.text = ("%.3f" % [owner.speed])
 

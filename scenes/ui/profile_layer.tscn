@@ -1,0 +1,142 @@
+[gd_scene load_steps=3 format=3 uid="uid://cex336ldxva3h"]
+
+[ext_resource type="Script" path="res://scripts/ui/profile_layer.gd" id="1_1ea5q"]
+[ext_resource type="Material" uid="uid://cqn5rkmj7io2i" path="res://shaders/panel_shader_material.tres" id="2_wno1y"]
+
+[node name="ProfileLayer" type="CanvasLayer" node_paths=PackedStringArray("milk", "milk_single_run", "time_played_single_run", "time_played_sum", "top_speed", "avg_speed", "meters_driven")]
+script = ExtResource("1_1ea5q")
+milk = NodePath("PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/MilkContainer/MilkValue")
+milk_single_run = NodePath("PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/MilkSingleRunContainer/MilkSingleRunValue")
+time_played_single_run = NodePath("PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/TimePlayedSingleRunContainer/TimePlayedSingleRunValue")
+time_played_sum = NodePath("PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/TimePlayedSumContainer/TimePlayedSumValue")
+top_speed = NodePath("PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/TopSpeedContainer/TopSpeedValue")
+avg_speed = NodePath("PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/AvgSpeedContainer/AvgSpeedValue")
+meters_driven = NodePath("PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/MetersDrivenContainer/MetersDrivenValue")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+material = ExtResource("2_wno1y")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/VBoxContainer/MarginContainer"]
+clip_contents = false
+layout_mode = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="MilkContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="MilkLabel" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/MilkContainer"]
+layout_mode = 2
+text = "milks_total:"
+
+[node name="MilkValue" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/MilkContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="MilkSingleRunContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="MilkSingleRunLabel" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/MilkSingleRunContainer"]
+layout_mode = 2
+text = "milks_single_run:"
+
+[node name="MilkSingleRunValue" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/MilkSingleRunContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="TimePlayedSingleRunContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TimePlayedSingleRunLabel" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/TimePlayedSingleRunContainer"]
+layout_mode = 2
+text = "time_played_single_run:"
+
+[node name="TimePlayedSingleRunValue" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/TimePlayedSingleRunContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="TimePlayedSumContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TimePlayedSumLabel" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/TimePlayedSumContainer"]
+layout_mode = 2
+text = "time_played_sum:"
+
+[node name="TimePlayedSumValue" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/TimePlayedSumContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="TopSpeedContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TopSpeedLabel" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/TopSpeedContainer"]
+layout_mode = 2
+text = "top_speed:"
+
+[node name="TopSpeedValue" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/TopSpeedContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="AvgSpeedContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="AvgSpeedLabel" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/AvgSpeedContainer"]
+layout_mode = 2
+text = "avg_speed:"
+
+[node name="AvgSpeedValue" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/AvgSpeedContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="MetersDrivenContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="MetersDrivenLabel" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/MetersDrivenContainer"]
+layout_mode = 2
+text = "meters_driven:"
+
+[node name="MetersDrivenValue" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/MetersDrivenContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="BackButton" type="Button" parent="PanelContainer/VBoxContainer/MarginContainer2"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Powrót"
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/MarginContainer2/BackButton" to="." method="_on_back_button_pressed"]
