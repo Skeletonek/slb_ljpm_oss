@@ -10,7 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://cb3mjcebhws3" path="res://audio/sfx/acquire2.wav" id="8_1nk6d"]
 [ext_resource type="AudioStream" uid="uid://df6d8kntbfdxv" path="res://audio/sfx/button_off.wav" id="9_1vd1p"]
 
-[node name="ShopLayer" type="CanvasLayer" node_paths=PackedStringArray("skin_image", "skin_name", "skin_price", "skin_buy_button", "skin_lock_icon", "skin_community_icon", "map_image", "map_name", "map_price", "map_buy_button", "map_lock_icon", "map_community_icon", "milks", "buy_success_player", "buy_fail_player")]
+[node name="ShopLayer" type="CanvasLayer" node_paths=PackedStringArray("skin_image", "skin_name", "skin_price", "skin_buy_button", "skin_lock_icon", "skin_community_icon", "skin_community_author", "map_image", "map_name", "map_price", "map_buy_button", "map_lock_icon", "map_community_icon", "map_community_author", "milks", "buy_success_player", "buy_fail_player")]
 script = ExtResource("1_gxe8y")
 skin_image = NodePath("PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/SkinImageTextureRect")
 skin_name = NodePath("PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/SkinNameLabel")
@@ -18,12 +18,14 @@ skin_price = NodePath("PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/
 skin_buy_button = NodePath("PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/SkinBuyButton")
 skin_lock_icon = NodePath("PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/SkinImageTextureRect/SkinImageLockedTextureRect")
 skin_community_icon = NodePath("PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/SkinImageTextureRect/SkinImageCommunityTextureRect2")
+skin_community_author = NodePath("PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/SkinImageTextureRect/SkinImageCommunityLabel")
 map_image = NodePath("PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/MapImageTextureRect")
 map_name = NodePath("PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/MapNameLabel")
 map_price = NodePath("PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/MapPriceContainer/MapPriceLabel")
 map_buy_button = NodePath("PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/MapBuyButton")
 map_lock_icon = NodePath("PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/MapImageTextureRect/MapImageLockedTextureRect")
 map_community_icon = NodePath("PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/MapImageTextureRect/MapImageCommunityTextureRect3")
+map_community_author = NodePath("PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/MapImageTextureRect/MapImageCommunityLabel")
 milks = NodePath("PanelContainer/VBoxContainer/HBoxContainer2/MilksLabel")
 buy_success_player = NodePath("BuyPlayer")
 buy_fail_player = NodePath("ErrorPlayer")
@@ -55,7 +57,7 @@ theme_override_constants/separation = 64
 alignment = 1
 
 [node name="SkinLeftButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(32, 0)
+custom_minimum_size = Vector2(48, 0)
 layout_mode = 2
 text = "<-"
 
@@ -70,7 +72,7 @@ flip_h = true
 
 [node name="SkinImageLockedTextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/SkinImageTextureRect"]
 visible = false
-modulate = Color(1, 1, 1, 0.588235)
+modulate = Color(1, 1, 1, 0.470588)
 custom_minimum_size = Vector2(256, 256)
 layout_mode = 1
 anchors_preset = 8
@@ -105,8 +107,19 @@ grow_vertical = 2
 texture = ExtResource("5_w3u5b")
 expand_mode = 5
 
+[node name="SkinImageCommunityLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/SkinImageTextureRect"]
+visible = false
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 0
+offset_left = 28.0
+offset_top = 525.0
+offset_right = 228.0
+offset_bottom = 552.0
+text = "Astro"
+horizontal_alignment = 1
+
 [node name="SkinRightButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(32, 0)
+custom_minimum_size = Vector2(48, 0)
 layout_mode = 2
 text = "->"
 
@@ -129,8 +142,8 @@ layout_mode = 2
 texture = ExtResource("6_xebl1")
 expand_mode = 3
 
-[node name="SkinBuyButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer" groups=["NoAudio"]]
-custom_minimum_size = Vector2(200, 0)
+[node name="SkinBuyButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer" groups=["NoButtonPressSFX"]]
+custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Kup"
@@ -147,7 +160,7 @@ theme_override_constants/separation = 64
 alignment = 1
 
 [node name="MapLeftButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
-custom_minimum_size = Vector2(32, 0)
+custom_minimum_size = Vector2(48, 0)
 layout_mode = 2
 text = "<-"
 
@@ -161,7 +174,7 @@ stretch_mode = 5
 
 [node name="MapImageLockedTextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/MapImageTextureRect"]
 visible = false
-modulate = Color(1, 1, 1, 0.588235)
+modulate = Color(1, 1, 1, 0.470588)
 custom_minimum_size = Vector2(256, 0)
 layout_mode = 1
 anchors_preset = 8
@@ -196,8 +209,19 @@ grow_vertical = 2
 texture = ExtResource("5_w3u5b")
 expand_mode = 5
 
+[node name="MapImageCommunityLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/MapImageTextureRect"]
+visible = false
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 0
+offset_left = 28.0
+offset_top = 525.0
+offset_right = 228.0
+offset_bottom = 552.0
+text = "Astro"
+horizontal_alignment = 1
+
 [node name="MapRightButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
-custom_minimum_size = Vector2(32, 0)
+custom_minimum_size = Vector2(48, 0)
 layout_mode = 2
 text = "->"
 
@@ -220,8 +244,8 @@ layout_mode = 2
 texture = ExtResource("6_xebl1")
 expand_mode = 3
 
-[node name="MapBuyButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2" groups=["NoAudio"]]
-custom_minimum_size = Vector2(200, 0)
+[node name="MapBuyButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2" groups=["NoButtonPressSFX"]]
+custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Kup"

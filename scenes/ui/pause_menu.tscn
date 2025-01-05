@@ -83,15 +83,15 @@ visible = false
 layer = 50
 visible = false
 
-[node name="PauseButton" type="Button" parent="AndroidPauseLayer"]
-custom_minimum_size = Vector2(50, 50)
+[node name="PauseButton" type="Button" parent="AndroidPauseLayer" groups=["NoButtonPressSFX"]]
+custom_minimum_size = Vector2(60, 60)
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 60.0
 offset_bottom = 60.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 32
 text = "||"
 
 [connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]

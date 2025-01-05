@@ -65,7 +65,7 @@ position = Vector2(0, -135)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("6_54chw")
 script = ExtResource("3_xjldr")
-parallax_multiplier = 0.15
+parallax_multiplier = 0.45
 mr_stopped = true
 
 [node name="Background" type="Sprite2D" parent="Background"]

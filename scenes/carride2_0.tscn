@@ -155,10 +155,10 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 225.0
-offset_top = -75.0
-offset_right = 405.0
-offset_bottom = -25.0
+offset_left = 127.0
+offset_top = -94.0
+offset_right = 350.0
+offset_bottom = -44.0
 grow_vertical = 0
 
 [node name="Label" type="Label" parent="GUI/TimeContainer"]
@@ -177,41 +177,36 @@ label_settings = SubResource("LabelSettings_s0jls")
 horizontal_alignment = 3
 
 [node name="MilkCountContainer" type="HBoxContainer" parent="GUI"]
-custom_minimum_size = Vector2(250, 50)
+custom_minimum_size = Vector2(100, 32)
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -270.0
-offset_top = -75.0
-offset_right = -20.0
-offset_bottom = -25.0
+offset_left = -1082.0
+offset_top = -47.0
+offset_right = -980.0
+offset_bottom = -3.0
 grow_horizontal = 0
 grow_vertical = 0
-
-[node name="Label" type="Label" parent="GUI/MilkCountContainer"]
-visible = false
-layout_mode = 2
-theme_override_font_sizes/font_size = 12
-text = "MLEKA: "
-label_settings = SubResource("LabelSettings_s0jls")
-uppercase = true
+alignment = 2
 
 [node name="TextureRect" type="TextureRect" parent="GUI/MilkCountContainer"]
-custom_minimum_size = Vector2(48, 32)
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 texture = ExtResource("3_0ciny")
 expand_mode = 5
 stretch_mode = 5
 
 [node name="LabelMilk" type="Label" parent="GUI/MilkCountContainer"]
+custom_minimum_size = Vector2(66, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
-text = "0
+text = "000
 "
 label_settings = SubResource("LabelSettings_s0jls")
+horizontal_alignment = 2
 
 [node name="SpeedContainer" type="HBoxContainer" parent="GUI"]
 visible = false
@@ -235,6 +230,7 @@ theme_override_font_sizes/font_size = 12
 text = "0
 "
 label_settings = SubResource("LabelSettings_s0jls")
+horizontal_alignment = 2
 
 [node name="HUDBorder" type="Sprite2D" parent="GUI"]
 z_index = -1
@@ -249,7 +245,7 @@ texture = SubResource("GradientTexture2D_n110a")
 
 [node name="LivesBorder" type="Sprite2D" parent="GUI"]
 z_index = -1
-position = Vector2(886.401, 664)
+position = Vector2(1066, 664)
 scale = Vector2(1.61564, 0.578701)
 texture = SubResource("GradientTexture2D_hvxgf")
 
@@ -272,7 +268,7 @@ scale = Vector2(0.309475, 0.864004)
 texture = ExtResource("8_mhq2g")
 
 [node name="PowerupBorder" type="Sprite2D" parent="GUI"]
-position = Vector2(457.401, 664)
+position = Vector2(1213, 664)
 scale = Vector2(0.615649, 0.578701)
 texture = SubResource("GradientTexture2D_hvxgf")
 
@@ -282,6 +278,28 @@ texture = SubResource("GradientTexture2D_n110a")
 
 [node name="PowerupHolder" type="Sprite2D" parent="GUI/PowerupBorder"]
 scale = Vector2(1.6243, 1.72801)
+
+[node name="TimeBorder" type="Sprite2D" parent="GUI"]
+z_index = -1
+position = Vector2(213, 649.75)
+scale = Vector2(1.46875, 0.332031)
+texture = SubResource("GradientTexture2D_hvxgf")
+
+[node name="TimeBG" type="Sprite2D" parent="GUI/TimeBorder"]
+position = Vector2(-1.64211e-05, -0.752923)
+scale = Vector2(1.91489, 1.64706)
+texture = SubResource("GradientTexture2D_n110a")
+
+[node name="MilkBorder" type="Sprite2D" parent="GUI"]
+z_index = -1
+position = Vector2(250, 694)
+scale = Vector2(0.890625, 0.3125)
+texture = SubResource("GradientTexture2D_hvxgf")
+
+[node name="MilkBG" type="Sprite2D" parent="GUI/MilkBorder"]
+position = Vector2(-2.83569e-05, -5.96046e-06)
+scale = Vector2(1.85965, 1.6)
+texture = SubResource("GradientTexture2D_n110a")
 
 [node name="Speedometer" type="Sprite2D" parent="GUI"]
 position = Vector2(640, 717)
@@ -359,9 +377,9 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -160.0
-offset_top = -318.0
+offset_top = -400.0
 offset_right = -32.0
-offset_bottom = -30.0
+offset_bottom = -112.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_constants/separation = 32

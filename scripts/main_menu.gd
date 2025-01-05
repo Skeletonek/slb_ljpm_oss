@@ -2,8 +2,6 @@ extends Control
 
 signal signal_debug_dev_buttons
 
-@export var skeletonek_logo: Control
-@export var godot_logo: Control
 @export var focus_node: Control
 
 var build_number: int = ProjectSettings.get_setting("application/config/build_number")

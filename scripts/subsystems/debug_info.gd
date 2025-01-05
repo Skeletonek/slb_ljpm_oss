@@ -20,8 +20,8 @@ func _ready():
 		delta_label.visible = true
 		$DebugInfo/Version/VersionBuildDate2.text = "Development Version"
 	$DebugInfo/Version/VersionBuildDate.text = "SLB: LJPM\n" + \
-	"Version: " + ProjectSettings.get_setting("application/config/version") + "\n" + \
 	"Build: " + str(ProjectSettings.get_setting("application/config/build_number")) + "\n" + \
+	"Version: " + ProjectSettings.get_setting("application/config/version") + "\n" + \
 	"Date: " + ProjectSettings.get_setting("application/config/date")
 	print(debug_info())
 
@@ -61,6 +61,7 @@ func debug_info() -> String:
 	var os_name = OS.get_name()
 	var os_distroname = OS.get_distribution_name()
 	var os_version = OS.get_version()
+	var device_name = OS.get_model_name()
 	var locale = OS.get_locale_language()
 	var cpu_name = OS.get_processor_name()
 	var cpu_corecount = str(OS.get_processor_count())
@@ -81,6 +82,7 @@ func debug_info() -> String:
 	return (
 		"Godot Engine {0}\n" +
 		"OS: {1} {2} {3}\n" +
+		"DEVICE: {16}\n" +
 		"CPU: {4} {5} threads\n" +
 		"MEMORY: ALL:{12}M | FREE:{13}M | AVAIL:{14}M | STACK:{15}M\n"+
 		"GPU: {6} {7}\n" +
@@ -104,6 +106,7 @@ func debug_info() -> String:
 		mem_free,
 		mem_available,
 		mem_stack,
+		device_name,
 	])
 
 

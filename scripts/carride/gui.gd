@@ -43,6 +43,7 @@ func _ready() -> void:
 		_enable_vbuttons(true)
 	if owner.version_2:
 		powerup_ending_timer.timeout.connect(_blink_powerup)
+	update_points()
 
 
 @warning_ignore("integer_division")
@@ -83,6 +84,13 @@ func show_powerup(powerup: PowerupClass.Powerups) -> void:
 
 func hide_powerup() -> void:
 	powerup_holder.hide()
+
+
+func stop_blinking_powerup() -> void:
+	powerup_ending_player.stop()
+	if powerup_ending_tween:
+		powerup_ending_tween.kill()
+	powerup_holder.modulate = Color.WHITE
 
 
 func _blink_powerup() -> void:

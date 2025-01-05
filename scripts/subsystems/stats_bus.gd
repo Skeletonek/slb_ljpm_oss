@@ -17,6 +17,8 @@ func _ready() -> void:
 		)
 		profile = _generate_clean_profile()
 	_add_missing_skins_and_maps()
+	print(profile.skins)
+	print(profile.maps)
 
 
 func get_skin_data(skin_index: int) -> Dictionary:
@@ -28,26 +30,29 @@ func get_skin_data(skin_index: int) -> Dictionary:
 				"texture": load("res://sprites/Panda_0001.png"),
 				"spriteframe": load("res://sprites/spriteframes/Panda.tres"),
 				"community_made": false,
+				"author": "",
 				"price": 0,
+				"y_pos_offset": 0.0,
+				"scale": 0.95,
+			}
+		profile.Skins.VOLVO_COMBI:
+			dict = {
+				"name": "Volvo",
+				"texture": load("res://sprites/Volvo_0001.png"),
+				"spriteframe": load("res://sprites/spriteframes/Volvo.tres"),
+				"community_made": true,
+				"author": "Astro",
+				"price": 250,
 				"y_pos_offset": 0.0,
 				"scale": 1.0,
 			}
-		# profile.Skins.VOLVO_COMBI:
-		# 	dict = {
-		# 		"name": "Volvo",
-		# 		"texture": null,
-		# 		"spriteframe": null,
-		# 		"community_made": false,
-		# 		"price": 250,
-		# 		"y_pos_offset": 0.0,
-		# 		"scale": 1.0,
-		# 	}
 		profile.Skins.REAL_PANDA:
 			dict = {
 				"name": "Panda",
 				"texture": load("res://sprites/RealPanda_0001.png"),
 				"spriteframe": load("res://sprites/spriteframes/RealPanda.tres"),
 				"community_made": true,
+				"author": "Astro",
 				"price": 500,
 				"y_pos_offset": -8.0,
 				"scale": 1.0,
@@ -58,6 +63,7 @@ func get_skin_data(skin_index: int) -> Dictionary:
 				"texture": load("res://sprites/Pigtank_0001.png"),
 				"spriteframe": load("res://sprites/spriteframes/Pigtank.tres"),
 				"community_made": false,
+				"author": "",
 				"price": 400,
 				"y_pos_offset": 0.0,
 				"scale": 1.0,
@@ -68,6 +74,7 @@ func get_skin_data(skin_index: int) -> Dictionary:
 				"texture": load("res://sprites/LunarRover_0001.png"),
 				"spriteframe": load("res://sprites/spriteframes/LunarRover.tres"),
 				"community_made": false,
+				"author": "",
 				"price": 200,
 				"y_pos_offset": -4.0,
 				"scale": 0.88,
@@ -78,6 +85,7 @@ func get_skin_data(skin_index: int) -> Dictionary:
 				"texture": load("res://sprites/ContentMaker_0001.png"),
 				"spriteframe": load("res://sprites/spriteframes/ContentMaker.tres"),
 				"community_made": true,
+				"author": "Astro",
 				"price": 800,
 				"y_pos_offset": -24.0,
 				"scale": 1.0,
@@ -88,9 +96,21 @@ func get_skin_data(skin_index: int) -> Dictionary:
 				"texture": load("res://sprites/LukaszczykOnAHorse_0001.png"),
 				"spriteframe": load("res://sprites/spriteframes/LukaszczykOnAHorse.tres"),
 				"community_made": true,
+				"author": "Astro",
 				"price": 400,
 				"y_pos_offset": 0.0,
 				"scale": 1.0,
+			}
+		profile.Skins.EMO_PANDA:
+			dict = {
+				"name": "Łukasczyk na koniu",
+				"texture": load("res://sprites/EmoPanda_0001.png"),
+				"spriteframe": load("res://sprites/spriteframes/EmoPanda.tres"),
+				"community_made": true,
+				"author": "Astro",
+				"price": 300,
+				"y_pos_offset": 0.0,
+				"scale": 0.95,
 			}
 	return dict
 
@@ -104,6 +124,7 @@ func get_map_data(map_index: int) -> Dictionary:
 				"texture": load("res://images/maps/ForestMap.png"),
 				"scene": load("res://nodes/maps/ForestMap.tscn"),
 				"community_made": false,
+				"author": "",
 				"price": 0,
 			}
 		profile.Maps.SAHARA:
@@ -112,6 +133,7 @@ func get_map_data(map_index: int) -> Dictionary:
 				"texture": load("res://images/maps/SaharaMap.png"),
 				"scene": load("res://nodes/maps/SaharaMap.tscn"),
 				"community_made": false,
+				"author": "",
 				"price": 400,
 			}
 		profile.Maps.LUNAR_CONFLICT:
@@ -120,6 +142,7 @@ func get_map_data(map_index: int) -> Dictionary:
 				"texture": load("res://images/maps/LunarConflictMap.png"),
 				"scene": load("res://nodes/maps/LunarConflictMap.tscn"),
 				"community_made": false,
+				"author": "Coco Jambo on Century Old Organs",
 				"price": 200,
 			}
 	return dict
@@ -181,24 +204,17 @@ func _generate_clean_profile() -> Profile:
 		0,
 		0,
 		0,
-		[true],
-		[true],
+		{0: true},
+		{0: true},
 		Profile.Skins.FIAT_PANDA,
 		Profile.Maps.FOREST,
 	)
 
 
 func _add_missing_skins_and_maps() -> void:
-	var skins_size = profile.Skins.size()
-	var maps_size = profile.Maps.size()
-	var skins_unlocked_size = profile.skins.size()
-	var maps_unlocked_size = profile.maps.size()
-
-	var skins_diff = skins_size - skins_unlocked_size
-	var maps_diff = maps_size - maps_unlocked_size
-
-	for x in range(0, skins_diff):
-		profile.skins.append(false)
-	for x in range(0, maps_diff):
-		profile.maps.append(false)
-
+	for skin in Profile.Skins.values():
+		if skin not in profile.skins:
+			profile.skins[skin] = false
+	for map in Profile.Maps.values():
+		if map not in profile.maps:
+			profile.maps[map] = false

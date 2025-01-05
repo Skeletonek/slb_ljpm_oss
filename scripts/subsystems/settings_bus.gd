@@ -28,6 +28,7 @@ var fps_max := 60
 var ui_blur := true
 var ui_scaling := 1.0
 
+var touchscreen_mode := false
 var touchscreen_control := TouchscreenControlMode.TAP
 var keyboard_up := KEY_W
 var keyboard_down := KEY_S
@@ -98,6 +99,7 @@ func load_config() -> bool:
 
 	reduced_motion = data["reduced_motion"]
 	easier_font = data["easier_font"]
+	touchscreen_mode = data["touchscreen_mode"]
 	touchscreen_control = data["touchscreen_control"]
 	gamepad_deadzone = data["gamepad_deadzone"]
 	telemetry = data["telemetry"]
@@ -135,6 +137,7 @@ func save_config():
 		"dev_show_fps": dev_show_fps,
 		"reduced_motion": reduced_motion,
 		"easier_font": easier_font,
+		"touchscreen_mode": touchscreen_mode,
 		"touchscreen_control": touchscreen_control,
 		"gamepad_deadzone": gamepad_deadzone,
 		"keyboard_up": keyboard_up,
@@ -195,15 +198,8 @@ func _enter_tree():
 			show_os_alert("WAYLAND INITIALIZATION ERROR", "Couldn't start a Wayland client\n" +
 				"Game will run in X11 mode."
 			)
-	# if OS.get_name() != "Android" and not OS.has_feature("editor"):
-	# 	var audioload = ProjectSettings.load_resource_pack("res://Resources/SLB2_Audio.pck")
-	# 	var videoload = ProjectSettings.load_resource_pack("res://Resources/SLB2_Video.pck")
-	# 	var graphicsload = ProjectSettings.load_resource_pack("res://Resources/SLB2_Graphics.pck")
-	# 	if not audioload or not videoload or not graphicsload:
-	# 		show_os_alert("MISSING RESOURCES", "Missing resources.\n" +
-	# 				 "Check if you have all necessary resources installed inside the Resources directory.\n" +
-	# 				 "The game will terminate.")
-	# 		get_tree().quit(404)
+	if OS.get_name() == "Android":
+		touchscreen_mode = true # Enforce touchscreen mode for android devices
 
 
 func _initialize_settings():
@@ -234,6 +230,9 @@ func _initialize_settings():
 
 	if easier_font:
 		ThemeDB.get_project_theme().set_default_font(load("res://theme/fonts/OpenDyslexic-Regular.otf"))
+
+	if OS.get_name() == "Android":
+		touchscreen_mode = true
 
 	var event = null
 	for action in ["move_up", "move_down"]:

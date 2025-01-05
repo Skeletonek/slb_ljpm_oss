@@ -41,6 +41,7 @@ const SUPPORTED_COMMANDS = [
 	"ui_scale",
 	"ui_blur",
 	"vsync",
+	"touchscreen_mode",
 	# Carride commands
 	"cr_speedometer_value",
 	"cr_playername",
@@ -82,7 +83,8 @@ func _ready():
 	).tween_callback(_read_data
 	).set_delay(UPDATE_INTERVAL)
 
-	if OS.get_name() == "Android" && OS.is_debug_build():
+	SignalBus.switch_touchscreen_mode.connect(_hide_dev_button)
+	if SettingsBus.touchscreen_mode && SettingsBus.dev_console:
 		$AndroidLayer.show()
 
 
@@ -165,17 +167,19 @@ func _autocomplete():
 				prompt_edit.text = commands.keys()[0]
 			else:
 				prompt_edit.text = commands.keys()[index+1]
+		prompt_edit.caret_column = prompt_edit.text.length()
 
 
 func _history(backward: bool):
 	if visible and not command_history.is_empty():
-		prompt_edit.text = command_history[history_index-1]
+		prompt_edit.text = command_history[history_index]
 		if backward:
-			if history_index > 1:
+			if history_index > 0:
 				history_index -= 1
 		else:
-			if history_index < command_history.size():
+			if history_index < command_history.size()-1:
 				history_index += 1
+		prompt_edit.caret_column = prompt_edit.text.length()
 
 
 func _on_show_button_pressed():
@@ -184,12 +188,11 @@ func _on_show_button_pressed():
 		prompt_edit.grab_focus()
 
 
-func _hide_dev_button(yes: bool):
-	if OS.get_name() == "Android":
-		if yes:
-			$AndroidLayer.show()
-		else:
-			$AndroidLayer.hide()
+func _hide_dev_button(_yes=false):
+	if SettingsBus.touchscreen_mode and SettingsBus.dev_console:
+		$AndroidLayer.show()
+	else:
+		$AndroidLayer.hide()
 
 
 func _on_prompt_edit_text_submitted(new_text):
@@ -197,7 +200,7 @@ func _on_prompt_edit_text_submitted(new_text):
 	prompt_edit.grab_focus()
 	prompt_edit.clear()
 	command_history.push_back(new_text)
-	history_index = command_history.size()
+	history_index = command_history.size()-1
 
 	var command_arr = Array(new_text.split(" "))
 	if command_arr[0] not in commands:
@@ -495,6 +498,14 @@ func _vsync(arg="") -> bool:
 	if ret != null:
 		SettingsBus.vsync = ret
 		DisplayServer.window_set_vsync_mode(ret)
+	return true
+
+
+func _touchscreen_mode(arg="") -> bool:
+	var ret = _process_bool(SettingsBus.touchscreen_mode, arg)
+	if ret != null:
+		SettingsBus.touchscreen_mode = ret
+		SignalBus.switch_touchscreen_mode.emit()
 	return true
 
 

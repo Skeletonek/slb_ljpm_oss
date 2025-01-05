@@ -15,12 +15,10 @@ shadow_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_jtopa"]
 font = ExtResource("1_ny1i1")
-font_size = 22
 shadow_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_metde"]
 font = ExtResource("1_ny1i1")
-font_size = 22
 shadow_color = Color(0, 0, 0, 1)
 
 [node name="debug_info" type="Control" node_paths=PackedStringArray("fps_label", "delta_label", "dev_errors_label", "dev_errors_cleaner")]
@@ -59,8 +57,8 @@ offset_right = 235.0
 offset_bottom = -5.0
 grow_vertical = 0
 text = "SLB2: TGRa
-Version: <VERSION>
 Build: <BUILD_NUMBER>
+Version: <VERSION>
 Date: <DATE>"
 label_settings = SubResource("LabelSettings_tjnbd")
 vertical_alignment = 2
@@ -92,9 +90,9 @@ top_level = true
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -440.0
-offset_right = -210.0
-offset_bottom = 104.0
+offset_left = -300.0
+offset_right = -150.0
+offset_bottom = 50.0
 grow_horizontal = 0
 text = "FPS: xxx"
 label_settings = SubResource("LabelSettings_jtopa")
@@ -107,8 +105,8 @@ top_level = true
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -230.0
-offset_bottom = 104.0
+offset_left = -150.0
+offset_bottom = 50.0
 grow_horizontal = 0
 text = "DELTA: x.xxxxx"
 label_settings = SubResource("LabelSettings_metde")

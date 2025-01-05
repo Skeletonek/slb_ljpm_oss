@@ -13,7 +13,8 @@ echo -e "${GREEN}Copying necessary build files${NOCOLOR}";
 cp -v build/custom.py build/ljpm.build build/build_custom_templates.sh godot/;
 
 echo -e "${GREEN}Running docker container${NOCOLOR}";
-docker run -it -v ./godot:/godot registry.gitlab.com/skeletonek/ljpm/slb_godot_build:focal_fossa-sdk35 ./build_custom_templates.sh;
+docker login registry.gitlab.com
+docker run -it -v ./godot:/godot registry.gitlab.com/skeletonek/ljpm/slb_godot_build:focal_fossa-sdk34 ./build_custom_templates.sh;
 
 echo -e "${GREEN}Copying export templates${NOCOLOR}";
 cp -v godot/bin/* export_templates/;

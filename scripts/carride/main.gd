@@ -130,6 +130,7 @@ func reset_powerup():
 	powerup_timer.stop()
 	gui.hide_powerup()
 	gui.powerup_ending_timer.stop()
+	gui.stop_blinking_powerup()
 
 
 func _speed_management(delta):
@@ -254,19 +255,9 @@ func _achievement_check():
 
 
 func _check_game_over_achievements():
-	match(ProfileBus.profile.chosen_skin):
-		# Profile.Skins.VOLVO_COMBI:
-		# 	AchievementSystem.call_achievement("volvo_combi")
-		Profile.Skins.REAL_PANDA:
-			AchievementSystem.call_achievement("real_panda")
-		Profile.Skins.PIGTANK:
-			AchievementSystem.call_achievement("pigtank")
-		Profile.Skins.LUNAR_ROVER:
-			AchievementSystem.call_achievement("lunar_rover")
-		Profile.Skins.CONTENT_MAKER:
-			AchievementSystem.call_achievement("content_maker")
-	match(ProfileBus.profile.chosen_map):
-		Profile.Maps.SAHARA:
-			AchievementSystem.call_achievement("sahara")
-		Profile.Maps.LUNAR_CONFLICT:
-			AchievementSystem.call_achievement("lunar_conflict")
+	var skin_name = Profile.Skins.keys()[ProfileBus.profile.chosen_skin].to_lower()
+	if skin_name in AchievementSystem.data:
+		AchievementSystem.call_achievement(skin_name)
+	var map_name = Profile.Maps.keys()[ProfileBus.profile.chosen_map].to_lower()
+	if map_name in AchievementSystem.data:
+		AchievementSystem.call_achievement(map_name)

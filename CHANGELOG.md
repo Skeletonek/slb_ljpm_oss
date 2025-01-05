@@ -1,3 +1,24 @@
+#### 2.0-Beta+3
+ - Changed method how unlocked skins and maps are handled by profile system.
+     This change make previous save files incompatible
+ - Replaced main menu theme with its remastered version
+ - Added Volvo skin
+ - Added Emo Panda skin
+ - Added community attribution to shop layer
+ - Added Cyber Punk music track
+ - Added icons for milk achievements
+ - Added icons for Real Panda and Lukaszczyk on Horse achievements
+ - Added icon for Globetrotter achievement
+ - Added toggle for touchscreen mode
+ - Added device name debug info for Android devices
+ - Resized and repositioned some touchscreen buttons
+ - Changed FPS counter font size
+ - Changed layout of the carride HUD
+ - Fixed powerup still blinking when picked up another or died
+ - Fixed dev console caret jumping to incorrect position when using autocomplete
+ - Fixed space ship stopping with camera on Lunar Conflict map
+ - Refactored some checks for achievements
+
 #### 2.0-Beta+2
  - Improved parallax background in forest map
  - Slightly improved parallax background in sahara map

@@ -1,19 +1,20 @@
 class_name Profile
 
 enum Skins {
-	FIAT_PANDA,
-	# VOLVO_COMBI,
-	REAL_PANDA,
-	PIGTANK,
-	LUNAR_ROVER,
-	CONTENT_MAKER,
-	LUKASZCZYK_ON_HORSE,
+	FIAT_PANDA=0,
+	VOLVO_COMBI=1,
+	REAL_PANDA=2,
+	PIGTANK=3,
+	LUNAR_ROVER=4,
+	CONTENT_MAKER=5,
+	LUKASZCZYK_ON_HORSE=6,
+	EMO_PANDA=7,
 }
 
 enum Maps {
-	FOREST,
-	SAHARA,
-	LUNAR_CONFLICT
+	FOREST=0,
+	SAHARA=1,
+	LUNAR_CONFLICT=2,
 }
 
 var milks_total: int
@@ -25,8 +26,8 @@ var avg_speed: int
 var meters_driven: int
 
 var milks: int
-var skins: Array[bool]
-var maps: Array[bool]
+var skins: Dictionary
+var maps: Dictionary
 
 var chosen_skin: Skins = Skins.FIAT_PANDA
 var chosen_map: Maps = Maps.FOREST
@@ -41,8 +42,8 @@ func _init(
 		_avg_speed: int,
 		_meters_driven: int,
 		_milks: int,
-		_skins: Array[bool],
-		_maps: Array[bool],
+		_skins: Dictionary,
+		_maps: Dictionary,
 		_chosen_skin: Skins,
 		_chosen_map: Maps,
 ) -> void:

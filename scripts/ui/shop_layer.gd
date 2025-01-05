@@ -7,6 +7,7 @@ extends CanvasLayer
 @export var skin_buy_button: Button
 @export var skin_lock_icon: TextureRect
 @export var skin_community_icon: TextureRect
+@export var skin_community_author: Label
 
 @export_category("Map")
 @export var map_image: TextureRect
@@ -15,6 +16,7 @@ extends CanvasLayer
 @export var map_buy_button: Button
 @export var map_lock_icon: TextureRect
 @export var map_community_icon: TextureRect
+@export var map_community_author: Label
 
 @export_category("Misc")
 @export var milks: Label
@@ -101,6 +103,8 @@ func _update_skin_panel() -> void:
 	skin_image.texture = data['texture']
 	skin_name.text = data['name']
 	skin_community_icon.visible = data['community_made']
+	skin_community_author.visible = data['community_made']
+	skin_community_author.text = data['author']
 	skin_price.text = str(data['price'])
 	if ProfileBus.profile.skins[skin_index]:
 		skin_buy_button.text = "W posiadaniu"
@@ -119,6 +123,8 @@ func _update_map_panel() -> void:
 	map_image.texture = data['texture']
 	map_name.text = data['name']
 	map_community_icon.visible = data['community_made']
+	map_community_author.visible = data['community_made']
+	map_community_author.text = data['author']
 	map_price.text = str(data['price'])
 	if ProfileBus.profile.maps[map_index]:
 		map_buy_button.text = "W posiadaniu"

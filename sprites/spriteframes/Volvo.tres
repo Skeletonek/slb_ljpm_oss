@@ -1,0 +1,18 @@
+[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://c6pbqdj2ltsib"]
+
+[ext_resource type="Texture2D" uid="uid://25b8x26trnky" path="res://sprites/Volvo_0001.png" id="1_s4cae"]
+[ext_resource type="Texture2D" uid="uid://cu73c6rh2af74" path="res://sprites/Volvo_0002.png" id="2_hg8mw"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_s4cae")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_hg8mw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]

@@ -57,7 +57,7 @@ font_size = 14
 [sub_resource type="LabelSettings" id="LabelSettings_6iuel"]
 font_size = 24
 
-[node name="OptionsLayer" type="CanvasLayer" node_paths=PackedStringArray("fullscreen_button", "fullscreen_android_info", "graphics_api_button", "graphics_api_restart", "vsync_button", "vsync_info", "linux_windowing_system_button", "linux_windowing_system_restart", "linux_windowing_system_info", "framerate_cap_spinbox", "blur_button", "ui_scaling_slider", "master_slider", "sfx_slider", "music_slider", "master_input", "sfx_input", "music_input", "tch_tap_button", "tch_swipe_button", "tch_vbuttons_button", "gamepad_deadzone_slider", "playername_edit", "playername_uuid", "telemetry_button", "devconsole_button", "devfps_button", "reduced_motion_button", "easier_font_button", "game_version_label", "device_data_label", "report_bug_forms_button", "report_bug_email_button", "back_button", "info_popup", "info_popup_title", "info_popup_content")]
+[node name="OptionsLayer" type="CanvasLayer" node_paths=PackedStringArray("fullscreen_button", "fullscreen_android_info", "graphics_api_button", "graphics_api_restart", "vsync_button", "vsync_info", "linux_windowing_system_button", "linux_windowing_system_restart", "linux_windowing_system_info", "framerate_cap_spinbox", "blur_button", "ui_scaling_slider", "master_slider", "sfx_slider", "music_slider", "master_input", "sfx_input", "music_input", "tch_tap_button", "tch_swipe_button", "tch_vbuttons_button", "gamepad_deadzone_slider", "playername_edit", "playername_uuid", "telemetry_button", "touchscreen_mode", "touchscreen_mode_android_info", "devconsole_button", "devfps_button", "reduced_motion_button", "easier_font_button", "game_version_label", "device_data_label", "report_bug_forms_button", "report_bug_email_button", "back_button", "info_popup", "info_popup_title", "info_popup_content")]
 script = ExtResource("1_cahn6")
 fullscreen_button = NodePath("TabContainer/Graphics/MarginContainer/VBoxContainer/FullScreen/FullScreenButton")
 fullscreen_android_info = NodePath("TabContainer/Graphics/MarginContainer/VBoxContainer/FullScreen/FullScreenLabelDesc")
@@ -84,6 +84,8 @@ gamepad_deadzone_slider = NodePath("TabContainer/Gameplay/MarginContainer/Scroll
 playername_edit = NodePath("TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/PlayerName/HBoxContainer/PlayernameEdit")
 playername_uuid = NodePath("TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/PlayerName/HBoxContainer/PlayernameUUID")
 telemetry_button = NodePath("TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/Telemetry/TelemetryButton")
+touchscreen_mode = NodePath("TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/TouchscreenMode/TouchscreenModeButton")
+touchscreen_mode_android_info = NodePath("TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/TouchscreenMode/TouchscreenModeLabelDesc")
 devconsole_button = NodePath("TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/ShowConsole/ShowConsoleButton")
 devfps_button = NodePath("TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/ShowFPS/ShowFPSButton")
 reduced_motion_button = NodePath("TabContainer/Accessibility/VBoxContainer/ReducedMotion/ReducedMotionButton")
@@ -817,6 +819,33 @@ text = "Zatwierdź
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 
+[node name="TouchscreenMode" type="HBoxContainer" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="TouchscreenModeLabel" type="Label" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/TouchscreenMode"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Tryb dotykowy:"
+vertical_alignment = 2
+
+[node name="TouchscreenModeLabelDesc" type="Label" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/TouchscreenMode"]
+visible = false
+layout_mode = 2
+text = "Wyłączenie tej opcji jest niemożliwe na systemie Android"
+label_settings = SubResource("LabelSettings_rskjs")
+horizontal_alignment = 1
+
+[node name="TouchscreenModeButton" type="Button" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/TouchscreenMode"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+focus_neighbor_top = NodePath("../../PlayerName/HBoxContainer/PlayernameEdit")
+focus_neighbor_bottom = NodePath("../../../../../../../MarginContainer/BackButton")
+toggle_mode = true
+text = "Wyłączony"
+script = ExtResource("3_uq6y0")
+
 [node name="ShowConsole" type="HBoxContainer" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
@@ -1120,6 +1149,7 @@ text = "Ok"
 [connection signal="toggled" from="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/TouchScreenControls/HBoxContainer/VirtualButtons/TCHVButtons" to="." method="_on_tch_vbuttons_toggled"]
 [connection signal="value_changed" from="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/Controller/Controller/Deadzone/HBoxContainer/DeadzoneSlider" to="." method="_on_deadzone_slider_value_changed"]
 [connection signal="pressed" from="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/PlayerName/HBoxContainer/PlayernameButton" to="." method="_on_playername_button_pressed"]
+[connection signal="toggled" from="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/TouchscreenMode/TouchscreenModeButton" to="." method="_on_touchscreen_mode_button_toggled"]
 [connection signal="toggled" from="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/ShowConsole/ShowConsoleButton" to="." method="_on_show_console_button_toggled"]
 [connection signal="toggled" from="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/ShowFPS/ShowFPSButton" to="." method="_on_show_fps_button_toggled"]
 [connection signal="pressed" from="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/Telemetry/TelemetryInfoButton" to="." method="_on_info_button_pressed" binds= ["telemetry"]]

@@ -6,8 +6,8 @@ extends CanvasLayer
 
 
 func _ready():
-	if OS.get_name() == "Android":
-		$AndroidPauseLayer.show()
+	SignalBus.switch_touchscreen_mode.connect(switch_touchscreen_mode)
+	switch_touchscreen_mode()
 	GlobalMusic.connect_buttons(self)
 
 
@@ -27,6 +27,13 @@ func _notification(what):
 
 func _on_pause_button_pressed():
 	_switch_visibility()
+
+
+func switch_touchscreen_mode():
+	if SettingsBus.touchscreen_mode:
+		$AndroidPauseLayer.show()
+	else:
+		$AndroidPauseLayer.hide()
 
 
 func _switch_visibility():

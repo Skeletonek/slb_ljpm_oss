@@ -17,19 +17,19 @@ const ACHIEVEMENT_LIST = {
 	"milk_100": [
 		"Wróciłem z mlekiem!",
 		"Zbierz łącznie 100 sztuk mleka",
-		preload("res://images/icons/slb2icon.png"),
+		preload("res://images/achievement_icons/Milk100.webp"),
 		false
 		],
 	"milk_500": [
 		"Mleko było na promocji!",
 		"Zbierz łącznie 500 sztuk mleka",
-		preload("res://images/icons/slb2icon.png"),
+		preload("res://images/achievement_icons/Milk500.webp"),
 		false
 		],
 	"milk_1000": [
 		"Otwieramy mleczarnie!",
 		"Zbierz łącznie 1000 sztuk mleka",
-		preload("res://images/icons/slb2icon.png"),
+		preload("res://images/achievement_icons/Milk1000.webp"),
 		false
 		],
 	"speed_110": [
@@ -53,7 +53,7 @@ const ACHIEVEMENT_LIST = {
 	"real_panda": [
 		"Smacznego bambusa!",
 		"Ukończ jedną rozgrywkę w skórce Pandy",
-		preload("res://images/icons/slb2icon.png"),
+		preload("res://images/achievement_icons/RealPanda.webp"),
 		false
 		],
 	"pigtank": [
@@ -77,7 +77,7 @@ const ACHIEVEMENT_LIST = {
 	"lukaszczyk_on_horse": [
 		"Jaskółka przeniosłaby orzech kokosowy?",
 		"Ukończ jedną rozgrywkę w skórce Łukaszczyka na koniu",
-		preload("res://images/icons/slb2icon.png"),
+		preload("res://images/achievement_icons/LukaszczykOnHorse.webp"),
 		false
 		],
 	"serious_business": [
@@ -101,7 +101,7 @@ const ACHIEVEMENT_LIST = {
 	"globetrotter": [
 		"Obieżyświat",
 		"Kup wszystkie mapy w sklepie",
-		preload("res://images/icons/slb2icon.png"),
+		preload("res://images/achievement_icons/Globetrotter.webp"),
 		false
 		],
 	"offroad": [

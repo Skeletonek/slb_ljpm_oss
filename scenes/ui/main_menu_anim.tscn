@@ -28,7 +28,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_io2uc"]
-size = Vector2(70, 40)
+size = Vector2(40, 40)
 
 [sub_resource type="Gradient" id="Gradient_7oas1"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)

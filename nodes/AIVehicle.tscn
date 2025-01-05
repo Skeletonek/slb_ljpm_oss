@@ -62,7 +62,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jfarv"]
-size = Vector2(177, 15.5)
+size = Vector2(163, 16)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dr88t"]
 radius = 32.0069
@@ -71,7 +71,7 @@ radius = 32.0069
 script = ExtResource("1_p7m8i")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(1.5, 1.5)
+scale = Vector2(1.425, 1.425)
 sprite_frames = SubResource("SpriteFrames_dpywc")
 animation = &"blue"
 flip_h = true
@@ -85,7 +85,7 @@ texture = ExtResource("10_p5gmq")
 collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(1, 21)
+position = Vector2(1.5, 20.875)
 shape = SubResource("RectangleShape2D_jfarv")
 
 [node name="CollisionShape2DMilk" type="CollisionShape2D" parent="Area2D"]

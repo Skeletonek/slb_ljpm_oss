@@ -67,7 +67,8 @@ scale = Vector2(2, 2)
 texture = SubResource("GradientTexture1D_qgick")
 script = ExtResource("3_3k3r8")
 parallax_jump_point_scale = 2
-parallax_multiplier = 0.6
+parallax_multiplier = 0.95
+base_speed = 220
 mr_hidden = true
 
 [node name="Spaceships" type="AnimatedSprite2D" parent="Spaceships"]

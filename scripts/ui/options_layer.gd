@@ -30,6 +30,8 @@ extends CanvasLayer
 @export var playername_edit: LineEdit
 @export var playername_uuid: Label
 @export var telemetry_button: Button
+@export var touchscreen_mode: Button
+@export var touchscreen_mode_android_info: Label
 @export var devconsole_button: Button
 @export var devfps_button: Button
 
@@ -89,12 +91,15 @@ func _ready(): # I'm starting to hate this code
 	easier_font_button.set_pressed_no_signal_custom(SettingsBus.easier_font)
 	reduced_motion_button.set_pressed_no_signal_custom(SettingsBus.reduced_motion)
 	blur_button.set_pressed(SettingsBus.ui_blur)
+	touchscreen_mode.set_pressed(SettingsBus.touchscreen_mode)
 	devconsole_button.set_pressed(SettingsBus.dev_console)
 	devfps_button.set_pressed(SettingsBus.dev_show_fps)
 
 	if OS.get_name() == "Android":
 		fullscreen_button.disabled = true
 		fullscreen_android_info.visible = true
+		touchscreen_mode.disabled = true
+		touchscreen_mode_android_info.visible = true
 	else:
 		fullscreen_button.set_pressed(SettingsBus.fullscreen)
 
@@ -322,6 +327,10 @@ func _on_report_bug_email_button_pressed():
 	var body = description + replication_steps + separator + title + version + device_data
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MINIMIZED)
 	OS.shell_open("mailto:slb.ljpm@skeletonek.com?body={0}".format([body]))
+
+func _on_touchscreen_mode_button_toggled(toggled_on):
+	SettingsBus.touchscreen_mode = toggled_on
+	SignalBus.switch_touchscreen_mode.emit()
 
 
 func _on_show_console_button_toggled(toggled_on):
