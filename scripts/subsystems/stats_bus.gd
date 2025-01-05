@@ -103,7 +103,7 @@ func get_skin_data(skin_index: int) -> Dictionary:
 			}
 		profile.Skins.EMO_PANDA:
 			dict = {
-				"name": "Łukasczyk na koniu",
+				"name": "Emo Panda",
 				"texture": load("res://sprites/EmoPanda_0001.png"),
 				"spriteframe": load("res://sprites/spriteframes/EmoPanda.tres"),
 				"community_made": true,
@@ -144,6 +144,15 @@ func get_map_data(map_index: int) -> Dictionary:
 				"community_made": false,
 				"author": "Coco Jambo on Century Old Organs",
 				"price": 200,
+			}
+		profile.Maps.CITY:
+			dict = {
+				"name": "Metropolia Halembska",
+				"texture": load("res://images/maps/CityMap.webp"),
+				"scene": load("res://nodes/maps/CityMap.tscn"),
+				"community_made": false,
+				"author": "",
+				"price": 800,
 			}
 	return dict
 

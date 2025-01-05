@@ -15,6 +15,7 @@ enum Maps {
 	FOREST=0,
 	SAHARA=1,
 	LUNAR_CONFLICT=2,
+	CITY=3,
 }
 
 var milks_total: int

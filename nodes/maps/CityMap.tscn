@@ -1,0 +1,140 @@
+[gd_scene load_steps=11 format=3 uid="uid://djmywhypxmmgc"]
+
+[ext_resource type="Script" path="res://scripts/carride/map_node.gd" id="1_c08bo"]
+[ext_resource type="Texture2D" uid="uid://dsig5tiyh0vr7" path="res://sprites/maps/city/City_Parallax1.png" id="2_ixsr1"]
+[ext_resource type="Script" path="res://scripts/carride/road_scroll.gd" id="3_olq0o"]
+[ext_resource type="Texture2D" uid="uid://dr4xbsax40rf6" path="res://sprites/maps/city/City_Parallax2.png" id="4_5vc0m"]
+[ext_resource type="Texture2D" uid="uid://ctcwb8xvuko2l" path="res://sprites/maps/city/City_Parallax3.png" id="5_css24"]
+[ext_resource type="Texture2D" uid="uid://j0c5usxgj5iy" path="res://sprites/maps/city/City_Parallax4.png" id="6_tagjv"]
+[ext_resource type="Texture2D" uid="uid://c6i12desfxhcj" path="res://sprites/maps/city/City_BG.png" id="7_nbgp6"]
+[ext_resource type="Texture2D" uid="uid://c57l262udunto" path="res://sprites/Road.png" id="8_2kqi5"]
+[ext_resource type="Texture2D" uid="uid://b18sb8w80bevu" path="res://sprites/maps/city/City_Sidewalk.png" id="8_e8vf8"]
+[ext_resource type="Texture2D" uid="uid://btqhaxxyw1tvd" path="res://sprites/RoadRM.png" id="9_2wurl"]
+
+[node name="ForestMap" type="Node2D"]
+script = ExtResource("1_c08bo")
+
+[node name="Parallax1" type="Sprite2D" parent="."]
+z_index = -6
+position = Vector2(0, -475.125)
+scale = Vector2(2, 2)
+texture = ExtResource("2_ixsr1")
+offset = Vector2(-70, 0)
+script = ExtResource("3_olq0o")
+parallax_multiplier = 0.7
+mr_hidden = true
+
+[node name="Parallax1" type="Sprite2D" parent="Parallax1"]
+position = Vector2(576, 0)
+texture = ExtResource("2_ixsr1")
+offset = Vector2(-70, 0)
+
+[node name="Parallax1_2" type="Sprite2D" parent="Parallax1"]
+position = Vector2(1152, 0)
+texture = ExtResource("2_ixsr1")
+offset = Vector2(-70, 0)
+
+[node name="Parallax2" type="Sprite2D" parent="."]
+z_index = -7
+position = Vector2(0, -375.67)
+scale = Vector2(2, 2)
+texture = ExtResource("4_5vc0m")
+offset = Vector2(-70, 0)
+script = ExtResource("3_olq0o")
+parallax_multiplier = 0.6
+mr_hidden = true
+
+[node name="Parallax2" type="Sprite2D" parent="Parallax2"]
+position = Vector2(576, 0)
+texture = ExtResource("4_5vc0m")
+offset = Vector2(-70, 0)
+
+[node name="Parallax2_2" type="Sprite2D" parent="Parallax2"]
+position = Vector2(1152, 0)
+texture = ExtResource("4_5vc0m")
+offset = Vector2(-70, 0)
+
+[node name="Parallax3" type="Sprite2D" parent="."]
+z_index = -8
+position = Vector2(0, -345.54)
+scale = Vector2(2, 2)
+texture = ExtResource("5_css24")
+offset = Vector2(-70, 0)
+script = ExtResource("3_olq0o")
+parallax_multiplier = 0.5
+mr_hidden = true
+
+[node name="Parallax3" type="Sprite2D" parent="Parallax3"]
+position = Vector2(576, 0)
+texture = ExtResource("5_css24")
+offset = Vector2(-70, 0)
+
+[node name="Parallax3_2" type="Sprite2D" parent="Parallax3"]
+position = Vector2(1152, 0)
+texture = ExtResource("5_css24")
+offset = Vector2(-70, 0)
+
+[node name="Parallax4" type="Sprite2D" parent="."]
+z_index = -9
+position = Vector2(0, -298.935)
+scale = Vector2(2, 2)
+texture = ExtResource("6_tagjv")
+offset = Vector2(-70, 0)
+script = ExtResource("3_olq0o")
+parallax_multiplier = 0.3
+mr_stopped = true
+
+[node name="Parallax4" type="Sprite2D" parent="Parallax4"]
+position = Vector2(576, 0)
+texture = ExtResource("6_tagjv")
+offset = Vector2(-70, 0)
+
+[node name="Parallax4_2" type="Sprite2D" parent="Parallax4"]
+position = Vector2(1152, 0)
+texture = ExtResource("6_tagjv")
+offset = Vector2(-70, 0)
+
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -10
+z_as_relative = false
+position = Vector2(0, -135)
+scale = Vector2(3, 3)
+texture = ExtResource("7_nbgp6")
+script = ExtResource("3_olq0o")
+parallax_multiplier = 0.1
+mr_stopped = true
+
+[node name="Background" type="Sprite2D" parent="Background"]
+position = Vector2(576, 0)
+texture = ExtResource("7_nbgp6")
+
+[node name="Sidewalk" type="Sprite2D" parent="."]
+z_index = -6
+position = Vector2(0, -92.53)
+scale = Vector2(2, 2)
+texture = ExtResource("8_e8vf8")
+offset = Vector2(-69, 0)
+script = ExtResource("3_olq0o")
+mr_stopped = true
+
+[node name="Sidewalk" type="Sprite2D" parent="Sidewalk"]
+position = Vector2(576, 0)
+texture = ExtResource("8_e8vf8")
+offset = Vector2(-69, 0)
+
+[node name="Sidewalk2" type="Sprite2D" parent="Sidewalk"]
+position = Vector2(1152, 0)
+texture = ExtResource("8_e8vf8")
+offset = Vector2(-69, 0)
+
+[node name="Road" type="Sprite2D" parent="."]
+z_index = -5
+position = Vector2(10, -5)
+scale = Vector2(2, 2)
+texture = ExtResource("8_2kqi5")
+script = ExtResource("3_olq0o")
+mr_sprite = ExtResource("9_2wurl")
+
+[node name="Road" type="Sprite2D" parent="Road"]
+position = Vector2(720, 0)
+texture = ExtResource("8_2kqi5")

@@ -360,15 +360,17 @@ Wyłączony
 [indent]Klatki są renderowane tak szybko jak pozwala na to sprzęt.
 Mogą pojawić się rwania obrazu.[/indent]
 
-Włączony
+FIFO - Oszczędność energii
 [indent]Obraz jest wyświetlany w synchronizacji z częstotliwością odświeżania ekranu.
-Klatki są ograniczone do częstotliwości ekranu i mogą wyświetlać się z opóźnieniem.[/indent]
+Klatki są ograniczone do częstotliwości ekranu i mogą wyświetlać się z opóźnieniem.
+Liczba klatek jest dzielona o liczbę całkowitą, jeśli nie można renderować dostatecznie szybko klatek.[/indent]
 
-Adaptacyjny
+Adaptacyjny - Minimalizacja przycięć
 [indent]Synchronizacja jest włączona, chyba że sprzęt nie będzie w stanie renderować dostateczenie szybko klatek. Wtedy synchronizacja zostaje wyłączona, aby ograniczyć ewentualne przycięcia obrazu.
+Najlepszy kompromis na maksymalne ograniczenie przycięć obrazu.
 Nieobsługiwane w trybie OpenGL[/indent]
 
-Mailbox
+Mailbox - Minimalizacja opóźnienia obrazu
 [indent]Renderuje i wyświetla klatkę w momencie odświeżenia obrazu
 Gwarantuje niskie opóźnienie obrazu jednocześnie nie powodując jego rwania, ale obraz może nie być renderowany płynnie.
 Nieobsługiwane w trybie OpenGL[/indent]

@@ -1,15 +1,10 @@
-[gd_scene load_steps=37 format=3 uid="uid://boixto1v5xtcq"]
+[gd_scene load_steps=31 format=3 uid="uid://boixto1v5xtcq"]
 
 [ext_resource type="Script" path="res://scripts/carride/main.gd" id="1_y5nnv"]
-[ext_resource type="Script" path="res://scripts/carride/gui.gd" id="2_8a32l"]
-[ext_resource type="Texture2D" uid="uid://dwcu034i1bbii" path="res://images/touchscreen_vbuttons/UpTouch.png" id="4_5gjce"]
+[ext_resource type="PackedScene" uid="uid://dfiiryowv56g0" path="res://scenes/carride_gui.tscn" id="2_ma2l2"]
 [ext_resource type="Script" path="res://scripts/carride/player.gd" id="4_sxi6f"]
 [ext_resource type="PackedScene" uid="uid://lugeuc8kewl3" path="res://scenes/ui/pause_menu.tscn" id="5_2qleg"]
-[ext_resource type="Texture2D" uid="uid://b04pu01i85qfb" path="res://images/touchscreen_vbuttons/UpTouchPressed.png" id="5_neflp"]
 [ext_resource type="AudioStream" uid="uid://dw6573okuao6h" path="res://audio/sfx/Car Crash Short.wav" id="6_dtkok"]
-[ext_resource type="Texture2D" uid="uid://dfyn51j8mmknf" path="res://images/touchscreen_vbuttons/DownTouch.png" id="6_o2i3l"]
-[ext_resource type="Material" uid="uid://cqn5rkmj7io2i" path="res://shaders/panel_shader_material.tres" id="7_5jy3v"]
-[ext_resource type="Texture2D" uid="uid://y4ytw7cfk6aw" path="res://images/touchscreen_vbuttons/DownTouchPressed.png" id="7_6r6ct"]
 [ext_resource type="Texture2D" uid="uid://dvhou5wmxufck" path="res://sprites/Speedometer.png" id="8_0puha"]
 [ext_resource type="PackedScene" uid="uid://7vvoan13ljn" path="res://nodes/maps/ForestMap.tscn" id="8_6spys"]
 [ext_resource type="Texture2D" uid="uid://gixvapofe1qx" path="res://sprites/SpeedometerArrow.png" id="9_ioopi"]
@@ -17,10 +12,6 @@
 [ext_resource type="SpriteFrames" uid="uid://boenmxlf17kxm" path="res://sprites/spriteframes/Panda.tres" id="12_w7l5f"]
 [ext_resource type="Texture2D" uid="uid://w5khp7bco2co" path="res://sprites/Explosion.png" id="13_6vstm"]
 [ext_resource type="AudioStream" uid="uid://dffjdog0p3fde" path="res://audio/sfx/bass.ogg" id="17_ltm6q"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_s0jls"]
-font_size = 36
-shadow_size = 0
 
 [sub_resource type="Gradient" id="Gradient_dndjk"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
@@ -122,184 +113,7 @@ speed_increment = 8.0
 speed = 300.0
 metadata/_edit_vertical_guides_ = [-221.0, -650.0]
 
-[node name="GUI" type="Control" parent="." node_paths=PackedStringArray("label_time", "label_milk", "speedometer_gauge")]
-z_index = 11
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -640.0
-offset_top = -357.0
-offset_right = 640.0
-offset_bottom = 363.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("2_8a32l")
-label_time = NodePath("TimeContainer/LabelTime")
-label_milk = NodePath("MilkCountContainer/LabelMilk")
-speedometer_gauge = NodePath("../Camera2D/Speedometer/SpeedometerGauge")
-
-[node name="TimeContainer" type="HBoxContainer" parent="GUI"]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 172.0
-offset_top = -78.0
-offset_right = 449.0
-offset_bottom = -31.0
-grow_vertical = 0
-
-[node name="Label" type="Label" parent="GUI/TimeContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 12
-text = "CZAS: "
-label_settings = SubResource("LabelSettings_s0jls")
-uppercase = true
-
-[node name="LabelTime" type="Label" parent="GUI/TimeContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 12
-text = "00:00.000"
-label_settings = SubResource("LabelSettings_s0jls")
-horizontal_alignment = 3
-
-[node name="MilkCountContainer" type="HBoxContainer" parent="GUI"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -450.0
-offset_top = -78.0
-offset_bottom = -31.0
-grow_horizontal = 0
-grow_vertical = 0
-
-[node name="Label" type="Label" parent="GUI/MilkCountContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 12
-text = "MLEKA: "
-label_settings = SubResource("LabelSettings_s0jls")
-uppercase = true
-
-[node name="LabelMilk" type="Label" parent="GUI/MilkCountContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 12
-text = "0
-"
-label_settings = SubResource("LabelSettings_s0jls")
-
-[node name="SpeedContainer" type="HBoxContainer" parent="GUI"]
-visible = false
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -86.0
-offset_top = -42.0
-offset_right = 86.0
-grow_horizontal = 2
-grow_vertical = 0
-alignment = 1
-
-[node name="LabelSpeed" type="Label" parent="GUI/SpeedContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 12
-text = "0
-"
-label_settings = SubResource("LabelSettings_s0jls")
-
-[node name="VButtonsContainer" type="VBoxContainer" parent="GUI"]
-visible = false
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -160.0
-offset_top = -400.0
-offset_right = -32.0
-offset_bottom = -112.0
-grow_horizontal = 0
-grow_vertical = 0
-theme_override_constants/separation = 32
-
-[node name="Up" type="TextureButton" parent="GUI/VButtonsContainer"]
-custom_minimum_size = Vector2(128, 128)
-layout_mode = 2
-texture_normal = ExtResource("4_5gjce")
-texture_pressed = ExtResource("5_neflp")
-ignore_texture_size = true
-stretch_mode = 5
-
-[node name="Down" type="TextureButton" parent="GUI/VButtonsContainer"]
-custom_minimum_size = Vector2(128, 128)
-layout_mode = 2
-texture_normal = ExtResource("6_o2i3l")
-texture_pressed = ExtResource("7_6r6ct")
-ignore_texture_size = true
-stretch_mode = 5
-
-[node name="PanelContainer" type="PanelContainer" parent="GUI"]
-visible = false
-material = ExtResource("7_5jy3v")
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="GUI/PanelContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
-
-[node name="VBoxContainer" type="VBoxContainer" parent="GUI/PanelContainer/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 16
-alignment = 1
-
-[node name="Label" type="Label" parent="GUI/PanelContainer/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 60)
-layout_mode = 2
-text = "Spowodowałeś wypadek!"
-horizontal_alignment = 1
-
-[node name="Label2" type="Label" parent="GUI/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Wynik:"
-horizontal_alignment = 1
-
-[node name="ScoreLabel" type="Label" parent="GUI/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "000000"
-horizontal_alignment = 1
-
-[node name="PlayAgainBtn" type="Button" parent="GUI/PanelContainer/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 60)
-layout_mode = 2
-focus_neighbor_bottom = NodePath("../MenuBtn")
-text = "Zagraj jeszcze raz"
-
-[node name="MenuBtn" type="Button" parent="GUI/PanelContainer/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 60)
-layout_mode = 2
-focus_neighbor_top = NodePath("../PlayAgainBtn")
-text = "Wróć do menu"
+[node name="GUI" parent="." instance=ExtResource("2_ma2l2")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -462,10 +276,5 @@ volume_db = -80.0
 autoplay = true
 bus = &"Music"
 
-[connection signal="touchscreen_move" from="GUI" to="LukaszczykWPandzie" method="move"]
-[connection signal="button_down" from="GUI/VButtonsContainer/Up" to="GUI" method="_on_up_button_down"]
-[connection signal="button_down" from="GUI/VButtonsContainer/Down" to="GUI" method="_on_down_button_down"]
-[connection signal="pressed" from="GUI/PanelContainer/MarginContainer/VBoxContainer/PlayAgainBtn" to="GUI" method="_on_play_again_btn_pressed"]
-[connection signal="pressed" from="GUI/PanelContainer/MarginContainer/VBoxContainer/MenuBtn" to="GUI" method="_on_menu_btn_pressed"]
 [connection signal="area_entered" from="LukaszczykWPandzie" to="LukaszczykWPandzie" method="_on_area_entered"]
 [connection signal="timeout" from="Timer" to="." method="_spawn_milk"]

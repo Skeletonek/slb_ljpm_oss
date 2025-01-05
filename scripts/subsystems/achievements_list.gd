@@ -44,12 +44,12 @@ const ACHIEVEMENT_LIST = {
 		preload("res://images/achievement_icons/Speed150.webp"),
 		false
 		],
-	# "volvo_combi": [
-	# 	"Volvo pls fix",
-	# 	"Ukończ jedną rozgrywkę w skórce Volvo",
-	# 	preload("res://images/icons/slb2icon.png"),
-	# 	false
-	# 	],
+	"volvo_combi": [
+		"Prawie jak amfibia",
+		"Ukończ jedną rozgrywkę w skórce Volvo",
+		preload("res://images/icons/slb2icon.png"),
+		false
+		],
 	"real_panda": [
 		"Smacznego bambusa!",
 		"Ukończ jedną rozgrywkę w skórce Pandy",
@@ -80,6 +80,12 @@ const ACHIEVEMENT_LIST = {
 		preload("res://images/achievement_icons/LukaszczykOnHorse.webp"),
 		false
 		],
+	"emo_panda": [
+		"xXx_DarkPanda_xXx",
+		"Ukończ jedną rozgrywkę w skórce Emo Pandy",
+		preload("res://images/icons/slb2icon.png"),
+		false
+		],
 	"serious_business": [
 		"Poważny biznes",
 		"Kup wszystkie skórki w sklepie",
@@ -96,6 +102,12 @@ const ACHIEVEMENT_LIST = {
 		"USA vs. ZSRR",
 		"Ukończ jedną rozgrywkę na mapie konfliktu księżycowego",
 		preload("res://images/achievement_icons/LunarConflict.webp"),
+		false
+		],
+	"city": [
+		"Transport Metropolitalny",
+		"Ukończ jedną rozgrywkę na mapie metropolii halembskiej",
+		preload("res://images/icons/slb2icon.png"),
 		false
 		],
 	"globetrotter": [

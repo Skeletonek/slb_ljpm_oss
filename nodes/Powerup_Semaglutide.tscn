@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://bd5tjb2qaeua4"]
+
+[ext_resource type="Script" path="res://scripts/carride/classes/powerup_class.gd" id="1_lohyo"]
+[ext_resource type="Texture2D" uid="uid://bx6skpux3jl51" path="res://sprites/PowerUp_Semaglutide.png" id="2_8kcsv"]
+[ext_resource type="Script" path="res://scripts/carride/components/vehicle_component.gd" id="3_7sewo"]
+[ext_resource type="Script" path="res://scripts/carride/components/pickable_component.gd" id="4_krns6"]
+[ext_resource type="AudioStream" uid="uid://b6aq1yhr40dkl" path="res://audio/sfx/acquire1.wav" id="5_7k00h"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ayeeq"]
+radius = 30.0
+
+[node name="MilkyWay" type="Node2D" groups=["Powerups"]]
+z_index = -1
+script = ExtResource("1_lohyo")
+type = 2
+time = 10.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 10)
+texture = ExtResource("2_8kcsv")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, 10)
+collision_layer = 4
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -5)
+shape = SubResource("CircleShape2D_ayeeq")
+
+[node name="VehicleComponent" type="Node2D" parent="."]
+script = ExtResource("3_7sewo")
+
+[node name="PickableComponent" type="Node2D" parent="." node_paths=PackedStringArray("col_shape")]
+script = ExtResource("4_krns6")
+col_shape = NodePath("../Area2D/CollisionShape2D")
+pickup_sfx = ExtResource("5_7k00h")
+
+[connection signal="area_entered" from="Area2D" to="VehicleComponent" method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="Area2D" to="PickableComponent" method="_on_area_2d_area_entered"]

@@ -1,18 +1,7 @@
-[gd_scene load_steps=41 format=3 uid="uid://b8sgtml2m0tio"]
+[gd_scene load_steps=25 format=3 uid="uid://b8sgtml2m0tio"]
 
 [ext_resource type="Script" path="res://scripts/carride/main.gd" id="1_kgrjb"]
-[ext_resource type="Script" path="res://scripts/carride/gui.gd" id="2_32m4m"]
-[ext_resource type="Texture2D" uid="uid://bpix4jm8ib32f" path="res://sprites/MilkNoShadow.png" id="3_0ciny"]
-[ext_resource type="Texture2D" uid="uid://dwcu034i1bbii" path="res://images/touchscreen_vbuttons/UpTouch.png" id="3_3em63"]
-[ext_resource type="Texture2D" uid="uid://b04pu01i85qfb" path="res://images/touchscreen_vbuttons/UpTouchPressed.png" id="4_nmvs1"]
-[ext_resource type="Texture2D" uid="uid://dfyn51j8mmknf" path="res://images/touchscreen_vbuttons/DownTouch.png" id="5_soq8h"]
-[ext_resource type="Texture2D" uid="uid://y4ytw7cfk6aw" path="res://images/touchscreen_vbuttons/DownTouchPressed.png" id="6_ns3o8"]
-[ext_resource type="Material" uid="uid://cqn5rkmj7io2i" path="res://shaders/panel_shader_material.tres" id="7_is3gh"]
-[ext_resource type="Texture2D" uid="uid://dvhou5wmxufck" path="res://sprites/Speedometer.png" id="8_38upb"]
-[ext_resource type="Texture2D" uid="uid://60anel18fj2x" path="res://sprites/PixelHeart.png" id="8_mhq2g"]
-[ext_resource type="AudioStream" uid="uid://c7h7k6gmb140j" path="res://audio/sfx/alert.wav" id="8_y5w37"]
-[ext_resource type="Texture2D" uid="uid://gixvapofe1qx" path="res://sprites/SpeedometerArrow.png" id="9_gjl7p"]
-[ext_resource type="AudioStream" uid="uid://ce4vujd044alp" path="res://audio/sfx/PowerUpCountdown.wav" id="9_nr7vq"]
+[ext_resource type="PackedScene" uid="uid://dfiiryowv56g0" path="res://scenes/carride_gui.tscn" id="2_vthj3"]
 [ext_resource type="PackedScene" uid="uid://7vvoan13ljn" path="res://nodes/maps/ForestMap.tscn" id="10_e6vsi"]
 [ext_resource type="Script" path="res://scripts/carride/player.gd" id="11_lef4e"]
 [ext_resource type="SpriteFrames" uid="uid://boenmxlf17kxm" path="res://sprites/spriteframes/Panda.tres" id="12_plq4u"]
@@ -21,24 +10,6 @@
 [ext_resource type="AudioStream" uid="uid://d2lim2blo57e" path="res://audio/sfx/milk.wav" id="15_opg6x"]
 [ext_resource type="PackedScene" uid="uid://lugeuc8kewl3" path="res://scenes/ui/pause_menu.tscn" id="16_f7r4o"]
 [ext_resource type="AudioStream" uid="uid://dffjdog0p3fde" path="res://audio/sfx/bass.ogg" id="17_msysa"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_s0jls"]
-font_size = 36
-shadow_size = 0
-
-[sub_resource type="Gradient" id="Gradient_dndjk"]
-colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_hvxgf"]
-gradient = SubResource("Gradient_dndjk")
-width = 128
-height = 128
-
-[sub_resource type="Gradient" id="Gradient_cp8fb"]
-colors = PackedColorArray(0.34902, 0.34902, 0.34902, 1, 0.34902, 0.34902, 0.34902, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_n110a"]
-gradient = SubResource("Gradient_cp8fb")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lr1qs"]
 size = Vector2(1500, 20)
@@ -115,11 +86,12 @@ size = Vector2(200, 40)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h1k2n"]
 size = Vector2(200, 40)
 
-[node name="Node2D" type="Node2D" node_paths=PackedStringArray("map")]
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("map", "player")]
 y_sort_enabled = true
 texture_filter = 1
 script = ExtResource("1_kgrjb")
 map = NodePath("ForestMap")
+player = NodePath("LukaszczykWPandzie")
 version_2 = true
 speed_increment = 8.0
 speed = 300.0
@@ -127,291 +99,7 @@ metadata/_edit_vertical_guides_ = [-221.0, -650.0]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="GUI" type="Control" parent="." node_paths=PackedStringArray("label_time", "label_milk", "speedometer_gauge", "lives", "last_live_player", "powerup_holder", "powerup_ending_timer", "powerup_ending_player")]
-z_index = 11
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -640.0
-offset_top = -357.0
-offset_right = 640.0
-offset_bottom = 363.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("2_32m4m")
-label_time = NodePath("TimeContainer/LabelTime")
-label_milk = NodePath("MilkCountContainer/LabelMilk")
-speedometer_gauge = NodePath("Speedometer/SpeedometerGauge")
-lives = [NodePath("LivesBorder/Live1"), NodePath("LivesBorder/Live2"), NodePath("LivesBorder/Live3")]
-last_live_player = NodePath("LastLivePlayer")
-powerup_holder = NodePath("PowerupBorder/PowerupHolder")
-powerup_ending_timer = NodePath("PowerupEndingTimer")
-powerup_ending_player = NodePath("PowerupEndingPlayer")
-
-[node name="TimeContainer" type="HBoxContainer" parent="GUI"]
-custom_minimum_size = Vector2(0, 50)
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 127.0
-offset_top = -94.0
-offset_right = 350.0
-offset_bottom = -44.0
-grow_vertical = 0
-
-[node name="Label" type="Label" parent="GUI/TimeContainer"]
-visible = false
-layout_mode = 2
-theme_override_font_sizes/font_size = 12
-text = "CZAS: "
-label_settings = SubResource("LabelSettings_s0jls")
-uppercase = true
-
-[node name="LabelTime" type="Label" parent="GUI/TimeContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 12
-text = "00:00.000"
-label_settings = SubResource("LabelSettings_s0jls")
-horizontal_alignment = 3
-
-[node name="MilkCountContainer" type="HBoxContainer" parent="GUI"]
-custom_minimum_size = Vector2(100, 32)
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -1082.0
-offset_top = -47.0
-offset_right = -980.0
-offset_bottom = -3.0
-grow_horizontal = 0
-grow_vertical = 0
-alignment = 2
-
-[node name="TextureRect" type="TextureRect" parent="GUI/MilkCountContainer"]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-texture = ExtResource("3_0ciny")
-expand_mode = 5
-stretch_mode = 5
-
-[node name="LabelMilk" type="Label" parent="GUI/MilkCountContainer"]
-custom_minimum_size = Vector2(66, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 12
-text = "000
-"
-label_settings = SubResource("LabelSettings_s0jls")
-horizontal_alignment = 2
-
-[node name="SpeedContainer" type="HBoxContainer" parent="GUI"]
-visible = false
-z_index = 1
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -86.0
-offset_top = -42.0
-offset_right = 86.0
-grow_horizontal = 2
-grow_vertical = 0
-alignment = 1
-
-[node name="LabelSpeed" type="Label" parent="GUI/SpeedContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 12
-text = "0
-"
-label_settings = SubResource("LabelSettings_s0jls")
-horizontal_alignment = 2
-
-[node name="HUDBorder" type="Sprite2D" parent="GUI"]
-z_index = -1
-position = Vector2(640, 677.5)
-scale = Vector2(10.005, 0.617188)
-texture = SubResource("GradientTexture2D_hvxgf")
-
-[node name="HUD" type="Sprite2D" parent="GUI/HUDBorder"]
-position = Vector2(0, 3.24049)
-scale = Vector2(1.987, 1.89873)
-texture = SubResource("GradientTexture2D_n110a")
-
-[node name="LivesBorder" type="Sprite2D" parent="GUI"]
-z_index = -1
-position = Vector2(1066, 664)
-scale = Vector2(1.61564, 0.578701)
-texture = SubResource("GradientTexture2D_hvxgf")
-
-[node name="Lives" type="Sprite2D" parent="GUI/LivesBorder"]
-scale = Vector2(1.923, 1.798)
-texture = SubResource("GradientTexture2D_n110a")
-
-[node name="Live1" type="Sprite2D" parent="GUI/LivesBorder"]
-position = Vector2(-40.8507, 0)
-scale = Vector2(0.309475, 0.864004)
-texture = ExtResource("8_mhq2g")
-
-[node name="Live2" type="Sprite2D" parent="GUI/LivesBorder"]
-scale = Vector2(0.309475, 0.864004)
-texture = ExtResource("8_mhq2g")
-
-[node name="Live3" type="Sprite2D" parent="GUI/LivesBorder"]
-position = Vector2(40.8507, 0)
-scale = Vector2(0.309475, 0.864004)
-texture = ExtResource("8_mhq2g")
-
-[node name="PowerupBorder" type="Sprite2D" parent="GUI"]
-position = Vector2(1213, 664)
-scale = Vector2(0.615649, 0.578701)
-texture = SubResource("GradientTexture2D_hvxgf")
-
-[node name="Powerup" type="Sprite2D" parent="GUI/PowerupBorder"]
-scale = Vector2(1.813, 1.798)
-texture = SubResource("GradientTexture2D_n110a")
-
-[node name="PowerupHolder" type="Sprite2D" parent="GUI/PowerupBorder"]
-scale = Vector2(1.6243, 1.72801)
-
-[node name="TimeBorder" type="Sprite2D" parent="GUI"]
-z_index = -1
-position = Vector2(213, 649.75)
-scale = Vector2(1.46875, 0.332031)
-texture = SubResource("GradientTexture2D_hvxgf")
-
-[node name="TimeBG" type="Sprite2D" parent="GUI/TimeBorder"]
-position = Vector2(-1.64211e-05, -0.752923)
-scale = Vector2(1.91489, 1.64706)
-texture = SubResource("GradientTexture2D_n110a")
-
-[node name="MilkBorder" type="Sprite2D" parent="GUI"]
-z_index = -1
-position = Vector2(250, 694)
-scale = Vector2(0.890625, 0.3125)
-texture = SubResource("GradientTexture2D_hvxgf")
-
-[node name="MilkBG" type="Sprite2D" parent="GUI/MilkBorder"]
-position = Vector2(-2.83569e-05, -5.96046e-06)
-scale = Vector2(1.85965, 1.6)
-texture = SubResource("GradientTexture2D_n110a")
-
-[node name="Speedometer" type="Sprite2D" parent="GUI"]
-position = Vector2(640, 717)
-texture = ExtResource("8_38upb")
-offset = Vector2(0, -64)
-
-[node name="SpeedometerGauge" type="Sprite2D" parent="GUI/Speedometer"]
-position = Vector2(0, -1)
-rotation = -0.628319
-texture = ExtResource("9_gjl7p")
-offset = Vector2(0, -63)
-
-[node name="PanelContainer" type="PanelContainer" parent="GUI"]
-visible = false
-material = ExtResource("7_is3gh")
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -149.5
-offset_top = -165.0
-offset_right = 149.5
-offset_bottom = 165.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="GUI/PanelContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
-
-[node name="VBoxContainer" type="VBoxContainer" parent="GUI/PanelContainer/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 16
-alignment = 1
-
-[node name="Label" type="Label" parent="GUI/PanelContainer/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 60)
-layout_mode = 2
-text = "Spowodowałeś wypadek!"
-horizontal_alignment = 1
-
-[node name="Label2" type="Label" parent="GUI/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Wynik:"
-horizontal_alignment = 1
-
-[node name="ScoreLabel" type="Label" parent="GUI/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "000000"
-horizontal_alignment = 1
-
-[node name="PlayAgainBtn" type="Button" parent="GUI/PanelContainer/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 60)
-layout_mode = 2
-focus_neighbor_bottom = NodePath("../MenuBtn")
-text = "Zagraj jeszcze raz"
-
-[node name="MenuBtn" type="Button" parent="GUI/PanelContainer/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 60)
-layout_mode = 2
-focus_neighbor_top = NodePath("../PlayAgainBtn")
-text = "Wróć do menu"
-
-[node name="VButtonsContainer" type="VBoxContainer" parent="GUI"]
-visible = false
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -160.0
-offset_top = -400.0
-offset_right = -32.0
-offset_bottom = -112.0
-grow_horizontal = 0
-grow_vertical = 0
-theme_override_constants/separation = 32
-
-[node name="Up" type="TextureButton" parent="GUI/VButtonsContainer"]
-custom_minimum_size = Vector2(128, 128)
-layout_mode = 2
-texture_normal = ExtResource("3_3em63")
-texture_pressed = ExtResource("4_nmvs1")
-ignore_texture_size = true
-stretch_mode = 5
-
-[node name="Down" type="TextureButton" parent="GUI/VButtonsContainer"]
-custom_minimum_size = Vector2(128, 128)
-layout_mode = 2
-texture_normal = ExtResource("5_soq8h")
-texture_pressed = ExtResource("6_ns3o8")
-ignore_texture_size = true
-stretch_mode = 5
-
-[node name="LastLivePlayer" type="AudioStreamPlayer" parent="GUI"]
-stream = ExtResource("8_y5w37")
-volume_db = -2.0
-bus = &"SFX"
-
-[node name="PowerupEndingPlayer" type="AudioStreamPlayer" parent="GUI"]
-stream = ExtResource("9_nr7vq")
-volume_db = 8.0
-bus = &"SFX"
-
-[node name="PowerupEndingTimer" type="Timer" parent="GUI"]
-one_shot = true
+[node name="GUI" parent="." instance=ExtResource("2_vthj3")]
 
 [node name="ForestMap" parent="." instance=ExtResource("10_e6vsi")]
 position = Vector2(0, 77)
@@ -556,9 +244,5 @@ autoplay = true
 bus = &"Music"
 
 [connection signal="touchscreen_move" from="GUI" to="LukaszczykWPandzie" method="move"]
-[connection signal="pressed" from="GUI/PanelContainer/MarginContainer/VBoxContainer/PlayAgainBtn" to="GUI" method="_on_play_again_btn_pressed"]
-[connection signal="pressed" from="GUI/PanelContainer/MarginContainer/VBoxContainer/MenuBtn" to="GUI" method="_on_menu_btn_pressed"]
-[connection signal="button_down" from="GUI/VButtonsContainer/Up" to="GUI" method="_on_up_button_down"]
-[connection signal="button_down" from="GUI/VButtonsContainer/Down" to="GUI" method="_on_down_button_down"]
 [connection signal="area_entered" from="LukaszczykWPandzie" to="LukaszczykWPandzie" method="_on_area_entered"]
 [connection signal="timeout" from="Timer" to="." method="_spawn_milk"]

@@ -45,7 +45,7 @@ func _change_to_milk() -> void:
 	if is_in_group("Obstacles"):
 		add_to_group("Milk")
 		remove_from_group("Obstacles")
-		car_animated_sprite.hide()
+		car_animated_sprite.modulate.a = 0.1
 		milk_sprite.show()
 		car_collision_shape.set_deferred("disabled", true)
 		milk_collision_shape.set_deferred("disabled", false)
@@ -59,7 +59,7 @@ func _change_from_milk() -> void:
 	if is_in_group("Milk"):
 		add_to_group("Obstacles")
 		remove_from_group("Milk")
-		car_animated_sprite.show()
+		car_animated_sprite.modulate.a = 1.0
 		milk_sprite.hide()
 		car_collision_shape.set_deferred("disabled", false)
 		milk_collision_shape.set_deferred("disabled", true)

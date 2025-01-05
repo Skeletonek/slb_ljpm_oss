@@ -1,8 +1,10 @@
 extends Node2D
 
 signal powerup_milkyway(yes: bool)
+signal powerup_semaglutide(yes: bool)
 
 @export var map: Node2D
+@export var player: Area2D
 @export var version_2: bool
 @export var speed_increment: float = 0.2
 
@@ -23,6 +25,7 @@ var milk_instance := preload("res://nodes/Milk.tscn")
 var milk_triple_instance := preload("res://nodes/MilkTriple.tscn")
 var powerup_slowmotion_instance := preload("res://nodes/Powerup_SlowMotion.tscn")
 var powerup_milkyway_instance := preload("res://nodes/Powerup_Milkyway.tscn")
+var powerup_semaglutide_instance := preload("res://nodes/Powerup_Semaglutide.tscn")
 
 var original_speed: float
 var stop_processing := false
@@ -119,6 +122,8 @@ func start_powerup(pwr_node):
 			time_scale = 0.5
 		PowerupClass.Powerups.MILKYWAY:
 			powerup_milkyway.emit(true)
+		PowerupClass.Powerups.SEMAGLUTIDE:
+			powerup_semaglutide.emit(true)
 	powerup_timer.start(pwr_node.time)
 	gui.show_powerup(pwr_node.type)
 	gui.powerup_ending_timer.start(pwr_node.time - 3)
@@ -127,6 +132,7 @@ func start_powerup(pwr_node):
 func reset_powerup():
 	time_scale = 1.0
 	powerup_milkyway.emit(false)
+	powerup_semaglutide.emit(false)
 	powerup_timer.stop()
 	gui.hide_powerup()
 	gui.powerup_ending_timer.stop()
@@ -182,7 +188,7 @@ func _spawn_milk(delta):
 		if version_2:
 			# milk_spawner.wait_time *= 1 / time_scale
 			if spawn_milk_count >= 5:
-				var rnd = randi_range(0,3)
+				var rnd = randi_range(0,4)
 				match(rnd):
 					0:
 						milk = milk_triple_instance.instantiate()
@@ -192,6 +198,8 @@ func _spawn_milk(delta):
 						milk = powerup_slowmotion_instance.instantiate()
 					3:
 						milk = powerup_milkyway_instance.instantiate()
+					4:
+						milk = powerup_semaglutide_instance.instantiate()
 				spawn_milk_count = 0
 			else:
 				milk = milk_instance.instantiate()

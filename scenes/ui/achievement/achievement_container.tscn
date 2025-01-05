@@ -5,7 +5,7 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_o3od6"]
 line_spacing = 0.0
-font_size = 20
+font_size = 18
 
 [node name="AchievementContainer" type="VBoxContainer"]
 custom_minimum_size = Vector2(150, 100)

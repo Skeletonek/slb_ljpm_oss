@@ -53,7 +53,7 @@ scale = Vector2(0.8, 0.8)
 texture = ExtResource("2_nheys")
 script = ExtResource("3_3k3r8")
 parallax_multiplier = 0.1
-mr_parallax_multiplier = 0.01
+mr_stopped = true
 
 [node name="Parallax1" type="Sprite2D" parent="Parallax1"]
 position = Vector2(1920, 0)
@@ -83,7 +83,7 @@ z_as_relative = false
 position = Vector2(250, -258)
 texture = ExtResource("4_amoh5")
 script = ExtResource("3_3k3r8")
-mr_parallax_multiplier = 0.01
+mr_stopped = true
 
 [node name="BackgroundRocks" type="Sprite2D" parent="BackgroundRocks"]
 position = Vector2(2048, 0)
@@ -95,7 +95,7 @@ z_as_relative = false
 scale = Vector2(0.35, 0.35)
 texture = ExtResource("4_dw7hs")
 script = ExtResource("3_3k3r8")
-mr_parallax_multiplier = 0.01
+mr_stopped = true
 
 [node name="Background" type="Sprite2D" parent="Background"]
 position = Vector2(3840, 0)

@@ -24,6 +24,7 @@ func _ready() -> void:
 	if owner.version_2:
 		original_y_position = position.y
 		death_timer = $DeathTimer
+		owner.powerup_semaglutide.connect(_powerup_semaglutide_handler)
 
 
 func _process(delta) -> void:
@@ -31,9 +32,11 @@ func _process(delta) -> void:
 	if move_vector.y > 0:
 		if position.y >= y_limit:
 			move_vector = Vector2(0,0)
+			owner.gui.direction_indicators(true, true)
 	elif move_vector.y < 0:
 		if position.y <= y_limit:
 			move_vector = Vector2(0,0)
+			owner.gui.direction_indicators(false, true)
 
 
 func _input(event):
@@ -134,6 +137,14 @@ func _area_entered_obstacle(ar):
 func move(dir_up: bool):
 	move_vector = Vector2(0, (-vertical_speed if dir_up else vertical_speed))
 	y_limit += -lane_y_diff if dir_up else lane_y_diff
+	owner.gui.direction_indicators(!dir_up, false)
+
+
+func _powerup_semaglutide_handler(yes: bool):
+	if yes:
+		scale = Vector2(0.5, 0.5)
+	else:
+		scale = Vector2(1.5, 1.5)
 
 
 func _set_skin():

@@ -15,6 +15,7 @@ var musicfiles = [
 	preload("res://audio/music/sahara.ogg"),
 	preload("res://audio/music/good-luck.ogg"),
 	preload("res://audio/music/cyber-punk.ogg"),
+	preload("res://audio/music/unnamed-driver.ogg"),
 ]
 
 var soundeffects = [

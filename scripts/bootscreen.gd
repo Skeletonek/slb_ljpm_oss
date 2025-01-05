@@ -10,6 +10,7 @@ func _ready():
 	$AnimationPlayer.animation_finished.connect(_load_main_menu)
 	ResourceLoader.load_threaded_request(MAINMENU_SCENE)
 
+
 func _load_main_menu(_anim_name = ""):
 	# if not SettingsBus.skip_intro:
 	# 	get_tree().change_scene_to_file("res://scenes/intro.tscn")

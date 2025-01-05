@@ -1,3 +1,15 @@
+#### 2.0-Beta+4
+ - Added decrease size powerup
+ - Added city map
+ - Added achievements for Volvo and Emo Panda
+ - Added "Unnamed Driver" music track
+ - Added car indicators to carride gui
+ - Added icon for elapsed time in carride gui
+ - Updated credits info
+ - Improved description for V-sync setting
+ - Changed milkyway behaviour to show ghostly figuers of the cars
+ - Improved AI vehicles collsion between each other
+
 #### 2.0-Beta+3
  - Changed method how unlocked skins and maps are handled by profile system.
      This change make previous save files incompatible

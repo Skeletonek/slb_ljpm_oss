@@ -44,7 +44,7 @@ alignment = 1
 [node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-vertical_scroll_mode = 2
+vertical_scroll_mode = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer"]
 custom_minimum_size = Vector2(0, 1000)
@@ -76,6 +76,43 @@ theme_override_font_sizes/font_size = 16
 text = "
 Twórcy:"
 horizontal_alignment = 1
+
+[node name="SkeletonekContainer2" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 10
+
+[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/SkeletonekContainer2"]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+
+[node name="SkeletonekLogo" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/SkeletonekContainer2/Control"]
+texture_filter = 2
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = -35.0
+offset_bottom = 35.0
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("5_8lv1x")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SkeletonekCredits" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/SkeletonekContainer2"]
+layout_mode = 2
+size_flags_stretch_ratio = 0.7
+theme_override_fonts/font = ExtResource("4_k2ykn")
+theme_override_font_sizes/font_size = 16
+text = "Skeletonek"
+label_settings = SubResource("LabelSettings_q8iax")
 
 [node name="SkeletonekContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 80)
@@ -216,18 +253,32 @@ theme_override_font_sizes/normal_font_size = 14
 theme_override_font_sizes/bold_font_size = 14
 bbcode_enabled = true
 text = "[center][b]Część skrórek do samochodów i map zostały stworzone przez społeczność gry:[/b]
-Real Panda - Astro
 Content Maker - Astro
+Emo Panda - Astro
+Real Panda - Astro
+Volvo - Astro
+
 [b]Dziękujemy wszystkim za wkład w tworzenie gry![/b]
 
 
 [b]Część grafik oraz utworów użytych w grze jest udostępnionych na licencji Creative Commons lub innej wolnej licencji:[/b]
 Milk bottle PNG - pngimg.com
-Stricken Commision - Bloo
-Good Luck - Bloo
-\"dead-ahead.ogg\" - Freedoom Contributors
-\"hard-trouble.ogg\" - Freedoom Contributors
 Explosion Animations Pack - ansimuz
+Modern City Backgrounds Pixel Art - craftpix.net
+Trashcan Pixel Art - Vecteezy (vecteezy.com)
+Street Lamps Pixel Art - Vecteezy (vecteezy.com)
+
+Cyber Punk (Neon Palms) - OvaniSound
+Dead Ahead (D2 Intermission) - Freedoom Contributors
+Digitist - OvaniSound
+Good Luck - Bloo
+Hard Trouble (Fear) - OvaniSound
+Phonky - OvaniSound
+Sahara - OvaniSound
+Spooky Scary Skeletons Remix - The Living Tombstone
+Stricken Commision - Bloo
+Tech Junkie - OvaniSound
+Unnamed Driver (E3M1) - Freedoom Contributors
 
 
 [b]Czcionki użyte w grze zostały udostępnione na licencji Open Font License:[/b]
@@ -280,6 +331,7 @@ text = "Powrót"
 [connection signal="gui_input" from="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer" to="." method="_on_scroll_container_gui_input"]
 [connection signal="scroll_ended" from="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer" to="." method="_on_scroll_container_scroll_ended"]
 [connection signal="scroll_started" from="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer" to="." method="_on_scroll_container_scroll_started"]
+[connection signal="gui_input" from="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/SkeletonekContainer2/Control/SkeletonekLogo" to="." method="_on_skeletonek_logo_click"]
 [connection signal="gui_input" from="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/SkeletonekContainer/Control/SkeletonekLogo" to="." method="_on_skeletonek_logo_click"]
 [connection signal="gui_input" from="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/GameEngineContainer/Control/GameEngineLogo" to="." method="_on_godot_logo_click"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
