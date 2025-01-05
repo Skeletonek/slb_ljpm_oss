@@ -18,6 +18,7 @@ RUN apt update && apt install -y mingw-w64 build-essential pkg-config libx11-dev
   python3 python3-pip && pip install SCons==4.0.1
 
 # Configure mingw for Godot building
+RUN update-alternatives --set x86_64-w64-mingw32-gcc /usr/bin/x86_64-w64-mingw32-gcc-posix
 RUN update-alternatives --set x86_64-w64-mingw32-g++ /usr/bin/x86_64-w64-mingw32-g++-posix
 
 # Install Android SDK

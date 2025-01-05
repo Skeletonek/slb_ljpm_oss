@@ -1,8 +1,16 @@
+#### 2.1.1
+ - Changed checking for available to wait one second after game launch
+ - Changed engine branch for Windows version from 4.3.0 to 4.3.1-dev
+ - Changed C++ compiler used to compile Windows version of the engine to MSVC
+ - Fixed being unable to launch the game on Windows systems
+
 #### 2.1.0
  - Added Fridge skin
+ - Added "Even Makłowicz will not jump out of the fridge" achievement
  - Added option to restart the game inside pause menu
  - Added collision check to disallow blocking player from escaping from the most outer lanes
  - Added "boot up check" for GUI car indicators at the start of the game
+ - Added a very small chance for Michał to turn on incorrect turn signal or even forget about it
  - Changed classic mode to use the same car spawning algorithm as the new improved mode
  - Decreased the possible speed difference between AI cars
  - Changed font color for exit buttons in pause menu

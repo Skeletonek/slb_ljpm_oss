@@ -44,15 +44,16 @@ func _ready() -> void:
 	# if SettingsBus.first_boot:
 		# $PopupTelemetry.show()
 
-	# Check for update
-	http_request.request_completed.connect(_validate_update)
-	http_request_changelog.request_completed.connect(_download_changelog)
-	_check_update()
-
 	if not get_parent() is Window:
 		get_parent().animation.luk_button.pressed.connect(_on_easter_egg_button_pressed)
 	else:
 		$MenuAnim.luk_button.pressed.connect(_on_easter_egg_button_pressed)
+
+	# Check for update
+	await get_tree().create_timer(1).timeout
+	http_request.request_completed.connect(_validate_update)
+	http_request_changelog.request_completed.connect(_download_changelog)
+	_check_update()
 
 
 func _on_global_music_finished():
