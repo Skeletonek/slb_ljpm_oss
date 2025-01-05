@@ -185,7 +185,7 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("4_k2ykn")
 theme_override_font_sizes/font_size = 16
 text = "Halembarus2:
-Reżyseria, Testowanie"
+Pomoc reżyserska, Testowanie"
 label_settings = SubResource("LabelSettings_q8iax")
 
 [node name="CreditsLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
@@ -252,11 +252,15 @@ theme_override_font_sizes/mono_font_size = 14
 theme_override_font_sizes/normal_font_size = 14
 theme_override_font_sizes/bold_font_size = 14
 bbcode_enabled = true
-text = "[center][b]Część skrórek do samochodów i map zostały stworzone przez społeczność gry:[/b]
-Content Maker - Astro
-Emo Panda - Astro
-Real Panda - Astro
-Volvo - Astro
+text = "[center]Część skrórek do samochodów i map zostały stworzone przez członka społeczności gry: Astro
+Content Maker
+Emo Panda
+Lowrider
+Optimus Prime
+Real Panda
+Volvo
+
+Cenne uwagi na etapie testowania gry przekazał: Vexentrios
 
 [b]Dziękujemy wszystkim za wkład w tworzenie gry![/b]
 
@@ -267,14 +271,15 @@ Explosion Animations Pack - ansimuz
 Modern City Backgrounds Pixel Art - craftpix.net
 Trashcan Pixel Art - Vecteezy (vecteezy.com)
 Street Lamps Pixel Art - Vecteezy (vecteezy.com)
+Businessman Png Image - freepngimg.com
 
 Cyber Punk (Neon Palms) - OvaniSound
 Dead Ahead (D2 Intermission) - Freedoom Contributors
 Digitist - OvaniSound
 Good Luck - Bloo
 Hard Trouble (Fear) - OvaniSound
+Infinity - OvaniSound
 Phonky - OvaniSound
-Sahara - OvaniSound
 Spooky Scary Skeletons Remix - The Living Tombstone
 Stricken Commision - Bloo
 Tech Junkie - OvaniSound

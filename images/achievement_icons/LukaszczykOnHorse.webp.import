@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/LukaszczykOnHorse.webp-19a6d7deb66bcf4f88b8cf
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

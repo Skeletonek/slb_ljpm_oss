@@ -1,0 +1,18 @@
+[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://i67exk0jb73m"]
+
+[ext_resource type="Texture2D" uid="uid://cde47ewfu0y0x" path="res://sprites/Lowrider_0001.png" id="1_3l13p"]
+[ext_resource type="Texture2D" uid="uid://c2p7jp4obuuds" path="res://sprites/Lowrider_0002.png" id="2_3rsm3"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_3l13p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_3rsm3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]

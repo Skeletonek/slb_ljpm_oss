@@ -8,22 +8,28 @@ extends Node
 # Is hidden?: boolean
 
 const ACHIEVEMENT_LIST = {
-	"milk_100": [
+	"milk_500": [
 		"Wróciłem z mlekiem!",
-		"Zbierz łącznie 100 sztuk mleka",
+		"Zbierz łącznie 500 sztuk mleka",
 		preload("res://images/achievement_icons/Milk100.webp"),
 		false
 		],
-	"milk_500": [
+	"milk_2000": [
 		"Mleko było na promocji!",
-		"Zbierz łącznie 500 sztuk mleka",
+		"Zbierz łącznie 2000 sztuk mleka",
 		preload("res://images/achievement_icons/Milk500.webp"),
 		false
 		],
-	"milk_1000": [
+	"milk_5000": [
 		"Otwieramy mleczarnie!",
-		"Zbierz łącznie 1000 sztuk mleka",
+		"Zbierz łącznie 5000 sztuk mleka",
 		preload("res://images/achievement_icons/Milk1000.webp"),
+		false
+		],
+	"milk_single_run": [
+		"Po co marnować paliwo?",
+		"Zbierz 200 sztuk mleka w ciągu jednej rozgrywki",
+		preload("res://images/achievement_icons/MilkSingleRun.webp"),
 		false
 		],
 	"speed_110": [
@@ -42,6 +48,24 @@ const ACHIEVEMENT_LIST = {
 		"Prędkość światła! (prawie)",
 		"Osiągnij prędkość 200 km/h",
 		preload("res://images/achievement_icons/Speed200.webp"),
+		false
+		],
+	"distance1": [
+		"Pierwsze przejażdżki",
+		"Przejedź łącznie 10 kilometrów",
+		preload("res://images/achievement_icons/Distance1.webp"),
+		false
+		],
+	"distance2": [
+		"Długodystansowiec",
+		"Przejedź łącznie 100 kilometrów",
+		preload("res://images/achievement_icons/Distance2.webp"),
+		false
+		],
+	"distance3": [
+		"Wielki podróżnik",
+		"Przejedź łącznie 200 kilometrów",
+		preload("res://images/achievement_icons/Distance3.webp"),
 		false
 		],
 	"volvo_combi": [
@@ -84,6 +108,18 @@ const ACHIEVEMENT_LIST = {
 		"xXx_DarkPanda_xXx",
 		"Ukończ jedną rozgrywkę w skórce Emo Pandy",
 		preload("res://images/achievement_icons/EmoPanda.webp"),
+		false
+		],
+	"lowrider": [
+		"Low and slow",
+		"Ukończ jedną rozgrywkę w skórce Lowridera",
+		preload("res://images/achievement_icons/Lowrider.webp"),
+		false
+		],
+	"optimus_prime": [
+		"Konwój",
+		"Ukończ jedną rozgrywkę w skórce Optimusa Prime",
+		preload("res://images/achievement_icons/OptimusPrime.webp"),
 		false
 		],
 	"serious_business": [

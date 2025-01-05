@@ -9,6 +9,8 @@ enum Skins {
 	CONTENT_MAKER=5,
 	LUKASZCZYK_ON_HORSE=6,
 	EMO_PANDA=7,
+	LOWRIDER=8,
+	OPTIMUS_PRIME=9,
 }
 
 enum Maps {

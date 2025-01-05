@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="SLB: LJPM"
-config/version="2.0-rc+4"
+config/version="2.0.0"
 run/main_scene="res://scenes/bootscreen.tscn"
 config/project_settings_override="user://override.cfg"
 config/quit_on_go_back=false
@@ -20,8 +20,8 @@ run/flush_stdout_on_print=true
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/image="res://images/SplashScreen.png"
 config/icon="res://icon.svg"
-config/build_number=30
-config/date="2024-12-27 19:21"
+config/build_number=31
+config/date="2024-12-31 12:00"
 
 [autoload]
 

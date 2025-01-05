@@ -77,6 +77,7 @@ func buy_skin() -> void:
 		_update_milks_count()
 		buy_success_player.play()
 		_check_achievement()
+		ProfileBus.save_profile_to_file()
 	else:
 		buy_fail_player.play()
 
@@ -94,6 +95,7 @@ func buy_map() -> void:
 		_update_milks_count()
 		buy_success_player.play()
 		_check_achievement()
+		ProfileBus.save_profile_to_file()
 	else:
 		buy_fail_player.play()
 

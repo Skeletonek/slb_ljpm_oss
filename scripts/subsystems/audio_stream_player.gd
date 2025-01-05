@@ -12,10 +12,10 @@ var musicfiles = [
 	preload("res://audio/music/tech-junkie.ogg"),
 	preload("res://audio/music/dead-ahead.ogg"),
 	preload("res://audio/music/hard-trouble.ogg"),
-	preload("res://audio/music/sahara.ogg"),
 	preload("res://audio/music/good-luck.ogg"),
 	preload("res://audio/music/cyber-punk.ogg"),
 	preload("res://audio/music/unnamed-driver.ogg"),
+	preload("res://audio/music/infinity.ogg"),
 ]
 
 var soundeffects = [

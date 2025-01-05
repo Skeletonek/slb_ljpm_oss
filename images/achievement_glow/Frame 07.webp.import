@@ -15,9 +15,9 @@ dest_files=["res://.godot/imported/Frame 07.webp-2b08630b22a4162a175f4e71f00e095
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
-compress/lossy_quality=0.7
+compress/lossy_quality=0.8
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0

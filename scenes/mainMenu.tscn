@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://dg78sdxts17fs"]
+[gd_scene load_steps=15 format=3 uid="uid://dg78sdxts17fs"]
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_f7xwm"]
 [ext_resource type="PackedScene" uid="uid://dhg1bdg5yc1y1" path="res://scenes/ui/main_menu_anim.tscn" id="2_bk5ie"]
 [ext_resource type="VideoStream" path="res://video/rick_astley.ogv" id="2_svo3y"]
 [ext_resource type="Texture2D" uid="uid://cyo4rlihaqgrc" path="res://images/icons/SLB2Logo.webp" id="3_hn8g4"]
+[ext_resource type="SpriteFrames" uid="uid://mguxm7usjhnv" path="res://images/animated_logo/mainMenu.tres" id="4_5vajt"]
 [ext_resource type="PackedScene" uid="uid://2sbxeymmsxu" path="res://scenes/ui/achievement_viewer.tscn" id="6_grvj1"]
 [ext_resource type="PackedScene" uid="uid://b7vga3h254d3i" path="res://scenes/ui/shop_layer.tscn" id="7_51vl4"]
 [ext_resource type="PackedScene" uid="uid://cex336ldxva3h" path="res://scenes/ui/profile_layer.tscn" id="7_d4g75"]
@@ -223,7 +224,21 @@ size_flags_vertical = 5
 toggle_mode = true
 text = "Nowa gra"
 
+[node name="VBoxContainer2" type="VBoxContainer" parent="MainMenuLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_top = 185.0
+offset_bottom = 185.0
+grow_horizontal = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="MainMenuLayer/VBoxContainer2"]
+scale = Vector2(0.3, 0.3)
+sprite_frames = ExtResource("4_5vajt")
+autoplay = "default"
+
 [node name="GameLogo" type="TextureRect" parent="MainMenuLayer"]
+visible = false
 texture_filter = 2
 anchors_preset = 5
 anchor_left = 0.5

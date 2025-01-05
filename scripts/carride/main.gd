@@ -211,6 +211,7 @@ func _spawn_milk(delta):
 				var rnd = randi_range(0,4)
 				if rnd == previous_milk_spawn:
 					rnd = (rnd + 1) % 5
+				previous_milk_spawn = rnd
 				match(rnd):
 					0:
 						milk = milk_triple_instance.instantiate()
@@ -246,7 +247,11 @@ func _add_scores():
 	if version_2:
 		ProfileBus.profile.add_powerups(powerup_counter)
 	if not version_2:
-		var leaderboard_name = "dev" if OS.is_debug_build() else "main"
+		var leaderboard_name = (
+			"dev"
+			if OS.is_debug_build() or OS.has_feature("private-test")
+			else "main"
+		)
 		SilentWolf.Scores.save_score(
 			ProfileBus.profile.get_full_playername(),
 			final_score,
@@ -283,6 +288,7 @@ func _add_scores():
 			leaderboard_name,
 			metadata,
 		)
+	ProfileBus.save_profile_to_file()
 
 
 func _set_map():
@@ -307,10 +313,13 @@ func _achievement_check():
 		AchievementSystem.call_achievement("speed_200")
 	if not version_2 and time > 60000000 and milks == 0:
 		AchievementSystem.call_achievement("lactose_intolerant")
-	if time > 180000000 and powerup_counter.values().all(
+	if version_2 and time > 180000000 and powerup_counter.values().all(
 		func(x): return x == 0
 	):
 		AchievementSystem.call_achievement("no_powerups")
+	if milks >= 200:
+		AchievementSystem.call_achievement("milk_single_run")
+
 
 func _check_game_over_achievements():
 	var skin_name = Profile.Skins.keys()[ProfileBus.profile.chosen_skin].to_lower()
@@ -319,3 +328,17 @@ func _check_game_over_achievements():
 	var map_name = Profile.Maps.keys()[ProfileBus.profile.chosen_map].to_lower()
 	if map_name in AchievementSystem.data:
 		AchievementSystem.call_achievement(map_name)
+	var stats_milk = ProfileBus.profile.milks_total
+	if stats_milk + milks >= 5000:
+		AchievementSystem.call_achievement("milk_5000")
+	if stats_milk + milks >= 2000:
+		AchievementSystem.call_achievement("milk_2000")
+	if stats_milk + milks >= 500:
+		AchievementSystem.call_achievement("milk_500")
+	var stats_distance = ProfileBus.profile.distance_sum
+	if stats_distance + distance >= 335000:
+		AchievementSystem.call_achievement("distance1")
+	if stats_distance + distance >= 3350000:
+		AchievementSystem.call_achievement("distance2")
+	if stats_distance + distance >= 6700000:
+		AchievementSystem.call_achievement("distance3")

@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/RickRolled.webp-2d32a4e1193d3241ea4fa3e6ee142
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

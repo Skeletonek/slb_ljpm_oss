@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/Milk100.webp-05637e8bc05239aa18426489f931bdef
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

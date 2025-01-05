@@ -4,6 +4,7 @@ signal signal_debug_dev_buttons
 
 @export var focus_node: Control
 
+var animated_logo = preload("res://images/animated_logo/mainMenu.tres")
 var build_number: int = ProjectSettings.get_setting("application/config/build_number")
 var version: String
 var download_url: String
@@ -21,6 +22,7 @@ var easter_egg_clickable := false
 
 
 func _ready() -> void:
+	$MainMenuLayer/VBoxContainer2/AnimatedSprite2D.sprite_frames = animated_logo
 	# This is for the SLB2: TGRa, not LJPM
 	# if GlobalMusic.stream.resource_path == "res://audio/music/the-great-rescue.ogg":
 	# 	var music_tick = GlobalMusic.get_playback_position()
@@ -202,6 +204,8 @@ func _hide_all_layers():
 	$ShopLayer.hide()
 	$MainMenuLayer/VBoxContainer/Profile/ProfileToggleButton.set_pressed_no_signal(false)
 	$MainMenuLayer/VBoxContainer/Profile/ProfileToggled.hide()
+	$MainMenuLayer/VBoxContainer/Scoreboard/ScoreboardToggleButton.set_pressed_no_signal(false)
+	$MainMenuLayer/VBoxContainer/Scoreboard/ScoreboardToggled.hide()
 	$MainMenuLayer/VBoxContainer/Game/GameToggleButton.set_pressed_no_signal(false)
 	$MainMenuLayer/VBoxContainer/Game/GameToggled.hide()
 	easter_egg_clickable = false

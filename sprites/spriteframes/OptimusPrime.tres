@@ -1,0 +1,18 @@
+[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://cyqn80bsfq3u8"]
+
+[ext_resource type="Texture2D" uid="uid://c81ah8n3op4rj" path="res://sprites/OptimusPrime_0001.png" id="1_we7w3"]
+[ext_resource type="Texture2D" uid="uid://b205ql0m0oth7" path="res://sprites/OptimusPrime_0002.png" id="2_r72em"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_we7w3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_r72em")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]

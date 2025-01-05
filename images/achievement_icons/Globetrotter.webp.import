@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/Globetrotter.webp-a9fa38b63da57361b39f8a693aa
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

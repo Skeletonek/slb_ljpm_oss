@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/LunarConflict.webp-aa4e3b4b8364763e26a110f197
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

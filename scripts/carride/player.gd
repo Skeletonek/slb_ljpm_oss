@@ -31,10 +31,12 @@ func _process(delta) -> void:
 	position += move_vector * delta * owner.time_scale
 	if move_vector.y > 0:
 		if position.y >= y_limit:
+			position.y = y_limit
 			move_vector = Vector2(0,0)
 			owner.gui.direction_indicators(true, true)
 	elif move_vector.y < 0:
 		if position.y <= y_limit:
+			position.y = y_limit
 			move_vector = Vector2(0,0)
 			owner.gui.direction_indicators(false, true)
 
@@ -87,7 +89,6 @@ func _area_entered_milk(ar):
 			owner.milks += 3
 		else:
 			owner.milks += 1
-		_milk_achievement_check()
 
 
 func _area_entered_powerup(ar):
@@ -178,13 +179,3 @@ func _reduce_motion(yes):
 		$LukaszczykWPandzie.stop()
 	else:
 		$LukaszczykWPandzie.play("default")
-
-
-func _milk_achievement_check():
-	var stats_milk = ProfileBus.profile.milks_total
-	if stats_milk + owner.milks >= 1000:
-		AchievementSystem.call_achievement("milk_1000")
-	if stats_milk + owner.milks >= 500:
-		AchievementSystem.call_achievement("milk_500")
-	if stats_milk + owner.milks >= 100:
-		AchievementSystem.call_achievement("milk_100")

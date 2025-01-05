@@ -1,3 +1,21 @@
+#### 2.0.0
+ - Added new, animated logo for 2.0 version
+ - Added infinity music track
+ - Changed game over panel title
+ - Added Lowrider community skin
+ - Added Optimus Prime community skin
+ - Added total distance achievements
+ - Added achievement for getting 200 milks in single run
+ - Increased milks needed for milk achievement (aka. collect x milks in total)
+ - Removed sahara music track
+ - Improved resilliency for saving profile data
+ - Changed milk achievements to check if criteria have been completed only during game over
+ - Very slightly increased player hitbox
+ - Fixed 'Powerups are for pussies' achievement activating even in classic mode
+ - Fixed powerups still showing up twice in a row
+ - Fixed scores saving to main scoreboard when playing classic mode in private-test version
+ - Fixed scoreboard buttons not hiding after entering any panel in main menu
+
 #### 2.0-RC+4
  - Add "Powerups are for pussies" achievement
  - Add "Lightspeed! (Almost)" achievement

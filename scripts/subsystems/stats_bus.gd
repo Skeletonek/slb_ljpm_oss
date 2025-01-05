@@ -116,6 +116,28 @@ func get_skin_data(skin_index: int) -> Dictionary:
 				"y_pos_offset": 0.0,
 				"scale": 0.95,
 			}
+		profile.Skins.LOWRIDER:
+			dict = {
+				"name": "Lowrider",
+				"texture": load("res://sprites/Lowrider_0002.png"),
+				"spriteframe": load("res://sprites/spriteframes/Lowrider.tres"),
+				"community_made": true,
+				"author": "Astro",
+				"price": 600,
+				"y_pos_offset": 12.0,
+				"scale": 1.00,
+			}
+		profile.Skins.OPTIMUS_PRIME:
+			dict = {
+				"name": "Optimus Prime",
+				"texture": load("res://sprites/OptimusPrime_0002.png"),
+				"spriteframe": load("res://sprites/spriteframes/OptimusPrime.tres"),
+				"community_made": true,
+				"author": "Astro",
+				"price": 500,
+				"y_pos_offset": 0.0,
+				"scale": 1.05,
+			}
 	return dict
 
 
