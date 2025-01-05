@@ -6,7 +6,9 @@ var move_vector: Vector2
 var y_limit = 60
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	SignalBus.reduce_motion.connect(_reduce_motion)
+	if SettingsBus.reduced_motion:
+		$LukaszczykWPandzie.stop()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -35,18 +37,26 @@ func _input(event):
 
 func _on_area_entered(area):
 	if area.is_in_group("Milk"):
-		area.reset_postion()
-		owner.milks += 1
-		$MilkPlayer.play()
+		if process_mode != Node.PROCESS_MODE_DISABLED:
+			area.queue_free()
+			owner.milks += 1
+			$MilkPlayer.play()
 	elif area.is_in_group("Obstacles"):
 		$CrashPlayer.play()
 		if not SettingsBus.godmode:
-			visible = false
-			await get_tree().create_timer(1.0).timeout
-			get_tree().change_scene_to_file("res://scenes/carride.tscn")
+			hide()
+			process_mode = Node.PROCESS_MODE_DISABLED
+			$MilkPlayer.process_mode = Node.PROCESS_MODE_ALWAYS
+			owner.game_over()
 
 
 func move(dir_up: bool):
 	move_vector = Vector2(0, (-speed if dir_up else speed))
 	y_limit += -80 if dir_up else 80
 
+
+func _reduce_motion(yes):
+	if yes: 
+		$LukaszczykWPandzie.stop()
+	else:
+		$LukaszczykWPandzie.play("default")

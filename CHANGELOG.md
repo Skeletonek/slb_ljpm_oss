@@ -1,3 +1,12 @@
+#### B.5.0
+ - Completely refactored AI cars and milk spawning algorithm
+ - Added random speed difference for every AI car
+ - Added simple game over screen
+ - Added update checking
+ - Reduced motion is now stoping sprite animations
+ - Fixed Graphics API setting not working on Android
+ - Fixed "Reduce motion" setting not working while in game
+
 #### B.4.0
  - Changed default font
  - Added option to change default font for OpenDyslexia

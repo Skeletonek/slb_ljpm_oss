@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://boixto1v5xtcq"]
+[gd_scene load_steps=20 format=3 uid="uid://boixto1v5xtcq"]
 
 [ext_resource type="Texture2D" uid="uid://c57l262udunto" path="res://sprites/Road.png" id="1_fp1p5"]
 [ext_resource type="Script" path="res://scripts/carride/main.gd" id="1_y5nnv"]
@@ -9,19 +9,9 @@
 [ext_resource type="Script" path="res://scripts/carride/player.gd" id="4_sxi6f"]
 [ext_resource type="PackedScene" uid="uid://lugeuc8kewl3" path="res://scenes/instances/pause_menu.tscn" id="5_2qleg"]
 [ext_resource type="AudioStream" uid="uid://dw6573okuao6h" path="res://audio/sfx/Car Crash Short.wav" id="6_dtkok"]
-[ext_resource type="Script" path="res://scripts/carride/ai_vehicle.gd" id="6_dvn5r"]
 [ext_resource type="Texture2D" uid="uid://1ybbxyuurtvd" path="res://sprites/Panda_0001.png" id="7_x3frt"]
 [ext_resource type="AudioStream" uid="uid://d2lim2blo57e" path="res://audio/sfx/Inventory Shiny Things A.wav" id="9_kk7c3"]
 [ext_resource type="Texture2D" uid="uid://v831njlfv53m" path="res://sprites/Panda_0002.png" id="9_vinbh"]
-[ext_resource type="Texture2D" uid="uid://bogskfkkkked4" path="res://sprites/PandaGreen_0001.png" id="11_87sgt"]
-[ext_resource type="Texture2D" uid="uid://t6a01dojmwqe" path="res://sprites/PandaBlue_0001.png" id="11_baqkq"]
-[ext_resource type="Texture2D" uid="uid://dxkix3qrn84re" path="res://sprites/PandaWhite_0001.png" id="12_64cf7"]
-[ext_resource type="Texture2D" uid="uid://d0y7a6yrpxcv2" path="res://sprites/PandaYellow_0001.png" id="13_eq01d"]
-[ext_resource type="Texture2D" uid="uid://b1bqnsurkpd3o" path="res://sprites/Milk.png" id="14_2a3f6"]
-[ext_resource type="Texture2D" uid="uid://b05hnorid4i0t" path="res://sprites/PandaBlue_0002.png" id="14_e8w48"]
-[ext_resource type="Texture2D" uid="uid://b81s8jbal2ixi" path="res://sprites/PandaGreen_0002.png" id="16_33n1u"]
-[ext_resource type="Texture2D" uid="uid://cabeb1ppt0x18" path="res://sprites/PandaWhite_0002.png" id="18_brttv"]
-[ext_resource type="Texture2D" uid="uid://dn1fuyl4oep7a" path="res://sprites/PandaYellow_0002.png" id="20_aouye"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_64r8c"]
 font_size = 24
@@ -54,92 +44,8 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jfarv"]
 size = Vector2(114, 15.5)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_rs6kl"]
-animations = [{
-"frames": [{
-"duration": 1.4,
-"texture": ExtResource("11_baqkq")
-}, {
-"duration": 1.0,
-"texture": ExtResource("14_e8w48")
-}],
-"loop": true,
-"name": &"default",
-"speed": 2.0
-}]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_5jwxj"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("11_87sgt")
-}, {
-"duration": 1.1,
-"texture": ExtResource("16_33n1u")
-}],
-"loop": true,
-"name": &"default",
-"speed": 2.0
-}]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_nrhsq"]
-animations = [{
-"frames": [{
-"duration": 1.2,
-"texture": ExtResource("12_64cf7")
-}, {
-"duration": 1.0,
-"texture": ExtResource("18_brttv")
-}],
-"loop": true,
-"name": &"default",
-"speed": 2.0
-}]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_bfyj1"]
-animations = [{
-"frames": [{
-"duration": 0.9,
-"texture": ExtResource("11_baqkq")
-}, {
-"duration": 1.0,
-"texture": ExtResource("14_e8w48")
-}],
-"loop": true,
-"name": &"default",
-"speed": 2.0
-}]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_7c84r"]
-animations = [{
-"frames": [{
-"duration": 1.3,
-"texture": ExtResource("13_eq01d")
-}, {
-"duration": 1.0,
-"texture": ExtResource("20_aouye")
-}],
-"loop": true,
-"name": &"default",
-"speed": 2.0
-}]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_jm4s4"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("12_64cf7")
-}, {
-"duration": 1.0,
-"texture": ExtResource("18_brttv")
-}],
-"loop": true,
-"name": &"default",
-"speed": 2.0
-}]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qmsv7"]
-size = Vector2(52, 51)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r5kkt"]
+size = Vector2(250, 40)
 
 [node name="Node2D" type="Node2D"]
 y_sort_enabled = true
@@ -150,6 +56,7 @@ speed = 300.0
 metadata/_edit_vertical_guides_ = [-221.0, -650.0]
 
 [node name="GUI" type="Control" parent="." node_paths=PackedStringArray("LabelTime", "LabelMilk")]
+z_index = 10
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -245,6 +152,49 @@ text = "0
 "
 label_settings = SubResource("LabelSettings_1ehfg")
 
+[node name="PanelContainer" type="PanelContainer" parent="GUI"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="GUI/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Label" type="Label" parent="GUI/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+text = "Spowodowałeś wypadek!"
+horizontal_alignment = 1
+
+[node name="PlayAgainBtn" type="Button" parent="GUI/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+text = "Zagraj jeszcze raz"
+
+[node name="MenuBtn" type="Button" parent="GUI/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+text = "Wróć do menu"
+
 [node name="Camera2D" type="Camera2D" parent="."]
 scale = Vector2(2, 2)
 
@@ -274,6 +224,7 @@ shape = SubResource("RectangleShape2D_lr1qs")
 [node name="OutOfBounds" type="StaticBody2D" parent="OutOfBounds"]
 position = Vector2(-463.5, 0)
 scale = Vector2(0.7, 0.7)
+collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="OutOfBounds/OutOfBounds"]
 position = Vector2(-17.1429, 0)
@@ -289,6 +240,7 @@ script = ExtResource("3_1a2x8")
 [node name="LukaszczykWPandzie" type="Area2D" parent="."]
 position = Vector2(-539, 60)
 scale = Vector2(1.5, 1.5)
+collision_mask = 7
 script = ExtResource("4_sxi6f")
 speed = 400
 
@@ -313,134 +265,72 @@ scale = Vector2(0.5, 0.5)
 stream = ExtResource("9_kk7c3")
 bus = &"SFX"
 
-[node name="PandaBlue" type="Area2D" parent="." groups=["Obstacles"]]
-position = Vector2(940, -20)
-scale = Vector2(1.5, 1.5)
-script = ExtResource("6_dvn5r")
+[node name="SpawnPoints" type="Node2D" parent="."]
+position = Vector2(1000, 0)
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PandaBlue"]
-sprite_frames = SubResource("SpriteFrames_rs6kl")
-autoplay = "default"
-frame_progress = 0.897002
-flip_h = true
+[node name="SP1" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(0, -100)
+gizmo_extents = 15.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PandaBlue"]
-position = Vector2(-1, 19)
-shape = SubResource("RectangleShape2D_jfarv")
+[node name="Area2D" type="Area2D" parent="SpawnPoints/SP1"]
+collision_mask = 7
 
-[node name="PandaBlue2" type="Area2D" parent="." groups=["Obstacles"]]
-position = Vector2(1200, 60)
-scale = Vector2(1.5, 1.5)
-script = ExtResource("6_dvn5r")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnPoints/SP1/Area2D"]
+position = Vector2(-125, 30)
+shape = SubResource("RectangleShape2D_r5kkt")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PandaBlue2"]
-sprite_frames = SubResource("SpriteFrames_5jwxj")
-autoplay = "default"
-frame_progress = 0.211462
-flip_h = true
+[node name="SP2" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(0, -20)
+gizmo_extents = 15.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PandaBlue2"]
-position = Vector2(-1, 19)
-shape = SubResource("RectangleShape2D_jfarv")
+[node name="Area2D" type="Area2D" parent="SpawnPoints/SP2"]
+collision_mask = 7
 
-[node name="PandaBlue3" type="Area2D" parent="." groups=["Obstacles"]]
-position = Vector2(1500, 140)
-scale = Vector2(1.5, 1.5)
-script = ExtResource("6_dvn5r")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnPoints/SP2/Area2D"]
+position = Vector2(-125, 30)
+shape = SubResource("RectangleShape2D_r5kkt")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PandaBlue3"]
-sprite_frames = SubResource("SpriteFrames_nrhsq")
-autoplay = "default"
-frame_progress = 0.464614
-flip_h = true
+[node name="SP3" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(0, 60)
+gizmo_extents = 15.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PandaBlue3"]
-position = Vector2(-1, 19)
-shape = SubResource("RectangleShape2D_jfarv")
+[node name="Area2D" type="Area2D" parent="SpawnPoints/SP3"]
+collision_mask = 7
 
-[node name="PandaBlue4" type="Area2D" parent="." groups=["Obstacles"]]
-position = Vector2(1770, 60)
-scale = Vector2(1.5, 1.5)
-script = ExtResource("6_dvn5r")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnPoints/SP3/Area2D"]
+position = Vector2(-125, 30)
+shape = SubResource("RectangleShape2D_r5kkt")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PandaBlue4"]
-sprite_frames = SubResource("SpriteFrames_bfyj1")
-autoplay = "default"
-frame_progress = 0.861107
-flip_h = true
+[node name="SP4" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(0, 140)
+gizmo_extents = 15.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PandaBlue4"]
-position = Vector2(-1, 19)
-shape = SubResource("RectangleShape2D_jfarv")
+[node name="Area2D" type="Area2D" parent="SpawnPoints/SP4"]
+collision_mask = 7
 
-[node name="PandaBlue5" type="Area2D" parent="." groups=["Obstacles"]]
-position = Vector2(2050, -100)
-scale = Vector2(1.5, 1.5)
-script = ExtResource("6_dvn5r")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnPoints/SP4/Area2D"]
+position = Vector2(-125, 30)
+shape = SubResource("RectangleShape2D_r5kkt")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PandaBlue5"]
-sprite_frames = SubResource("SpriteFrames_7c84r")
-autoplay = "default"
-frame_progress = 0.630228
-flip_h = true
+[node name="SP5" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(0, 220)
+gizmo_extents = 15.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PandaBlue5"]
-position = Vector2(-1, 19)
-shape = SubResource("RectangleShape2D_jfarv")
+[node name="Area2D" type="Area2D" parent="SpawnPoints/SP5"]
+collision_mask = 7
 
-[node name="PandaBlue6" type="Area2D" parent="." groups=["Obstacles"]]
-position = Vector2(2350, 220)
-scale = Vector2(1.5, 1.5)
-script = ExtResource("6_dvn5r")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PandaBlue6"]
-sprite_frames = SubResource("SpriteFrames_jm4s4")
-autoplay = "default"
-frame_progress = 0.0820787
-flip_h = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PandaBlue6"]
-position = Vector2(-1, 19)
-shape = SubResource("RectangleShape2D_jfarv")
-
-[node name="Milk" type="Area2D" parent="." groups=["Milk"]]
-z_index = -1
-position = Vector2(1760, -20)
-script = ExtResource("6_dvn5r")
-speed_increment = 300
-
-[node name="Sprite2D" type="Sprite2D" parent="Milk"]
-position = Vector2(0, 10)
-texture = ExtResource("14_2a3f6")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Milk"]
-position = Vector2(0, 5)
-shape = SubResource("RectangleShape2D_qmsv7")
-
-[node name="Milk2" type="Area2D" parent="." groups=["Milk"]]
-z_index = -1
-position = Vector2(2551, 220)
-script = ExtResource("6_dvn5r")
-speed_increment = 300
-
-[node name="Sprite2D" type="Sprite2D" parent="Milk2"]
-position = Vector2(0, 10)
-texture = ExtResource("14_2a3f6")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Milk2"]
-position = Vector2(0, 5)
-shape = SubResource("RectangleShape2D_qmsv7")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnPoints/SP5/Area2D"]
+position = Vector2(-125, 30)
+shape = SubResource("RectangleShape2D_r5kkt")
 
 [node name="PauseLayer" parent="." instance=ExtResource("5_2qleg")]
 
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
 [connection signal="touchscreen_move" from="GUI" to="LukaszczykWPandzie" method="move"]
+[connection signal="pressed" from="GUI/PanelContainer/MarginContainer/VBoxContainer/PlayAgainBtn" to="GUI" method="_on_play_again_btn_pressed"]
+[connection signal="pressed" from="GUI/PanelContainer/MarginContainer/VBoxContainer/MenuBtn" to="GUI" method="_on_menu_btn_pressed"]
 [connection signal="area_entered" from="LukaszczykWPandzie" to="LukaszczykWPandzie" method="_on_area_entered"]
 [connection signal="body_entered" from="LukaszczykWPandzie" to="LukaszczykWPandzie" method="_on_body_entered"]
-[connection signal="body_entered" from="PandaBlue" to="PandaBlue" method="_on_body_entered"]
-[connection signal="body_entered" from="PandaBlue2" to="PandaBlue2" method="_on_body_entered"]
-[connection signal="body_entered" from="PandaBlue3" to="PandaBlue3" method="_on_body_entered"]
-[connection signal="body_entered" from="PandaBlue4" to="PandaBlue4" method="_on_body_entered"]
-[connection signal="body_entered" from="PandaBlue5" to="PandaBlue5" method="_on_body_entered"]
-[connection signal="body_entered" from="PandaBlue6" to="PandaBlue6" method="_on_body_entered"]
-[connection signal="body_entered" from="Milk" to="Milk" method="_on_body_entered"]
-[connection signal="body_entered" from="Milk2" to="Milk2" method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_spawn_milk"]

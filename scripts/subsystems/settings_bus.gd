@@ -23,7 +23,7 @@ var skip_intro := false
 var godmode: = false
 
 var cfg_window_mode := DisplayServer.WINDOW_MODE_WINDOWED
-var cfg_rendering_method := "gl_compatibility"
+var cfg_rendering_method := "mobile"
 var cfg = ConfigFile.new()
 
 func load_config() -> bool:
@@ -76,10 +76,10 @@ func save_config():
 
 
 func load_override():
-	var err = cfg.load("override.cfg")
+	var err = cfg.load("user://override.cfg")
 	if err != OK:
 		cfg_window_mode = DisplayServer.WINDOW_MODE_WINDOWED
-		cfg_rendering_method = "gl_compatibility"
+		cfg_rendering_method = "mobile"
 		return
 	cfg_window_mode = cfg.get_value("display", "window/size/mode")
 	cfg_rendering_method = cfg.get_value("rendering", "renderer/rendering_method")
@@ -89,7 +89,7 @@ func save_override():
 	cfg.set_value("display", "window/size/mode", cfg_window_mode)
 	cfg.set_value("rendering", "renderer/rendering_method", cfg_rendering_method)
 	cfg.set_value("rendering", "renderer/rendering_method.mobile", cfg_rendering_method)
-	cfg.save("override.cfg")
+	cfg.save("user://override.cfg")
 
 
 func _enter_tree():

@@ -187,6 +187,17 @@ texture = ExtResource("3_hn8g4")
 expand_mode = 1
 stretch_mode = 5
 
+[node name="UpdateButton" type="Button" parent="MainMenuLayer"]
+visible = false
+custom_minimum_size = Vector2(160, 70)
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 283.0
+offset_bottom = 80.0
+focus_neighbor_bottom = NodePath("../CreditsButton")
+focus_previous = NodePath("../CreditsButton")
+text = "Dostępna aktualizacja!"
+
 [node name="OptionsLayer" parent="." instance=ExtResource("5_ek5qx")]
 visible = false
 
@@ -431,8 +442,12 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "Powrót"
 
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+timeout = 3.0
+
 [connection signal="pressed" from="MainMenuLayer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="MainMenuLayer/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
 [connection signal="pressed" from="MainMenuLayer/VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
 [connection signal="pressed" from="MainMenuLayer/VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="MainMenuLayer/UpdateButton" to="." method="_update_game"]
 [connection signal="pressed" from="CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

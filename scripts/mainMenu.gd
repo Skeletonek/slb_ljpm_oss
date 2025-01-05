@@ -2,8 +2,16 @@ extends Control
 
 
 @onready var options_layer = $OptionsLayer
+@onready var http_request = $HTTPRequest
+@onready var update_button = $MainMenuLayer/UpdateButton
+
 @export var skeletonek_logo: Control
 @export var godot_logo: Control
+
+var build_number: int = ProjectSettings.get_setting("application/config/build_number")
+var new_build_code: String
+var download_url: String
+var changelog_url: String
 
 func _ready():
 	skeletonek_logo.gui_input.connect(_on_skeletonek_logo_click)
@@ -21,6 +29,10 @@ func _ready():
 	device_info_label.text = _debug_info() + "\n\n"
 	var game_info_label = $CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer2/GameInfo
 	game_info_label.text = "Wersja gry: " + ProjectSettings.get_setting("application/config/version") + "\n\n"
+	
+	# Check for update
+	http_request.request_completed.connect(_validate_update)
+	_check_update()
 
 
 func _on_global_music_finished():
@@ -47,8 +59,36 @@ func _debug_info() -> String:
 	return text
 
 
-func _process(_delta):
-	pass
+func _check_update():
+	http_request.request("https://server.skeletonek.com/app/ljpm/update.json")
+	print("Checking if update is available...")
+
+
+func _validate_update(result, response_code, headers, body):
+	if result != 0:
+		push_warning("Couldn't check for update! Do we have an internet?")
+		update_button.text = "Brak połączenia"
+		update_button.disabled = true
+		update_button.show()
+		get_tree().create_timer(10).timeout.connect(_check_update)
+		pass # There is a connection error
+	else:
+		print("Correctly checked if update is available")
+		var json = JSON.parse_string(body.get_string_from_utf8())
+		if int(json["buildNumber"]) > build_number:
+			print("Update found!")
+			download_url = json["downloadURL"]
+			changelog_url = json["changelogURL"]
+			new_build_code = json["buildCode"]
+			update_button.text = "Dostępna aktualizacja!"
+			update_button.disabled = false
+			update_button.show()
+
+
+func _update_game():
+	OS.shell_open(download_url)
+	SettingsBus.save_config()
+	get_tree().quit()
 
 
 func _notification(what):

@@ -12,6 +12,7 @@ config_version=5
 
 config/name="LJPM"
 run/main_scene="res://scenes/mainMenu.tscn"
+config/project_settings_override="user://override.cfg"
 config/quit_on_go_back=false
 config/features=PackedStringArray("4.1", "Mobile")
 run/flush_stdout_on_print=true
@@ -19,9 +20,9 @@ boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/image="res://images/SplashScreen.png"
 config/icon="res://icon.svg"
 boot_splash/minimum_display_time=1000
-config/version="B.4.0"
-config/build_number=5
-config/date="2023-11-13 22:15"
+config/version="B.5.0"
+config/build_number=6
+config/date="2023-11-15 23:21"
 
 [autoload]
 
