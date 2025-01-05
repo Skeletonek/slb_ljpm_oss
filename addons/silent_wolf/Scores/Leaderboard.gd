@@ -1,5 +1,5 @@
 @tool
-extends Node
+extends CanvasLayer
 
 const ScoreItem = preload("ScoreItem.tscn")
 const SWLogger = preload("res://addons/silent_wolf/utils/SWLogger.gd")
@@ -28,6 +28,14 @@ func _ready():
 		scores = sw_result.scores
 		hide_message()
 		render_board(scores, local_scores)
+
+
+func _input(event):
+	if visible:
+		if event.is_action_pressed("move_up") :
+			$Board/HighScores.scroll_vertical -= 50
+		elif event.is_action_pressed("move_down"):
+			$Board/HighScores.scroll_vertical += 50
 
 
 func render_board(scores: Array, local_scores: Array) -> void:

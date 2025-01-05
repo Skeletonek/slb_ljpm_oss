@@ -1,0 +1,17 @@
+[Desktop Entry]
+Comment[pl_PL]=
+Comment=
+Exec=sh -c 'cd "$(dirname "$0")" && ./LJPM.x86_64 --rendering-method gl_compatibility --rendering-driver opengl3' %k
+GenericName[pl_PL]=
+GenericName=
+Icon=system-run
+MimeType=
+Name[pl_PL]=Skrót do programu
+Name=Skrót do programu
+Path=
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+X-KDE-SubstituteUID=false
+X-KDE-Username=

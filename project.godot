@@ -20,18 +20,18 @@ boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/image="res://images/SplashScreen.png"
 config/icon="res://icon.svg"
 boot_splash/minimum_display_time=1000
-config/version="1.0.2"
-config/build_number=13
-config/date="2023-11-26 21:08"
+config/version="1.1.0"
+config/build_number=14
+config/date="2023-11-30 01:42"
 
 [autoload]
 
 SignalBus="*res://scripts/signal_bus.gd"
-GlobalMusic="*res://scenes/instances/audio_stream_player.tscn"
 DebugInfo="*res://scenes/instances/debug_info.tscn"
 Console="res://scenes/instances/console_scene.tscn"
 SettingsBus="*res://scripts/subsystems/settings_bus.gd"
 SilentWolf="*res://addons/silent_wolf/SilentWolf.gd"
+GlobalMusic="*res://scenes/instances/audio_stream_player.tscn"
 
 [debug]
 
@@ -41,6 +41,7 @@ file_logging/enable_file_logging=true
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+window/size/mode=3
 window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="canvas_items"

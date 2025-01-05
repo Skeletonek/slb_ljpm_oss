@@ -54,6 +54,7 @@ text = "Loading scores..."
 
 [node name="HighScores" type="CenterContainer" parent="Board"]
 layout_mode = 2
+size_flags_vertical = 3
 theme = SubResource("Theme_j1gah")
 
 [node name="ScoreItemContainer" type="VBoxContainer" parent="Board/HighScores"]

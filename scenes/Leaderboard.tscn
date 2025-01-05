@@ -61,7 +61,7 @@ theme_override_font_sizes/font_size = 36
 text = "Loading scores..."
 
 [node name="HighScores" type="ScrollContainer" parent="Board"]
-custom_minimum_size = Vector2(900, 300)
+custom_minimum_size = Vector2(950, 350)
 layout_mode = 2
 size_flags_horizontal = 4
 theme = SubResource("Theme_j1gah")

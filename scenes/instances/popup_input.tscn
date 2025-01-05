@@ -64,10 +64,11 @@ horizontal_alignment = 1
 layout_mode = 2
 alignment = 1
 
-[node name="PlayerNameEdit" type="TextEdit" parent="Panel/VBoxContainer/HBoxContainer"]
+[node name="PlayerNameEdit" type="LineEdit" parent="Panel/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(500, 40)
 layout_mode = 2
 placeholder_text = "Podaj swoją nazwę"
+max_length = 36
 
 [node name="PlayerUUID" type="Label" parent="Panel/VBoxContainer/HBoxContainer"]
 layout_mode = 2

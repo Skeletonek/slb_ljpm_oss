@@ -48,6 +48,17 @@ func _ready():
 	reduced_motion_button.set_pressed_no_signal_custom(SettingsBus.reduced_motion)
 
 
+func _input(event):
+	if event.is_action_pressed("next_tab"):
+		if $TabContainer.current_tab < 3:
+			$TabContainer.current_tab += 1
+		elif $TabContainer.current_tab == 3:
+			OS.shell_open("https://forms.gle/94hffgvFiSXHfA529")
+	elif event.is_action_pressed("previous_tab"):
+		if $TabContainer.current_tab > 0:
+			$TabContainer.current_tab -= 1
+
+
 func _on_master_slider_value_changed(value):
 	SettingsBus.master_volume=value
 	AudioServer.set_bus_volume_db(0, linear_to_db(value)*2)
@@ -161,3 +172,16 @@ func _on_report_bug_pressed(tab):
 	if tab == 4:
 		OS.shell_open("https://forms.gle/94hffgvFiSXHfA529")
 		$TabContainer.current_tab = 0
+
+
+func _on_tab_container_tab_changed(tab):
+	match tab:
+		0:
+			back_button.focus_neighbor_top = ui_scaling_slider.get_path()
+		1:
+			back_button.focus_neighbor_top = music_slider.get_path()
+		2:
+			back_button.focus_neighbor_top = dev_console_button.get_path()
+		3:
+			back_button.focus_neighbor_top = easier_font_button.get_path()
+	back_button.grab_focus()

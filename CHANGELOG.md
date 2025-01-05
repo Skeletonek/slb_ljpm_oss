@@ -1,3 +1,17 @@
+#### 1.1.0
+ - Changed default mobile renderer to OpenGL
+ - Added shortcuts to launch OpenGL version of the game to desktop builds
+ - Changed maximum player name length to 36 characters
+ - Fixed pause menu not saving settings on exit
+ - Fixed audio volume loading with slight delay
+ - Fixed scrollbar apearing in scores when using OpenDyslexia font
+ - Fixed OpenDyslexia font covering speedometer
+ - Fixed easter egg button being clickable under pop up's
+ - Fixed some UI elements being not navigable using gamepads
+ - Fixed Windows builds user IDs containing "{" character
+ - Fixed music_list command not working
+ - Enabled godmode in release builds (Godmode will disable saving scores until game restart)
+
 #### 1.0.2
  - Fixed exploit connected to display refresh rate
 

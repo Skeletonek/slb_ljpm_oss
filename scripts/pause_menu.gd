@@ -34,6 +34,7 @@ func _switch_visibility():
 	elif not get_tree().paused:
 		show()
 		get_tree().paused = true
+		resume_button.grab_focus()
 
 
 func _on_resume_button_pressed():
@@ -55,6 +56,7 @@ func _on_main_menu_button_pressed():
 
 func _on_exit_button_pressed():
 	get_tree().paused = false
+	SettingsBus.save_config()
 	get_tree().quit()
 
 

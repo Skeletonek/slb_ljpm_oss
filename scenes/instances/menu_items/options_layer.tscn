@@ -57,6 +57,7 @@ size_flags_vertical = 4
 tab_alignment = 1
 
 [node name="Grafika" type="Control" parent="TabContainer"]
+visible = false
 layout_mode = 2
 focus_neighbor_right = NodePath("../Audio")
 
@@ -528,6 +529,7 @@ focus_neighbor_top = NodePath("../../../Keybindings/HBoxContainer/Keyboard/Down/
 focus_neighbor_right = NodePath("../PlayernameButton")
 focus_neighbor_bottom = NodePath("../../../DevConsole/DevConsoleButton")
 placeholder_text = "Nazwa użytkownika"
+max_length = 36
 
 [node name="PlayernameUUID" type="Label" parent="TabContainer/Rozgrywka/ScrollContainer/VBoxContainer/PlayerName/HBoxContainer"]
 custom_minimum_size = Vector2(180, 0)
@@ -560,7 +562,6 @@ text = "Wyłączony"
 script = ExtResource("3_uq6y0")
 
 [node name="Dostępność" type="Control" parent="TabContainer"]
-visible = false
 layout_mode = 2
 focus_neighbor_left = NodePath("../Rozgrywka")
 focus_neighbor_right = NodePath("../Zgłoś błąd")
@@ -669,6 +670,7 @@ text = "Zapisz i wróć"
 stream = ExtResource("4_5hsqm")
 bus = &"SFX"
 
+[connection signal="tab_changed" from="TabContainer" to="." method="_on_tab_container_tab_changed"]
 [connection signal="tab_clicked" from="TabContainer" to="." method="_on_report_bug_pressed"]
 [connection signal="toggled" from="TabContainer/Grafika/VBoxContainer/Screen/FullScreenButton" to="." method="_on_full_screen_button_toggled"]
 [connection signal="value_changed" from="TabContainer/Grafika/VBoxContainer/UIScaling/Container/TextureRect/UIScalingSlider" to="." method="_on_ui_scaling_slider_value_changed"]

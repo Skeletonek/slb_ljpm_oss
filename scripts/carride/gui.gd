@@ -17,6 +17,8 @@ var stop_processing := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if SettingsBus.easier_font:
+		LabelTime.label_settings.font_size = 32
 	diff_time = 0
 	SignalBus.enable_touchscreen_vbuttons.connect(_enable_vbuttons)
 	if SettingsBus.touchscreen_control == SettingsBus.TOUCHSCREEN_CONTROL_MODE.VButtons:

@@ -2,6 +2,7 @@ extends Node
 
 const DESKTOP_PLATFORM = ["Windows", "UWP", "macOS", "Linux", "FreeBSD", "NetBSD", "OpenBSD", "BSD"]
 enum TOUCHSCREEN_CONTROL_MODE {Tap, Swipe, VButtons}
+var os_id = 1 if OS.get_name() == "Windows" else 0
 
 var master_volume := 1.0
 var sfx_volume := 0.8
@@ -15,7 +16,7 @@ var fullscreen := true
 var touchscreen_control := TOUCHSCREEN_CONTROL_MODE.Tap
 var keyboard_up := KEY_W
 var keyboard_down := KEY_S
-var playername := "#" + OS.get_unique_id().substr(0, 8)
+var playername := "#" + OS.get_unique_id().substr(os_id, 8)
 var dev_console := false
 
 var narrator_speaking := false
@@ -24,7 +25,8 @@ var easier_font := false
 
 var skip_intro := false
 
-var godmode: = false
+var cheats := false
+var godmode := false
 
 var cfg_window_mode := DisplayServer.WINDOW_MODE_WINDOWED
 var cfg_rendering_method := "mobile"
@@ -60,6 +62,10 @@ func load_config() -> bool:
 		keyboard_down = data["keyboard_down"]
 		playername = data["playername"]
 		dev_console = data["dev_console"]
+
+		if playername.length() > 44:
+			var playername_split = playername.split('#')
+			playername = playername_split[0].substr(0,36) + '#' + playername_split[1]
 		return true
 
 
@@ -117,6 +123,12 @@ func _enter_tree():
 
 	_initialize_settings()
 	_configure_silentwolf()
+	print("DEVICE ID: %s" % OS.get_unique_id())
+
+
+func _notification(what):
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		SettingsBus.save_config()
 
 
 func _initialize_settings():

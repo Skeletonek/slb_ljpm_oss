@@ -112,8 +112,8 @@ func _get_all_musicfiles():
 		dir.list_dir_begin()
 		var file_name = dir.get_next()
 		while file_name != "":
-			if not dir.current_is_dir() and not file_name.ends_with(".import"):
-				print(file_name)
+			if not dir.current_is_dir() and file_name.ends_with(".ogg.import"):
+				print(file_name.trim_suffix(".import"))
 			file_name = dir.get_next()
 
 
@@ -165,18 +165,14 @@ func _on_prompt_edit_text_submitted(new_text):
 			else:
 				push_warning("Player name is not set. Head to the settings to change it")
 		SUPPORTED_COMMANDS[12]:
-			if OS.is_debug_build():
-				SettingsBus.godmode = !SettingsBus.godmode
-				print("Godmode " + ("enabled" if SettingsBus.godmode else "disabled"))
-			else:
-				push_error("This command is supported only in Debug build")
+			SettingsBus.cheats = true
+			SettingsBus.godmode = !SettingsBus.godmode
+			print("Godmode " + ("enabled" if SettingsBus.godmode else "disabled"))
+			push_warning("Saving scores is now disabled until game restart!")
 		SUPPORTED_COMMANDS[13]:
 			DebugInfo.toggle()
 		SUPPORTED_COMMANDS[14]:
-			if OS.is_debug_build():
-				SilentWolf.Scores.wipe_leaderboard()
-			else:
-				push_error("This command is supported only in Debug build")
+			push_error("Unsupported command")
 		_:
 			push_error("Unknown command")
 	prompt_edit.clear()

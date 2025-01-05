@@ -100,10 +100,10 @@ func _update_game():
 	$PopupChangelog.show()
 
 
-func _notification(what):
-	if what == NOTIFICATION_WM_CLOSE_REQUEST:
-		SettingsBus.save_config()
-		get_tree().quit() # default behavior
+#func _notification(what):
+#	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+#		SettingsBus.save_config()
+#		get_tree().quit() # default behavior
 
 
 func _on_continue_button_pressed():
@@ -163,6 +163,6 @@ func _on_godot_logo_click(event):
 
 
 func _on_easter_egg_button_pressed():
-	if $MainMenuLayer.visible == true:
+	if $MainMenuLayer.visible && not $popup_input.visible && not $PopupChangelog.visible:
 		OS.shell_open("https://youtu.be/dQw4w9WgXcQ?si=FRObNjwf145_svmv")
 
