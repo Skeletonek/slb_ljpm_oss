@@ -1,0 +1,9 @@
+stages:
+  - lint
+
+lint:
+  stage: lint
+  image: python:3.11
+  script:
+    - pip install "gdtoolkit~=4.3"
+    - gdlint scripts/

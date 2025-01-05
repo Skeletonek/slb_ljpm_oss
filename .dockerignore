@@ -1,0 +1,11 @@
+addons/
+audio/
+images/
+nodes/
+scenes/
+scripts/
+shaders/
+sprites/
+theme/
+.git/
+.godot/

@@ -1,0 +1,31 @@
+stages:
+  - build
+
+variables:
+  GODOT_VERSION: "4.3-stable"
+  SLB_NO_RELEASE: "true" #The script checks if var exists so this value could be anything
+
+build_export_templates:
+  stage: build
+  tags:
+    - self-hosted
+    - docker
+  timeout: 3h
+  image:
+    name: "registry.gitlab.com/skeletonek/ljpm/slb_godot_build:focal_fossa-sdk34"
+  before_script:
+    - COL="\e[36m" && CLR="\e[0m"
+  script:
+    - echo -e "${COL}Clone Godot repository${CLR}"
+    - git clone https://github.com/godotengine/godot
+    - (cd godot && git checkout $GODOT_VERSION)
+
+    - echo -e "${COL}Move necessary files to the cloned repo${CLR}"
+    - cp -v build/custom.py build/ljpm.build build/build_custom_templates.sh godot/
+
+    - echo -e "${COL}Build export templates${CLR}"
+    - (cd godot && chmod u+x ./build_custom_templates.sh && ./build_custom_templates.sh)
+  artifacts:
+    paths:
+      - godot/bin
+    expire_in: 12 hours
