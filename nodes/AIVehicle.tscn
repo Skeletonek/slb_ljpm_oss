@@ -100,13 +100,14 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jfarv"]
-size = Vector2(163, 16)
+size = Vector2(163, 20)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_dr88t"]
-radius = 32.0069
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1qelp"]
+radius = 10.545
+height = 60.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y8oay"]
-size = Vector2(196, 16)
+size = Vector2(196, 10)
 
 [node name="AIVehicle" type="Node2D" groups=["Car", "Obstacles"]]
 script = ExtResource("1_p7m8i")
@@ -130,8 +131,9 @@ position = Vector2(1.5, 20.875)
 shape = SubResource("RectangleShape2D_jfarv")
 
 [node name="CollisionShape2DMilk" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0.999999, 1.33333)
-shape = SubResource("CircleShape2D_dr88t")
+position = Vector2(1, 23.305)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_1qelp")
 disabled = true
 
 [node name="AICollisionArea2D" type="Area2D" parent="."]

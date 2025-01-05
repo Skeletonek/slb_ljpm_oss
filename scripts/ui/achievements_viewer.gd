@@ -16,7 +16,6 @@ var achievement_container = preload("res://scenes/ui/achievement/achievement_con
 var achievement_animation = preload("res://scenes/ui/achievement/animation_glow.tscn")
 var locked_achv_icon = preload("res://images/icons/slb2icon.png")
 var desaturate_material = preload("res://shaders/desaturation_material.tres")
-var gui_drag_lock = false
 @onready var achv_panel = $PanelContainer/VBoxContainer/MarginContainer/\
 	ScrollContainer/HFlowContainer
 @onready var achv_details = $AchvDetailsView
@@ -108,17 +107,27 @@ func _generate_achievement_containers(
 
 	instance.achievement_index = id
 	instance.gui_input.connect(_load_achv_details.bind(instance))
+	instance.mouse_entered.connect(
+		_achv_container_mouse_inside.bind(instance)
+	)
+	instance.mouse_exited.connect(
+		_achv_container_mouse_outside.bind(instance)
+	)
 	achv_panel.add_child(instance)
 
 
+func _achv_container_mouse_inside(sender):
+	sender.mouse_inside = true
+
+
+func _achv_container_mouse_outside(sender):
+	sender.mouse_inside = false
+
+
 func _load_achv_details(event, sender):
-	if event is InputEventMouseButton and event.pressed:
-		gui_drag_lock = false
-	if event is InputEventMouseMotion and event.relative > Vector2(0,0):
-		gui_drag_lock = true
 	if (event is InputEventMouseButton and \
 		event.button_index == MOUSE_BUTTON_LEFT and \
-		not gui_drag_lock and not event.pressed
+		sender.mouse_inside and not event.pressed
 	) or event.is_action_pressed("ui_accept"):
 			var achv_index = sender.achievement_index
 			var achv_data = AchievementSystem.data[achv_index]

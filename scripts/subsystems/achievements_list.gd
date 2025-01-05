@@ -38,6 +38,12 @@ const ACHIEVEMENT_LIST = {
 		preload("res://images/achievement_icons/Speed150.webp"),
 		false
 		],
+	"speed_200": [
+		"Prędkość światła! (prawie)",
+		"Osiągnij prędkość 200 km/h",
+		preload("res://images/achievement_icons/Speed200.webp"),
+		false
+		],
 	"volvo_combi": [
 		"Prawie jak amfibia",
 		"Ukończ jedną rozgrywkę w skórce Volvo",
@@ -118,7 +124,7 @@ const ACHIEVEMENT_LIST = {
 		],
 	"lactose_intolerant": [
 		"Nietolerancja laktozy",
-		"Jedź przez minutę i nie zbierz żadnego mleka",
+		"Jedź przez minutę i nie zbierz żadnego mleka w trybie klasycznym",
 		preload("res://images/achievement_icons/LactoseIntolerant.webp"),
 		false
 		],
@@ -133,5 +139,11 @@ const ACHIEVEMENT_LIST = {
 		"Obejrzyj cały teledysk z Rick'em Astley'em",
 		preload("res://images/achievement_icons/RickRolled.webp"),
 		true
+		],
+	"no_powerups": [
+		"Powerupy są dla cieniasów!",
+		"Jedź przez trzy minuty i nie zbierz żadnego ulepszenia w trybie ulepszonym",
+		preload("res://images/achievement_icons/NoPowerups.webp"),
+		false
 		],
 }

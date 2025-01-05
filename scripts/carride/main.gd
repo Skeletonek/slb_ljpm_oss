@@ -13,6 +13,13 @@ signal powerup_semaglutide(yes: bool)
 @export var speed: float = 0:
 	get:
 		return speed
+	set(x):
+		speed = x
+		real_speed = (((speed / 10 ) - 66) / 0.9 ) + 100
+
+@export var real_speed: float = 0:
+	get:
+		return real_speed
 
 @export var spawn_time_limit: float = 16:
 	get:
@@ -29,12 +36,13 @@ var powerup_slowmotion_instance := preload("res://nodes/Powerup_SlowMotion.tscn"
 var powerup_milkyway_instance := preload("res://nodes/Powerup_Milkyway.tscn")
 var powerup_semaglutide_instance := preload("res://nodes/Powerup_Semaglutide.tscn")
 
+var previous_milk_spawn: int = -1
 var original_speed: float
 var stop_processing := false
 var spawn_time: float = 0
-var powerup_timer: Timer
 var spawn_time_milk: float = 0
 var spawn_milk_count: int = 1
+var powerup_timer: Timer
 var powerup_counter = Dictionary()
 
 var lives: int = 1:
@@ -201,6 +209,8 @@ func _spawn_milk(delta):
 			# milk_spawner.wait_time *= 1 / time_scale
 			if spawn_milk_count >= 5:
 				var rnd = randi_range(0,4)
+				if rnd == previous_milk_spawn:
+					rnd = (rnd + 1) % 5
 				match(rnd):
 					0:
 						milk = milk_triple_instance.instantiate()
@@ -289,14 +299,18 @@ func _change_scale_factor():
 
 
 func _achievement_check():
-	var real_speed = (((speed / 10 ) - 66) / 0.9 ) + 100
 	if real_speed > 110:
 		AchievementSystem.call_achievement("speed_110")
 	if real_speed > 150:
 		AchievementSystem.call_achievement("speed_150")
-	if time > 60000000 and milks == 0:
+	if real_speed > 200:
+		AchievementSystem.call_achievement("speed_200")
+	if not version_2 and time > 60000000 and milks == 0:
 		AchievementSystem.call_achievement("lactose_intolerant")
-
+	if time > 180000000 and powerup_counter.values().all(
+		func(x): return x == 0
+	):
+		AchievementSystem.call_achievement("no_powerups")
 
 func _check_game_over_achievements():
 	var skin_name = Profile.Skins.keys()[ProfileBus.profile.chosen_skin].to_lower()

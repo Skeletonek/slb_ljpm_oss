@@ -23,7 +23,8 @@ func start_blinking() -> void:
     tween.set_loops()
 
 func stop_blinking() -> void:
-    tween.kill()
+    if tween:
+        tween.kill()
     modulate = Color.BLACK
 
 func light_on() -> void:

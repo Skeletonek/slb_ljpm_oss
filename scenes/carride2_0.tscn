@@ -81,10 +81,10 @@ size = Vector2(114, 15.5)
 size = Vector2(120, 40)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6het2"]
-size = Vector2(200, 40)
+size = Vector2(228, 40)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h1k2n"]
-size = Vector2(200, 40)
+size = Vector2(229, 40)
 
 [node name="Node2D" type="Node2D" node_paths=PackedStringArray("map", "player")]
 y_sort_enabled = true
@@ -194,7 +194,7 @@ gizmo_extents = 15.0
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnPoints/SP2/Area2D"]
-position = Vector2(-101, 30)
+position = Vector2(-115, 30)
 shape = SubResource("RectangleShape2D_6het2")
 
 [node name="SP3" type="Marker2D" parent="SpawnPoints"]
@@ -216,7 +216,7 @@ gizmo_extents = 15.0
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnPoints/SP4/Area2D"]
-position = Vector2(-101, 30)
+position = Vector2(-115.5, 30)
 shape = SubResource("RectangleShape2D_h1k2n")
 
 [node name="SP5" type="Marker2D" parent="SpawnPoints"]

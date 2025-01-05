@@ -31,6 +31,7 @@ var powerup_textures = [
 var powerup_ending_tween
 
 @onready var speedometer: Label = $Speedometer/SpeedContainer/LabelSpeed
+@onready var speedometer_real: Label = $Speedometer/SpeedContainer/LabelRealSpeed
 @onready var score_label := $PanelContainer/MarginContainer/VBoxContainer/ScoreLabel
 @onready var game_over_panel := $PanelContainer
 @onready var play_again_button := $PanelContainer/MarginContainer/VBoxContainer/PlayAgainBtn
@@ -62,6 +63,7 @@ func _process(_delta: float) -> void:
 		label_time.text = ("%02d:%02d:%03d" % [minutes, seconds, miliseconds])
 		label_distance.text = ("%05.2fkm" % [owner.distance / 33500])
 		speedometer.text = ("%.3f" % [owner.speed])
+		speedometer_real.text = ("%.3f" % [owner.real_speed])
 		speedometer_gauge.rotation_degrees = gauge_speed
 
 

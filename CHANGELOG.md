@@ -1,3 +1,19 @@
+#### 2.0-RC+4
+ - Add "Powerups are for pussies" achievement
+ - Add "Lightspeed! (Almost)" achievement
+ - Add real speed counter for debug purposes
+ - Changed powerups spawning system so that it disallows spawning the same powerup twice in a row
+ - Slightly adjusted car spawning algorithm
+ - Fixed missing spaces in popups regarding game restart
+ - Fixed achivement details panel sometimes not opening right after being closed
+ - Fixed hud blinker lights activating when dead
+ - Fixed slight car offset when picked size-decrease powerup
+ - Fixed picking up powerups and milks inside another AI cars even after dying
+ - Slightly adjusted pickups hitboxes
+ - Fixed canceling bootscreen animation on input even before game has fully initialized
+ - Fixed console error when dying without changing lanes once
+ - Fixed speedometer being inaccurate
+
 #### 2.0-RC+3
  - Improved informing user of the next application actions when importing player data
  - Fixed file dialog not showing any files when importing player data on Android devices

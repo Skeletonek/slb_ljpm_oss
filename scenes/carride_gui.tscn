@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dfiiryowv56g0"]
+[gd_scene load_steps=33 format=3 uid="uid://dfiiryowv56g0"]
 
 [ext_resource type="Script" path="res://scripts/carride/gui.gd" id="1_bnrtr"]
 [ext_resource type="Texture2D" uid="uid://bpix4jm8ib32f" path="res://sprites/MilkNoShadow.png" id="2_mlfbj"]
@@ -43,6 +43,10 @@ gradient = SubResource("Gradient_cp8fb")
 
 [sub_resource type="LabelSettings" id="LabelSettings_s0jls"]
 font_size = 36
+shadow_size = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_nxc55"]
+font_size = 24
 shadow_size = 0
 
 [node name="GUI" type="Control" node_paths=PackedStringArray("label_time", "label_milk", "label_distance", "speedometer_gauge", "lives", "last_live_player", "powerup_holder", "powerup_ending_timer", "powerup_ending_player", "indicators")]
@@ -261,28 +265,34 @@ rotation = -0.628319
 texture = ExtResource("5_3wpfb")
 offset = Vector2(0, -63)
 
-[node name="SpeedContainer" type="HBoxContainer" parent="Speedometer"]
-visible = false
+[node name="SpeedContainer" type="VBoxContainer" parent="Speedometer"]
 z_index = 1
+custom_minimum_size = Vector2(108, 0)
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -87.0
-offset_top = -44.0
-offset_right = 85.0
+offset_left = -46.16
+offset_top = -59.735
+offset_right = 43.84
+offset_bottom = 2.265
 grow_horizontal = 2
 grow_vertical = 0
 alignment = 1
 
+[node name="LabelRealSpeed" type="Label" parent="Speedometer/SpeedContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "000.000"
+label_settings = SubResource("LabelSettings_nxc55")
+
 [node name="LabelSpeed" type="Label" parent="Speedometer/SpeedContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
-text = "0
+text = "0000.000
 "
-label_settings = SubResource("LabelSettings_s0jls")
-horizontal_alignment = 2
+label_settings = SubResource("LabelSettings_nxc55")
 
 [node name="Indicators" type="Node2D" parent="."]
 z_index = 1

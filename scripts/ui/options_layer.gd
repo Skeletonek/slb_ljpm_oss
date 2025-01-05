@@ -396,11 +396,11 @@ func _on_open_file_dialog_file_selected(path):
 	info_popup_title.text = "Wymagane ponowne uruchomienie"
 	if OS.get_name() != "Android":
 		info_popup_content.text = "Gra zostanie uruchomiona ponownie w celu" \
-			+ "poprawnego załadowania zaimportowanych danych gracza"
+			+ " poprawnego załadowania zaimportowanych danych gracza"
 	else:
 		info_popup_content.text = "Gra zostanie teraz wyłączona i będzie wymagać" \
-			+ "ręcznego uruchomienia ponownie w celu poprawnego załadowania" \
-			+ "zaimportowanych danych gracza"
+			+ " ręcznego uruchomienia ponownie w celu poprawnego załadowania" \
+			+ " zaimportowanych danych gracza"
 	info_popup_button.pressed.connect(_restart_due_to_data_load)
 	info_popup.show()
 

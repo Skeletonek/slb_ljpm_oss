@@ -30,7 +30,8 @@ func _load_main_menu(_anim_name = ""):
 
 
 func _input(event):
-	if not block and ((event is InputEventKey) or
+	if not block and Engine.get_frames_drawn() > 1 and \
+			((event is InputEventKey) or
 			(event is InputEventScreenTouch) or
 			(event is InputEventMouseButton)):
 		block = true

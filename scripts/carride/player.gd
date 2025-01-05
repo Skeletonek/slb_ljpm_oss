@@ -71,13 +71,14 @@ func _input(event):
 
 
 func _on_area_entered(area):
-	var ar = area.get_parent()
-	if ar.is_in_group("Milk"):
-		_area_entered_milk(ar)
-	if ar.is_in_group("Powerups"):
-		_area_entered_powerup(ar)
-	if ar.is_in_group("Obstacles"):
-		_area_entered_obstacle(ar)
+	if process_mode != Node.PROCESS_MODE_DISABLED:
+		var ar = area.get_parent()
+		if ar.is_in_group("Obstacles"):
+			_area_entered_obstacle(ar)
+		if ar.is_in_group("Milk"):
+			_area_entered_milk(ar)
+		if ar.is_in_group("Powerups"):
+			_area_entered_powerup(ar)
 
 
 func _area_entered_milk(ar):
@@ -100,53 +101,68 @@ func _area_entered_obstacle(ar):
 			AchievementSystem.call_achievement("offroad")
 		if not SettingsBus.godmode:
 			owner.lives -= 1
+			owner.gui.direction_indicators(true, true)
+			owner.gui.direction_indicators(false, true)
 			if owner.version_2:
 				owner.gui.hide_one_live()
 				owner.powerup = null
-			$LukaszczykWPandzie.hide()
-			if explosion_tween:
-				explosion_tween.kill()
-			$Explosion.position = Vector2(0,0)
-			$Explosion.play()
-			explosion_tween = $Explosion.create_tween()
-			explosion_tween.tween_property(
-					$Explosion,
-					"position",
-					Vector2.LEFT * owner.speed,
-					explosion_anim_duration_multiplier
-			)
+			_explode()
 
 			call_deferred("set", "process_mode", Node.PROCESS_MODE_DISABLED)
 			if owner.lives <= 0:
 				owner.game_over()
 			else:
-				ProfileBus.profile.add_run()
-				ProfileBus.profile.add_speed(owner.speed)
-				death_timer.start(2)
-				await death_timer.timeout
-				position = Vector2(position.x, original_y_position)
-				y_limit = position.y
-				call_deferred("set", "process_mode", Node.PROCESS_MODE_INHERIT)
-				owner.speed = owner.original_speed
-				$LukaszczykWPandzie.show()
+				_respawn()
 
-				dont_collide = true
-				death_timer.start(1)
-				await death_timer.timeout
-				dont_collide = false
+
+func _explode():
+	$LukaszczykWPandzie.hide()
+	if explosion_tween:
+		explosion_tween.kill()
+	$Explosion.position = Vector2(0,0)
+	$Explosion.play()
+	explosion_tween = $Explosion.create_tween()
+	explosion_tween.tween_property(
+			$Explosion,
+			"position",
+			Vector2.LEFT * owner.speed,
+			explosion_anim_duration_multiplier
+	)
+
+
+func _respawn():
+	ProfileBus.profile.add_run()
+	ProfileBus.profile.add_speed(owner.speed)
+	death_timer.start(2)
+	await death_timer.timeout
+	position = Vector2(position.x, original_y_position)
+	y_limit = position.y
+	call_deferred("set", "process_mode", Node.PROCESS_MODE_INHERIT)
+	owner.speed = owner.original_speed
+	$LukaszczykWPandzie.show()
+
+	dont_collide = true
+	death_timer.start(1)
+	await death_timer.timeout
+	dont_collide = false
 
 
 func move(dir_up: bool):
-	move_vector = Vector2(0, (-vertical_speed if dir_up else vertical_speed))
-	y_limit += -lane_y_diff if dir_up else lane_y_diff
-	owner.gui.direction_indicators(!dir_up, false)
+	if process_mode != Node.PROCESS_MODE_DISABLED:
+		move_vector = Vector2(0, (-vertical_speed if dir_up else vertical_speed))
+		y_limit += -lane_y_diff if dir_up else lane_y_diff
+		owner.gui.direction_indicators(!dir_up, false)
 
 
 func _powerup_semaglutide_handler(yes: bool):
-	if yes:
+	if yes and scale == Vector2(1.5, 1.5):
 		scale = Vector2(0.5, 0.5)
-	else:
+		y_limit -= -20
+		position -= Vector2(0, -20)
+	elif scale == Vector2(0.5, 0.5):
 		scale = Vector2(1.5, 1.5)
+		y_limit -= 20
+		position += Vector2(0, -20)
 
 
 func _set_skin():

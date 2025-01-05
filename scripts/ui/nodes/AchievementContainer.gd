@@ -2,6 +2,7 @@ class_name AchievementContainer extends VBoxContainer
 
 var achievement_index: String
 var achievement_anim = null
+var mouse_inside = false
 
 
 func _ready() -> void:
