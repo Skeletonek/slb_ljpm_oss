@@ -1,6 +1,8 @@
 extends Control
 
 @export var LabelTime: Label
+@export var LabelMilk: Label
+@onready var Speedometer: Label = $HBoxContainer3/LabelSpeed
 var start_time: int
 var diff_time: int
 # Called when the node enters the scene tree for the first time.
@@ -16,3 +18,7 @@ func _process(delta):
 	var seconds: int = (diff_time / 1000) % 60
 	var minutes: int = (diff_time / 1000) / 60
 	LabelTime.text = ("%02d:%02d:%03d" % [minutes, seconds, miliseconds])
+	Speedometer.text = ("%.3f" % [owner.speed])
+
+func update_points():
+	LabelMilk.text = str(owner.milks)

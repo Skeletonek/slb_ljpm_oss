@@ -1,7 +1,5 @@
 extends Control
 
-signal DEBUG_DEV_BUTTONS
-
 
 @onready var options_layer = $OptionsLayer
 @export var skeletonek_logo: Control
@@ -11,16 +9,12 @@ func _ready():
 	skeletonek_logo.gui_input.connect(_on_skeletonek_logo_click)
 	godot_logo.gui_input.connect(_on_godot_logo_click)
 	
-	GlobalMusic.finished.connect(_on_global_music_finished)
-	if not GlobalMusic.is_playing():
-		_on_global_music_finished()
+#	GlobalMusic.finished.connect(_on_global_music_finished)
+#	if not GlobalMusic.is_playing():
+#		_on_global_music_finished()
 	$MainMenuLayer/VBoxContainer/ContinueButton.grab_focus()
 	
 	print(Input.get_connected_joypads())
-	DEBUG_DEV_BUTTONS.connect(_enable_dev_buttons)
-	# Developer console is inaccessible on Android, unless you have plugged in a keyboard
-	if OS.get_name() == "Android" and OS.is_debug_build():
-		$MainMenuLayer/DevButtons.visible = true
 	
 	print(_debug_info())
 	var device_info_label = $CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer2/DeviceInfo
@@ -37,10 +31,6 @@ func _on_global_music_finished():
 	else:
 		GlobalMusic.stream = load("res://music/tech-junkie.ogg")
 	GlobalMusic.play()
-
-
-func _enable_dev_buttons():
-	$MainMenuLayer/DevButtons.visible = true
 
 
 func _debug_info() -> String:

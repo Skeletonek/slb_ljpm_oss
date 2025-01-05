@@ -2,6 +2,8 @@ extends Node
 
 const DESKTOP_PLATFORM = ["Windows", "UWP", "macOS", "Linux", "FreeBSD", "NetBSD", "OpenBSD", "BSD"]
 
+var godmode: bool = false
+
 var master_volume := 1.0
 var sfx_volume := 0.8
 var voice_volume := 1.0

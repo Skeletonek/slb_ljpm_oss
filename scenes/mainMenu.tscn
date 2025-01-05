@@ -243,7 +243,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.7
 text = "Copyright © 2007-2023 Juan Linietsky, Ariel Manzur & contributors.
-Godot Engine nie jest powiązany z twórcami SLB2: TGRA.
+Godot Engine nie jest powiązany z twórcami SLB: LJPM
 Więcej informacji o Godot Engine jest dostępnych na stronie https://godotengine.org/"
 label_settings = SubResource("LabelSettings_q8iax")
 autowrap_mode = 2

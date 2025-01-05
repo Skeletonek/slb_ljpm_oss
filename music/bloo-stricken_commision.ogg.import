@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/bloo-stricken_commision.ogg-61aa0002ce897bb7b
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0.0
 bpm=0.0
 beat_count=0

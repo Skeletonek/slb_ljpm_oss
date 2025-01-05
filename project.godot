@@ -19,9 +19,9 @@ boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/image="res://images/SplashScreen.png"
 config/icon="res://icon.svg"
 boot_splash/minimum_display_time=1000
-config/version="A.1.1"
-config/build_number=2
-config/date="2023-11-07 22:46"
+config/version="A.2.0"
+config/build_number=3
+config/date="2023-11-12 03:03"
 
 [autoload]
 
@@ -31,6 +31,10 @@ DebugInfo="*res://scenes/instances/debug_info.tscn"
 Console="res://scenes/instances/console_scene.tscn"
 SettingsBus="*res://scripts/subsystems/settings_bus.gd"
 
+[debug]
+
+file_logging/enable_file_logging=true
+
 [display]
 
 window/size/viewport_width=1280
@@ -39,7 +43,6 @@ window/size/mode=3
 window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="canvas_items"
-window/stretch/aspect="keep_height"
 window/size/mode.editor=0
 
 [gui]

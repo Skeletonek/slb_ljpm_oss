@@ -1,21 +1,29 @@
 extends Node2D
 
+@onready var GUI: Control = $GUI
 
 signal vehicle_reached_oob
-# Called when the node enters the scene tree for the first time.
+
+@export var speed_increment: float = 0.2
+
+@export var speed: float = 0:
+	get:
+		return speed
+var milks: int = 0:
+	get:
+		return milks
+	set(value):
+		milks = value 
+		GUI.update_points()
+
+
 func _ready():
-	var date = int(Time.get_unix_time_from_system()) % 2
-	if date == 0:
-		GlobalMusic.stream = load("res://music/bloo-stricken_commision.ogg")
-	else:
-		GlobalMusic.stream = load("res://music/tech-junkie.ogg")
-	GlobalMusic.play()
 	vehicle_reached_oob.connect(_respawn_vehicle)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	_change_scale_factor()
+	_change_scale_factor() #FIXME: Find better solution
+	speed += pow(delta, 2) * speed_increment
 
 
 func _change_scale_factor():

@@ -11,7 +11,8 @@ const SUPPORTED_COMMANDS = {
 	8: "timelines",
 	9: "music_play",
 	10: "music_list",
-	11: "carride"
+	11: "carride",
+	12: "god"
 }
 
 signal error_msg_received(msg:String)
@@ -148,6 +149,9 @@ func _on_prompt_edit_text_submitted(new_text):
 			_get_all_musicfiles()
 		SUPPORTED_COMMANDS[11]:
 			get_tree().change_scene_to_file("res://scenes/carride.tscn")
+		SUPPORTED_COMMANDS[12]:
+			SettingsBus.godmode = !SettingsBus.godmode
+			print("Godmode " + ("enabled" if SettingsBus.godmode else "disabled"))
 		_:
 			push_error("Unknown command")
 	prompt_edit.clear()
