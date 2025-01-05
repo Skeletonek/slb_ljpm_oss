@@ -66,7 +66,7 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("4_k2ykn")
 theme_override_font_sizes/font_size = 16
 text = "Super Łukaszczyk Bros: Łukaszczyk Jedzie Po Mleko
-Copyright © 2023-2024 - Skeletonek & Halembarus2"
+Copyright © 2023-2025 - Skeletonek & Halembarus2"
 horizontal_alignment = 1
 
 [node name="CreditsLabel2" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
@@ -230,7 +230,7 @@ custom_minimum_size = Vector2(575, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_k2ykn")
 theme_override_font_sizes/font_size = 16
-text = "Copyright © 2007-2024 Juan Linietsky, Ariel Manzur & contributors.
+text = "Copyright © 2007-2025 Juan Linietsky, Ariel Manzur & contributors.
 Godot Engine nie jest powiązany z twórcami SLB: LJPM
 Więcej informacji o Godot Engine jest dostępnych na stronie https://godotengine.org/"
 label_settings = SubResource("LabelSettings_q8iax")

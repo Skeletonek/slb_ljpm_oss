@@ -243,10 +243,10 @@ func _add_scores():
 		)
 	else:
 		var metadata = {
-			"distance": distance,
+			"distance": (distance / 33500) * 1000,
 			"time": time,
 		}
-		var leaderboard_name = "dev_2_0_milk" if OS.is_debug_build() else "main_2_0_milk"
+		var leaderboard_name = "dev_2_0_milk" if OS.is_debug_build() or OS.has_feature("private-test") else "main_2_0_milk"
 		SilentWolf.Scores.save_score(
 			ProfileBus.profile.get_full_playername(),
 			milks,
@@ -257,7 +257,7 @@ func _add_scores():
 			"milks": milks,
 			"time": time,
 		}
-		leaderboard_name = "dev_2_0_distance" if OS.is_debug_build() else "main_2_0_distance"
+		leaderboard_name = "dev_2_0_distance" if OS.is_debug_build() or OS.has_feature("private-test") else "main_2_0_distance"
 		SilentWolf.Scores.save_score(
 			ProfileBus.profile.get_full_playername(),
 			(distance / 33500) * 1000,

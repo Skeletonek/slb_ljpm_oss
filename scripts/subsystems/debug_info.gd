@@ -13,6 +13,12 @@ const WARNING_MSG_PREFIX_2 := "USER WARNING: "
 @export var dev_errors_cleaner: Timer
 
 func _ready():
+	if OS.has_feature("private-test"):
+		$DebugInfo/Version.visible = true
+		dev_errors_label.visible = true
+		fps_label.visible = true
+		delta_label.visible = true
+		$DebugInfo/Version/VersionBuildDate2.text = "Private Test Version"
 	if OS.is_debug_build():
 		$DebugInfo/Version.visible = true
 		dev_errors_label.visible = true

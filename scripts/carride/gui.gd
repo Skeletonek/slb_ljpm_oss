@@ -72,7 +72,7 @@ func update_points() -> void:
 func game_over() -> void:
 	stop_processing = true
 	if owner.version_2:
-		score_label.text = "Mleka: %d   Dystans: %d" % [owner.milks, (owner.distance / 36500) * 1000]
+		score_label.text = "Mleka: %d   Dystans: %.0f" % [owner.milks, (owner.distance / 36500) * 1000]
 	else:
 		score_label.text = str(owner.final_score)
 	play_again_button.grab_focus()
@@ -206,13 +206,13 @@ func _cr_speedometer_value(yes: bool) -> void:
 
 func _on_play_again_btn_pressed() -> void:
 	if get_parent().version_2:
-		get_tree().change_scene_to_file("res://scenes/carride2_0.tscn")
+		get_tree().call_deferred("change_scene_to_file", "res://scenes/carride2_0.tscn")
 	else:
-		get_tree().change_scene_to_file("res://scenes/carride.tscn")
+		get_tree().call_deferred("change_scene_to_file", "res://scenes/carride.tscn")
 
 
 func _on_menu_btn_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/mainMenu.tscn")
+	get_tree().call_deferred("change_scene_to_file", "res://scenes/mainMenu.tscn")
 
 
 func _on_up_button_down() -> void:

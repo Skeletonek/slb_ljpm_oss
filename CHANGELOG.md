@@ -1,3 +1,11 @@
+#### 2.0-RC+2
+ - Updated copyright notices
+ - Hidden all unused features that are not implemented
+ - Fixed info buttons not working
+ - Fixed carride game over panel showing wrong distance
+ - Fixed console error when restarting carride on android
+ - Fixed console error when returning to main menu on android
+
 #### 2.0-RC+1
  - Added new statistics visible inside statistics panel
  - Added special skins for AI cars when playing on lunar conflict map

@@ -343,7 +343,7 @@ func _achievement_award(arg) -> bool:
 			if status != true:
 				push_error("Awarding failed!")
 	else:
-		push_error("This comman	d is supported only in Debug build")
+		push_error("This command is supported only in Debug build")
 	return true
 
 

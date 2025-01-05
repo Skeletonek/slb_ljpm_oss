@@ -186,6 +186,7 @@ custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 
 [node name="PowerupRamContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 alignment = 1
 
