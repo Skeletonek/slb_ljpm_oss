@@ -1,3 +1,7 @@
+#### 1.0.1
+ - Fixed removing newline characters from player names in leaderboard
+ - Fixed easter egg button being clickable behind opaque menus
+
 #### 1.0.0
  - Added pop up when player name is not set
  - Added new version info pop up

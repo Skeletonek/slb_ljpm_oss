@@ -163,5 +163,6 @@ func _on_godot_logo_click(event):
 
 
 func _on_easter_egg_button_pressed():
-	OS.shell_open("https://youtu.be/dQw4w9WgXcQ?si=FRObNjwf145_svmv")
+	if $MainMenuLayer.visible == true:
+		OS.shell_open("https://youtu.be/dQw4w9WgXcQ?si=FRObNjwf145_svmv")
 

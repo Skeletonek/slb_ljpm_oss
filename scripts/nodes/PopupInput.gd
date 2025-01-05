@@ -13,6 +13,6 @@ func _ready():
 
 
 func _on_save_button_pressed():
-	SettingsBus.playername = PlayerNameEdit.text + SettingsBus.playername.right(9)
+	SettingsBus.playername = PlayerNameEdit.text.replace("\n", "") + SettingsBus.playername.right(9)
 	hide()
 	save_button.emit()

@@ -50,7 +50,8 @@ func game_over():
 	GUI.game_over()
 	$PauseLayer.process_mode = Node.PROCESS_MODE_DISABLED
 	stop_processing = true
-	SilentWolf.Scores.save_score(SettingsBus.playername, final_score)
+	var leaderboard_name = "dev" if OS.is_debug_build() else "main"
+	SilentWolf.Scores.save_score(SettingsBus.playername, final_score, leaderboard_name)
 
 
 func _ready():

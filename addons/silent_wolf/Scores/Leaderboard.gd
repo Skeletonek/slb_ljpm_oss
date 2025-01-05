@@ -6,7 +6,7 @@ const SWLogger = preload("res://addons/silent_wolf/utils/SWLogger.gd")
 
 var list_index = 0
 # Replace the leaderboard name if you're not using the default leaderboard
-var ld_name = "main"
+var ld_name = "dev" if OS.is_debug_build() else "main"
 var max_scores = 100
 
 
@@ -14,7 +14,7 @@ func _ready():
 	print("SilentWolf.Scores.leaderboards: " + str(SilentWolf.Scores.leaderboards))
 	print("SilentWolf.Scores.ldboard_config: " + str(SilentWolf.Scores.ldboard_config))
 	var scores = SilentWolf.Scores.scores
-	#var scores = []
+	#var scores = []")
 	if ld_name in SilentWolf.Scores.leaderboards:
 		scores = SilentWolf.Scores.leaderboards[ld_name]
 	var local_scores = SilentWolf.Scores.local_scores
@@ -24,7 +24,7 @@ func _ready():
 	else:
 		# use a signal to notify when the high scores have been returned, and show a "loading" animation until it's the case...
 		add_loading_scores_message()
-		var sw_result = await SilentWolf.Scores.get_scores(max_scores).sw_get_scores_complete
+		var sw_result = await SilentWolf.Scores.get_scores(max_scores, ld_name).sw_get_scores_complete
 		scores = sw_result.scores
 		hide_message()
 		render_board(scores, local_scores)
@@ -87,7 +87,7 @@ func score_in_score_array(scores: Array, new_score: Dictionary) -> bool:
 func add_item(player_name: String, score_value: String) -> void:
 	var item = ScoreItem.instantiate()
 	list_index += 1
-	item.get_node("PlayerName").text = str(list_index) + str(". ") + player_name
+	item.get_node("PlayerName").text = str(list_index) + str(". ") + player_name.replace("\n", "")
 	item.get_node("Score").text = score_value
 	item.offset_top = list_index * 100
 	$"Board/HighScores/ScoreItemContainer".add_child(item)

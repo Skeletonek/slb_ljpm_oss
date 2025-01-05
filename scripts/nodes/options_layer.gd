@@ -129,7 +129,7 @@ func _unpress_tch_buttons():
 
 
 func _on_playername_button_pressed():
-	SettingsBus.playername = playername_edit.text + SettingsBus.playername.right(9)
+	SettingsBus.playername = playername_edit.text.replace("\n", "") + SettingsBus.playername.right(9)
 
 
 func _on_dev_console_button_toggled(button_pressed):
