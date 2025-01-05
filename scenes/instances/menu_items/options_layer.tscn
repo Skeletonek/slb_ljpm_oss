@@ -61,6 +61,7 @@ horizontal_alignment = 1
 vertical_alignment = 2
 
 [node name="FullScreenButton" type="Button" parent="TabContainer/Grafika/VBoxContainer/Screen"]
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 toggle_mode = true
 text = "Wyłączony"
@@ -83,10 +84,11 @@ text = "API graficzne:"
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="GraphicsAPIButton" type="MenuButton" parent="TabContainer/Grafika/VBoxContainer/Screen2"]
+[node name="GraphicsAPIButton" type="OptionButton" parent="TabContainer/Grafika/VBoxContainer/Screen2"]
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
-text = "Vulkan"
 item_count = 2
+selected = 0
 popup/item_0/text = "Vulkan"
 popup/item_0/id = 0
 popup/item_1/text = "OpenGL"

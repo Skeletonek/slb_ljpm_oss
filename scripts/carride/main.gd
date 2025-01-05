@@ -18,7 +18,9 @@ var milks: int = 0:
 
 
 func _ready():
+	_change_scale_factor()
 	vehicle_reached_oob.connect(_respawn_vehicle)
+	GlobalMusic.change_track()
 
 
 func _process(delta):

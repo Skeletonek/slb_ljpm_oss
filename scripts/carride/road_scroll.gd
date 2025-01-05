@@ -10,4 +10,4 @@ func _ready():
 func _process(delta):
 	position += Vector2(-(owner.speed + speed_increment),0) * delta
 	if position.x <= -90:
-		position.x = 70 - delta
+		position.x = 70 + (position.x + 90)

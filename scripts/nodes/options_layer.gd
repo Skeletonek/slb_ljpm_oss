@@ -6,7 +6,7 @@ extends CanvasLayer
 @onready var music_slider:HSlider = $TabContainer/Audio/VBoxContainer/MusicSlider
 @onready var ui_scaling_slider:HSlider = $TabContainer/Grafika/VBoxContainer/UIScaling/Container/TextureRect/UIScalingSlider
 @onready var fullscreen_button:Button = $TabContainer/Grafika/VBoxContainer/Screen/FullScreenButton
-@onready var graphics_api_button:MenuButton = $TabContainer/Grafika/VBoxContainer/Screen2/GraphicsAPIButton
+@onready var graphics_api_button:OptionButton = $TabContainer/Grafika/VBoxContainer/Screen2/GraphicsAPIButton
 @onready var graphics_api_restart:Label = $TabContainer/Grafika/VBoxContainer/Screen2/GraphicsAPIRestartLabel
 @onready var fullscreen_android_info:Label = $TabContainer/Grafika/VBoxContainer/Screen/FullScreenLabelDesc
 @onready var back_button:Button = $MarginContainer/BackButton
@@ -23,7 +23,7 @@ func _ready():
 		fullscreen_android_info.visible = true
 	graphics_api_button.get_popup().id_pressed.connect(_on_graphics_api_pressed)
 	if SettingsBus.cfg_rendering_method == "gl_compatibility":
-		graphics_api_button.text = "OpenGL"
+		graphics_api_button.selected = 1
 
 
 func _on_master_slider_value_changed(value):
@@ -65,10 +65,10 @@ func _on_graphics_api_pressed(id: int):
 	match(id):
 		0:
 			SettingsBus.cfg_rendering_method = "mobile"
-			graphics_api_button.text = "Vulkan"
+			#graphics_api_button.text = "Vulkan"
 		1:
 			SettingsBus.cfg_rendering_method = "gl_compatibility"
-			graphics_api_button.text = "OpenGL"
+			#graphics_api_button.text = "OpenGL"
 		_:
 			push_error("Unknown entry. Graphics API Button is broken. How?")
 	SettingsBus.save_override()

@@ -19,9 +19,9 @@ boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/image="res://images/SplashScreen.png"
 config/icon="res://icon.svg"
 boot_splash/minimum_display_time=1000
-config/version="A.2.0"
-config/build_number=3
-config/date="2023-11-12 03:03"
+config/version="B.3.0"
+config/build_number=4
+config/date="2023-11-12 22:39"
 
 [autoload]
 
@@ -47,6 +47,7 @@ window/size/mode.editor=0
 
 [gui]
 
+theme/custom="res://theme.tres"
 theme/custom_font="res://theme/fonts/NotoSans-Medium.ttf"
 theme/default_font_generate_mipmaps=true
 

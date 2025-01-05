@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/tech-junkie.ogg-4038c497144eaa396a2e4b559678a
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0.0
 bpm=0.0
 beat_count=0
