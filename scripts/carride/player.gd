@@ -45,8 +45,9 @@ func _on_area_entered(area):
 		$CrashPlayer.play()
 		if not SettingsBus.godmode:
 			hide()
-			process_mode = Node.PROCESS_MODE_DISABLED
-			$MilkPlayer.process_mode = Node.PROCESS_MODE_ALWAYS
+			call_deferred("set", "process_mode", Node.PROCESS_MODE_DISABLED)
+#			process_mode = Node.PROCESS_MODE_DISABLED
+			$CrashPlayer.process_mode = Node.PROCESS_MODE_ALWAYS
 			owner.game_over()
 
 

@@ -222,7 +222,7 @@ scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_lr1qs")
 
 [node name="OutOfBounds" type="StaticBody2D" parent="OutOfBounds"]
-position = Vector2(-463.5, 0)
+position = Vector2(-750, 0)
 scale = Vector2(0.7, 0.7)
 collision_mask = 7
 

@@ -14,7 +14,16 @@ signal vehicle_reached_oob
 
 var spawn_time_limit: int = 20:
 	get:
-		return spawn_time_limit - floori(((speed - 300) / 80))
+		return spawn_time_limit
+#		return spawn_time_limit - floori(((speed - 300) / 66))
+
+var spawn_rnd_min: int = 0:
+	get:
+		return spawn_rnd_min
+
+var spawn_rnd_max: int = 1:
+	get:
+		return spawn_rnd_max + ((speed - 300) / 300)
 
 @export var speed: float = 0:
 	get:
@@ -48,7 +57,7 @@ func _process(delta):
 
 
 func _physics_process(delta):
-	spawn_time += randi_range(0,1)
+	spawn_time += randi_range(spawn_rnd_min,spawn_rnd_max)
 	if spawn_time > spawn_time_limit:
 		var loc_rnd = randi_range(0,4)
 		var marker: Node2D = $SpawnPoints.get_child(loc_rnd)

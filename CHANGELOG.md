@@ -1,3 +1,10 @@
+#### B.5.1
+ - Improved spawning algorithm curve
+ - Changed Android Adaptive Icons files
+ - Fixed missing permission to access the internet
+ - Fixed missing crash sound effect
+ - Fixed engine error appearing in developer console about disabling a CollisionObject node during a physics callback
+
 #### B.5.0
  - Completely refactored AI cars and milk spawning algorithm
  - Added random speed difference for every AI car
