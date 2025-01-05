@@ -6,6 +6,7 @@ const MINIMUM_SWIPE_DRAG = 120
 
 @export var label_time: Label
 @export var label_milk: Label
+@export var label_distance: Label
 @export var speedometer_gauge: Sprite2D
 @export var lives: Array[Sprite2D]
 @export var last_live_player: AudioStreamPlayer
@@ -59,6 +60,7 @@ func _process(_delta: float) -> void:
 		var seconds: int = (diff_time / 1000000) % 60
 		var minutes: int = (diff_time / 1000000) / 60
 		label_time.text = ("%02d:%02d:%03d" % [minutes, seconds, miliseconds])
+		label_distance.text = ("%05.2fkm" % [owner.distance / 33500])
 		speedometer.text = ("%.3f" % [owner.speed])
 		speedometer_gauge.rotation_degrees = gauge_speed
 
@@ -69,7 +71,10 @@ func update_points() -> void:
 
 func game_over() -> void:
 	stop_processing = true
-	score_label.text = str(owner.final_score)
+	if owner.version_2:
+		score_label.text = "Mleka: %d   Dystans: %d" % [owner.milks, (owner.distance / 36500) * 1000]
+	else:
+		score_label.text = str(owner.final_score)
 	play_again_button.grab_focus()
 	game_over_panel.show()
 

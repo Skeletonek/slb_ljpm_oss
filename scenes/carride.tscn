@@ -1,33 +1,15 @@
-[gd_scene load_steps=31 format=3 uid="uid://boixto1v5xtcq"]
+[gd_scene load_steps=25 format=3 uid="uid://boixto1v5xtcq"]
 
 [ext_resource type="Script" path="res://scripts/carride/main.gd" id="1_y5nnv"]
 [ext_resource type="PackedScene" uid="uid://dfiiryowv56g0" path="res://scenes/carride_gui.tscn" id="2_ma2l2"]
 [ext_resource type="Script" path="res://scripts/carride/player.gd" id="4_sxi6f"]
 [ext_resource type="PackedScene" uid="uid://lugeuc8kewl3" path="res://scenes/ui/pause_menu.tscn" id="5_2qleg"]
 [ext_resource type="AudioStream" uid="uid://dw6573okuao6h" path="res://audio/sfx/Car Crash Short.wav" id="6_dtkok"]
-[ext_resource type="Texture2D" uid="uid://dvhou5wmxufck" path="res://sprites/Speedometer.png" id="8_0puha"]
 [ext_resource type="PackedScene" uid="uid://7vvoan13ljn" path="res://nodes/maps/ForestMap.tscn" id="8_6spys"]
-[ext_resource type="Texture2D" uid="uid://gixvapofe1qx" path="res://sprites/SpeedometerArrow.png" id="9_ioopi"]
 [ext_resource type="AudioStream" uid="uid://d2lim2blo57e" path="res://audio/sfx/milk.wav" id="9_kk7c3"]
 [ext_resource type="SpriteFrames" uid="uid://boenmxlf17kxm" path="res://sprites/spriteframes/Panda.tres" id="12_w7l5f"]
 [ext_resource type="Texture2D" uid="uid://w5khp7bco2co" path="res://sprites/Explosion.png" id="13_6vstm"]
 [ext_resource type="AudioStream" uid="uid://dffjdog0p3fde" path="res://audio/sfx/bass.ogg" id="17_ltm6q"]
-
-[sub_resource type="Gradient" id="Gradient_dndjk"]
-colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_hvxgf"]
-gradient = SubResource("Gradient_dndjk")
-width = 640
-height = 128
-
-[sub_resource type="Gradient" id="Gradient_cp8fb"]
-colors = PackedColorArray(0.34902, 0.34902, 0.34902, 1, 0.34902, 0.34902, 0.34902, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_n110a"]
-gradient = SubResource("Gradient_cp8fb")
-width = 638
-height = 128
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lr1qs"]
 size = Vector2(1500, 20)
@@ -113,34 +95,9 @@ speed_increment = 8.0
 speed = 300.0
 metadata/_edit_vertical_guides_ = [-221.0, -650.0]
 
-[node name="GUI" parent="." instance=ExtResource("2_ma2l2")]
-
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="HUDBorder" type="Sprite2D" parent="Camera2D"]
-z_index = 10
-position = Vector2(0, 409)
-scale = Vector2(2, 2)
-texture = SubResource("GradientTexture2D_hvxgf")
-
-[node name="HUD" type="Sprite2D" parent="Camera2D"]
-z_index = 10
-position = Vector2(0, 413)
-scale = Vector2(2, 2)
-texture = SubResource("GradientTexture2D_n110a")
-
-[node name="Speedometer" type="Sprite2D" parent="Camera2D"]
-z_index = 10
-position = Vector2(0, 360)
-texture = ExtResource("8_0puha")
-offset = Vector2(0, -64)
-
-[node name="SpeedometerGauge" type="Sprite2D" parent="Camera2D/Speedometer"]
-z_index = 10
-position = Vector2(0, -1)
-rotation = -0.628319
-texture = ExtResource("9_ioopi")
-offset = Vector2(0, -63)
+[node name="GUI" parent="." instance=ExtResource("2_ma2l2")]
 
 [node name="ForestMap" parent="." instance=ExtResource("8_6spys")]
 position = Vector2(0, 77)
@@ -276,5 +233,6 @@ volume_db = -80.0
 autoplay = true
 bus = &"Music"
 
+[connection signal="touchscreen_move" from="GUI" to="LukaszczykWPandzie" method="move"]
 [connection signal="area_entered" from="LukaszczykWPandzie" to="LukaszczykWPandzie" method="_on_area_entered"]
 [connection signal="timeout" from="Timer" to="." method="_spawn_milk"]

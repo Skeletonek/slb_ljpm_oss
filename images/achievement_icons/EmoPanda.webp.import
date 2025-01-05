@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://4qt4ifaim2qi"
-path="res://.godot/imported/LC_SpaceShip4.png-dcdde922bb3c3ba3e8d9e07bf29d163c.ctex"
+uid="uid://obk00xtrt2fj"
+path="res://.godot/imported/EmoPanda.webp-1a931ec28be1ff0157c3e40fb6db2158.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/LC_SpaceShip4.png"
-dest_files=["res://.godot/imported/LC_SpaceShip4.png-dcdde922bb3c3ba3e8d9e07bf29d163c.ctex"]
+source_file="res://images/achievement_icons/EmoPanda.webp"
+dest_files=["res://.godot/imported/EmoPanda.webp-1a931ec28be1ff0157c3e40fb6db2158.ctex"]
 
 [params]
 

@@ -8,7 +8,6 @@ const SWLogger = preload("res://addons/silent_wolf/utils/SWLogger.gd")
 @export var dev_ld: String
 
 var list_index = 0
-# Replace the leaderboard name if you're not using the default leaderboard
 var max_scores = 1000
 var scores = []
 
@@ -127,14 +126,18 @@ func hide_message() -> void:
 
 
 func top_score() -> void:
-	var result = await SilentWolf.Scores.get_top_score_by_player(SettingsBus.playername, 10, ld_name
-															  ).sw_top_player_score_complete
-	if result:
+	var name = ProfileBus.profile.get_full_playername()
+	var result = 0
+	var iter = 0
+	for score in scores:
+		iter += 1
+		if name == score.player_name:
+			result = iter
+			break
+	if result == 0:
 		$"Board/TopScoreContainer/Label".text = "Twoja najwyższa pozycja: Brak"
 	else:
-		var pos = await SilentWolf.Scores.get_score_position(result.top_score.score_id, ld_name
-													   ).sw_get_position_complete
-		$"Board/TopScoreContainer/Label".text = "Twoja najwyższa pozycja: %s" % pos.position
+		$"Board/TopScoreContainer/Label".text = "Twoja najwyższa pozycja: %s" % result
 
 
 func clear_leaderboard() -> void:

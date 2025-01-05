@@ -5,13 +5,13 @@
 [ext_resource type="Script" path="res://scripts/carride/road_scroll.gd" id="3_3k3r8"]
 [ext_resource type="Texture2D" uid="uid://bqj6ykklsg2wi" path="res://sprites/maps/lunar_conflict/lc_layer.webp" id="4_amoh5"]
 [ext_resource type="Texture2D" uid="uid://hr87nowgadrt" path="res://sprites/maps/lunar_conflict/lc_moon.webp" id="4_dw7hs"]
-[ext_resource type="Texture2D" uid="uid://bia3bnt6eiov1" path="res://sprites/LC_SpaceShip1.png" id="4_v0gf5"]
+[ext_resource type="Texture2D" uid="uid://bia3bnt6eiov1" path="res://sprites/LunarSpaceShip1.png" id="4_v0gf5"]
 [ext_resource type="Texture2D" uid="uid://c57l262udunto" path="res://sprites/Road.png" id="5_1euaw"]
-[ext_resource type="Texture2D" uid="uid://bqcbdyshicj7u" path="res://sprites/LC_SpaceShip2.png" id="5_pnlim"]
-[ext_resource type="Texture2D" uid="uid://dy518n8bsq24s" path="res://sprites/LC_SpaceShip3.png" id="6_gwrlq"]
+[ext_resource type="Texture2D" uid="uid://bqcbdyshicj7u" path="res://sprites/LunarSpaceShip2.png" id="5_pnlim"]
+[ext_resource type="Texture2D" uid="uid://dy518n8bsq24s" path="res://sprites/LunarSpaceShip3.png" id="6_gwrlq"]
 [ext_resource type="Texture2D" uid="uid://btqhaxxyw1tvd" path="res://sprites/RoadRM.png" id="6_h62jk"]
-[ext_resource type="Texture2D" uid="uid://4qt4ifaim2qi" path="res://sprites/LC_SpaceShip4.png" id="7_d26ix"]
-[ext_resource type="Texture2D" uid="uid://cknnc8ylk7t8w" path="res://sprites/LC_SpaceShip5.png" id="8_f2r77"]
+[ext_resource type="Texture2D" uid="uid://4qt4ifaim2qi" path="res://sprites/LunarSpaceShip4.png" id="7_d26ix"]
+[ext_resource type="Texture2D" uid="uid://cknnc8ylk7t8w" path="res://sprites/LunarSpaceShip5.png" id="8_f2r77"]
 
 [sub_resource type="Gradient" id="Gradient_342eu"]
 colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 0)

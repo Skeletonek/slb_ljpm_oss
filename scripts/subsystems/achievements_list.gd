@@ -8,12 +8,6 @@ extends Node
 # Is hidden?: boolean
 
 const ACHIEVEMENT_LIST = {
-	"lactose_intolerant": [
-		"Nietolerancja laktozy",
-		"Jedź przez minutę i nie zbierz żadnego mleka",
-		preload("res://images/achievement_icons/LactoseIntolerant.webp"),
-		false
-		],
 	"milk_100": [
 		"Wróciłem z mlekiem!",
 		"Zbierz łącznie 100 sztuk mleka",
@@ -47,7 +41,7 @@ const ACHIEVEMENT_LIST = {
 	"volvo_combi": [
 		"Prawie jak amfibia",
 		"Ukończ jedną rozgrywkę w skórce Volvo",
-		preload("res://images/icons/slb2icon.png"),
+		preload("res://images/achievement_icons/VolvoCombi.webp"),
 		false
 		],
 	"real_panda": [
@@ -65,13 +59,13 @@ const ACHIEVEMENT_LIST = {
 	"lunar_rover": [
 		"aeiou",
 		"Ukończ jedną rozgrywkę w Łaziku Księzycowym",
-		preload("res://images/icons/slb2icon.png"),
+		preload("res://images/achievement_icons/LunarRover.webp"),
 		false
 		],
 	"content_maker": [
 		"Gwiazda internetu",
 		"Ukończ jedną rozgrywkę w skórce Kontenciarza",
-		preload("res://images/icons/slb2icon.png"),
+		preload("res://images/achievement_icons/ContentMaker.webp"),
 		false
 		],
 	"lukaszczyk_on_horse": [
@@ -83,19 +77,19 @@ const ACHIEVEMENT_LIST = {
 	"emo_panda": [
 		"xXx_DarkPanda_xXx",
 		"Ukończ jedną rozgrywkę w skórce Emo Pandy",
-		preload("res://images/icons/slb2icon.png"),
+		preload("res://images/achievement_icons/EmoPanda.webp"),
 		false
 		],
 	"serious_business": [
 		"Poważny biznes",
 		"Kup wszystkie skórki w sklepie",
-		preload("res://images/icons/slb2icon.png"),
+		preload("res://images/achievement_icons/SeriousBusiness.webp"),
 		false
 		],
 	"sahara": [
 		"Lampa jak sk...",
 		"Ukończ jedną rozgrywkę na mapie sahary",
-		preload("res://images/icons/slb2icon.png"),
+		preload("res://images/achievement_icons/Sahara.webp"),
 		false
 		],
 	"lunar_conflict": [
@@ -107,7 +101,7 @@ const ACHIEVEMENT_LIST = {
 	"city": [
 		"Transport Metropolitalny",
 		"Ukończ jedną rozgrywkę na mapie metropolii halembskiej",
-		preload("res://images/icons/slb2icon.png"),
+		preload("res://images/achievement_icons/City.webp"),
 		false
 		],
 	"globetrotter": [
@@ -120,6 +114,12 @@ const ACHIEVEMENT_LIST = {
 		"Myślałem że to rajd przełajowy...",
 		"Zjedź z drogi",
 		preload("res://images/achievement_icons/Offroad.webp"),
+		true
+		],
+	"lactose_intolerant": [
+		"Nietolerancja laktozy",
+		"Jedź przez minutę i nie zbierz żadnego mleka",
+		preload("res://images/achievement_icons/LactoseIntolerant.webp"),
 		false
 		],
 	"rick_roll": [
@@ -131,7 +131,7 @@ const ACHIEVEMENT_LIST = {
 	"rick_rolled": [
 		"I won't give Rick up !11! <3 <3",
 		"Obejrzyj cały teledysk z Rick'em Astley'em",
-		preload("res://images/achievement_icons/RickRoll.webp"),
+		preload("res://images/achievement_icons/RickRolled.webp"),
 		true
 		],
 }

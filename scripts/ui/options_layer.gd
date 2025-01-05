@@ -74,9 +74,8 @@ func _ready(): # I'm starting to hate this code
 	if SettingsBus.cfg_rendering_method == "gl_compatibility":
 		graphics_api_button.selected = 1
 
-	var playername_split = SettingsBus.playername.split("#")
-	playername_edit.text = playername_split[0]
-	playername_uuid.text = "#" + playername_split[1]
+	playername_edit.text = ProfileBus.profile.playername
+	playername_uuid.text = "#" + ProfileBus.profile.machineid
 
 	match(SettingsBus.touchscreen_control):
 		SettingsBus.TouchscreenControlMode.TAP:
@@ -286,7 +285,7 @@ func _on_deadzone_slider_value_changed(value: float) -> void:
 
 
 func _on_playername_button_pressed():
-	SettingsBus.playername = playername_edit.text.replace("\n", "") + SettingsBus.playername.right(9)
+	ProfileBus.profile.change_playername(playername_edit.text)
 
 
 func _on_telemetry_button_toggled(button_preseed):
@@ -296,6 +295,21 @@ func _on_telemetry_button_toggled(button_preseed):
 func _on_dev_console_button_toggled(button_pressed):
 	SettingsBus.dev_console = button_pressed
 	SignalBus.dev_console.emit(button_pressed)
+
+
+func _on_touchscreen_mode_button_toggled(toggled_on):
+	SettingsBus.touchscreen_mode = toggled_on
+	SignalBus.switch_touchscreen_mode.emit()
+
+
+func _on_show_console_button_toggled(toggled_on):
+	SettingsBus.dev_console = toggled_on
+	SignalBus.dev_console.emit(toggled_on)
+
+
+func _on_show_fps_button_toggled(toggled_on):
+	SettingsBus.dev_show_fps = toggled_on
+	DebugInfo.toggle_fps()
 
 
 func _on_reduced_motion_button_toggled(button_pressed):
@@ -328,19 +342,78 @@ func _on_report_bug_email_button_pressed():
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MINIMIZED)
 	OS.shell_open("mailto:slb.ljpm@skeletonek.com?body={0}".format([body]))
 
-func _on_touchscreen_mode_button_toggled(toggled_on):
-	SettingsBus.touchscreen_mode = toggled_on
-	SignalBus.switch_touchscreen_mode.emit()
+
+func _on_import_data_button_pressed():
+	$OpenFileDialog.set_current_dir(
+		OS.get_system_dir(OS.SystemDir.SYSTEM_DIR_DOCUMENTS)
+	)
+	$OpenFileDialog.set_current_file("slb-ljpm-save-data.zip")
+	$OpenFileDialog.popup()
 
 
-func _on_show_console_button_toggled(toggled_on):
-	SettingsBus.dev_console = toggled_on
-	SignalBus.dev_console.emit(toggled_on)
+func _on_export_data_button_pressed():
+	$SaveFileDialog.set_current_dir(
+		OS.get_system_dir(OS.SystemDir.SYSTEM_DIR_DOCUMENTS)
+	)
+	$SaveFileDialog.set_current_file("slb-ljpm-save-data.zip")
+	$SaveFileDialog.popup()
 
 
-func _on_show_fps_button_toggled(toggled_on):
-	SettingsBus.dev_show_fps = toggled_on
-	DebugInfo.toggle_fps()
+func _on_open_file_dialog_file_selected(path):
+	var zipper := ZIPReader.new()
+	var file
+	var err := zipper.open(path)
+	if err != OK:
+		return PackedByteArray()
+	file = FileAccess.open(ProfileBus.FILENAME, FileAccess.WRITE)
+	file.store_buffer(zipper.read_file("profile.dat"))
+	file.close()
+	file = FileAccess.open(AchievementSystem.ACHV_FILE, FileAccess.WRITE)
+	file.store_buffer(zipper.read_file("achievements.dat"))
+	file.close()
+	zipper.close()
+
+	if not AchievementSystem.load_achievements():
+		SettingsBus.show_os_alert("ERROR",
+			"Achievement file seems to be corrupted. Skipping load"
+		)
+
+	var loaded_profile = ProfileBus.load_profile_from_file()
+	if loaded_profile:
+		ProfileBus.profile = loaded_profile
+	else:
+		# Whoops!
+		SettingsBus.show_os_alert("ERROR",
+			"Profile file seems to be corrupted. Skipping load"
+		)
+
+	if OS.get_name() != "Android":
+		OS.create_process(OS.get_executable_path(), [])
+	else:
+		SettingsBus.show_os_alert("INFO",
+			"Aplikacja zostanie teraz wyłączona i będzie wymagać" \
+			+ "ręcznego uruchomienia ponownie w celu poprawnego" \
+			+ "załadowania zaimportowanych danych gracza"
+		)
+	get_tree().quit()
+
+
+func _on_save_file_dialog_file_selected(path):
+	var zipper := ZIPPacker.new()
+	var err := zipper.open(path)
+	if err != OK:
+		return err
+	zipper.start_file("profile.dat")
+	zipper.write_file(
+		FileAccess.get_file_as_bytes(ProfileBus.FILENAME)
+	)
+	zipper.close_file()
+	zipper.start_file("achievements.dat")
+	zipper.write_file(
+		FileAccess.get_file_as_bytes(AchievementSystem.ACHV_FILE)
+	)
+	zipper.close_file()
+	zipper.close()
 
 
 func _on_back_button_pressed():

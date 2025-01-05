@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dy518n8bsq24s"
-path="res://.godot/imported/LC_SpaceShip3.png-aa401dc5fff286c5f0c3a0f60cb6b960.ctex"
+uid="uid://cv61xi10lccqf"
+path="res://.godot/imported/Sahara.webp-88eb73f798a3fee97000a02e8bdcf5b3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/LC_SpaceShip3.png"
-dest_files=["res://.godot/imported/LC_SpaceShip3.png-aa401dc5fff286c5f0c3a0f60cb6b960.ctex"]
+source_file="res://images/achievement_icons/Sahara.webp"
+dest_files=["res://.godot/imported/Sahara.webp-88eb73f798a3fee97000a02e8bdcf5b3.ctex"]
 
 [params]
 

@@ -120,6 +120,8 @@ func _area_entered_obstacle(ar):
 			if owner.lives <= 0:
 				owner.game_over()
 			else:
+				ProfileBus.profile.add_run()
+				ProfileBus.profile.add_speed(owner.speed)
 				death_timer.start(2)
 				await death_timer.timeout
 				position = Vector2(position.x, original_y_position)

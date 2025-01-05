@@ -1043,6 +1043,20 @@ text = "Zgłoś błąd przez formularz"
 layout_mode = 2
 text = "Zgłoś błąd przez E-mail"
 
+[node name="DataExport" type="VBoxContainer" parent="TabContainer/Technical help/VBoxContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 16
+
+[node name="ImportDataButton" type="Button" parent="TabContainer/Technical help/VBoxContainer/DataExport"]
+layout_mode = 2
+text = "Importuj dane gracza"
+
+[node name="ExportDataButton" type="Button" parent="TabContainer/Technical help/VBoxContainer/DataExport"]
+layout_mode = 2
+text = "Eksportuj dane gracza"
+
 [node name="MarginContainer" type="MarginContainer" parent="."]
 custom_minimum_size = Vector2(0, 100)
 anchors_preset = 7
@@ -1128,13 +1142,31 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "Ok"
 
+[node name="OpenFileDialog" type="FileDialog" parent="."]
+title = "Open a File"
+initial_position = 1
+size = Vector2i(667, 400)
+ok_button_text = "Open"
+cancel_button_text = "Anuluj"
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.zip")
+use_native_dialog = true
+
+[node name="SaveFileDialog" type="FileDialog" parent="."]
+auto_translate_mode = 1
+initial_position = 1
+size = Vector2i(695, 400)
+ok_button_text = "Zapisz"
+cancel_button_text = "Anuluj"
+access = 2
+filters = PackedStringArray("*.zip")
+use_native_dialog = true
+
 [connection signal="tab_changed" from="TabContainer" to="." method="_on_tab_container_tab_changed"]
 [connection signal="toggled" from="TabContainer/Graphics/MarginContainer/VBoxContainer/FullScreen/FullScreenButton" to="." method="_on_full_screen_button_toggled"]
-[connection signal="pressed" from="TabContainer/Graphics/MarginContainer/VBoxContainer/GraphicsAPI/GraphicsAPIInfoButton" to="." method="_on_info_button_pressed" binds= ["api"]]
 [connection signal="item_selected" from="TabContainer/Graphics/MarginContainer/VBoxContainer/GraphicsAPI/GraphicsAPIButton" to="." method="_on_graphics_api_pressed"]
-[connection signal="pressed" from="TabContainer/Graphics/MarginContainer/VBoxContainer/VSync/VSyncInfoButton" to="." method="_on_info_button_pressed" binds= ["vsync"]]
 [connection signal="item_selected" from="TabContainer/Graphics/MarginContainer/VBoxContainer/VSync/VSyncButton" to="." method="_on_v_sync_button_item_selected"]
-[connection signal="pressed" from="TabContainer/Graphics/MarginContainer/VBoxContainer/WindowingSystem/LinuxWindowingSystemInfoButton" to="." method="_on_info_button_pressed" binds= ["linux_window_sys"]]
 [connection signal="item_selected" from="TabContainer/Graphics/MarginContainer/VBoxContainer/WindowingSystem/LinuxWindowingSystemButton" to="." method="_on_linux_windowing_system_button_item_selected"]
 [connection signal="value_changed" from="TabContainer/Graphics/MarginContainer/VBoxContainer/Framelimit/FramelimitSpinner" to="." method="_on_framelimit_button_value_changed"]
 [connection signal="toggled" from="TabContainer/Graphics/MarginContainer/VBoxContainer/UIBlur/UIBlurButton" to="." method="_on_ui_blur_button_toggled"]
@@ -1152,10 +1184,13 @@ text = "Ok"
 [connection signal="toggled" from="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/TouchscreenMode/TouchscreenModeButton" to="." method="_on_touchscreen_mode_button_toggled"]
 [connection signal="toggled" from="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/ShowConsole/ShowConsoleButton" to="." method="_on_show_console_button_toggled"]
 [connection signal="toggled" from="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/ShowFPS/ShowFPSButton" to="." method="_on_show_fps_button_toggled"]
-[connection signal="pressed" from="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/Telemetry/TelemetryInfoButton" to="." method="_on_info_button_pressed" binds= ["telemetry"]]
 [connection signal="toggled" from="TabContainer/Accessibility/VBoxContainer/ReducedMotion/ReducedMotionButton" to="." method="_on_reduced_motion_button_toggled"]
 [connection signal="toggled" from="TabContainer/Accessibility/VBoxContainer/EasierFont/EasierFontButton" to="." method="_on_easier_font_button_toggled"]
 [connection signal="pressed" from="TabContainer/Technical help/VBoxContainer/ReportBug/ReportBugFormsButton" to="." method="_on_report_bug_forms_button_pressed"]
 [connection signal="pressed" from="TabContainer/Technical help/VBoxContainer/ReportBug/ReportBugEmailButton" to="." method="_on_report_bug_email_button_pressed"]
+[connection signal="pressed" from="TabContainer/Technical help/VBoxContainer/DataExport/ImportDataButton" to="." method="_on_import_data_button_pressed"]
+[connection signal="pressed" from="TabContainer/Technical help/VBoxContainer/DataExport/ExportDataButton" to="." method="_on_export_data_button_pressed"]
 [connection signal="pressed" from="MarginContainer/BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="pressed" from="PopupInfo/Panel/VBoxContainer/HBoxContainer/AcceptButton" to="PopupInfo" method="hide"]
+[connection signal="file_selected" from="OpenFileDialog" to="." method="_on_open_file_dialog_file_selected"]
+[connection signal="file_selected" from="SaveFileDialog" to="." method="_on_save_file_dialog_file_selected"]

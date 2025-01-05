@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://dfiiryowv56g0"]
+[gd_scene load_steps=32 format=3 uid="uid://dfiiryowv56g0"]
 
 [ext_resource type="Script" path="res://scripts/carride/gui.gd" id="1_bnrtr"]
 [ext_resource type="Texture2D" uid="uid://bpix4jm8ib32f" path="res://sprites/MilkNoShadow.png" id="2_mlfbj"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://60anel18fj2x" path="res://sprites/PixelHeart.png" id="3_la0qy"]
 [ext_resource type="Texture2D" uid="uid://dvhou5wmxufck" path="res://sprites/Speedometer.png" id="4_2bj23"]
 [ext_resource type="Texture2D" uid="uid://gixvapofe1qx" path="res://sprites/SpeedometerArrow.png" id="5_3wpfb"]
+[ext_resource type="Texture2D" uid="uid://bt7arq6j0221b" path="res://sprites/RoadIcon.png" id="5_k1i3q"]
 [ext_resource type="Material" uid="uid://cqn5rkmj7io2i" path="res://shaders/panel_shader_material.tres" id="6_slg2x"]
 [ext_resource type="Texture2D" uid="uid://cff8xknyyndxk" path="res://sprites/gui/car_icons/warningbattery.png" id="6_u5k3x"]
 [ext_resource type="Texture2D" uid="uid://dwcu034i1bbii" path="res://images/touchscreen_vbuttons/UpTouch.png" id="7_1fr8w"]
@@ -44,7 +45,7 @@ gradient = SubResource("Gradient_cp8fb")
 font_size = 36
 shadow_size = 0
 
-[node name="GUI" type="Control" node_paths=PackedStringArray("label_time", "label_milk", "speedometer_gauge", "lives", "last_live_player", "powerup_holder", "powerup_ending_timer", "powerup_ending_player", "indicators")]
+[node name="GUI" type="Control" node_paths=PackedStringArray("label_time", "label_milk", "label_distance", "speedometer_gauge", "lives", "last_live_player", "powerup_holder", "powerup_ending_timer", "powerup_ending_player", "indicators")]
 z_index = 11
 layout_mode = 3
 anchors_preset = 15
@@ -59,6 +60,7 @@ grow_vertical = 2
 script = ExtResource("1_bnrtr")
 label_time = NodePath("Time/TimeContainer/LabelTime")
 label_milk = NodePath("Milk/MilkCountContainer/LabelMilk")
+label_distance = NodePath("Distance/DistanceContainer/LabelDistance")
 speedometer_gauge = NodePath("Speedometer/Speedometer/SpeedometerGauge")
 lives = [NodePath("LivesBorder/Live1"), NodePath("LivesBorder/Live2"), NodePath("LivesBorder/Live3")]
 last_live_player = NodePath("LastLivePlayer")
@@ -120,7 +122,7 @@ z_index = 1
 
 [node name="TimeBorder" type="Sprite2D" parent="Time"]
 z_index = -1
-position = Vector2(197, 650)
+position = Vector2(237.08, 694)
 scale = Vector2(1.72, 0.332)
 texture = SubResource("GradientTexture2D_hvxgf")
 
@@ -134,10 +136,10 @@ custom_minimum_size = Vector2(0, 50)
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 92.0
-offset_top = 626.0
-offset_right = 315.0
-offset_bottom = 676.0
+offset_left = 132.08
+offset_top = 670.0
+offset_right = 355.08
+offset_bottom = 720.0
 grow_vertical = 0
 
 [node name="TextureRect" type="TextureRect" parent="Time/TimeContainer"]
@@ -167,7 +169,7 @@ z_index = 1
 
 [node name="MilkBorder" type="Sprite2D" parent="Milk"]
 z_index = -1
-position = Vector2(250, 694)
+position = Vector2(290, 650)
 scale = Vector2(0.890625, 0.3125)
 texture = SubResource("GradientTexture2D_hvxgf")
 
@@ -181,10 +183,10 @@ custom_minimum_size = Vector2(100, 32)
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 197.0
-offset_top = 674.0
-offset_right = 299.0
-offset_bottom = 718.0
+offset_left = 237.0
+offset_top = 630.0
+offset_right = 339.0
+offset_bottom = 674.0
 grow_vertical = 0
 alignment = 2
 
@@ -201,6 +203,47 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "000
 "
+label_settings = SubResource("LabelSettings_s0jls")
+horizontal_alignment = 2
+
+[node name="Distance" type="Node2D" parent="."]
+z_index = 1
+
+[node name="DistanceBorder" type="Sprite2D" parent="Distance"]
+z_index = -1
+position = Vector2(133, 650)
+scale = Vector2(1.516, 0.313)
+texture = SubResource("GradientTexture2D_hvxgf")
+
+[node name="DistanceBG" type="Sprite2D" parent="Distance/DistanceBorder"]
+position = Vector2(-2.83569e-05, -5.96046e-06)
+scale = Vector2(1.921, 1.6)
+texture = SubResource("GradientTexture2D_n110a")
+
+[node name="DistanceContainer" type="HBoxContainer" parent="Distance"]
+custom_minimum_size = Vector2(100, 32)
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 41.0
+offset_top = 630.0
+offset_right = 222.0
+offset_bottom = 674.0
+grow_vertical = 0
+alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="Distance/DistanceContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("5_k1i3q")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="LabelDistance" type="Label" parent="Distance/DistanceContainer"]
+custom_minimum_size = Vector2(146, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "00.00km"
 label_settings = SubResource("LabelSettings_s0jls")
 horizontal_alignment = 2
 

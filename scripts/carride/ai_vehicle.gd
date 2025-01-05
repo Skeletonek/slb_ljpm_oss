@@ -3,6 +3,7 @@ class_name AIVehicle
 extends Node2D
 
 const VARIANTS = ["blue", "green", "white", "yellow"]
+const LC_VARIANTS = ["lc_rover", "lc_tank"]
 
 var variant: String
 
@@ -16,8 +17,15 @@ var variant: String
 
 func _ready():
 	SignalBus.reduce_motion.connect(_reduce_motion)
-	var rnd = randi_range(0,3)
-	variant = VARIANTS[rnd]
+	var rnd = 0
+	if ProfileBus.profile.chosen_map == Profile.Maps.LUNAR_CONFLICT:
+		rnd = randi_range(0, LC_VARIANTS.size()-1)
+		variant = LC_VARIANTS[rnd]
+		if variant == "lc_rover":
+			car_animated_sprite.scale -= Vector2(0.06, 0.06)
+	else:
+		rnd = randi_range(0,VARIANTS.size()-1)
+		variant = VARIANTS[rnd]
 	car_animated_sprite.play(variant)
 	if SettingsBus.reduced_motion:
 		car_animated_sprite.stop()

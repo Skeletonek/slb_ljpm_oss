@@ -3,15 +3,22 @@
 [ext_resource type="Script" path="res://scripts/ui/profile_layer.gd" id="1_1ea5q"]
 [ext_resource type="Material" uid="uid://cqn5rkmj7io2i" path="res://shaders/panel_shader_material.tres" id="2_wno1y"]
 
-[node name="ProfileLayer" type="CanvasLayer" node_paths=PackedStringArray("milk", "milk_single_run", "time_played_single_run", "time_played_sum", "top_speed", "avg_speed", "meters_driven")]
+[node name="ProfileLayer" type="CanvasLayer" node_paths=PackedStringArray("games", "runs", "milk", "milk_single_run", "time_played_single_run", "time_played_sum", "top_speed", "top_speed_avg", "distance_sum", "distance_single_run", "powerups_ram", "powerups_slowmotion", "powerups_semaglutide", "powerups_milkyway")]
 script = ExtResource("1_1ea5q")
+games = NodePath("PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/GamesContainer/GamesValue")
+runs = NodePath("PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/RunsContainer/RunsValue")
 milk = NodePath("PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/MilkContainer/MilkValue")
 milk_single_run = NodePath("PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/MilkSingleRunContainer/MilkSingleRunValue")
 time_played_single_run = NodePath("PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/TimePlayedSingleRunContainer/TimePlayedSingleRunValue")
 time_played_sum = NodePath("PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/TimePlayedSumContainer/TimePlayedSumValue")
 top_speed = NodePath("PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/TopSpeedContainer/TopSpeedValue")
-avg_speed = NodePath("PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/AvgSpeedContainer/AvgSpeedValue")
-meters_driven = NodePath("PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/MetersDrivenContainer/MetersDrivenValue")
+top_speed_avg = NodePath("PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/TopSpeedAvgContainer/TopSpeedAvgValue")
+distance_sum = NodePath("PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/DistanceSumContainer/DistanceSumValue")
+distance_single_run = NodePath("PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/DistanceAvgContainer/DistanceSumValue")
+powerups_ram = NodePath("PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/PowerupRamContainer/PowerupRamValue")
+powerups_slowmotion = NodePath("PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/PowerupSlowmotionContainer/PowerupSlowmotionValue")
+powerups_semaglutide = NodePath("PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/PowerupSemaglutideContainer/PowerupSemaglutideValue")
+powerups_milkyway = NodePath("PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/PowerupMilkywayContainer/PowerupMilkywayValue")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 material = ExtResource("2_wno1y")
@@ -42,13 +49,41 @@ layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
+[node name="GamesContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="GamesLabel" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/GamesContainer"]
+layout_mode = 2
+text = "Rozegranych misji zdobycia mleka:"
+
+[node name="GamesValue" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/GamesContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="RunsContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="RunsLabel" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/RunsContainer"]
+layout_mode = 2
+text = "Skasowanych pojazdów:"
+
+[node name="RunsValue" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/RunsContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="Separator4" type="Control" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
 [node name="MilkContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 alignment = 1
 
 [node name="MilkLabel" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/MilkContainer"]
 layout_mode = 2
-text = "Łącznie zebranych mlek:"
+text = "Łącznie zebranych butelek z mlekiem:"
 
 [node name="MilkValue" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/MilkContainer"]
 layout_mode = 2
@@ -60,7 +95,7 @@ alignment = 1
 
 [node name="MilkSingleRunLabel" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/MilkSingleRunContainer"]
 layout_mode = 2
-text = "Rekord mlek w ciągu jednej rozgrywki:"
+text = "Rekord butelek z mlekiem w ciągu jednej rozgrywki:"
 
 [node name="MilkSingleRunValue" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/MilkSingleRunContainer"]
 layout_mode = 2
@@ -69,18 +104,6 @@ text = "0"
 [node name="Separator" type="Control" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-
-[node name="TimePlayedSingleRunContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer"]
-layout_mode = 2
-alignment = 1
-
-[node name="TimePlayedSingleRunLabel" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/TimePlayedSingleRunContainer"]
-layout_mode = 2
-text = "Rekord czasu w ciągu jednej rozgrywki:"
-
-[node name="TimePlayedSingleRunValue" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/TimePlayedSingleRunContainer"]
-layout_mode = 2
-text = "0"
 
 [node name="TimePlayedSumContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -91,6 +114,18 @@ layout_mode = 2
 text = "Łącznie zmarnowano czasu:"
 
 [node name="TimePlayedSumValue" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/TimePlayedSumContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="TimePlayedSingleRunContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TimePlayedSingleRunLabel" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/TimePlayedSingleRunContainer"]
+layout_mode = 2
+text = "Rekord czasu w ciągu jednej rozgrywki:"
+
+[node name="TimePlayedSingleRunValue" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/TimePlayedSingleRunContainer"]
 layout_mode = 2
 text = "0"
 
@@ -110,27 +145,91 @@ text = "Prędkość maksymalna:"
 layout_mode = 2
 text = "0"
 
-[node name="AvgSpeedContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="TopSpeedAvgContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="AvgSpeedLabel" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/AvgSpeedContainer"]
+[node name="TopSpeedAvgLabel" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/TopSpeedAvgContainer"]
 layout_mode = 2
-text = "Średnia prędkość:"
+text = "Średnia prędkość maksymalna:"
 
-[node name="AvgSpeedValue" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/AvgSpeedContainer"]
+[node name="TopSpeedAvgValue" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/TopSpeedAvgContainer"]
 layout_mode = 2
 text = "0"
 
-[node name="MetersDrivenContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="DistanceSumContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="MetersDrivenLabel" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/MetersDrivenContainer"]
+[node name="DistanceSumLabel" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/DistanceSumContainer"]
 layout_mode = 2
-text = "Kilometrów przejechanych:"
+text = "Przejechany dystans:"
 
-[node name="MetersDrivenValue" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/MetersDrivenContainer"]
+[node name="DistanceSumValue" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/DistanceSumContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="DistanceAvgContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="DistanceSumLabel" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/DistanceAvgContainer"]
+layout_mode = 2
+text = "Rekord dystansu w ciągu jednej rozgrywki:"
+
+[node name="DistanceSumValue" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/DistanceAvgContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="Separator3" type="Control" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="PowerupRamContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="PowerupRamLabel" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/PowerupRamContainer"]
+layout_mode = 2
+text = "Zebranych taranów:"
+
+[node name="PowerupRamValue" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/PowerupRamContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="PowerupSlowmotionContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="PowerupSlowmotionLabel" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/PowerupSlowmotionContainer"]
+layout_mode = 2
+text = "Zebranych spowolnień czasu:"
+
+[node name="PowerupSlowmotionValue" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/PowerupSlowmotionContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="PowerupSemaglutideContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="PowerupSemaglutideLabel" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/PowerupSemaglutideContainer"]
+layout_mode = 2
+text = "Zebranych pomniejszaczy:"
+
+[node name="PowerupSemaglutideValue" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/PowerupSemaglutideContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="PowerupMilkywayContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="PowerupMilkywayLabel" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/PowerupMilkywayContainer"]
+layout_mode = 2
+text = "Zebranych batoników czekoladowych:"
+
+[node name="PowerupMilkywayValue" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/PowerupMilkywayContainer"]
 layout_mode = 2
 text = "0"
 

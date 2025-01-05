@@ -1,10 +1,14 @@
 extends Node
 
 const FILENAME = "user://profile.dat"
+const FILENAME_VERSION = 2
 
+var machineid: String
 var profile: Profile
 
 func _ready() -> void:
+	machineid = OS.get_unique_id().substr(SettingsBus.os_id, 8)
+	print("Machine ID: %s" % machineid)
 	var loaded_profile = load_profile_from_file()
 	if loaded_profile:
 		profile = loaded_profile
@@ -165,21 +169,59 @@ func load_profile_from_file() -> Profile:
 		return data
 
 	var file = FileAccess.open(FILENAME, FileAccess.READ)
-	data = Profile.new(
-			file.get_32(),
-			file.get_32(),
-			file.get_32(),
-			file.get_64(),
-			file.get_float(),
-			file.get_32(),
-			file.get_32(),
-			file.get_32(),
-			file.get_var(),
-			file.get_var(),
-			file.get_8(),
-			file.get_8(),
-	)
+	var file_version = file.get_16()
+	if file_version == 2:
+		data = Profile.new(
+				file.get_pascal_string(),
+				file.get_pascal_string(),
+				file.get_32(),
+				file.get_32(),
+				file.get_64(),
+				file.get_32(),
+				file.get_32(),
+				file.get_64(),
+				file.get_float(),
+				file.get_float(),
+				file.get_float(),
+				file.get_float(),
+				file.get_32(),
+				file.get_64(),
+				file.get_64(),
+				file.get_64(),
+				file.get_64(),
+				file.get_var(),
+				file.get_var(),
+				file.get_8(),
+				file.get_8(),
+		)
+	# FILE_VERSION 1: Missing playername and machineid vars
+	elif file_version == 1:
+		data = Profile.new(
+				"",
+				machineid,
+				file.get_32(),
+				file.get_32(),
+				file.get_64(),
+				file.get_32(),
+				file.get_32(),
+				file.get_64(),
+				file.get_float(),
+				file.get_float(),
+				file.get_float(),
+				file.get_float(),
+				file.get_32(),
+				file.get_64(),
+				file.get_64(),
+				file.get_64(),
+				file.get_64(),
+				file.get_var(),
+				file.get_var(),
+				file.get_8(),
+				file.get_8(),
+		)
 	if data is Profile:
+		machineid = data.machineid
+		print("Machine ID loaded from save file: %s" % data.machineid)
 		return data
 
 	return null
@@ -188,14 +230,24 @@ func load_profile_from_file() -> Profile:
 func save_profile_to_file() -> void:
 	if not SettingsBus.cheats:
 		var file = FileAccess.open(FILENAME, FileAccess.WRITE)
-		file.store_32(profile.milks_total)
+		file.store_16(FILENAME_VERSION)
+		file.store_pascal_string(profile.playername)
+		file.store_pascal_string(profile.machineid)
+		file.store_32(profile.games)
+		file.store_32(profile.runs)
+		file.store_64(profile.milks_total)
 		file.store_32(profile.milks_single_run)
 		file.store_32(profile.time_played_single_run)
 		file.store_64(profile.time_played_sum)
+		file.store_float(profile.distance_sum)
+		file.store_float(profile.distance_single_run)
 		file.store_float(profile.top_speed)
-		file.store_32(profile.avg_speed)
-		file.store_32(profile.meters_driven)
+		file.store_float(profile.top_speed_avg)
 		file.store_32(profile.milks)
+		file.store_64(profile.powerups_ram)
+		file.store_64(profile.powerups_slowmotion)
+		file.store_64(profile.powerups_semaglutide)
+		file.store_64(profile.powerups_milkyway)
 		file.store_var(profile.skins)
 		file.store_var(profile.maps)
 		file.store_8(profile.chosen_skin)
@@ -205,11 +257,20 @@ func save_profile_to_file() -> void:
 
 func _generate_clean_profile() -> Profile:
 	return Profile.new(
+		"",
+		machineid,
+		0,
+		0,
 		0,
 		0,
 		0,
 		0,
 		0.0,
+		0.0,
+		0.0,
+		0.0,
+		0,
+		0,
 		0,
 		0,
 		0,

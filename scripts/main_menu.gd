@@ -19,19 +19,20 @@ var easter_egg_clickable := false
 @onready var http_request_changelog = $HTTPRequest2
 @onready var player_name_input_popup = $PopupInput
 
-func _ready() -> void:
-	if GlobalMusic.stream.resource_path == "res://audio/music/the-great-rescue.ogg":
-		var music_tick = GlobalMusic.get_playback_position()
-		GlobalMusic.stream = load("res://audio/music/the-greatest-rescue.ogg")
-		GlobalMusic.play()
-		GlobalMusic.seek(music_tick)
 
-	GlobalMusic.connect_buttons(self)
+func _ready() -> void:
+	# This is for the SLB2: TGRa, not LJPM
+	# if GlobalMusic.stream.resource_path == "res://audio/music/the-great-rescue.ogg":
+	# 	var music_tick = GlobalMusic.get_playback_position()
+	# 	GlobalMusic.stream = load("res://audio/music/the-greatest-rescue.ogg")
+	# 	GlobalMusic.play()
+	# 	GlobalMusic.seek(music_tick)
 
 	focus_node.grab_focus()
 
-	if SettingsBus.first_boot:
-		$PopupTelemetry.show()
+	GlobalMusic.connect_buttons(self)
+	# if SettingsBus.first_boot:
+		# $PopupTelemetry.show()
 
 	# Check for update
 	http_request.request_completed.connect(_validate_update)
@@ -109,7 +110,7 @@ func _notification(what):
 
 
 func _on_continue_button_pressed():
-	if SettingsBus.playername.split("#")[0] == "":
+	if ProfileBus.profile.playername == "":
 		player_name_input_popup.show()
 		player_name_input_popup.save_button.connect(_on_continue_button_pressed)
 		return
@@ -118,7 +119,7 @@ func _on_continue_button_pressed():
 
 
 func _on_new_game_2_0_button_pressed():
-	if SettingsBus.playername.split("#")[0] == "":
+	if ProfileBus.profile.playername == "":
 		player_name_input_popup.show()
 		player_name_input_popup.save_button.connect(_on_new_game_2_0_button_pressed)
 		return
@@ -164,10 +165,16 @@ func _on_hi_score_button_pressed():
 
 
 func _on_hi_score_2_button_pressed():
-	$Leaderboard2Layer.boot()
+	$Leaderboard2MilkLayer.boot()
 	_hide_all_layers()
-	$Leaderboard2Layer.show()
-	$Leaderboard2Layer/Board/CloseButtonContainer/CloseButton.grab_focus()
+	$Leaderboard2MilkLayer.show()
+	$Leaderboard2MilkLayer/Board/CloseButtonContainer/CloseButton.grab_focus()
+
+func _on_hi_score_2_distance_button_pressed():
+	$Leaderboard2DistanceLayer.boot()
+	_hide_all_layers()
+	$Leaderboard2DistanceLayer.show()
+	$Leaderboard2DistanceLayer/Board/CloseButtonContainer/CloseButton.grab_focus()
 
 
 func _on_exit_button_pressed():
@@ -187,7 +194,8 @@ func _hide_all_layers():
 	$MainMenuLayer.hide()
 	$OptionsLayer.hide()
 	$LeaderboardLayer.hide()
-	$Leaderboard2Layer.hide()
+	$Leaderboard2MilkLayer.hide()
+	$Leaderboard2DistanceLayer.hide()
 	$AchievementsLayer.hide()
 	$CreditsLayer.hide()
 	$ProfileLayer.hide()

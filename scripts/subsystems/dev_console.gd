@@ -518,9 +518,9 @@ func _cr_speedometer_value(arg="") -> bool:
 
 
 func _cr_playername(arg="") -> bool:
-	var ret = _process_string(SettingsBus.playername.split("#")[0], arg)
+	var ret = _process_string(ProfileBus.profile.playername, arg)
 	if ret != null:
-		SettingsBus.playername = arg.replace("\n", "") + SettingsBus.playername.right(9)
+		ProfileBus.profile.change_playername(arg)
 	return true
 
 

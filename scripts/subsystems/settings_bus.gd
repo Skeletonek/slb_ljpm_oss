@@ -33,7 +33,6 @@ var touchscreen_control := TouchscreenControlMode.TAP
 var keyboard_up := KEY_W
 var keyboard_down := KEY_S
 var gamepad_deadzone := 0.3
-var playername := "#" + OS.get_unique_id().substr(os_id, 8)
 var telemetry := false
 
 var volume := [1.0, 0.8, 1.0, 0.5, 1.0]
@@ -80,41 +79,43 @@ func load_config() -> bool:
 		return false
 	var data: Dictionary = json.get_data()
 
-	fullscreen = data["fullscreen"]
-	vsync = data["vsync"] if data.has("vsync") else vsync
-	fps_max = data["fps_max"] if data.has("fps_max") else fps_max
-	ui_scaling = data["ui_scaling"]
-	ui_blur = data["ui_blur"] if data.has("ui_blur") else ui_blur
+	fullscreen = validate_data(data, "fullscreen", fullscreen)
+	vsync = validate_data(data, "vsync", vsync)
+	fps_max = validate_data(data, "fps_max", fps_max)
+	ui_scaling = validate_data(data, "ui_scaling", ui_scaling)
+	ui_blur = validate_data(data, "ui_blur", ui_blur)
 
-	volume[AudioBus.MASTER] = data["master_volume"]
-	volume[AudioBus.SFX] = data["sfx_volume"]
-	volume[AudioBus.VOICE] = data["voice_volume"]
-	volume[AudioBus.MUSIC] = data["music_volume"]
-	volume[AudioBus.NARRATOR] = data["narrator_volume"]
+	volume[AudioBus.MASTER] = validate_data(data, "master_volume", volume[AudioBus.MASTER])
+	volume[AudioBus.SFX] = validate_data(data, "sfx_volume", volume[AudioBus.SFX])
+	volume[AudioBus.VOICE] = validate_data(data, "voice_volume", volume[AudioBus.VOICE])
+	volume[AudioBus.MUSIC] = validate_data(data, "music_volume", volume[AudioBus.MUSIC])
+	volume[AudioBus.NARRATOR] = validate_data(data, "narrator_volume", volume[AudioBus.NARRATOR])
 
-	narrator_speaking = data["narrator_speaking"]
+	narrator_speaking = validate_data(data, "narrator_speaking", narrator_speaking)
 
-	skip_intro = data["skip_intro"]
-	skip_boot = data["skip_boot"] if data.has("skip_boot") else skip_boot
+	skip_intro = validate_data(data, "skip_intro", skip_intro)
+	skip_boot = validate_data(data, "skip_boot", skip_boot)
 
-	reduced_motion = data["reduced_motion"]
-	easier_font = data["easier_font"]
-	touchscreen_mode = data["touchscreen_mode"]
-	touchscreen_control = data["touchscreen_control"]
-	gamepad_deadzone = data["gamepad_deadzone"]
-	telemetry = data["telemetry"]
-	keyboard_up = data["keyboard_up"]
-	keyboard_down = data["keyboard_down"]
-	playername = data["playername"]
+	reduced_motion = validate_data(data, "reduced_motion", reduced_motion)
+	easier_font = validate_data(data, "easier_font", easier_font)
+	touchscreen_mode = validate_data(data, "touchscreen_mode", touchscreen_mode)
+	touchscreen_control = validate_data(data, "touchscreen_control", touchscreen_control)
+	gamepad_deadzone = validate_data(data, "gamepad_deadzone", gamepad_deadzone)
+	telemetry = validate_data(data, "telemetry", telemetry)
+	keyboard_up = validate_data(data, "keyboard_up", keyboard_up)
+	keyboard_down = validate_data(data, "keyboard_down", keyboard_down)
 
-	dev_console = data["dev_console"]
-	dev_show_fps = data["dev_show_fps"] if data.has("dev_show_fps") else dev_show_fps
+	dev_console = validate_data(data, "dev_console", dev_console)
+	dev_show_fps = validate_data(data, "dev_show_fps", dev_show_fps)
 
-	if playername.length() > 44:
-		var playername_split = playername.split('#')
-		playername = playername_split[0].substr(0,36) + '#' + playername_split[1]
 	save_config()
 	return true
+
+
+func validate_data(data: Dictionary, value: String, old_value):
+	if value in data.keys():
+		return data[value]
+	return old_value
 
 
 func save_config():
@@ -142,7 +143,6 @@ func save_config():
 		"gamepad_deadzone": gamepad_deadzone,
 		"keyboard_up": keyboard_up,
 		"keyboard_down": keyboard_down,
-		"playername": playername,
 		"telemetry": telemetry
 	}
 	var json = JSON.stringify(config_dict)

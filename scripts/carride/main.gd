@@ -1,3 +1,5 @@
+# 33500 units is a ~1 kilometer
+
 extends Node2D
 
 signal powerup_milkyway(yes: bool)
@@ -33,6 +35,7 @@ var spawn_time: float = 0
 var powerup_timer: Timer
 var spawn_time_milk: float = 0
 var spawn_milk_count: int = 1
+var powerup_counter = Dictionary()
 
 var lives: int = 1:
 	get:
@@ -56,10 +59,15 @@ var powerup:
 		if value != null:
 			powerup = value.type
 			start_powerup(value)
+			powerup_counter[value.type] += 1
 
 var time: int = 0:
 	get:
 		return time
+
+var distance: float = 0.0:
+	get:
+		return distance
 
 var time_scale: float = 1.0:
 	get:
@@ -91,6 +99,8 @@ func _ready():
 		original_speed = speed
 		powerup_timer = $PowerupTimer
 		powerup_timer.timeout.connect(func(): powerup = null)
+		for x in PowerupClass.Powerups.values():
+			powerup_counter[x] = 0
 
 
 func _process(delta):
@@ -98,6 +108,7 @@ func _process(delta):
 	_speed_management(delta)
 	_achievement_check()
 	bass_player.volume_db = clampf(-(80 - (speed * 0.10)), -80, 15)
+	distance += (speed + 300) * time_scale * delta
 
 
 func _physics_process(delta):
@@ -215,26 +226,41 @@ func _spawn_milk(delta):
 
 
 func _add_scores():
+	ProfileBus.profile.add_game()
+	ProfileBus.profile.add_run()
 	ProfileBus.profile.add_milks(milks)
 	ProfileBus.profile.add_time(time)
 	ProfileBus.profile.add_speed(speed)
+	ProfileBus.profile.add_distance(distance)
+	if version_2:
+		ProfileBus.profile.add_powerups(powerup_counter)
 	if not version_2:
 		var leaderboard_name = "dev" if OS.is_debug_build() else "main"
 		SilentWolf.Scores.save_score(
-			SettingsBus.playername,
+			ProfileBus.profile.get_full_playername(),
 			final_score,
 			leaderboard_name,
 		)
 	else:
 		var metadata = {
+			"distance": distance,
+			"time": time,
+		}
+		var leaderboard_name = "dev_2_0_milk" if OS.is_debug_build() else "main_2_0_milk"
+		SilentWolf.Scores.save_score(
+			ProfileBus.profile.get_full_playername(),
+			milks,
+			leaderboard_name,
+			metadata,
+		)
+		metadata = {
 			"milks": milks,
 			"time": time,
-			"speed": speed,
 		}
-		var leaderboard_name = "dev_2_0" if OS.is_debug_build() else "main_2_0"
+		leaderboard_name = "dev_2_0_distance" if OS.is_debug_build() else "main_2_0_distance"
 		SilentWolf.Scores.save_score(
-			SettingsBus.playername,
-			final_score,
+			ProfileBus.profile.get_full_playername(),
+			(distance / 33500) * 1000,
 			leaderboard_name,
 			metadata,
 		)

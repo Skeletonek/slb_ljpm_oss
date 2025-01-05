@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bia3bnt6eiov1"
-path="res://.godot/imported/LC_SpaceShip1.png-13bcb6d804670168a2eddb15ae64a80e.ctex"
+uid="uid://dch16ucperwlj"
+path="res://.godot/imported/LunarRover.webp-30e6555e5d989f60c4bc4056ef78cc6f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/LC_SpaceShip1.png"
-dest_files=["res://.godot/imported/LC_SpaceShip1.png-13bcb6d804670168a2eddb15ae64a80e.ctex"]
+source_file="res://images/achievement_icons/LunarRover.webp"
+dest_files=["res://.godot/imported/LunarRover.webp-30e6555e5d989f60c4bc4056ef78cc6f.ctex"]
 
 [params]
 

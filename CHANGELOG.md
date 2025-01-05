@@ -1,3 +1,17 @@
+#### 2.0-RC+1
+ - Added new statistics visible inside statistics panel
+ - Added special skins for AI cars when playing on lunar conflict map
+ - Added icons for all missing achievements
+ - Added player data importing and exporting
+ - Added distance counter to the gui in carride
+ - Changed playername storing system
+ - Separated milks and distance to its own scoreboards in 2_0 scoreboard
+ - Improved resilliency to errors when loading config files
+ - Fixed issues with showing highest position on the scoreboard
+ - Fixed achievement deatils panel showing when dragging screen in achievements viewer
+ - Fixed calculating top speed in statistics layer
+ - Fixed carride 1.0 being unplayable on Android devices
+
 #### 2.0-Beta+4
  - Added decrease size powerup
  - Added city map

@@ -150,7 +150,7 @@ alignment = 2
 visible = false
 layout_mode = 2
 
-[node name="HiScore2Button" type="Button" parent="MainMenuLayer/VBoxContainer/Scoreboard/ScoreboardToggled"]
+[node name="HiScore2DistanceButton" type="Button" parent="MainMenuLayer/VBoxContainer/Scoreboard/ScoreboardToggled"]
 custom_minimum_size = Vector2(160, 70)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -158,7 +158,19 @@ size_flags_vertical = 8
 focus_neighbor_bottom = NodePath("../../../CreditsButton")
 focus_previous = NodePath("../../../CreditsButton")
 text = "Tryb
-nowoczesny"
+ulepszony
+(dystans)"
+
+[node name="HiScore2MilkButton" type="Button" parent="MainMenuLayer/VBoxContainer/Scoreboard/ScoreboardToggled"]
+custom_minimum_size = Vector2(160, 70)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+focus_neighbor_bottom = NodePath("../../../CreditsButton")
+focus_previous = NodePath("../../../CreditsButton")
+text = "Tryb
+ulepszony
+(mleka)"
 
 [node name="HiScoreButton" type="Button" parent="MainMenuLayer/VBoxContainer/Scoreboard/ScoreboardToggled"]
 custom_minimum_size = Vector2(160, 70)
@@ -193,7 +205,7 @@ layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 5
 text = "Tryb
-nowoczesny"
+ulepszony"
 
 [node name="GameClassicButton" type="Button" parent="MainMenuLayer/VBoxContainer/Game/GameToggled"]
 custom_minimum_size = Vector2(160, 70)
@@ -236,12 +248,19 @@ focus_neighbor_bottom = NodePath("../VBoxContainer/CreditsButton")
 focus_previous = NodePath("../VBoxContainer/CreditsButton")
 text = "Dostępna aktualizacja!"
 
-[node name="Leaderboard2Layer" parent="." instance=ExtResource("8_y7sgj")]
+[node name="Leaderboard2DistanceLayer" parent="." instance=ExtResource("8_y7sgj")]
 process_priority = 5
 process_physics_priority = 5
 visible = false
-main_ld = "main_2_0"
-dev_ld = "dev_2_0"
+main_ld = "main_2_0_distance"
+dev_ld = "dev_2_0_distance"
+
+[node name="Leaderboard2MilkLayer" parent="." instance=ExtResource("8_y7sgj")]
+process_priority = 5
+process_physics_priority = 5
+visible = false
+main_ld = "main_2_0_milk"
+dev_ld = "dev_2_0_milk"
 
 [node name="LeaderboardLayer" parent="." instance=ExtResource("8_y7sgj")]
 process_priority = 5
@@ -295,7 +314,8 @@ visible = false
 [connection signal="pressed" from="MainMenuLayer/VBoxContainer/Profile/ProfileToggled/AchievementsButton" to="." method="_on_achievements_button_pressed"]
 [connection signal="toggled" from="MainMenuLayer/VBoxContainer/Profile/ProfileToggleButton" to="." method="switch_easter_egg_clickable"]
 [connection signal="toggled" from="MainMenuLayer/VBoxContainer/Profile/ProfileToggleButton" to="MainMenuLayer/VBoxContainer/Profile/ProfileToggled" method="set_visible"]
-[connection signal="pressed" from="MainMenuLayer/VBoxContainer/Scoreboard/ScoreboardToggled/HiScore2Button" to="." method="_on_hi_score_2_button_pressed"]
+[connection signal="pressed" from="MainMenuLayer/VBoxContainer/Scoreboard/ScoreboardToggled/HiScore2DistanceButton" to="." method="_on_hi_score_2_distance_button_pressed"]
+[connection signal="pressed" from="MainMenuLayer/VBoxContainer/Scoreboard/ScoreboardToggled/HiScore2MilkButton" to="." method="_on_hi_score_2_button_pressed"]
 [connection signal="pressed" from="MainMenuLayer/VBoxContainer/Scoreboard/ScoreboardToggled/HiScoreButton" to="." method="_on_hi_score_button_pressed"]
 [connection signal="toggled" from="MainMenuLayer/VBoxContainer/Scoreboard/ScoreboardToggleButton" to="." method="switch_easter_egg_clickable"]
 [connection signal="toggled" from="MainMenuLayer/VBoxContainer/Scoreboard/ScoreboardToggleButton" to="MainMenuLayer/VBoxContainer/Scoreboard/ScoreboardToggled" method="set_visible"]
