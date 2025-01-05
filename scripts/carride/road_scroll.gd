@@ -34,7 +34,7 @@ func _process(delta):
 			if owner.speed <= -300:
 				return
 		position += Vector2(
-				min(0,-(owner.speed + SPEED_INCREMENT)),
+				min(0,-(owner.speed + SPEED_INCREMENT) * owner.time_scale),
 				0
 		) * delta * _p_mul
 		if position.x <= jump_point:

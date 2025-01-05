@@ -4,30 +4,37 @@ extends CanvasLayer
 const ScoreItem = preload("ScoreItem.tscn")
 const SWLogger = preload("res://addons/silent_wolf/utils/SWLogger.gd")
 
+@export var main_ld: String
+@export var dev_ld: String
+
 var list_index = 0
 # Replace the leaderboard name if you're not using the default leaderboard
-var ld_name = "dev" if OS.is_debug_build() else "main"
-var max_scores = 500
+var max_scores = 1000
+var scores = []
+
+@onready var ld_name = dev_ld if OS.is_debug_build() else main_ld
 
 
 func boot():
 	print("SilentWolf.Scores.leaderboards: " + str(SilentWolf.Scores.leaderboards))
 	print("SilentWolf.Scores.ldboard_config: " + str(SilentWolf.Scores.ldboard_config))
-	var scores = SilentWolf.Scores.scores
+	ld_name = dev_ld if OS.is_debug_build() else main_ld
 	#var scores = []")
-	if ld_name in SilentWolf.Scores.leaderboards:
-		scores = SilentWolf.Scores.leaderboards[ld_name]
+	clear_leaderboard()
+	add_loading_scores_message()
+
 	var local_scores = SilentWolf.Scores.local_scores
 	
-	if len(scores) > 0: 
+	if len(scores) > 0:
+		hide_message()
 		render_board(scores, local_scores)
 	else:
 		# use a signal to notify when the high scores have been returned, and show a "loading" animation until it's the case...
-		add_loading_scores_message()
 		var sw_result = await SilentWolf.Scores.get_scores(max_scores, ld_name).sw_get_scores_complete
 		scores = sw_result.scores
 		hide_message()
 		render_board(scores, local_scores)
+		top_score()
 
 
 func _input(event):
@@ -103,14 +110,14 @@ func add_item(player_name: String, score_value: String) -> void:
 
 func add_no_scores_message() -> void:
 	var item = $"Board/MessageContainer/TextMessage"
-	item.text = "No scores yet!"
+	item.text = "Brak wyników!"
 	$"Board/MessageContainer".show()
 	item.offset_top = 135
 
 
 func add_loading_scores_message() -> void:
 	var item = $"Board/MessageContainer/TextMessage"
-	item.text = "Loading scores..."
+	item.text = "Ładowanie wyników..."
 	$"Board/MessageContainer".show()
 	item.offset_top = 135
 
@@ -119,7 +126,19 @@ func hide_message() -> void:
 	$"Board/MessageContainer".hide()
 
 
+func top_score() -> void:
+	var result = await SilentWolf.Scores.get_top_score_by_player(SettingsBus.playername, 10, ld_name
+															  ).sw_top_player_score_complete
+	if result.top_score.is_empty():
+		$"Board/TopScoreContainer/Label".text = "Twoja najwyższa pozycja: Brak"
+	else:
+		var pos = await SilentWolf.Scores.get_score_position(result.top_score.score_id, ld_name
+													   ).sw_get_position_complete
+		$"Board/TopScoreContainer/Label".text = "Twoja najwyższa pozycja: %s" % pos.position
+
+
 func clear_leaderboard() -> void:
+	list_index = 0
 	var score_item_container = $"Board/HighScores/ScoreItemContainer"
 	if score_item_container.get_child_count() > 0:
 		var children = score_item_container.get_children()

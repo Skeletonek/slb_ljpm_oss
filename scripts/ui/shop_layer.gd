@@ -63,3 +63,8 @@ func _update_map_panel() -> void:
 	var data = ProfileBus.get_map_data(map_index)
 	map_image.texture = data['texture']
 	map_name.text = data['name']
+
+
+func _on_back_button_pressed():
+	# gdlint:ignore=private-method-call
+	$"../"._on_back_button_pressed()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://b8sgtml2m0tio"]
+[gd_scene load_steps=37 format=3 uid="uid://b8sgtml2m0tio"]
 
 [ext_resource type="Script" path="res://scripts/carride/main.gd" id="1_kgrjb"]
 [ext_resource type="Script" path="res://scripts/carride/gui.gd" id="2_32m4m"]
@@ -14,8 +14,9 @@
 [ext_resource type="SpriteFrames" uid="uid://boenmxlf17kxm" path="res://sprites/spriteframes/Panda.tres" id="12_plq4u"]
 [ext_resource type="Texture2D" uid="uid://w5khp7bco2co" path="res://sprites/Explosion.png" id="13_bv85e"]
 [ext_resource type="AudioStream" uid="uid://dw6573okuao6h" path="res://audio/sfx/Car Crash Short.wav" id="14_lxxd4"]
-[ext_resource type="AudioStream" uid="uid://d2lim2blo57e" path="res://audio/sfx/Inventory Shiny Things A.wav" id="15_opg6x"]
+[ext_resource type="AudioStream" uid="uid://d2lim2blo57e" path="res://audio/sfx/milk.wav" id="15_opg6x"]
 [ext_resource type="PackedScene" uid="uid://lugeuc8kewl3" path="res://scenes/ui/pause_menu.tscn" id="16_f7r4o"]
+[ext_resource type="AudioStream" uid="uid://dffjdog0p3fde" path="res://audio/sfx/bass.ogg" id="17_msysa"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_s0jls"]
 font_size = 36
@@ -103,17 +104,23 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jfarv"]
 size = Vector2(114, 15.5)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_r5kkt"]
-size = Vector2(250, 40)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rof7r"]
+size = Vector2(150, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6het2"]
+size = Vector2(230, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h1k2n"]
+size = Vector2(230, 40)
 
 [node name="Node2D" type="Node2D" node_paths=PackedStringArray("map")]
 y_sort_enabled = true
 texture_filter = 1
 script = ExtResource("1_kgrjb")
-speed_increment = 8.0
-speed = 300.0
 map = NodePath("ForestMap")
 version_2 = true
+speed_increment = 8.0
+speed = 300.0
 metadata/_edit_vertical_guides_ = [-221.0, -650.0]
 
 [node name="GUI" type="Control" parent="." node_paths=PackedStringArray("label_time", "label_milk")]
@@ -324,25 +331,26 @@ offset = Vector2(0, -63)
 [node name="ForestMap" parent="." instance=ExtResource("10_e6vsi")]
 position = Vector2(0, 77)
 
-[node name="OutOfBounds" type="Node2D" parent="."]
+[node name="OutOfBounds" type="Node2D" parent="." groups=["Obstacles", "OutOfBounds"]]
+z_as_relative = false
 position = Vector2(80, 71)
 scale = Vector2(2, 2)
 
-[node name="OutOfBoundsLeft" type="Area2D" parent="OutOfBounds" groups=["Obstacles"]]
-position = Vector2(-4, -110.5)
+[node name="OutOfBoundsLeft" type="Area2D" parent="OutOfBounds"]
+position = Vector2(-4, -112)
 scale = Vector2(0.5, 0.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="OutOfBounds/OutOfBoundsLeft"]
 shape = SubResource("RectangleShape2D_lr1qs")
 
-[node name="OutOfBoundsRight" type="Area2D" parent="OutOfBounds" groups=["Obstacles"]]
+[node name="OutOfBoundsRight" type="Area2D" parent="OutOfBounds"]
 position = Vector2(-2.40002, 111)
 scale = Vector2(0.5, 0.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="OutOfBounds/OutOfBoundsRight"]
 shape = SubResource("RectangleShape2D_lr1qs")
 
-[node name="OutOfBounds" type="StaticBody2D" parent="OutOfBounds"]
+[node name="OutOfBounds" type="Area2D" parent="OutOfBounds"]
 position = Vector2(-750, 0)
 scale = Vector2(0.7, 0.7)
 collision_mask = 7
@@ -351,7 +359,7 @@ collision_mask = 7
 position = Vector2(-17.1429, 0)
 shape = SubResource("RectangleShape2D_8unen")
 
-[node name="LukaszczykWPandzie" type="Area2D" parent="."]
+[node name="LukaszczykWPandzie" type="Area2D" parent="." groups=["Player"]]
 position = Vector2(-529, 43)
 scale = Vector2(1.5, 1.5)
 collision_mask = 7
@@ -380,7 +388,7 @@ scale = Vector2(0.5, 0.5)
 stream = ExtResource("14_lxxd4")
 bus = &"SFX"
 
-[node name="MilkPlayer" type="AudioStreamPlayer2D" parent="LukaszczykWPandzie"]
+[node name="PickupPlayer" type="AudioStreamPlayer2D" parent="LukaszczykWPandzie"]
 process_mode = 1
 position = Vector2(-64.5, -225)
 scale = Vector2(0.5, 0.5)
@@ -395,60 +403,66 @@ position = Vector2(0, -117)
 gizmo_extents = 15.0
 
 [node name="Area2D" type="Area2D" parent="SpawnPoints/SP1"]
-collision_mask = 7
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnPoints/SP1/Area2D"]
-position = Vector2(-125, 30)
-shape = SubResource("RectangleShape2D_r5kkt")
+position = Vector2(-75, 30)
+shape = SubResource("RectangleShape2D_rof7r")
 
 [node name="SP2" type="Marker2D" parent="SpawnPoints"]
 position = Vector2(0, -37)
 gizmo_extents = 15.0
 
 [node name="Area2D" type="Area2D" parent="SpawnPoints/SP2"]
-collision_mask = 7
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnPoints/SP2/Area2D"]
-position = Vector2(-125, 30)
-shape = SubResource("RectangleShape2D_r5kkt")
+position = Vector2(-115, 30)
+shape = SubResource("RectangleShape2D_6het2")
 
 [node name="SP3" type="Marker2D" parent="SpawnPoints"]
 position = Vector2(0, 43)
 gizmo_extents = 15.0
 
 [node name="Area2D" type="Area2D" parent="SpawnPoints/SP3"]
-collision_mask = 7
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnPoints/SP3/Area2D"]
-position = Vector2(-125, 30)
-shape = SubResource("RectangleShape2D_r5kkt")
+position = Vector2(-75, 30)
+shape = SubResource("RectangleShape2D_rof7r")
 
 [node name="SP4" type="Marker2D" parent="SpawnPoints"]
 position = Vector2(0, 123)
 gizmo_extents = 15.0
 
 [node name="Area2D" type="Area2D" parent="SpawnPoints/SP4"]
-collision_mask = 7
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnPoints/SP4/Area2D"]
-position = Vector2(-125, 30)
-shape = SubResource("RectangleShape2D_r5kkt")
+position = Vector2(-115, 30)
+shape = SubResource("RectangleShape2D_h1k2n")
 
 [node name="SP5" type="Marker2D" parent="SpawnPoints"]
 position = Vector2(0, 203)
 gizmo_extents = 15.0
 
 [node name="Area2D" type="Area2D" parent="SpawnPoints/SP5"]
-collision_mask = 7
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnPoints/SP5/Area2D"]
-position = Vector2(-125, 30)
-shape = SubResource("RectangleShape2D_r5kkt")
+position = Vector2(-75, 30)
+shape = SubResource("RectangleShape2D_rof7r")
 
 [node name="PauseLayer" parent="." instance=ExtResource("16_f7r4o")]
 
 [node name="Timer" type="Timer" parent="."]
-autostart = true
+process_callback = 0
+
+[node name="BassPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("17_msysa")
+volume_db = -80.0
+autoplay = true
+bus = &"Music"
 
 [connection signal="touchscreen_move" from="GUI" to="LukaszczykWPandzie" method="move"]
 [connection signal="button_down" from="GUI/VButtonsContainer/Up" to="GUI" method="_on_up_button_down"]
@@ -456,5 +470,4 @@ autostart = true
 [connection signal="pressed" from="GUI/PanelContainer/MarginContainer/VBoxContainer/PlayAgainBtn" to="GUI" method="_on_play_again_btn_pressed"]
 [connection signal="pressed" from="GUI/PanelContainer/MarginContainer/VBoxContainer/MenuBtn" to="GUI" method="_on_menu_btn_pressed"]
 [connection signal="area_entered" from="LukaszczykWPandzie" to="LukaszczykWPandzie" method="_on_area_entered"]
-[connection signal="body_entered" from="LukaszczykWPandzie" to="LukaszczykWPandzie" method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_spawn_milk"]

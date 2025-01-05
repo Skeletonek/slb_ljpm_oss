@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://d2lim2blo57e"
-path="res://.godot/imported/Inventory Shiny Things A.wav-caedfae64e53960794c9fe3b371f025f.sample"
+path="res://.godot/imported/milk.wav-0e1cdb83fe472bee9b8675c2f32839c4.sample"
 
 [deps]
 
-source_file="res://audio/sfx/Inventory Shiny Things A.wav"
-dest_files=["res://.godot/imported/Inventory Shiny Things A.wav-caedfae64e53960794c9fe3b371f025f.sample"]
+source_file="res://audio/sfx/milk.wav"
+dest_files=["res://.godot/imported/milk.wav-0e1cdb83fe472bee9b8675c2f32839c4.sample"]
 
 [params]
 

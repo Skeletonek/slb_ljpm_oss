@@ -1,3 +1,25 @@
+#### 2.0-Alpha+8
+ - Added power up system
+ - Added slow motion powerup
+ - Added sound effect for milk bundle
+ - Added simple UI navigation with keyboard and gamepad
+ - Added self-check for recognizing available V-sync options
+ - Added scoreboard for 2.0 mode
+ - Added information for best score position
+ - Added easter egg for international milk day (1st June)
+ - Added process delta counter
+ - Improved Rick Roll easter egg
+ - Improved debug log overlay interface
+ - Improved cars and milks spawning algorithms
+ - Mitigated known "car wall" bug
+ - Updated V-sync option help information
+ - Changed button popup UI theme
+ - Changed gameplay tab settings layout
+ - Adjusted button audio volume
+ - Greatly refactored car ride minigame code
+ - Fixed easter egg reacting when bootscreen was still visible
+ - Fixed button audio playing twice in profile section
+
 #### 2.0-Alpha+7
  - Added basic 2_0 gameplay with milk bundles giving 3 points
  - Added Lunar Rover skin

@@ -58,7 +58,7 @@ layout_mode = 2
 [node name="TextMessage" type="Label" parent="Board/MessageContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
-text = "Loading scores..."
+text = "Ładowanie wyników..."
 
 [node name="HighScores" type="ScrollContainer" parent="Board"]
 custom_minimum_size = Vector2(950, 350)
@@ -71,6 +71,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
+
+[node name="TopScoreContainer" type="CenterContainer" parent="Board"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Board/TopScoreContainer"]
+layout_mode = 2
+text = "Twoja najwyższa pozycja: ..."
 
 [node name="CloseButtonContainer" type="CenterContainer" parent="Board"]
 layout_mode = 2

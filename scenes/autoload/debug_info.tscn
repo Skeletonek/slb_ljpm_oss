@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cjhj2b2jopy14"]
+[gd_scene load_steps=7 format=3 uid="uid://cjhj2b2jopy14"]
 
 [ext_resource type="FontFile" uid="uid://bp02gos6qbie1" path="res://theme/fonts/NotoSansMono-Regular.ttf" id="1_ny1i1"]
 [ext_resource type="Script" path="res://scripts/subsystems/debug_info.gd" id="1_s8h6l"]
@@ -18,7 +18,13 @@ font = ExtResource("1_ny1i1")
 font_size = 22
 shadow_color = Color(0, 0, 0, 1)
 
-[node name="debug_info" type="Control" node_paths=PackedStringArray("dev_errors_label")]
+[sub_resource type="LabelSettings" id="LabelSettings_metde"]
+font = ExtResource("1_ny1i1")
+font_size = 22
+shadow_color = Color(0, 0, 0, 1)
+
+[node name="debug_info" type="Control" node_paths=PackedStringArray("fps_label", "delta_label", "dev_errors_label", "dev_errors_cleaner")]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -26,7 +32,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_s8h6l")
+fps_label = NodePath("DebugInfo/FPS")
+delta_label = NodePath("DebugInfo/Delta")
 dev_errors_label = NodePath("DebugInfo/DevErrors")
+dev_errors_cleaner = NodePath("DevErrorsCleaner")
 
 [node name="DebugInfo" type="CanvasLayer" parent="."]
 layer = 100
@@ -83,24 +92,42 @@ top_level = true
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
+offset_left = -440.0
+offset_right = -210.0
+offset_bottom = 104.0
+grow_horizontal = 0
+text = "FPS: xxx"
+label_settings = SubResource("LabelSettings_jtopa")
+horizontal_alignment = 2
+uppercase = true
+
+[node name="Delta" type="Label" parent="DebugInfo"]
+visible = false
+top_level = true
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
 offset_left = -230.0
 offset_bottom = 104.0
 grow_horizontal = 0
-text = "FPS: n/a"
-label_settings = SubResource("LabelSettings_jtopa")
+text = "DELTA: x.xxxxx"
+label_settings = SubResource("LabelSettings_metde")
 horizontal_alignment = 2
 uppercase = true
 
 [node name="DevErrors" type="RichTextLabel" parent="DebugInfo"]
 visible = false
-custom_minimum_size = Vector2(0, 100)
+custom_minimum_size = Vector2(1280, 100)
 anchors_preset = 10
 anchor_right = 1.0
-offset_right = -280.0
-offset_bottom = 100.0
+offset_top = 80.0
+offset_bottom = 180.0
 grow_horizontal = 2
+size_flags_horizontal = 0
 size_flags_vertical = 0
 mouse_filter = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 1
 theme_override_fonts/normal_font = ExtResource("1_ny1i1")
 theme_override_fonts/mono_font = ExtResource("1_ny1i1")
 theme_override_fonts/italics_font = ExtResource("1_ny1i1")
@@ -113,3 +140,9 @@ theme_override_font_sizes/normal_font_size = 12
 theme_override_font_sizes/bold_font_size = 12
 bbcode_enabled = true
 scroll_following = true
+
+[node name="DevErrorsCleaner" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[connection signal="timeout" from="DevErrorsCleaner" to="." method="_on_dev_errors_cleaner_timeout"]

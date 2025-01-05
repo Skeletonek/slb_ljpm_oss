@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dhg1bdg5yc1y1"]
+[gd_scene load_steps=8 format=3 uid="uid://dhg1bdg5yc1y1"]
 
 [ext_resource type="Script" path="res://scripts/main_menu_anim.gd" id="1_lo1uh"]
 [ext_resource type="PackedScene" uid="uid://7vvoan13ljn" path="res://nodes/maps/ForestMap.tscn" id="2_7vlv3"]
 [ext_resource type="SpriteFrames" uid="uid://boenmxlf17kxm" path="res://sprites/spriteframes/Panda.tres" id="4_bcmsm"]
+[ext_resource type="Texture2D" uid="uid://bpix4jm8ib32f" path="res://sprites/MilkNoShadow.png" id="4_v5pja"]
 
 [sub_resource type="Animation" id="Animation_dt7n6"]
 resource_name = "main_menu_sway"
@@ -57,3 +58,23 @@ flip_h = true
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="LukaszczykWPandzie"]
 shape = SubResource("RectangleShape2D_io2uc")
+
+[node name="MilkRain" type="CPUParticles2D" parent="."]
+visible = false
+position = Vector2(0, -440)
+emitting = false
+amount = 64
+lifetime = 10.0
+local_coords = true
+texture = ExtResource("4_v5pja")
+emission_shape = 3
+emission_rect_extents = Vector2(720, 1)
+direction = Vector2(0, 1)
+spread = 10.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 300.0
+angular_velocity_min = -90.0
+angular_velocity_max = 90.0
+scale_amount_min = 0.5
+scale_amount_max = 0.8

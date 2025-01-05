@@ -3,13 +3,18 @@ extends Control
 const ERROR_MSG_PREFIX := "USER ERROR: "
 const WARNING_MSG_PREFIX := "USER WARNING: "
 
+@export var fps_label: Label
+@export var delta_label: Label
+
 @export var dev_errors_label: RichTextLabel
+@export var dev_errors_cleaner: Timer
 
 func _ready():
 	if OS.is_debug_build():
 		$DebugInfo/Version.visible = true
-		$DebugInfo/DevErrors.visible = true
-		$DebugInfo/FPS.visible = true
+		dev_errors_label.visible = true
+		fps_label.visible = true
+		delta_label.visible = true
 		$DebugInfo/Version/VersionBuildDate2.text = "Development Version"
 	$DebugInfo/Version/VersionBuildDate.text = "SLB: LJPM\n" + \
 	"Version: " + ProjectSettings.get_setting("application/config/version") + "\n" + \
@@ -19,7 +24,20 @@ func _ready():
 
 
 func _process(delta):
-	$DebugInfo/FPS.text = "FPS: %4d" % (1 / delta)
+	if SettingsBus.dev_show_fps:
+		var fps = Engine.get_frames_per_second()
+		fps_label.text = "FPS: %4d" % fps
+		delta_label.text = "Delta: %.5f" % delta
+		fps_label.label_settings.font_color = _label_color(30, 60, fps)
+		delta_label.label_settings.font_color = _label_color(-0.03334, 	-0.01667, -delta)
+
+
+func _label_color(lowest, low, value) -> Color:
+	if value < lowest:
+		return Color.RED
+	if lowest <= value and value < low:
+		return Color.ORANGE
+	return Color.WHITE
 
 
 func toggle():
@@ -27,11 +45,12 @@ func toggle():
 
 
 func toggle_fps():
-	$DebugInfo/FPS.visible = SettingsBus.dev_show_fps
+	fps_label.visible = SettingsBus.dev_show_fps
+	delta_label.visible = SettingsBus.dev_show_fps
 
 
 func toggle_errors():
-	$DebugInfo/DevErrors.visible = SettingsBus.dev_show_errors
+	dev_errors_label.visible = SettingsBus.dev_show_errors
 
 
 func debug_info() -> String:
@@ -88,9 +107,17 @@ func debug_info() -> String:
 func append_error(text):
 	dev_errors_label.append_text("[color=red][ERR] " +
 	text.trim_prefix(ERROR_MSG_PREFIX) + "[/color]\n")
+	dev_errors_cleaner.wait_time = 10.0
+	dev_errors_cleaner.start()
 
 
 func append_warning(text):
 	dev_errors_label.append_text("[color=orange][WRN] " +
 	text.trim_prefix(WARNING_MSG_PREFIX) + "[/color]\n")
+	dev_errors_cleaner.wait_time = 10.0
+	dev_errors_cleaner.start()
+
+
+func _on_dev_errors_cleaner_timeout():
+	dev_errors_label.text = ""
 

@@ -1,19 +1,23 @@
-[gd_scene load_steps=6 format=3 uid="uid://cp56lbkh6vy4g"]
+[gd_scene load_steps=7 format=3 uid="uid://dfvu6fsj7c1of"]
 
-[ext_resource type="Texture2D" uid="uid://b1bqnsurkpd3o" path="res://sprites/Milk.png" id="2_j6qcp"]
-[ext_resource type="Script" path="res://scripts/carride/components/vehicle_component.gd" id="3_xl3bq"]
-[ext_resource type="Script" path="res://scripts/carride/components/pickable_component.gd" id="4_tv8mo"]
-[ext_resource type="AudioStream" uid="uid://d2lim2blo57e" path="res://audio/sfx/milk.wav" id="5_ru7lx"]
+[ext_resource type="Script" path="res://scripts/carride/classes/powerup_class.gd" id="1_40xli"]
+[ext_resource type="Texture2D" uid="uid://c365lbbtxw5e7" path="res://sprites/SlowMotionPowerup.png" id="2_5trw8"]
+[ext_resource type="Script" path="res://scripts/carride/components/vehicle_component.gd" id="3_fnwag"]
+[ext_resource type="Script" path="res://scripts/carride/components/pickable_component.gd" id="4_apmtq"]
+[ext_resource type="AudioStream" uid="uid://b6aq1yhr40dkl" path="res://audio/sfx/acquire1.wav" id="4_di1xd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ayeeq"]
 radius = 30.0
 
-[node name="Milk" type="Node2D" groups=["Milk"]]
+[node name="SlowMotion" type="Node2D" groups=["Powerups"]]
 z_index = -1
+script = ExtResource("1_40xli")
+type = 1
+time = 10.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, 10)
-texture = ExtResource("2_j6qcp")
+texture = ExtResource("2_5trw8")
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(0, 10)
@@ -25,12 +29,12 @@ position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_ayeeq")
 
 [node name="VehicleComponent" type="Node2D" parent="."]
-script = ExtResource("3_xl3bq")
+script = ExtResource("3_fnwag")
 
 [node name="PickableComponent" type="Node2D" parent="." node_paths=PackedStringArray("col_shape")]
-script = ExtResource("4_tv8mo")
+script = ExtResource("4_apmtq")
 col_shape = NodePath("../Area2D/CollisionShape2D")
-pickup_sfx = ExtResource("5_ru7lx")
+pickup_sfx = ExtResource("4_di1xd")
 
 [connection signal="area_entered" from="Area2D" to="VehicleComponent" method="_on_area_2d_area_entered"]
 [connection signal="area_entered" from="Area2D" to="PickableComponent" method="_on_area_2d_area_entered"]

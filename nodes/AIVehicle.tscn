@@ -1,0 +1,84 @@
+[gd_scene load_steps=13 format=3 uid="uid://dx2hxvg68wfj7"]
+
+[ext_resource type="Script" path="res://scripts/carride/ai_vehicle.gd" id="1_p7m8i"]
+[ext_resource type="Texture2D" uid="uid://t6a01dojmwqe" path="res://sprites/PandaBlue_0001.png" id="2_hiln3"]
+[ext_resource type="Texture2D" uid="uid://b05hnorid4i0t" path="res://sprites/PandaBlue_0002.png" id="3_47ag3"]
+[ext_resource type="Texture2D" uid="uid://bogskfkkkked4" path="res://sprites/PandaGreen_0001.png" id="4_iv43x"]
+[ext_resource type="Texture2D" uid="uid://b81s8jbal2ixi" path="res://sprites/PandaGreen_0002.png" id="5_3728b"]
+[ext_resource type="Texture2D" uid="uid://dxkix3qrn84re" path="res://sprites/PandaWhite_0001.png" id="6_65b68"]
+[ext_resource type="Texture2D" uid="uid://cabeb1ppt0x18" path="res://sprites/PandaWhite_0002.png" id="7_puwec"]
+[ext_resource type="Texture2D" uid="uid://d0y7a6yrpxcv2" path="res://sprites/PandaYellow_0001.png" id="8_aycwh"]
+[ext_resource type="Texture2D" uid="uid://dn1fuyl4oep7a" path="res://sprites/PandaYellow_0002.png" id="9_6b6cu"]
+[ext_resource type="Script" path="res://scripts/carride/components/vehicle_component.gd" id="10_twmb7"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dpywc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_hiln3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_47ag3")
+}],
+"loop": true,
+"name": &"blue",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_iv43x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_3728b")
+}],
+"loop": true,
+"name": &"green",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_65b68")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_puwec")
+}],
+"loop": true,
+"name": &"white",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_aycwh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_6b6cu")
+}],
+"loop": true,
+"name": &"yellow",
+"speed": 2.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jfarv"]
+size = Vector2(114, 15.5)
+
+[node name="AIVehicle" type="Node2D" node_paths=PackedStringArray("anim") groups=["Car", "Obstacles"]]
+scale = Vector2(1.5, 1.5)
+script = ExtResource("1_p7m8i")
+anim = NodePath("AnimatedSprite2D")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_dpywc")
+animation = &"blue"
+flip_h = true
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-1, 19)
+shape = SubResource("RectangleShape2D_jfarv")
+
+[node name="VehicleComponent" type="Node2D" parent="."]
+script = ExtResource("10_twmb7")
+
+[connection signal="area_entered" from="Area2D" to="VehicleComponent" method="_on_area_2d_area_entered"]

@@ -16,6 +16,7 @@ var easter_egg_clickable := false
 @onready var http_request = $HTTPRequest
 @onready var http_request_changelog = $HTTPRequest2
 @onready var update_button = $MainMenuLayer/UpdateButton
+@onready var rick_player: VideoStreamPlayer = $Rick
 
 
 func _ready() -> void:
@@ -57,7 +58,6 @@ func _ready() -> void:
 		get_parent().animation.luk_button.pressed.connect(_on_easter_egg_button_pressed)
 	else:
 		$MenuAnim.luk_button.pressed.connect(_on_easter_egg_button_pressed)
-	easter_egg_clickable = true
 
 
 func _on_global_music_finished():
@@ -91,6 +91,7 @@ func _validate_update(result, _response_code, _headers, body):
 		get_tree().create_timer(10).timeout.connect(_check_update)
 	else:
 		print("Correctly checked if update is available")
+		update_button.hide()
 		var json = JSON.parse_string(body.get_string_from_utf8())
 		if int(json["buildNumber"]) > build_number:
 			print("Update found!")
@@ -157,6 +158,12 @@ func _on_achievements_button_pressed():
 	$AchievementsLayer/PanelContainer/VBoxContainer/MarginContainer2/BackButton.grab_focus()
 
 
+func _on_skin_shop_button_pressed():
+	_hide_all_layers()
+	$ShopLayer.show()
+	$ShopLayer/PanelContainer/VBoxContainer/MarginContainer/BackButton.grab_focus()
+
+
 func _on_statistics_button_pressed():
 	_hide_all_layers()
 	$ProfileLayer.show()
@@ -168,6 +175,13 @@ func _on_hi_score_button_pressed():
 	_hide_all_layers()
 	$LeaderboardLayer.show()
 	$LeaderboardLayer/Board/CloseButtonContainer/CloseButton.grab_focus()
+
+
+func _on_hi_score_2_button_pressed():
+	$Leaderboard2Layer.boot()
+	_hide_all_layers()
+	$Leaderboard2Layer.show()
+	$Leaderboard2Layer/Board/CloseButtonContainer/CloseButton.grab_focus()
 
 
 func _on_exit_button_pressed():
@@ -187,11 +201,15 @@ func _hide_all_layers():
 	$MainMenuLayer.hide()
 	$OptionsLayer.hide()
 	$LeaderboardLayer.hide()
+	$Leaderboard2Layer.hide()
 	$AchievementsLayer.hide()
 	$CreditsLayer.hide()
 	$ProfileLayer.hide()
-	$MainMenuLayer/VBoxContainer/Profile/ProfileToggleButton.button_pressed = false
-	$MainMenuLayer/VBoxContainer/Game/GameToggleButton.button_pressed = false
+	$ShopLayer.hide()
+	$MainMenuLayer/VBoxContainer/Profile/ProfileToggleButton.set_pressed_no_signal(false)
+	$MainMenuLayer/VBoxContainer/Profile/ProfileToggled.hide()
+	$MainMenuLayer/VBoxContainer/Game/GameToggleButton.set_pressed_no_signal(false)
+	$MainMenuLayer/VBoxContainer/Game/GameToggled.hide()
 	easter_egg_clickable = false
 
 
@@ -207,11 +225,19 @@ func _on_godot_logo_click(event):
 			OS.shell_open("https://godotengine.org")
 
 
-func _switch_easter_egg_clickable(no: bool) -> void:
+func switch_easter_egg_clickable(no: bool) -> void:
 	easter_egg_clickable = !no
 
 
 func _on_easter_egg_button_pressed():
 	if easter_egg_clickable && not $popup_input.visible && not $PopupChangelog.visible:
 		AchievementSystem.call_achievement("rick_roll")
-		OS.shell_open("https://youtu.be/dQw4w9WgXcQ")
+		GlobalMusic.stop()
+		rick_player.play()
+		# OS.shell_open("https://youtu.be/dQw4w9WgXcQ")
+
+
+func _on_rick_finished():
+	AchievementSystem.call_achievement("rick_rolled")
+	rick_player.play()
+

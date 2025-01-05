@@ -183,4 +183,4 @@ text = "Powrót"
 [connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/SkinRightButton" to="." method="switch_skin" binds= [1]]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/MapLeftButton" to="." method="switch_map" binds= [-1]]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/MapRightButton" to="." method="switch_map" binds= [1]]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/MarginContainer/BackButton" to="." method="hide"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/MarginContainer/BackButton" to="." method="_on_back_button_pressed"]

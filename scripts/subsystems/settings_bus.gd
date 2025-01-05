@@ -22,7 +22,7 @@ var os_id = 1 if OS.get_name() == "Windows" else 0
 var ui_shader_material_instance := preload("res://shaders/panel_shader_material.tres")
 
 var fullscreen := true
-var vsync := DisplayServer.VSYNC_ADAPTIVE
+var vsync = null
 var fps_max := 60
 var ui_blur := true
 var ui_scaling := 1.0
@@ -34,6 +34,7 @@ var gamepad_deadzone := 1.0
 var playername := "#" + OS.get_unique_id().substr(os_id, 8)
 
 var volume := [1.0, 0.8, 1.0, 0.5, 1.0]
+var vsync_availability := [null, null, null, null]
 
 var dev_console := false
 # These values aren't saved
@@ -192,16 +193,23 @@ func _enter_tree():
 	# 		get_tree().quit(404)
 
 
+# func _ready() -> void:
+# 	_check_vsync_availability()
+# 	vsync = _vsync_set_by_priority()
+# 	DisplayServer.window_set_vsync_mode(vsync)
+
+
 func _initialize_settings():
 	for bus in AudioBus.values():
 		set_audio_volume(bus, volume[bus])
 	get_tree().root.content_scale_factor = ui_scaling
-	DisplayServer.window_set_vsync_mode(SettingsBus.vsync)
 	var window_mode = (
 		DisplayServer.WINDOW_MODE_FULLSCREEN if SettingsBus.fullscreen
 		else DisplayServer.WINDOW_MODE_WINDOWED
 		)
 	DisplayServer.window_set_mode(window_mode)
+	await _check_vsync_availability()
+	DisplayServer.window_set_vsync_mode(SettingsBus.vsync)
 	set_ui_shader(ui_blur)
 	if (SettingsBus.vsync == DisplayServer.VSYNC_DISABLED or
 		SettingsBus.vsync == DisplayServer.VSYNC_MAILBOX
@@ -228,6 +236,36 @@ func _initialize_debug_settings():
 		dev_show_errors = true
 		dev_show_fps = true
 		cr_speedometer_label = true
+
+
+func _check_vsync_availability() -> void:
+	# Yup, GDScript cannot iterate through enums... sad...
+	await get_tree().process_frame
+	var vsyncs = [
+		DisplayServer.VSYNC_DISABLED,
+		DisplayServer.VSYNC_ENABLED,
+		DisplayServer.VSYNC_ADAPTIVE,
+		DisplayServer.VSYNC_MAILBOX,
+	]
+	for v in vsyncs:
+		DisplayServer.window_set_vsync_mode(v)
+		await get_tree().process_frame
+		if DisplayServer.window_get_vsync_mode() == v:
+			vsync_availability[v] = true
+		else:
+			vsync_availability[v] = false
+	if vsync == null:
+		vsync = _vsync_set_by_priority()
+
+
+func _vsync_set_by_priority() -> DisplayServer.VSyncMode:
+	if vsync_availability[DisplayServer.VSYNC_MAILBOX]:
+		return DisplayServer.VSYNC_MAILBOX
+	if vsync_availability[DisplayServer.VSYNC_ADAPTIVE]:
+		return DisplayServer.VSYNC_ADAPTIVE
+	if vsync_availability[DisplayServer.VSYNC_ENABLED]:
+		return DisplayServer.VSYNC_ENABLED
+	return DisplayServer.VSYNC_DISABLED
 
 
 func show_os_alert(console_title: String, message: String):
@@ -264,8 +302,8 @@ func _configure_silentwolf():
 	SilentWolf.configure({
 		"api_key": Marshalls.base64_to_utf8(API_KEY).strip_escapes(),
 		"game_id": "slbljpm",
-		"log_level": 2 if OS.is_debug_build() else 1,
-		"max_scores": 1000
+		"log_level": 2 if OS.is_debug_build() else 0,
+		"max_scores": 500
 	})
 	SilentWolf.configure_scores({
 		"open_scene_on_close": "res://scenes/mainMenu.tscn"

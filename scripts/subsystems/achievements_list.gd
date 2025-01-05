@@ -98,4 +98,10 @@ const ACHIEVEMENT_LIST = {
 		preload("res://images/achievement_icons/RickRoll.webp"),
 		true
 		],
+	"rick_rolled": [
+		"I won't give Rick up !11! <3 <3",
+		"Obejrzyj cały teledysk z Rick'em Astley'em",
+		preload("res://images/achievement_icons/RickRoll.webp"),
+		true
+		],
 }

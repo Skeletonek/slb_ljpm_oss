@@ -91,21 +91,28 @@ func _ready(): # I'm starting to hate this code
 	easier_font_button.set_pressed_no_signal_custom(SettingsBus.easier_font)
 	reduced_motion_button.set_pressed_no_signal_custom(SettingsBus.reduced_motion)
 
+	var i = 0
+	for v in SettingsBus.vsync_availability:
+		vsync_button.set_item_disabled(i, !v)
+		if v == false:
+			vsync_info.show()
+		i += 1
+
 	if OS.get_name() == "Android":
 		fullscreen_button.disabled = true
 		fullscreen_android_info.visible = true
 		# Disable Off and Adaptive for Android as this platform most probably
 		# doesn't support it
-		vsync_button.set_item_disabled(0, true)
-		vsync_button.set_item_disabled(2, true)
-		vsync_info.show()
+		# vsync_button.set_item_disabled(0, true)
+		# vsync_button.set_item_disabled(2, true)
+		# vsync_info.show()
 	else:
 		fullscreen_button.set_pressed(SettingsBus.fullscreen)
 
 	# Wayland (or at least KDE KWin) doesn't support Adaptive V-sync
-	if DisplayServer.get_name() == "Wayland":
-		vsync_button.set_item_disabled(2, true)
-		vsync_info.show()
+	# if DisplayServer.get_name() == "Wayland":
+	# 	vsync_button.set_item_disabled(2, true)
+		# vsync_info.show()
 
 	blur_button.set_pressed(SettingsBus.ui_blur)
 
@@ -292,25 +299,24 @@ func _on_info_button_pressed(info):
 		"vsync":
 			info_popup_title.text = "Synchronizacja pionowa (V-sync)"
 			info_popup_content.text = """
+[u]Niektóre opcje mogą nie być dostępne na niektórych systemach[/u]
+
 Wyłączony
 [indent]Klatki są renderowane tak szybko jak pozwala na to sprzęt.
-Mogą pojawić się rwania obrazu. Umożliwia ustawienie własnego limitu klatek.
-Opcja nie działa na urządzeniach z systemem Android.[/indent]
+Mogą pojawić się rwania obrazu.[/indent]
 
 Włączony
 [indent]Obraz jest wyświetlany w synchronizacji z częstotliwością odświeżania ekranu.
-Klatki są ograniczone do częstotliwości ekranu.
-Mogą pojawić się niewielkie opóźnienia obrazu.[/indent]
+Klatki są ograniczone do częstotliwości ekranu i mogą wyświetlać się z opóźnieniem.[/indent]
 
 Adaptacyjny
-[indent]Synchronizacja jest włączona, chyba że sprzęt nie będzie w stanie
-renderować dostateczenie szybko klatek. Wtedy synchronizacja zostaje wyłączona, aby ograniczyć ewentualne przycięcia obrazu.
-Opcja nie działa na urządzeniach z systemem Android, oraz systemach Linux z systemem okien Wayland.[/indent]
+[indent]Synchronizacja jest włączona, chyba że sprzęt nie będzie w stanie renderować dostateczenie szybko klatek. Wtedy synchronizacja zostaje wyłączona, aby ograniczyć ewentualne przycięcia obrazu.
+Nieobsługiwane w trybie OpenGL[/indent]
 
 Mailbox
-[indent]Wyświetla najnowszą klatkę w momencie odświeżenia ekranu.
-Nie powinien powodować rwania obrazu, a klatki mogą być renderowane tak szybko jak pozwala na to sprzęt.
-Umożliwia ustawienie własnego limitu klatek.[/indent]
+[indent]Renderuje i wyświetla klatkę w momencie odświeżenia obrazu
+Gwarantuje niskie opóźnienie obrazu jednocześnie nie powodując jego rwania, ale obraz może nie być renderowany płynnie.
+Nieobsługiwane w trybie OpenGL[/indent]
 """
 		"api":
 			info_popup_title.text = "API Graficzne"
@@ -336,6 +342,21 @@ Wayland
 Korzystanie z tego systemu może wymusić włączenie synchronizacji pionowej, w zależności od posiadanego kompozytora okien, wersji sterowników graficznych oraz jądra systemu.
 Nie zaleca się włączania tej opcji podczas korzystania z sesji X11.
 Ta opcja jest eksperymentalna i może powodować problemy.[/indent]
+"""
+		"telemetry":
+			info_popup_title.text = "Telemetria"
+			info_popup_content.text = """
+Wyłączony
+[indent]Gra nie wysyła żadnych danych.[/indent]
+
+Włączony
+[indent]Gra okresowo będzie wysyłać statystyki dotyczące Twojego profilu, dla usprawnienia rozgrywki czy usprawnienia globalnych statystyk takich jak procent graczy, które odblokowały dane osiągnięcie. Do wysyłanych statystyk należą:
+ - Informacje o zdobytych osiągnięciach
+ - Statystyki gry takie jak ilość zdobytych mlek itp.
+ - Zakupione skórki w sklepie
+ - Wybrane ustawienia
+ - Statystyki dotyczące sprzętu
+Twoje dane pozostaną anonimowe i pozbawione wszelkich informacji, które pozwoliłyby powiązać je z Twoim profilem.[/indent]
 """
 	info_popup.show()
 # gdlint:enable=max-line-length

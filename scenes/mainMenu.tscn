@@ -1,7 +1,8 @@
-[gd_scene load_steps=21 format=3 uid="uid://dg78sdxts17fs"]
+[gd_scene load_steps=22 format=3 uid="uid://dg78sdxts17fs"]
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_f7xwm"]
 [ext_resource type="PackedScene" uid="uid://dhg1bdg5yc1y1" path="res://scenes/ui/main_menu_anim.tscn" id="2_bk5ie"]
+[ext_resource type="VideoStream" path="res://video/rick_astley.ogv" id="2_svo3y"]
 [ext_resource type="Texture2D" uid="uid://cyo4rlihaqgrc" path="res://images/icons/SLB2Logo.webp" id="3_hn8g4"]
 [ext_resource type="Material" uid="uid://cqn5rkmj7io2i" path="res://shaders/panel_shader_material.tres" id="5_l01dg"]
 [ext_resource type="PackedScene" uid="uid://2sbxeymmsxu" path="res://scenes/ui/achievement_viewer.tscn" id="6_grvj1"]
@@ -40,6 +41,15 @@ script = ExtResource("1_f7xwm")
 skeletonek_logo = NodePath("CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/SkeletonekContainer/Control/SkeletonekLogo")
 godot_logo = NodePath("CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/GameEngineContainer/Control/GameEngineLogo")
 focus_node = NodePath("MainMenuLayer/VBoxContainer/Game/GameToggleButton")
+
+[node name="Rick" type="VideoStreamPlayer" parent="."]
+z_index = -1
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+mouse_filter = 2
+stream = ExtResource("2_svo3y")
+bus = &"Music"
 
 [node name="MenuAnim" parent="." instance=ExtResource("2_bk5ie")]
 
@@ -150,13 +160,40 @@ size_flags_vertical = 5
 toggle_mode = true
 text = "Profil"
 
-[node name="HiScoreButton" type="Button" parent="MainMenuLayer/VBoxContainer"]
+[node name="Scoreboard" type="VBoxContainer" parent="MainMenuLayer/VBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="ScoreboardToggled" type="VBoxContainer" parent="MainMenuLayer/VBoxContainer/Scoreboard"]
+visible = false
+layout_mode = 2
+
+[node name="HiScore2Button" type="Button" parent="MainMenuLayer/VBoxContainer/Scoreboard/ScoreboardToggled"]
 custom_minimum_size = Vector2(160, 70)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
-focus_neighbor_bottom = NodePath("../CreditsButton")
-focus_previous = NodePath("../CreditsButton")
+focus_neighbor_bottom = NodePath("../../../CreditsButton")
+focus_previous = NodePath("../../../CreditsButton")
+text = "Tryb
+nowoczesny"
+
+[node name="HiScoreButton" type="Button" parent="MainMenuLayer/VBoxContainer/Scoreboard/ScoreboardToggled"]
+custom_minimum_size = Vector2(160, 70)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+focus_neighbor_bottom = NodePath("../../../CreditsButton")
+focus_previous = NodePath("../../../CreditsButton")
+text = "Tryb 
+klasyczny"
+
+[node name="ScoreboardToggleButton" type="Button" parent="MainMenuLayer/VBoxContainer/Scoreboard"]
+custom_minimum_size = Vector2(160, 70)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 5
+toggle_mode = true
 text = "Tablica
 wyników"
 
@@ -217,10 +254,22 @@ focus_neighbor_bottom = NodePath("../VBoxContainer/CreditsButton")
 focus_previous = NodePath("../VBoxContainer/CreditsButton")
 text = "Dostępna aktualizacja!"
 
-[node name="LeaderboardLayer" parent="." instance=ExtResource("8_y7sgj")]
+[node name="Leaderboard2Layer" parent="." instance=ExtResource("8_y7sgj")]
 process_priority = 5
 process_physics_priority = 5
 visible = false
+main_ld = "main_2_0"
+dev_ld = "dev_2_0"
+
+[node name="LeaderboardLayer" parent="." instance=ExtResource("8_y7sgj")]
+process_priority = 5
+process_physics_priority = 5
+process_thread_group = 2
+process_thread_group_order = 0
+process_thread_messages = 0
+visible = false
+main_ld = "main"
+dev_ld = "dev"
 
 [node name="OptionsLayer" parent="." instance=ExtResource("9_1nt05")]
 visible = false
@@ -534,18 +583,22 @@ visible = false
 [node name="popup_input" parent="." instance=ExtResource("17_1ly6a")]
 visible = false
 
+[connection signal="finished" from="Rick" to="." method="_on_rick_finished"]
 [connection signal="pressed" from="MainMenuLayer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="MainMenuLayer/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
 [connection signal="pressed" from="MainMenuLayer/VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
 [connection signal="pressed" from="MainMenuLayer/VBoxContainer/Profile/ProfileToggled/StatisticsButton" to="." method="_on_statistics_button_pressed"]
-[connection signal="pressed" from="MainMenuLayer/VBoxContainer/Profile/ProfileToggled/SkinShopButton" to="ShopLayer" method="show"]
+[connection signal="pressed" from="MainMenuLayer/VBoxContainer/Profile/ProfileToggled/SkinShopButton" to="." method="_on_skin_shop_button_pressed"]
 [connection signal="pressed" from="MainMenuLayer/VBoxContainer/Profile/ProfileToggled/AchievementsButton" to="." method="_on_achievements_button_pressed"]
-[connection signal="toggled" from="MainMenuLayer/VBoxContainer/Profile/ProfileToggleButton" to="." method="_switch_easter_egg_clickable"]
+[connection signal="toggled" from="MainMenuLayer/VBoxContainer/Profile/ProfileToggleButton" to="." method="switch_easter_egg_clickable"]
 [connection signal="toggled" from="MainMenuLayer/VBoxContainer/Profile/ProfileToggleButton" to="MainMenuLayer/VBoxContainer/Profile/ProfileToggled" method="set_visible"]
-[connection signal="pressed" from="MainMenuLayer/VBoxContainer/HiScoreButton" to="." method="_on_hi_score_button_pressed"]
+[connection signal="pressed" from="MainMenuLayer/VBoxContainer/Scoreboard/ScoreboardToggled/HiScore2Button" to="." method="_on_hi_score_2_button_pressed"]
+[connection signal="pressed" from="MainMenuLayer/VBoxContainer/Scoreboard/ScoreboardToggled/HiScoreButton" to="." method="_on_hi_score_button_pressed"]
+[connection signal="toggled" from="MainMenuLayer/VBoxContainer/Scoreboard/ScoreboardToggleButton" to="." method="switch_easter_egg_clickable"]
+[connection signal="toggled" from="MainMenuLayer/VBoxContainer/Scoreboard/ScoreboardToggleButton" to="MainMenuLayer/VBoxContainer/Scoreboard/ScoreboardToggled" method="set_visible"]
 [connection signal="pressed" from="MainMenuLayer/VBoxContainer/Game/GameToggled/GameNewButton" to="." method="_on_new_game_2_0_button_pressed"]
 [connection signal="pressed" from="MainMenuLayer/VBoxContainer/Game/GameToggled/GameClassicButton" to="." method="_on_continue_button_pressed"]
-[connection signal="toggled" from="MainMenuLayer/VBoxContainer/Game/GameToggleButton" to="." method="_switch_easter_egg_clickable"]
+[connection signal="toggled" from="MainMenuLayer/VBoxContainer/Game/GameToggleButton" to="." method="switch_easter_egg_clickable"]
 [connection signal="toggled" from="MainMenuLayer/VBoxContainer/Game/GameToggleButton" to="MainMenuLayer/VBoxContainer/Game/GameToggled" method="set_visible"]
 [connection signal="pressed" from="MainMenuLayer/UpdateButton" to="." method="_update_game"]
 [connection signal="pressed" from="CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

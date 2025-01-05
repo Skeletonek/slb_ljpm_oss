@@ -46,16 +46,25 @@ func _input(event):
 
 
 func _on_area_entered(area):
-	if area.is_in_group("Milk"):
+	var ar = area.get_parent()
+	if ar.is_in_group("Milk"):
 		if process_mode != Node.PROCESS_MODE_DISABLED:
-			area.queue_free()
-			if area.is_in_group("MilkTriple"):
+			if ar.is_in_group("MilkTriple"):
 				owner.milks += 3
 			else:
 				owner.milks += 1
-			$MilkPlayer.play()
 			_milk_achievement_check()
-	elif area.is_in_group("Obstacles"):
+	if ar.is_in_group("Powerups"):
+		if ar.type == PowerupClass.Powerups.SLOWMOTION:
+			push_warning("Slowing down!")
+			owner.time_scale = 0.5
+			# owner.milk_spawner.wait_time *= 1 / owner.time_scale
+			await get_tree().create_timer(ar.time).timeout
+			owner.time_scale = 1.0
+			# owner.milk_spawner.wait_time *= 1 / owner.time_scale
+			push_warning("Restoring speed!")
+			return
+	if ar.is_in_group("Obstacles"):
 		$CrashPlayer.play()
 		if not SettingsBus.godmode:
 			$LukaszczykWPandzie.hide()
@@ -70,7 +79,7 @@ func _on_area_entered(area):
 			tween.tween_callback($Explosion.queue_free)
 			owner.game_over()
 			call_deferred("set", "process_mode", Node.PROCESS_MODE_DISABLED)
-		if area.name.contains("OutOfBounds"):
+		if ar.is_in_group("OutOfBounds"):
 			AchievementSystem.call_achievement("offroad")
 
 
@@ -102,4 +111,3 @@ func _milk_achievement_check():
 		AchievementSystem.call_achievement("milk_500")
 	if stats_milk + owner.milks >= 100:
 		AchievementSystem.call_achievement("milk_100")
-

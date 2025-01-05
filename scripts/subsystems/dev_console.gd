@@ -11,6 +11,7 @@ const SUPPORTED_COMMANDS = [
 	"exit",
 	"gamemap",
 	"carride",
+	"time",
 	# Developer commands
 	"enable_dev_buttons",
 	"debug_info",
@@ -245,6 +246,11 @@ func _carride() -> bool:
 			"Set your playername in gameplay page of game settings or via cr_playername command! ")
 		return true
 	get_tree().change_scene_to_file("res://scenes/carride.tscn")
+	return true
+
+
+func _time() -> bool:
+	print(Time.get_datetime_string_from_system())
 	return true
 
 

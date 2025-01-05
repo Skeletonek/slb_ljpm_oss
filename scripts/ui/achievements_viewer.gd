@@ -20,6 +20,7 @@ var desaturate_material = preload("res://shaders/desaturation_material.tres")
 	ScrollContainer/HFlowContainer
 @onready var achv_details = $AchvDetailsView
 @onready var achv_all_container = $PanelContainer/VBoxContainer/AllAchvUnlockedContainer
+@onready var back_button = $PanelContainer/VBoxContainer/MarginContainer2/BackButton
 
 func _ready():
 	SignalBus.refresh_achievements_viewer.connect(_refresh)
@@ -110,8 +111,10 @@ func _generate_achievement_containers(
 
 
 func _load_achv_details(event, sender):
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+	if (event is InputEventMouseButton and \
+		event.button_index == MOUSE_BUTTON_LEFT and \
+		event.pressed
+	) or event.is_action_pressed("ui_accept"):
 			var achv_index = sender.achievement_index
 			var achv_data = AchievementSystem.data[achv_index]
 
@@ -134,11 +137,14 @@ func _load_achv_details(event, sender):
 						AchievementSystem.completed[achv_index][ACHV_DATE]
 				)
 			achv_details.visible = true
+			achv_details.close_button.grab_focus()
 			print("Clicked ", sender.get_node("AchievementTitle").text)
+			GlobalMusic.button_sound(true, GlobalMusic.BtnType.SWITCH)
 
 
 func _process(_delta):
 	pass
+
 
 func _on_back_button_pressed():
 	# gdlint:ignore=private-method-call
