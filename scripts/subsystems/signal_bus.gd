@@ -4,6 +4,7 @@ extends Node
 signal finished_loading
 signal load_specific_timeline(timeline_path)
 signal refresh_achievements_viewer
+signal reload_scale_factor
 
 signal enable_touchscreen_vbuttons(yes: bool)
 signal switch_touchscreen_mode

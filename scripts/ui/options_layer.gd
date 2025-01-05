@@ -53,6 +53,7 @@ extends CanvasLayer
 @export var info_popup: CanvasLayer
 @export var info_popup_title: Label
 @export var info_popup_content: RichTextLabel
+@export var info_popup_button: Button
 
 @onready var tab_container := $TabContainer
 
@@ -252,6 +253,7 @@ func _on_ui_blur_button_toggled(toggled_on):
 func _on_ui_scaling_slider_value_changed(value):
 	SettingsBus.ui_scaling = value
 	get_tree().root.content_scale_factor = value
+	SignalBus.reload_scale_factor.emit()
 
 
 func _on_tch_tap_toggled(_button_pressed):
@@ -344,6 +346,8 @@ func _on_report_bug_email_button_pressed():
 
 
 func _on_import_data_button_pressed():
+	if OS.get_name() == "Android":
+		OS.request_permissions()
 	$OpenFileDialog.set_current_dir(
 		OS.get_system_dir(OS.SystemDir.SYSTEM_DIR_DOCUMENTS)
 	)
@@ -352,6 +356,8 @@ func _on_import_data_button_pressed():
 
 
 func _on_export_data_button_pressed():
+	if OS.get_name() == "Android":
+		OS.request_permissions()
 	$SaveFileDialog.set_current_dir(
 		OS.get_system_dir(OS.SystemDir.SYSTEM_DIR_DOCUMENTS)
 	)
@@ -387,14 +393,21 @@ func _on_open_file_dialog_file_selected(path):
 			"Profile file seems to be corrupted. Skipping load"
 		)
 
+	info_popup_title.text = "Wymagane ponowne uruchomienie"
+	if OS.get_name() != "Android":
+		info_popup_content.text = "Gra zostanie uruchomiona ponownie w celu" \
+			+ "poprawnego załadowania zaimportowanych danych gracza"
+	else:
+		info_popup_content.text = "Gra zostanie teraz wyłączona i będzie wymagać" \
+			+ "ręcznego uruchomienia ponownie w celu poprawnego załadowania" \
+			+ "zaimportowanych danych gracza"
+	info_popup_button.pressed.connect(_restart_due_to_data_load)
+	info_popup.show()
+
+
+func _restart_due_to_data_load():
 	if OS.get_name() != "Android":
 		OS.create_process(OS.get_executable_path(), [])
-	else:
-		SettingsBus.show_os_alert("INFO",
-			"Aplikacja zostanie teraz wyłączona i będzie wymagać" \
-			+ "ręcznego uruchomienia ponownie w celu poprawnego" \
-			+ "załadowania zaimportowanych danych gracza"
-		)
 	get_tree().quit()
 
 

@@ -232,6 +232,7 @@ func _initialize_settings():
 		ThemeDB.get_project_theme().set_default_font(load("res://theme/fonts/OpenDyslexic-Regular.otf"))
 
 	if OS.get_name() == "Android":
+		OS.request_permission("MANAGE_EXTERNAL_STORAGE")
 		touchscreen_mode = true
 
 	var event = null
@@ -243,6 +244,11 @@ func _initialize_settings():
 
 
 func _initialize_debug_settings():
+	if OS.has_feature("private-test"):
+		dev_console = true
+		dev_error_sounds = true
+		dev_show_errors = true
+		dev_show_fps = true
 	if OS.is_debug_build():
 		dev_console = true
 		dev_error_sounds = true

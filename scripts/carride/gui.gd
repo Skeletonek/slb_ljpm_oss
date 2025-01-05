@@ -72,7 +72,7 @@ func update_points() -> void:
 func game_over() -> void:
 	stop_processing = true
 	if owner.version_2:
-		score_label.text = "Mleka: %d   Dystans: %.0f" % [owner.milks, (owner.distance / 36500) * 1000]
+		score_label.text = "Mleka: %d   Dystans: %d" % [owner.milks, (owner.distance / 33500) * 1000]
 	else:
 		score_label.text = str(owner.final_score)
 	play_again_button.grab_focus()

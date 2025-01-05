@@ -91,6 +91,7 @@ func _enter_tree() -> void:
 func _ready():
 	_change_scale_factor()
 	_set_map()
+	SignalBus.reload_scale_factor.connect(_change_scale_factor)
 	# vehicle_reached_oob.connect(_respawn_vehicle)
 	GlobalMusic.change_track()
 	SignalBus.cr_map.connect(_set_map)
@@ -246,7 +247,11 @@ func _add_scores():
 			"distance": (distance / 33500) * 1000,
 			"time": time,
 		}
-		var leaderboard_name = "dev_2_0_milk" if OS.is_debug_build() or OS.has_feature("private-test") else "main_2_0_milk"
+		var leaderboard_name = (
+			"dev_2_0_milk"
+			if OS.is_debug_build() or OS.has_feature("private-test")
+			else "main_2_0_milk"
+		)
 		SilentWolf.Scores.save_score(
 			ProfileBus.profile.get_full_playername(),
 			milks,
@@ -257,7 +262,11 @@ func _add_scores():
 			"milks": milks,
 			"time": time,
 		}
-		leaderboard_name = "dev_2_0_distance" if OS.is_debug_build() or OS.has_feature("private-test") else "main_2_0_distance"
+		leaderboard_name = (
+			"dev_2_0_distance"
+			if OS.is_debug_build() or OS.has_feature("private-test")
+			else "main_2_0_distance"
+		)
 		SilentWolf.Scores.save_score(
 			ProfileBus.profile.get_full_playername(),
 			(distance / 33500) * 1000,
@@ -280,9 +289,10 @@ func _change_scale_factor():
 
 
 func _achievement_check():
-	if speed > 800:
+	var real_speed = (((speed / 10 ) - 66) / 0.9 ) + 100
+	if real_speed > 110:
 		AchievementSystem.call_achievement("speed_110")
-	if speed > 1200:
+	if real_speed > 150:
 		AchievementSystem.call_achievement("speed_150")
 	if time > 60000000 and milks == 0:
 		AchievementSystem.call_achievement("lactose_intolerant")

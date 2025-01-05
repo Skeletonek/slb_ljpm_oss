@@ -83,10 +83,16 @@ func _reduce_motion(yes):
 			_p_mul = mr_parallax_multiplier
 			if mr_sprite != null:
 				texture = mr_sprite
-				get_child(0).texture = mr_sprite
+				var childs = get_children()
+				for child in childs:
+					if child is Sprite2D:
+						child.texture = mr_sprite
 		false:
 			_stop = false
 			show()
 			_p_mul = parallax_multiplier
 			texture = _sprite
-			get_child(0).texture = _sprite
+			var childs = get_children()
+			for child in childs:
+				if child is Sprite2D:
+					child.texture = _sprite

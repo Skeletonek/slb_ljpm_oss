@@ -57,7 +57,7 @@ font_size = 14
 [sub_resource type="LabelSettings" id="LabelSettings_6iuel"]
 font_size = 24
 
-[node name="OptionsLayer" type="CanvasLayer" node_paths=PackedStringArray("fullscreen_button", "fullscreen_android_info", "graphics_api_button", "graphics_api_restart", "vsync_button", "vsync_info", "linux_windowing_system_button", "linux_windowing_system_restart", "linux_windowing_system_info", "framerate_cap_spinbox", "blur_button", "ui_scaling_slider", "master_slider", "sfx_slider", "music_slider", "master_input", "sfx_input", "music_input", "tch_tap_button", "tch_swipe_button", "tch_vbuttons_button", "gamepad_deadzone_slider", "playername_edit", "playername_uuid", "telemetry_button", "touchscreen_mode", "touchscreen_mode_android_info", "devconsole_button", "devfps_button", "reduced_motion_button", "easier_font_button", "game_version_label", "device_data_label", "report_bug_forms_button", "report_bug_email_button", "back_button", "info_popup", "info_popup_title", "info_popup_content")]
+[node name="OptionsLayer" type="CanvasLayer" node_paths=PackedStringArray("fullscreen_button", "fullscreen_android_info", "graphics_api_button", "graphics_api_restart", "vsync_button", "vsync_info", "linux_windowing_system_button", "linux_windowing_system_restart", "linux_windowing_system_info", "framerate_cap_spinbox", "blur_button", "ui_scaling_slider", "master_slider", "sfx_slider", "music_slider", "master_input", "sfx_input", "music_input", "tch_tap_button", "tch_swipe_button", "tch_vbuttons_button", "gamepad_deadzone_slider", "playername_edit", "playername_uuid", "telemetry_button", "touchscreen_mode", "touchscreen_mode_android_info", "devconsole_button", "devfps_button", "reduced_motion_button", "easier_font_button", "game_version_label", "device_data_label", "report_bug_forms_button", "report_bug_email_button", "back_button", "info_popup", "info_popup_title", "info_popup_content", "info_popup_button")]
 script = ExtResource("1_cahn6")
 fullscreen_button = NodePath("TabContainer/Graphics/MarginContainer/VBoxContainer/FullScreen/FullScreenButton")
 fullscreen_android_info = NodePath("TabContainer/Graphics/MarginContainer/VBoxContainer/FullScreen/FullScreenLabelDesc")
@@ -98,6 +98,7 @@ back_button = NodePath("MarginContainer/BackButton")
 info_popup = NodePath("PopupInfo")
 info_popup_title = NodePath("PopupInfo/Panel/VBoxContainer/HBoxContainer2/PopupInfoTitle")
 info_popup_content = NodePath("PopupInfo/Panel/VBoxContainer/PopupInfoRichLabel")
+info_popup_button = NodePath("PopupInfo/Panel/VBoxContainer/HBoxContainer/AcceptButton")
 
 [node name="TabContainer" type="TabContainer" parent="."]
 material = ExtResource("2_4i7gj")

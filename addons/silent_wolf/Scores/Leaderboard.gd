@@ -11,19 +11,22 @@ var list_index = 0
 var max_scores = 1000
 var scores = []
 
-@onready var ld_name = dev_ld if OS.is_debug_build() else main_ld
-
+var ld_name: String
 
 func boot():
 	print("SilentWolf.Scores.leaderboards: " + str(SilentWolf.Scores.leaderboards))
 	print("SilentWolf.Scores.ldboard_config: " + str(SilentWolf.Scores.ldboard_config))
-	ld_name = dev_ld if OS.is_debug_build() else main_ld
+	ld_name = (
+		dev_ld
+		if OS.is_debug_build() or OS.has_feature("private-test")
+		else main_ld
+	)
 	#var scores = []")
 	clear_leaderboard()
 	add_loading_scores_message()
 
-	var local_scores = SilentWolf.Scores.local_scores
-	
+	var local_scores = []
+
 	if len(scores) > 0:
 		hide_message()
 		render_board(scores, local_scores)

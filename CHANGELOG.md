@@ -1,3 +1,14 @@
+#### 2.0-RC+3
+ - Improved informing user of the next application actions when importing player data
+ - Fixed file dialog not showing any files when importing player data on Android devices
+ - Fixed obtaining speed-related achievements
+     Please note that the speedometer is now showing the speed very inaccurately, this will change in the future version
+ - Fixed game over screen showing wrong distance
+ - Fixed carride scaling only after unpausing the game when changing UI scale
+ - Fixed scoreboard showing scores from other scores until game restart
+ - Fixed scoreboard not showing scores at all when in Private Test game versions
+ - Fixed console error when turning off motion reduction on Lunar Conflict map
+
 #### 2.0-RC+2
  - Updated copyright notices
  - Hidden all unused features that are not implemented
