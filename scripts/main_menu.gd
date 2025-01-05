@@ -115,7 +115,8 @@ func _on_continue_button_pressed():
 		player_name_input_popup.show()
 		player_name_input_popup.save_button.connect(_on_continue_button_pressed)
 		return
-	get_tree().change_scene_to_file("res://scenes/carride.tscn")
+	# HACK Workaround for Godot bug #48607
+	get_tree().call_deferred("change_scene_to_file", "res://scenes/carride.tscn")
 
 
 func _on_new_game_2_0_button_pressed():
@@ -123,7 +124,8 @@ func _on_new_game_2_0_button_pressed():
 		player_name_input_popup.show()
 		player_name_input_popup.save_button.connect(_on_new_game_2_0_button_pressed)
 		return
-	get_tree().change_scene_to_file("res://scenes/carride2_0.tscn")
+	# HACK Workaround for Godot bug #48607
+	get_tree().call_deferred("change_scene_to_file", "res://scenes/carride2_0.tscn")
 
 
 func _on_options_button_pressed():
@@ -214,4 +216,3 @@ func _on_easter_egg_button_pressed():
 func _on_rick_finished():
 	AchievementSystem.call_achievement("rick_rolled")
 	rick_player.play()
-

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c365lbbtxw5e7"
-path="res://.godot/imported/SlowMotionPowerup.png-e701c2c78eb14fc11abe651828a75264.ctex"
+uid="uid://cknnc8ylk7t8w"
+path="res://.godot/imported/LC_SpaceShip5.png-a56f29320b73297e1ad885433d64d2ed.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/SlowMotionPowerup.png"
-dest_files=["res://.godot/imported/SlowMotionPowerup.png-e701c2c78eb14fc11abe651828a75264.ctex"]
+source_file="res://sprites/LC_SpaceShip5.png"
+dest_files=["res://.godot/imported/LC_SpaceShip5.png-a56f29320b73297e1ad885433d64d2ed.ctex"]
 
 [params]
 

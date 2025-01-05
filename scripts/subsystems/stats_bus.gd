@@ -100,7 +100,7 @@ func get_map_data(map_index: int) -> Dictionary:
 	match(map_index):
 		profile.Maps.FOREST:
 			dict = {
-				"name": "Las",
+				"name": "Las Borowski",
 				"texture": load("res://images/maps/ForestMap.png"),
 				"scene": load("res://nodes/maps/ForestMap.tscn"),
 				"community_made": false,
@@ -108,7 +108,7 @@ func get_map_data(map_index: int) -> Dictionary:
 			}
 		profile.Maps.SAHARA:
 			dict = {
-				"name": "Pustynia",
+				"name": "Wydmy Egipskie",
 				"texture": load("res://images/maps/SaharaMap.png"),
 				"scene": load("res://nodes/maps/SaharaMap.tscn"),
 				"community_made": false,

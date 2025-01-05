@@ -17,13 +17,14 @@ var diff_time: int = 0
 var swipe_start: Vector2
 var stop_processing := false
 var gauge_speed: float = -36
-# gdlint:ignore=duplicated-load
+# gdlint:disable=duplicated-load
 var powerup_textures = [
-	load("res://sprites/SlowMotionPowerup.png"),
-	load("res://sprites/SlowMotionPowerup.png"),
-	load("res://sprites/SlowMotionPowerup.png"),
-	load("res://sprites/SlowMotionPowerup.png"),
+	null,
+	load("res://sprites/PowerUp_SlowMotion.png"),
+	null,
+	load("res://sprites/PowerUp_MilkyWay.png"),
 ]
+# gdlint:enable=duplicated-load
 var powerup_ending_tween
 
 @onready var speedometer: Label = $SpeedContainer/LabelSpeed
@@ -40,7 +41,8 @@ func _ready() -> void:
 	_cr_speedometer_value(SettingsBus.cr_speedometer_label)
 	if SettingsBus.touchscreen_control == SettingsBus.TouchscreenControlMode.VBUTTONS:
 		_enable_vbuttons(true)
-	powerup_ending_timer.timeout.connect(_blink_powerup)
+	if owner.version_2:
+		powerup_ending_timer.timeout.connect(_blink_powerup)
 
 
 @warning_ignore("integer_division")
@@ -75,7 +77,7 @@ func show_powerup(powerup: PowerupClass.Powerups) -> void:
 		PowerupClass.Powerups.SEMAGLUTIDE:
 			pass
 		PowerupClass.Powerups.MILKYWAY:
-			pass
+			powerup_holder.texture = powerup_textures[3]
 	powerup_holder.show()
 
 

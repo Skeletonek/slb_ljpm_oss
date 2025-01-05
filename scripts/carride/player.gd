@@ -12,9 +12,8 @@ var original_y_position: float
 
 var dont_collide := false
 
-var powerup_timer: Timer
 var explosion_tween: Tween
-
+var death_timer: Timer
 
 func _ready() -> void:
 	SignalBus.reduce_motion.connect(_reduce_motion)
@@ -24,8 +23,7 @@ func _ready() -> void:
 		$LukaszczykWPandzie.stop()
 	if owner.version_2:
 		original_y_position = position.y
-		powerup_timer = $PowerupTimer
-		powerup_timer.timeout.connect(_powerup_timer_timeout)
+		death_timer = $DeathTimer
 
 
 func _process(delta) -> void:
@@ -70,14 +68,13 @@ func _input(event):
 
 
 func _on_area_entered(area):
-	if not dont_collide:
-		var ar = area.get_parent()
-		if ar.is_in_group("Milk"):
-			_area_entered_milk(ar)
-		if ar.is_in_group("Powerups"):
-			_area_entered_powerup(ar)
-		if ar.is_in_group("Obstacles"):
-			_area_entered_obstacle(ar)
+	var ar = area.get_parent()
+	if ar.is_in_group("Milk"):
+		_area_entered_milk(ar)
+	if ar.is_in_group("Powerups"):
+		_area_entered_powerup(ar)
+	if ar.is_in_group("Obstacles"):
+		_area_entered_obstacle(ar)
 
 
 func _area_entered_milk(ar):
@@ -90,59 +87,48 @@ func _area_entered_milk(ar):
 
 
 func _area_entered_powerup(ar):
-	powerup_timer.stop()
-	_powerup_timer_timeout()
-	owner.gui.show_powerup(ar.type)
-	if ar.type == PowerupClass.Powerups.SLOWMOTION:
-		owner.time_scale = 0.5
-		owner.gui.powerup_ending_timer.start(ar.time-3)
-		powerup_timer.start(ar.time)
-		return
+	owner.powerup = ar
 
 
 func _area_entered_obstacle(ar):
-	$CrashPlayer.play()
-	if ar.is_in_group("OutOfBounds"):
-		AchievementSystem.call_achievement("offroad")
-	if not SettingsBus.godmode:
-		owner.lives -= 1
-		if owner.version_2:
-			owner.gui.hide_one_live()
-			_powerup_timer_timeout()
-			powerup_timer.stop()
+	if not dont_collide or ar.is_in_group("OutOfBounds"):
+		$CrashPlayer.play()
+		if ar.is_in_group("OutOfBounds"):
+			AchievementSystem.call_achievement("offroad")
+		if not SettingsBus.godmode:
+			owner.lives -= 1
+			if owner.version_2:
+				owner.gui.hide_one_live()
+				owner.powerup = null
+			$LukaszczykWPandzie.hide()
+			if explosion_tween:
+				explosion_tween.kill()
+			$Explosion.position = Vector2(0,0)
+			$Explosion.play()
+			explosion_tween = $Explosion.create_tween()
+			explosion_tween.tween_property(
+					$Explosion,
+					"position",
+					Vector2.LEFT * owner.speed,
+					explosion_anim_duration_multiplier
+			)
 
-		$LukaszczykWPandzie.hide()
-		if explosion_tween:
-			explosion_tween.kill()
-		$Explosion.position = Vector2(0,0)
-		$Explosion.play()
-		explosion_tween = $Explosion.create_tween()
-		explosion_tween.tween_property(
-				$Explosion,
-				"position",
-				Vector2.LEFT * owner.speed,
-				explosion_anim_duration_multiplier
-		)
+			call_deferred("set", "process_mode", Node.PROCESS_MODE_DISABLED)
+			if owner.lives <= 0:
+				owner.game_over()
+			else:
+				death_timer.start(2)
+				await death_timer.timeout
+				position = Vector2(position.x, original_y_position)
+				y_limit = position.y
+				call_deferred("set", "process_mode", Node.PROCESS_MODE_INHERIT)
+				owner.speed = owner.original_speed
+				$LukaszczykWPandzie.show()
 
-		call_deferred("set", "process_mode", Node.PROCESS_MODE_DISABLED)
-		if owner.lives <= 0:
-			owner.game_over()
-		else:
-			await get_tree().create_timer(2).timeout
-			position = Vector2(position.x, original_y_position)
-			y_limit = position.y
-			call_deferred("set", "process_mode", Node.PROCESS_MODE_INHERIT)
-			owner.speed = owner.original_speed
-			$LukaszczykWPandzie.show()
-			dont_collide = true
-			await get_tree().create_timer(1).timeout
-			dont_collide = false
-
-
-func _powerup_timer_timeout():
-	owner.gui.hide_powerup()
-	owner.gui.powerup_ending_timer.stop()
-	owner.time_scale = 1.0
+				dont_collide = true
+				death_timer.start(1)
+				await death_timer.timeout
+				dont_collide = false
 
 
 func move(dir_up: bool):

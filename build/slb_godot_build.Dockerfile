@@ -3,7 +3,7 @@
 #
 # docker run -v local_mount:container_mount image:tag
 # F.e.:
-# docker run -v godot_src_code:/godot slb_godot_build:4.3.0
+# docker run -v godot_src_code:/godot slb_godot_build:focal_fossa-sdk35
 
 # Use Focal Fossa image for insuring compatibility with linux distros using GLIBC 2.31+
 FROM ubuntu:20.04
@@ -23,7 +23,7 @@ RUN update-alternatives --set x86_64-w64-mingw32-g++ /usr/bin/x86_64-w64-mingw32
 RUN mkdir -p /android/cmdline-tools/latest && cd /android/cmdline-tools/latest && \
   curl -L https://server.skeletonek.com/app/ljpm/cmdline-tools.tar.gz | tar -xzvf - --strip-components=1 && \
   cd bin/ && yes | ./sdkmanager --licenses && \
-  ./sdkmanager --install "platforms;android-35" "build-tools;35.0.0" "ndk;28.0.12433566"
+  ./sdkmanager --install "platforms;android-35" "build-tools;35.0.0"
 
 
-WORKDIR /
+WORKDIR /godot

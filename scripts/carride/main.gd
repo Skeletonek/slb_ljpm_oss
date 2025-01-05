@@ -1,6 +1,6 @@
 extends Node2D
 
-# signal vehicle_reached_oob
+signal powerup_milkyway(yes: bool)
 
 @export var map: Node2D
 @export var version_2: bool
@@ -22,10 +22,12 @@ var ai_vehicle_instance := preload("res://nodes/AIVehicle.tscn")
 var milk_instance := preload("res://nodes/Milk.tscn")
 var milk_triple_instance := preload("res://nodes/MilkTriple.tscn")
 var powerup_slowmotion_instance := preload("res://nodes/Powerup_SlowMotion.tscn")
+var powerup_milkyway_instance := preload("res://nodes/Powerup_Milkyway.tscn")
 
 var original_speed: float
 var stop_processing := false
 var spawn_time: float = 0
+var powerup_timer: Timer
 var spawn_time_milk: float = 0
 var spawn_milk_count: int = 1
 
@@ -41,6 +43,16 @@ var milks: int = 0:
 	set(value):
 		milks = value
 		gui.update_points()
+
+var powerup:
+	get:
+		return powerup
+	set(value):
+		reset_powerup()
+		powerup = value
+		if value != null:
+			powerup = value.type
+			start_powerup(value)
 
 var time: int = 0:
 	get:
@@ -74,6 +86,8 @@ func _ready():
 	if version_2:
 		lives = 3
 		original_speed = speed
+		powerup_timer = $PowerupTimer
+		powerup_timer.timeout.connect(func(): powerup = null)
 
 
 func _process(delta):
@@ -97,6 +111,25 @@ func game_over():
 	if not SettingsBus.cheats:
 		_check_game_over_achievements()
 		_add_scores()
+
+
+func start_powerup(pwr_node):
+	match(pwr_node.type):
+		PowerupClass.Powerups.SLOWMOTION:
+			time_scale = 0.5
+		PowerupClass.Powerups.MILKYWAY:
+			powerup_milkyway.emit(true)
+	powerup_timer.start(pwr_node.time)
+	gui.show_powerup(pwr_node.type)
+	gui.powerup_ending_timer.start(pwr_node.time - 3)
+
+
+func reset_powerup():
+	time_scale = 1.0
+	powerup_milkyway.emit(false)
+	powerup_timer.stop()
+	gui.hide_powerup()
+	gui.powerup_ending_timer.stop()
 
 
 func _speed_management(delta):
@@ -148,10 +181,16 @@ func _spawn_milk(delta):
 		if version_2:
 			# milk_spawner.wait_time *= 1 / time_scale
 			if spawn_milk_count >= 5:
-				if randi_range(0,1) == 1:
-					milk = milk_triple_instance.instantiate()
-				else:
-					milk = powerup_slowmotion_instance.instantiate()
+				var rnd = randi_range(0,3)
+				match(rnd):
+					0:
+						milk = milk_triple_instance.instantiate()
+					1:
+						milk = milk_triple_instance.instantiate()
+					2:
+						milk = powerup_slowmotion_instance.instantiate()
+					3:
+						milk = powerup_milkyway_instance.instantiate()
 				spawn_milk_count = 0
 			else:
 				milk = milk_instance.instantiate()

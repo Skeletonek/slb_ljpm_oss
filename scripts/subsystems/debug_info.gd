@@ -1,8 +1,10 @@
 extends Control
 
-const ERROR_MSG_PREFIX := "USER ERROR: "
-const ERROR_SCRIPT_MSG_PREFIX := "USER SCRIPT ERROR: "
-const WARNING_MSG_PREFIX := "USER WARNING: "
+const ERROR_MSG_PREFIX_1 := "ERROR: "
+const ERROR_MSG_PREFIX_2 := "USER ERROR: "
+const ERROR_MSG_PREFIX_3 := "USER SCRIPT ERROR: "
+const WARNING_MSG_PREFIX_1 := "WARNING: "
+const WARNING_MSG_PREFIX_2 := "USER WARNING: "
 
 @export var fps_label: Label
 @export var delta_label: Label
@@ -106,12 +108,14 @@ func debug_info() -> String:
 
 
 func append_error(text):
-	dev_errors_label.append_text("[color=red][ERR] " +
-		text.trim_prefix(
-			ERROR_MSG_PREFIX
-		).trim_prefix(
-			ERROR_SCRIPT_MSG_PREFIX
-		) + "[/color]\n"
+	dev_errors_label.append_text("[color=red][ERR] " + \
+			text.trim_prefix(
+				ERROR_MSG_PREFIX_1
+			).trim_prefix(
+				ERROR_MSG_PREFIX_2
+			).trim_prefix(
+				ERROR_MSG_PREFIX_3
+			) + "[/color]\n"
 	)
 	dev_errors_cleaner.wait_time = 10.0
 	dev_errors_cleaner.start()
@@ -119,11 +123,15 @@ func append_error(text):
 
 func append_warning(text):
 	dev_errors_label.append_text("[color=orange][WRN] " +
-	text.trim_prefix(WARNING_MSG_PREFIX) + "[/color]\n")
+			text.trim_prefix(
+				WARNING_MSG_PREFIX_1
+			).trim_prefix(
+				WARNING_MSG_PREFIX_2
+			) + "[/color]\n"
+	)
 	dev_errors_cleaner.wait_time = 10.0
 	dev_errors_cleaner.start()
 
 
 func _on_dev_errors_cleaner_timeout():
 	dev_errors_label.text = ""
-

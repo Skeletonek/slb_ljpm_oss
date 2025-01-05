@@ -1,3 +1,17 @@
+#### 2.0-Beta+2
+ - Improved parallax background in forest map
+ - Slightly improved parallax background in sahara map
+ - Improved parallax background in Lunar Conflict map
+ - Added dynamic objects to parallax background in Lunar Conflict map
+ - Slightly improved carride GUI
+ - Fixed error while gtting top score when no scores of current user exists
+ - Fixed error coloring in developer console for some issues
+ - Fixed "Condition "!is_inside_tree()" is true. Returning: false" on Android devices
+ - Fixed player not colliding with out of bounds, milks and powerups second after death
+ - Fixed error when starting classic carride
+ - Decreased 2D shadow atlas size
+ - Refactored powerup code
+
 #### 2.0-Beta+1
  - Added lives mechanic for 2.0 gameplay
  - Added countdown when powerup is about to end

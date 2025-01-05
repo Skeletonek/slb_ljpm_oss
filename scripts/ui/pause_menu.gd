@@ -61,7 +61,8 @@ func _on_settings_button_pressed():
 func _on_main_menu_button_pressed():
 	_hide_all_layers()
 	get_tree().paused = false
-	get_tree().change_scene_to_file("res://scenes/mainMenu.tscn")
+	# HACK Workaround for Godot bug #48607
+	get_tree().call_deferred("change_scene_to_file", "res://scenes/mainMenu.tscn")
 
 
 func _on_exit_button_pressed():
@@ -80,4 +81,3 @@ func _hide_all_layers():
 	hide()
 	$AchievementsLayer.hide()
 	$OptionsLayer.hide()
-

@@ -129,7 +129,7 @@ func hide_message() -> void:
 func top_score() -> void:
 	var result = await SilentWolf.Scores.get_top_score_by_player(SettingsBus.playername, 10, ld_name
 															  ).sw_top_player_score_complete
-	if result.top_score.is_empty():
+	if result:
 		$"Board/TopScoreContainer/Label".text = "Twoja najwyższa pozycja: Brak"
 	else:
 		var pos = await SilentWolf.Scores.get_score_position(result.top_score.score_id, ld_name

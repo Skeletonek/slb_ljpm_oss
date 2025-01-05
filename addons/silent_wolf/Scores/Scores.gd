@@ -214,13 +214,15 @@ func _on_GetTopScoreByPlayer_request_completed(result, response_code, headers, b
 		var json_body = JSON.parse_string(body.get_string_from_utf8())
 		var sw_result: Dictionary = SilentWolf.build_result(json_body)
 		if json_body.success:
-			SWLogger.info("SilentWolf get top score by player success, found top score? " + str(!json_body.top_score.is_empty()))
-			player_top_score = translate_score_fields(json_body.top_score)
-			SWLogger.debug("Top score for " + json_body.player_name +  ": " + str(player_top_score))
-			var ld_name = json_body.ld_name
-			var ld_config = json_body.ld_config
-			var player_name = json_body.player_name
-			sw_result["top_score"] = player_top_score
+			var found = !json_body.top_score.is_empty()
+			SWLogger.info("SilentWolf get top score by player success, found top score? " + str(found))
+			if found:
+				player_top_score = translate_score_fields(json_body.top_score)
+				SWLogger.debug("Top score for " + json_body.player_name +  ": " + str(player_top_score))
+				var ld_name = json_body.ld_name
+				var ld_config = json_body.ld_config
+				var player_name = json_body.player_name
+				sw_result["top_score"] = player_top_score
 		else:
 			SWLogger.error("SilentWolf get top score by player failure: " + str(json_body.error))
 		sw_top_player_score_complete.emit(sw_result)	

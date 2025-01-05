@@ -45,6 +45,50 @@ As of now, it is recommended to run the project in **Godot Engine 4.3**
 Technically it is possible to run the game on unsupported platforms such as MacOS or BSD-family systems, but no binaries are provided and developers won't help with developing fixes for these systems.
 
 
+## Hardware requirements
+### Minimum:
+
+- CPU:
+  - Windows: |
+  - Linux: x86_64 processor with 4 threads
+    - Intel Pentium G4560
+    - AMD Athlon 200GE
+  - Android: x86_64 or ARM64 processor with 4 threads
+    - Qualcomm Snapdragon 400
+    - MediaTek MT6595M
+- RAM: 3 GB of hardware memory
+- Disk: 300 MB free space
+- GPU:
+  - Windows: |
+  - Linux: Integrated GPU with OpenGL 3.3+ support
+    - Intel HD Graphics 4000
+    - AMD Radeon R3 Graphics
+  - Android: Integrated GPU with OpenGL ES 3.0+ support
+    - Qualcomm Adreno 305
+    - PowerVR G6200
+
+### Recommended:
+
+- CPU:
+  - Windows: |
+  - Linux: x86_64 processor with 4 cores
+    - Intel Core i5-3330
+    - AMD Ryzen 3 1200
+  - Android: x86_64 or ARM64 processor with 4 cores
+    - Qualcomm Snapdragon 400
+    - MediaTek MT6595M
+- RAM: 4 GB of hardware memory
+- Disk: 300 MB free space
+- GPU:
+  - Windows: |
+  - Linux: |
+  - Android: Integrated or Dedicated GPU with Vulkan 1.0+ support
+    - Intel HD Graphics 400
+    - AMD Radeon Vega 3
+    - Qualcomm Adreno 505
+    - Mali-T760 MP2
+
+
 ## Graphics API
 The game uses both OpenGL and Vulkan (mobile) based backends. In Godot these are called "Compatibility" and "Mobile" respectively.\
 Game can be run with 'Forward+' backend, but it is not official.

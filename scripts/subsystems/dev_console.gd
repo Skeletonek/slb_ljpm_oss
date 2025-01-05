@@ -54,9 +54,11 @@ const SUPPORTED_COMMANDS = [
 	]
 
 const UPDATE_INTERVAL := 0.1
-const ERROR_MSG_PREFIX := "USER ERROR: "
-const ERROR_SCRIPT_MSG_PREFIX := "USER SCRIPT ERROR: "
-const WARNING_MSG_PREFIX := "USER WARNING: "
+const ERROR_MSG_PREFIX_1 := "ERROR: "
+const ERROR_MSG_PREFIX_2 := "USER ERROR: "
+const ERROR_MSG_PREFIX_3 := "USER SCRIPT ERROR: "
+const WARNING_MSG_PREFIX_1 := "WARNING: "
+const WARNING_MSG_PREFIX_2 := "USER WARNING: "
 const COMMAND_MSG_PREFIX := "DEV PROMPT: "
 #Any logs with three spaces at the beginning will be ignored.
 const IGNORE_PREFIX := "   "
@@ -96,20 +98,31 @@ func _read_data():
 		var new_line = godot_log.get_line()
 		if new_line.begins_with(IGNORE_PREFIX):
 			continue
-		if new_line.begins_with(ERROR_MSG_PREFIX) or new_line.begins_with(ERROR_SCRIPT_MSG_PREFIX):
+		if new_line.begins_with(ERROR_MSG_PREFIX_1) or \
+				new_line.begins_with(ERROR_MSG_PREFIX_2) or \
+				new_line.begins_with(ERROR_MSG_PREFIX_3) \
+		:
 			log_rich_label.append_text("[color=red][ERR] " +
 					new_line.trim_prefix(
-						ERROR_MSG_PREFIX
+						ERROR_MSG_PREFIX_1
 					).trim_prefix(
-						ERROR_SCRIPT_MSG_PREFIX
+						ERROR_MSG_PREFIX_2
+					).trim_prefix(
+						ERROR_MSG_PREFIX_3
 					) + "[/color]")
 			if SettingsBus.dev_error_sounds:
 				err_player.play()
 			if SettingsBus.dev_show_errors:
 				DebugInfo.append_error(new_line)
-		elif new_line.begins_with(WARNING_MSG_PREFIX):
+		elif new_line.begins_with(WARNING_MSG_PREFIX_1) or \
+				new_line.begins_with(WARNING_MSG_PREFIX_2) \
+		:
 			log_rich_label.append_text("[color=orange][WRN] " +
-					new_line.trim_prefix(WARNING_MSG_PREFIX) + "[/color]")
+					new_line.trim_prefix(
+						WARNING_MSG_PREFIX_1
+					).trim_prefix(
+						WARNING_MSG_PREFIX_2
+					) + "[/color]")
 			if SettingsBus.dev_error_sounds:
 				wrn_player.play()
 			if SettingsBus.dev_show_errors:

@@ -1,7 +1,8 @@
-[gd_scene load_steps=40 format=3 uid="uid://b8sgtml2m0tio"]
+[gd_scene load_steps=41 format=3 uid="uid://b8sgtml2m0tio"]
 
 [ext_resource type="Script" path="res://scripts/carride/main.gd" id="1_kgrjb"]
 [ext_resource type="Script" path="res://scripts/carride/gui.gd" id="2_32m4m"]
+[ext_resource type="Texture2D" uid="uid://bpix4jm8ib32f" path="res://sprites/MilkNoShadow.png" id="3_0ciny"]
 [ext_resource type="Texture2D" uid="uid://dwcu034i1bbii" path="res://images/touchscreen_vbuttons/UpTouch.png" id="3_3em63"]
 [ext_resource type="Texture2D" uid="uid://b04pu01i85qfb" path="res://images/touchscreen_vbuttons/UpTouchPressed.png" id="4_nmvs1"]
 [ext_resource type="Texture2D" uid="uid://dfyn51j8mmknf" path="res://images/touchscreen_vbuttons/DownTouch.png" id="5_soq8h"]
@@ -106,13 +107,13 @@ animations = [{
 size = Vector2(114, 15.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rof7r"]
-size = Vector2(150, 40)
+size = Vector2(120, 40)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6het2"]
-size = Vector2(230, 40)
+size = Vector2(200, 40)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h1k2n"]
-size = Vector2(230, 40)
+size = Vector2(200, 40)
 
 [node name="Node2D" type="Node2D" node_paths=PackedStringArray("map")]
 y_sort_enabled = true
@@ -123,6 +124,8 @@ version_2 = true
 speed_increment = 8.0
 speed = 300.0
 metadata/_edit_vertical_guides_ = [-221.0, -650.0]
+
+[node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="GUI" type="Control" parent="." node_paths=PackedStringArray("label_time", "label_milk", "speedometer_gauge", "lives", "last_live_player", "powerup_holder", "powerup_ending_timer", "powerup_ending_player")]
 z_index = 11
@@ -139,25 +142,27 @@ grow_vertical = 2
 script = ExtResource("2_32m4m")
 label_time = NodePath("TimeContainer/LabelTime")
 label_milk = NodePath("MilkCountContainer/LabelMilk")
-speedometer_gauge = NodePath("../Camera2D/Speedometer/SpeedometerGauge")
-lives = [NodePath("../Camera2D/Live1"), NodePath("../Camera2D/Live2"), NodePath("../Camera2D/Live3")]
+speedometer_gauge = NodePath("Speedometer/SpeedometerGauge")
+lives = [NodePath("LivesBorder/Live1"), NodePath("LivesBorder/Live2"), NodePath("LivesBorder/Live3")]
 last_live_player = NodePath("LastLivePlayer")
-powerup_holder = NodePath("../Camera2D/PowerupHolder")
+powerup_holder = NodePath("PowerupBorder/PowerupHolder")
 powerup_ending_timer = NodePath("PowerupEndingTimer")
 powerup_ending_player = NodePath("PowerupEndingPlayer")
 
 [node name="TimeContainer" type="HBoxContainer" parent="GUI"]
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 117.0
-offset_top = -78.0
-offset_right = 394.0
-offset_bottom = -31.0
+offset_left = 225.0
+offset_top = -75.0
+offset_right = 405.0
+offset_bottom = -25.0
 grow_vertical = 0
 
 [node name="Label" type="Label" parent="GUI/TimeContainer"]
+visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "CZAS: "
@@ -172,26 +177,34 @@ label_settings = SubResource("LabelSettings_s0jls")
 horizontal_alignment = 3
 
 [node name="MilkCountContainer" type="HBoxContainer" parent="GUI"]
-custom_minimum_size = Vector2(250, 0)
+custom_minimum_size = Vector2(250, 50)
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -272.0
-offset_top = -78.0
-offset_right = -22.0
-offset_bottom = -34.0
+offset_left = -270.0
+offset_top = -75.0
+offset_right = -20.0
+offset_bottom = -25.0
 grow_horizontal = 0
 grow_vertical = 0
 
 [node name="Label" type="Label" parent="GUI/MilkCountContainer"]
+visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "MLEKA: "
 label_settings = SubResource("LabelSettings_s0jls")
 uppercase = true
+
+[node name="TextureRect" type="TextureRect" parent="GUI/MilkCountContainer"]
+custom_minimum_size = Vector2(48, 32)
+layout_mode = 2
+texture = ExtResource("3_0ciny")
+expand_mode = 5
+stretch_mode = 5
 
 [node name="LabelMilk" type="Label" parent="GUI/MilkCountContainer"]
 layout_mode = 2
@@ -202,6 +215,7 @@ label_settings = SubResource("LabelSettings_s0jls")
 
 [node name="SpeedContainer" type="HBoxContainer" parent="GUI"]
 visible = false
+z_index = 1
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -222,37 +236,63 @@ text = "0
 "
 label_settings = SubResource("LabelSettings_s0jls")
 
-[node name="VButtonsContainer" type="VBoxContainer" parent="GUI"]
-visible = false
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -160.0
-offset_top = -290.0
-offset_right = -32.0
-offset_bottom = -30.0
-grow_horizontal = 0
-grow_vertical = 0
-theme_override_constants/separation = 32
+[node name="HUDBorder" type="Sprite2D" parent="GUI"]
+z_index = -1
+position = Vector2(640, 677.5)
+scale = Vector2(10.005, 0.617188)
+texture = SubResource("GradientTexture2D_hvxgf")
 
-[node name="Up" type="TextureButton" parent="GUI/VButtonsContainer"]
-custom_minimum_size = Vector2(128, 128)
-layout_mode = 2
-texture_normal = ExtResource("3_3em63")
-texture_pressed = ExtResource("4_nmvs1")
-ignore_texture_size = true
-stretch_mode = 5
+[node name="HUD" type="Sprite2D" parent="GUI/HUDBorder"]
+position = Vector2(0, 3.24049)
+scale = Vector2(1.987, 1.89873)
+texture = SubResource("GradientTexture2D_n110a")
 
-[node name="Down" type="TextureButton" parent="GUI/VButtonsContainer"]
-custom_minimum_size = Vector2(128, 128)
-layout_mode = 2
-texture_normal = ExtResource("5_soq8h")
-texture_pressed = ExtResource("6_ns3o8")
-ignore_texture_size = true
-stretch_mode = 5
+[node name="LivesBorder" type="Sprite2D" parent="GUI"]
+z_index = -1
+position = Vector2(886.401, 664)
+scale = Vector2(1.61564, 0.578701)
+texture = SubResource("GradientTexture2D_hvxgf")
+
+[node name="Lives" type="Sprite2D" parent="GUI/LivesBorder"]
+scale = Vector2(1.923, 1.798)
+texture = SubResource("GradientTexture2D_n110a")
+
+[node name="Live1" type="Sprite2D" parent="GUI/LivesBorder"]
+position = Vector2(-40.8507, 0)
+scale = Vector2(0.309475, 0.864004)
+texture = ExtResource("8_mhq2g")
+
+[node name="Live2" type="Sprite2D" parent="GUI/LivesBorder"]
+scale = Vector2(0.309475, 0.864004)
+texture = ExtResource("8_mhq2g")
+
+[node name="Live3" type="Sprite2D" parent="GUI/LivesBorder"]
+position = Vector2(40.8507, 0)
+scale = Vector2(0.309475, 0.864004)
+texture = ExtResource("8_mhq2g")
+
+[node name="PowerupBorder" type="Sprite2D" parent="GUI"]
+position = Vector2(457.401, 664)
+scale = Vector2(0.615649, 0.578701)
+texture = SubResource("GradientTexture2D_hvxgf")
+
+[node name="Powerup" type="Sprite2D" parent="GUI/PowerupBorder"]
+scale = Vector2(1.813, 1.798)
+texture = SubResource("GradientTexture2D_n110a")
+
+[node name="PowerupHolder" type="Sprite2D" parent="GUI/PowerupBorder"]
+scale = Vector2(1.6243, 1.72801)
+
+[node name="Speedometer" type="Sprite2D" parent="GUI"]
+position = Vector2(640, 717)
+texture = ExtResource("8_38upb")
+offset = Vector2(0, -64)
+
+[node name="SpeedometerGauge" type="Sprite2D" parent="GUI/Speedometer"]
+position = Vector2(0, -1)
+rotation = -0.628319
+texture = ExtResource("9_gjl7p")
+offset = Vector2(0, -63)
 
 [node name="PanelContainer" type="PanelContainer" parent="GUI"]
 visible = false
@@ -263,10 +303,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_left = -149.5
+offset_top = -165.0
+offset_right = 149.5
+offset_bottom = 165.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -310,6 +350,38 @@ layout_mode = 2
 focus_neighbor_top = NodePath("../PlayAgainBtn")
 text = "Wróć do menu"
 
+[node name="VButtonsContainer" type="VBoxContainer" parent="GUI"]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -160.0
+offset_top = -318.0
+offset_right = -32.0
+offset_bottom = -30.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/separation = 32
+
+[node name="Up" type="TextureButton" parent="GUI/VButtonsContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture_normal = ExtResource("3_3em63")
+texture_pressed = ExtResource("4_nmvs1")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Down" type="TextureButton" parent="GUI/VButtonsContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture_normal = ExtResource("5_soq8h")
+texture_pressed = ExtResource("6_ns3o8")
+ignore_texture_size = true
+stretch_mode = 5
+
 [node name="LastLivePlayer" type="AudioStreamPlayer" parent="GUI"]
 stream = ExtResource("8_y5w37")
 volume_db = -2.0
@@ -321,73 +393,7 @@ volume_db = 8.0
 bus = &"SFX"
 
 [node name="PowerupEndingTimer" type="Timer" parent="GUI"]
-
-[node name="Camera2D" type="Camera2D" parent="."]
-
-[node name="HUDBorder" type="Sprite2D" parent="Camera2D"]
-z_index = 10
-position = Vector2(0, 409)
-scale = Vector2(10.005, 2)
-texture = SubResource("GradientTexture2D_hvxgf")
-
-[node name="HUD" type="Sprite2D" parent="Camera2D/HUDBorder"]
-scale = Vector2(1.987, 1.94)
-texture = SubResource("GradientTexture2D_n110a")
-
-[node name="LivesBorder" type="Sprite2D" parent="Camera2D"]
-z_index = 10
-position = Vector2(246.401, 307)
-scale = Vector2(1.61564, 0.578701)
-texture = SubResource("GradientTexture2D_hvxgf")
-
-[node name="Lives" type="Sprite2D" parent="Camera2D/LivesBorder"]
-scale = Vector2(1.923, 1.798)
-texture = SubResource("GradientTexture2D_n110a")
-
-[node name="Live1" type="Sprite2D" parent="Camera2D"]
-z_index = 11
-position = Vector2(180.401, 307)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("8_mhq2g")
-
-[node name="Live2" type="Sprite2D" parent="Camera2D"]
-z_index = 11
-position = Vector2(246.401, 307)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("8_mhq2g")
-
-[node name="Live3" type="Sprite2D" parent="Camera2D"]
-z_index = 11
-position = Vector2(312.401, 307)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("8_mhq2g")
-
-[node name="PowerupBorder" type="Sprite2D" parent="Camera2D"]
-z_index = 10
-position = Vector2(-182.599, 307)
-scale = Vector2(0.615649, 0.578701)
-texture = SubResource("GradientTexture2D_hvxgf")
-
-[node name="Powerup" type="Sprite2D" parent="Camera2D/PowerupBorder"]
-scale = Vector2(1.813, 1.798)
-texture = SubResource("GradientTexture2D_n110a")
-
-[node name="PowerupHolder" type="Sprite2D" parent="Camera2D"]
-z_index = 11
-position = Vector2(-182.599, 307)
-
-[node name="Speedometer" type="Sprite2D" parent="Camera2D"]
-z_index = 10
-position = Vector2(0, 360)
-texture = ExtResource("8_38upb")
-offset = Vector2(0, -64)
-
-[node name="SpeedometerGauge" type="Sprite2D" parent="Camera2D/Speedometer"]
-z_index = 10
-position = Vector2(0, -1)
-rotation = -0.628319
-texture = ExtResource("9_gjl7p")
-offset = Vector2(0, -63)
+one_shot = true
 
 [node name="ForestMap" parent="." instance=ExtResource("10_e6vsi")]
 position = Vector2(0, 77)
@@ -398,14 +404,14 @@ position = Vector2(80, 71)
 scale = Vector2(2, 2)
 
 [node name="OutOfBoundsLeft" type="Area2D" parent="OutOfBounds"]
-position = Vector2(-4, -112)
+position = Vector2(-4, -118)
 scale = Vector2(0.5, 0.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="OutOfBounds/OutOfBoundsLeft"]
 shape = SubResource("RectangleShape2D_lr1qs")
 
 [node name="OutOfBoundsRight" type="Area2D" parent="OutOfBounds"]
-position = Vector2(-2.40002, 111)
+position = Vector2(-2.4, 106)
 scale = Vector2(0.5, 0.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="OutOfBounds/OutOfBoundsRight"]
@@ -456,7 +462,9 @@ scale = Vector2(0.5, 0.5)
 stream = ExtResource("15_opg6x")
 bus = &"SFX"
 
-[node name="PowerupTimer" type="Timer" parent="LukaszczykWPandzie"]
+[node name="DeathTimer" type="Timer" parent="LukaszczykWPandzie"]
+process_mode = 1
+one_shot = true
 
 [node name="SpawnPoints" type="Node2D" parent="."]
 position = Vector2(1010, 0)
@@ -469,7 +477,7 @@ gizmo_extents = 15.0
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnPoints/SP1/Area2D"]
-position = Vector2(-75, 30)
+position = Vector2(-61, 30)
 shape = SubResource("RectangleShape2D_rof7r")
 
 [node name="SP2" type="Marker2D" parent="SpawnPoints"]
@@ -480,7 +488,7 @@ gizmo_extents = 15.0
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnPoints/SP2/Area2D"]
-position = Vector2(-115, 30)
+position = Vector2(-101, 30)
 shape = SubResource("RectangleShape2D_6het2")
 
 [node name="SP3" type="Marker2D" parent="SpawnPoints"]
@@ -491,7 +499,7 @@ gizmo_extents = 15.0
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnPoints/SP3/Area2D"]
-position = Vector2(-75, 30)
+position = Vector2(-61, 30)
 shape = SubResource("RectangleShape2D_rof7r")
 
 [node name="SP4" type="Marker2D" parent="SpawnPoints"]
@@ -502,7 +510,7 @@ gizmo_extents = 15.0
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnPoints/SP4/Area2D"]
-position = Vector2(-115, 30)
+position = Vector2(-101, 30)
 shape = SubResource("RectangleShape2D_h1k2n")
 
 [node name="SP5" type="Marker2D" parent="SpawnPoints"]
@@ -513,13 +521,15 @@ gizmo_extents = 15.0
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnPoints/SP5/Area2D"]
-position = Vector2(-75, 30)
+position = Vector2(-61, 30)
 shape = SubResource("RectangleShape2D_rof7r")
 
 [node name="PauseLayer" parent="." instance=ExtResource("16_f7r4o")]
 
 [node name="Timer" type="Timer" parent="."]
 process_callback = 0
+
+[node name="PowerupTimer" type="Timer" parent="."]
 
 [node name="BassPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("17_msysa")
@@ -528,9 +538,9 @@ autoplay = true
 bus = &"Music"
 
 [connection signal="touchscreen_move" from="GUI" to="LukaszczykWPandzie" method="move"]
-[connection signal="button_down" from="GUI/VButtonsContainer/Up" to="GUI" method="_on_up_button_down"]
-[connection signal="button_down" from="GUI/VButtonsContainer/Down" to="GUI" method="_on_down_button_down"]
 [connection signal="pressed" from="GUI/PanelContainer/MarginContainer/VBoxContainer/PlayAgainBtn" to="GUI" method="_on_play_again_btn_pressed"]
 [connection signal="pressed" from="GUI/PanelContainer/MarginContainer/VBoxContainer/MenuBtn" to="GUI" method="_on_menu_btn_pressed"]
+[connection signal="button_down" from="GUI/VButtonsContainer/Up" to="GUI" method="_on_up_button_down"]
+[connection signal="button_down" from="GUI/VButtonsContainer/Down" to="GUI" method="_on_down_button_down"]
 [connection signal="area_entered" from="LukaszczykWPandzie" to="LukaszczykWPandzie" method="_on_area_entered"]
 [connection signal="timeout" from="Timer" to="." method="_spawn_milk"]

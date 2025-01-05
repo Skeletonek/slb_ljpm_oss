@@ -1,23 +1,23 @@
-[gd_scene load_steps=7 format=3 uid="uid://dfvu6fsj7c1of"]
+[gd_scene load_steps=7 format=3 uid="uid://dq3wop05jcyms"]
 
-[ext_resource type="Script" path="res://scripts/carride/classes/powerup_class.gd" id="1_40xli"]
-[ext_resource type="Texture2D" uid="uid://c365lbbtxw5e7" path="res://sprites/PowerUp_SlowMotion.png" id="2_5trw8"]
-[ext_resource type="Script" path="res://scripts/carride/components/vehicle_component.gd" id="3_fnwag"]
-[ext_resource type="Script" path="res://scripts/carride/components/pickable_component.gd" id="4_apmtq"]
-[ext_resource type="AudioStream" uid="uid://b6aq1yhr40dkl" path="res://audio/sfx/acquire1.wav" id="4_di1xd"]
+[ext_resource type="Script" path="res://scripts/carride/classes/powerup_class.gd" id="1_41ct7"]
+[ext_resource type="Texture2D" uid="uid://c02vd5c1321x3" path="res://sprites/PowerUp_MilkyWay.png" id="2_0mboy"]
+[ext_resource type="Script" path="res://scripts/carride/components/vehicle_component.gd" id="3_nb7b3"]
+[ext_resource type="Script" path="res://scripts/carride/components/pickable_component.gd" id="4_dc2lr"]
+[ext_resource type="AudioStream" uid="uid://b6aq1yhr40dkl" path="res://audio/sfx/acquire1.wav" id="5_xfi3q"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ayeeq"]
 radius = 30.0
 
-[node name="SlowMotion" type="Node2D" groups=["Powerups"]]
+[node name="MilkyWay" type="Node2D" groups=["Powerups"]]
 z_index = -1
-script = ExtResource("1_40xli")
-type = 1
-time = 10.0
+script = ExtResource("1_41ct7")
+type = 3
+time = 5.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, 10)
-texture = ExtResource("2_5trw8")
+texture = ExtResource("2_0mboy")
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(0, 10)
@@ -29,12 +29,12 @@ position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_ayeeq")
 
 [node name="VehicleComponent" type="Node2D" parent="."]
-script = ExtResource("3_fnwag")
+script = ExtResource("3_nb7b3")
 
 [node name="PickableComponent" type="Node2D" parent="." node_paths=PackedStringArray("col_shape")]
-script = ExtResource("4_apmtq")
+script = ExtResource("4_dc2lr")
 col_shape = NodePath("../Area2D/CollisionShape2D")
-pickup_sfx = ExtResource("4_di1xd")
+pickup_sfx = ExtResource("5_xfi3q")
 
 [connection signal="area_entered" from="Area2D" to="VehicleComponent" method="_on_area_2d_area_entered"]
 [connection signal="area_entered" from="Area2D" to="PickableComponent" method="_on_area_2d_area_entered"]

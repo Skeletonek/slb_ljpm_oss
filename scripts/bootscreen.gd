@@ -16,10 +16,14 @@ func _load_main_menu(_anim_name = ""):
 	# 	return
 	# get_tree().change_scene_to_file("res://scenes/mainMenu.tscn")
 	print("Main menu status: %s" % ResourceLoader.load_threaded_get_status(MAINMENU_SCENE))
+	var base_t = Time.get_ticks_msec()
 	var menu_scene = ResourceLoader.load_threaded_get(MAINMENU_SCENE)
 	var menu = menu_scene.instantiate()
+	print("Instantiating took: %sms" % [Time.get_ticks_msec() - base_t])
 	menu.get_child(1).queue_free()
+	base_t = Time.get_ticks_msec()
 	get_parent().add_child(menu)
+	print("Adding took: %sms" % [Time.get_ticks_msec() - base_t])
 	tree_exited.connect(menu.switch_easter_egg_clickable.bind(false))
 	queue_free()
 

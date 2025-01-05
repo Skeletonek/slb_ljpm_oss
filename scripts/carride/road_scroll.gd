@@ -1,7 +1,7 @@
 extends Sprite2D
 
 const SPEED_INCREMENT := 300
-@export var jump_point := -1440
+@export var parallax_jump_point_scale := 1
 @export var parallax_multiplier := 1.0
 
 ## For motion reducton settings
@@ -15,11 +15,13 @@ const SPEED_INCREMENT := 300
 @export var mr_parallax_multiplier: float
 @export var mr_sprite: Texture2D
 
+var _jump_point := 0.0
 var _sprite := texture
 var _stop := false
 var _p_mul: float
 
 func _ready():
+	_jump_point = -(texture.get_size().x * scale.x * parallax_jump_point_scale)
 	_p_mul = parallax_multiplier
 	SignalBus.reduce_motion.connect(_reduce_motion)
 	if mr_parallax_multiplier == 0.0:
@@ -37,8 +39,8 @@ func _process(delta):
 				min(0,-(owner.speed + SPEED_INCREMENT) * owner.time_scale),
 				0
 		) * delta * _p_mul
-		if position.x <= jump_point:
-			position.x = position.x + -jump_point
+		if position.x <= _jump_point:
+			position.x = position.x + -_jump_point
 
 
 func _reduce_motion(yes):

@@ -1,11 +1,47 @@
-[gd_scene load_steps=7 format=3 uid="uid://c7njf8rte5rfr"]
+[gd_scene load_steps=16 format=3 uid="uid://c7njf8rte5rfr"]
 
 [ext_resource type="Script" path="res://scripts/carride/map_node.gd" id="1_o14x5"]
 [ext_resource type="Texture2D" uid="uid://bviwggjeiqqyd" path="res://sprites/maps/lunar_conflict/lc_space.webp" id="2_nheys"]
 [ext_resource type="Script" path="res://scripts/carride/road_scroll.gd" id="3_3k3r8"]
+[ext_resource type="Texture2D" uid="uid://bqj6ykklsg2wi" path="res://sprites/maps/lunar_conflict/lc_layer.webp" id="4_amoh5"]
 [ext_resource type="Texture2D" uid="uid://hr87nowgadrt" path="res://sprites/maps/lunar_conflict/lc_moon.webp" id="4_dw7hs"]
+[ext_resource type="Texture2D" uid="uid://bia3bnt6eiov1" path="res://sprites/LC_SpaceShip1.png" id="4_v0gf5"]
 [ext_resource type="Texture2D" uid="uid://c57l262udunto" path="res://sprites/Road.png" id="5_1euaw"]
+[ext_resource type="Texture2D" uid="uid://bqcbdyshicj7u" path="res://sprites/LC_SpaceShip2.png" id="5_pnlim"]
+[ext_resource type="Texture2D" uid="uid://dy518n8bsq24s" path="res://sprites/LC_SpaceShip3.png" id="6_gwrlq"]
 [ext_resource type="Texture2D" uid="uid://btqhaxxyw1tvd" path="res://sprites/RoadRM.png" id="6_h62jk"]
+[ext_resource type="Texture2D" uid="uid://4qt4ifaim2qi" path="res://sprites/LC_SpaceShip4.png" id="7_d26ix"]
+[ext_resource type="Texture2D" uid="uid://cknnc8ylk7t8w" path="res://sprites/LC_SpaceShip5.png" id="8_f2r77"]
+
+[sub_resource type="Gradient" id="Gradient_342eu"]
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_qgick"]
+gradient = SubResource("Gradient_342eu")
+width = 1024
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_scwqs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_v0gf5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_pnlim")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_gwrlq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_d26ix")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_f2r77")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="LunarConflictMap" type="Node2D"]
 script = ExtResource("1_o14x5")
@@ -16,7 +52,6 @@ position = Vector2(0, -129)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("2_nheys")
 script = ExtResource("3_3k3r8")
-jump_point = -1536
 parallax_multiplier = 0.1
 mr_parallax_multiplier = 0.01
 
@@ -24,24 +59,48 @@ mr_parallax_multiplier = 0.01
 position = Vector2(1920, 0)
 texture = ExtResource("2_nheys")
 
+[node name="Spaceships" type="Sprite2D" parent="."]
+z_index = -9
+z_as_relative = false
+position = Vector2(512, -384)
+scale = Vector2(2, 2)
+texture = SubResource("GradientTexture1D_qgick")
+script = ExtResource("3_3k3r8")
+parallax_jump_point_scale = 2
+parallax_multiplier = 0.6
+mr_hidden = true
+
+[node name="Spaceships" type="AnimatedSprite2D" parent="Spaceships"]
+position = Vector2(512, 0)
+sprite_frames = SubResource("SpriteFrames_scwqs")
+autoplay = "default"
+frame_progress = 0.926842
+
+[node name="BackgroundRocks" type="Sprite2D" parent="."]
+z_index = -9
+z_as_relative = false
+position = Vector2(250, -258)
+texture = ExtResource("4_amoh5")
+script = ExtResource("3_3k3r8")
+mr_parallax_multiplier = 0.01
+
+[node name="BackgroundRocks" type="Sprite2D" parent="BackgroundRocks"]
+position = Vector2(2048, 0)
+texture = ExtResource("4_amoh5")
+
 [node name="Background" type="Sprite2D" parent="."]
 z_index = -10
 z_as_relative = false
 scale = Vector2(0.35, 0.35)
 texture = ExtResource("4_dw7hs")
 script = ExtResource("3_3k3r8")
-jump_point = -1344
 mr_parallax_multiplier = 0.01
 
 [node name="Background" type="Sprite2D" parent="Background"]
-z_index = -10
-z_as_relative = false
 position = Vector2(3840, 0)
 texture = ExtResource("4_dw7hs")
 
 [node name="Background2" type="Sprite2D" parent="Background"]
-z_index = -10
-z_as_relative = false
 position = Vector2(7680, 0)
 texture = ExtResource("4_dw7hs")
 
