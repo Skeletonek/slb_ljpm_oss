@@ -16,7 +16,6 @@ const SUPPORTED_COMMANDS = [
 	"enable_dev_buttons",
 	"debug_info",
 	"build_info",
-	"god",
 	"sound_errors",
 	"show_errors",
 	"show_fps",
@@ -41,15 +40,22 @@ const SUPPORTED_COMMANDS = [
 	"fullscreen",
 	"ui_scale",
 	"ui_blur",
+	"vsync",
 	# Carride commands
 	"cr_speedometer_value",
 	"cr_playername",
 	"cr_skin",
 	"cr_map",
+	# Cheats
+	"god",
+	"cr_ch_add_milk",
+	"cr_ch_unlock_skins",
+	"cr_ch_unlock_maps",
 	]
 
 const UPDATE_INTERVAL := 0.1
 const ERROR_MSG_PREFIX := "USER ERROR: "
+const ERROR_SCRIPT_MSG_PREFIX := "USER SCRIPT ERROR: "
 const WARNING_MSG_PREFIX := "USER WARNING: "
 const COMMAND_MSG_PREFIX := "DEV PROMPT: "
 #Any logs with three spaces at the beginning will be ignored.
@@ -90,9 +96,13 @@ func _read_data():
 		var new_line = godot_log.get_line()
 		if new_line.begins_with(IGNORE_PREFIX):
 			continue
-		if new_line.begins_with(ERROR_MSG_PREFIX):
+		if new_line.begins_with(ERROR_MSG_PREFIX) or new_line.begins_with(ERROR_SCRIPT_MSG_PREFIX):
 			log_rich_label.append_text("[color=red][ERR] " +
-					new_line.trim_prefix(ERROR_MSG_PREFIX) + "[/color]")
+					new_line.trim_prefix(
+						ERROR_MSG_PREFIX
+					).trim_prefix(
+						ERROR_SCRIPT_MSG_PREFIX
+					) + "[/color]")
 			if SettingsBus.dev_error_sounds:
 				err_player.play()
 			if SettingsBus.dev_show_errors:
@@ -186,8 +196,10 @@ func _on_prompt_edit_text_submitted(new_text):
 	if result == false or result == null:
 		push_error("Command failed")
 
+
 # The 'setting' property is only for showing the value
 # In GDScript it's imposssible to pass a primitive type as an reference
+@warning_ignore("shadowed_global_identifier")
 func _process_int(setting: int, value, min: int, max: int) -> Variant:
 	if value.is_valid_int():
 		var val = clampi(int(value), min, max)
@@ -196,6 +208,7 @@ func _process_int(setting: int, value, min: int, max: int) -> Variant:
 	return null
 
 
+@warning_ignore("shadowed_global_identifier")
 func _process_float(setting: float, value, min: float, max: float) -> Variant:
 	if value.is_valid_float():
 		var val = clampf(float(value), min, max)
@@ -218,6 +231,12 @@ func _process_string(setting: String, value) -> Variant:
 		return value
 	print("Value (string): " + setting)
 	return null
+
+
+func _process_cheat() -> void:
+	if not SettingsBus.cheats:
+		push_warning("Saving data and obtaining achievements are now disabled until game restart!")
+	SettingsBus.cheats = true
 
 
 func _help() -> bool:
@@ -270,14 +289,6 @@ func _debug_info() -> bool:
 
 func _build_info() -> bool:
 	DebugInfo.toggle()
-	return true
-
-
-func _god() -> bool:
-	SettingsBus.cheats = true
-	SettingsBus.godmode = !SettingsBus.godmode
-	print("Godmode " + ("enabled" if SettingsBus.godmode else "disabled"))
-	push_warning("Saving scores and obtaining achievements are now disabled until game restart!")
 	return true
 
 
@@ -461,6 +472,19 @@ func _ui_blur(arg="") -> bool:
 	return true
 
 
+func _vsync(arg="") -> bool:
+	var ret = _process_int(
+		SettingsBus.vsync,
+		arg,
+		0,
+		3,
+	)
+	if ret != null:
+		SettingsBus.vsync = ret
+		DisplayServer.window_set_vsync_mode(ret)
+	return true
+
+
 func _cr_speedometer_value(arg="") -> bool:
 	var ret = _process_bool(SettingsBus.cr_speedometer_label, arg)
 	if ret != null:
@@ -484,8 +508,10 @@ func _cr_skin(arg="") -> bool:
 		Profile.Skins.size()-1
 	)
 	if ret != null:
-		ProfileBus.profile.chosen_skin = ret
-		SignalBus.cr_skin.emit()
+		if ProfileBus.profile.change_skin(ret as Profile.Skins):
+			SignalBus.cr_skin.emit()
+		else:
+			push_error("You don't own this skin!")
 	return true
 
 
@@ -497,6 +523,41 @@ func _cr_map(arg="") -> bool:
 		Profile.Maps.size()-1
 	)
 	if ret != null:
-		ProfileBus.profile.chosen_map = ret
-		SignalBus.cr_map.emit()
+		if ProfileBus.profile.change_map(ret as Profile.Maps):
+			SignalBus.cr_map.emit()
+		else:
+			push_error("You don't own this skin!")
+	return true
+
+
+func _god() -> bool:
+	_process_cheat()
+	SettingsBus.godmode = !SettingsBus.godmode
+	print("Godmode " + ("enabled" if SettingsBus.godmode else "disabled"))
+	return true
+
+
+func _cr_ch_add_milk(arg="") -> bool:
+	_process_cheat()
+	if arg.is_valid_int():
+		ProfileBus.profile.milks += int(arg)
+		SignalBus.cr_update_milks_count.emit()
+	return true
+
+
+func _cr_ch_unlock_skins() -> bool:
+	_process_cheat()
+	for x in ProfileBus.profile.skins.size():
+		ProfileBus.profile.skins[x] = true
+		SignalBus.cr_ch_unlock_skins.emit()
+		SignalBus.ch_unlock_skins = true
+	return true
+
+
+func _cr_ch_unlock_maps() -> bool:
+	_process_cheat()
+	for x in ProfileBus.profile.maps.size():
+		ProfileBus.profile.maps[x] = true
+		SignalBus.cr_ch_unlock_maps.emit()
+		SignalBus.ch_unlock_maps = true
 	return true

@@ -1,0 +1,285 @@
+[gd_scene load_steps=12 format=3 uid="uid://0co42py0a61l"]
+
+[ext_resource type="Script" path="res://scripts/ui/credits_layer.gd" id="1_ws07h"]
+[ext_resource type="Material" uid="uid://cqn5rkmj7io2i" path="res://shaders/panel_shader_material.tres" id="2_johsm"]
+[ext_resource type="Texture2D" uid="uid://cyo4rlihaqgrc" path="res://images/icons/SLB2Logo.webp" id="3_c1i1q"]
+[ext_resource type="FontFile" uid="uid://c08wcdbvxirl1" path="res://theme/fonts/NotoSans-Medium.ttf" id="4_k2ykn"]
+[ext_resource type="Texture2D" uid="uid://chmu0q4arfvtg" path="res://images/SkeletonLogoV6S.png" id="5_8lv1x"]
+[ext_resource type="Texture2D" uid="uid://bnvg8lvduxprm" path="res://images/HalembarusLogoV1.1S.jpg" id="6_ebip1"]
+[ext_resource type="Texture2D" uid="uid://cm8cnn2cih4wk" path="res://images/GodotLogo.png" id="7_0qiho"]
+[ext_resource type="FontFile" uid="uid://cneqby736uacu" path="res://theme/fonts/NotoSans-Bold.ttf" id="8_f1snl"]
+[ext_resource type="Texture2D" uid="uid://dxe6vh4w56dcl" path="res://images/silentwolf.png" id="9_tx77s"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_q8iax"]
+font_size = 14
+
+[sub_resource type="LabelSettings" id="LabelSettings_xqss0"]
+font_size = 14
+
+[node name="CreditsLayer" type="CanvasLayer" node_paths=PackedStringArray("scroll_container")]
+script = ExtResource("1_ws07h")
+scroll_container = NodePath("PanelContainer/MarginContainer/VBoxContainer/ScrollContainer")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+material = ExtResource("2_johsm")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+vertical_scroll_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer"]
+custom_minimum_size = Vector2(0, 1000)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="GameLogo" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+texture_filter = 2
+custom_minimum_size = Vector2(0, 190)
+layout_mode = 2
+texture = ExtResource("3_c1i1q")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="GameNameCopyright" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_k2ykn")
+theme_override_font_sizes/font_size = 16
+text = "Super Łukaszczyk Bros: Łukaszczyk Jedzie Po Mleko
+Copyright © 2023-2024 - Skeletonek & Halembarus2"
+horizontal_alignment = 1
+
+[node name="CreditsLabel2" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_k2ykn")
+theme_override_font_sizes/font_size = 16
+text = "
+Twórcy:"
+horizontal_alignment = 1
+
+[node name="SkeletonekContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 10
+
+[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/SkeletonekContainer"]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+
+[node name="SkeletonekLogo" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/SkeletonekContainer/Control"]
+texture_filter = 2
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = -35.0
+offset_bottom = 35.0
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("5_8lv1x")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SkeletonekCredits" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/SkeletonekContainer"]
+custom_minimum_size = Vector2(485, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 0.7
+theme_override_fonts/font = ExtResource("4_k2ykn")
+theme_override_font_sizes/font_size = 16
+text = "Skeletonek:
+Programowanie, Grafika, Audio, Procesy budowy, Reżyseria, Testowanie"
+label_settings = SubResource("LabelSettings_q8iax")
+
+[node name="HalembarusContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 10
+
+[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HalembarusContainer"]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+
+[node name="HalembarusLogo" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HalembarusContainer/Control"]
+texture_filter = 2
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = -35.0
+offset_bottom = 35.0
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("6_ebip1")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HalembarusCredits" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HalembarusContainer"]
+custom_minimum_size = Vector2(485, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_k2ykn")
+theme_override_font_sizes/font_size = 16
+text = "Halembarus2:
+Reżyseria, Testowanie"
+label_settings = SubResource("LabelSettings_q8iax")
+
+[node name="CreditsLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_k2ykn")
+theme_override_font_sizes/font_size = 16
+text = "
+Projekt stworzono w:"
+horizontal_alignment = 1
+
+[node name="GameEngineContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 10
+
+[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/GameEngineContainer"]
+custom_minimum_size = Vector2(170, 70)
+layout_mode = 2
+
+[node name="GameEngineLogo" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/GameEngineContainer/Control"]
+texture_filter = 2
+custom_minimum_size = Vector2(170, 70)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -170.0
+offset_top = -35.0
+offset_bottom = 35.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
+texture = ExtResource("7_0qiho")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="GameEngineCredits" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/GameEngineContainer"]
+custom_minimum_size = Vector2(575, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_k2ykn")
+theme_override_font_sizes/font_size = 16
+text = "Copyright © 2007-2024 Juan Linietsky, Ariel Manzur & contributors.
+Godot Engine nie jest powiązany z twórcami SLB: LJPM
+Więcej informacji o Godot Engine jest dostępnych na stronie https://godotengine.org/"
+label_settings = SubResource("LabelSettings_q8iax")
+
+[node name="Separator" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="AssetsInfo" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(450, 0)
+layout_mode = 2
+mouse_filter = 1
+theme_override_constants/line_separation = 3
+theme_override_fonts/normal_font = ExtResource("4_k2ykn")
+theme_override_fonts/bold_font = ExtResource("8_f1snl")
+theme_override_font_sizes/bold_italics_font_size = 14
+theme_override_font_sizes/italics_font_size = 14
+theme_override_font_sizes/mono_font_size = 14
+theme_override_font_sizes/normal_font_size = 14
+theme_override_font_sizes/bold_font_size = 14
+bbcode_enabled = true
+text = "[center][b]Część skrórek do samochodów i map zostały stworzone przez społeczność gry:[/b]
+Real Panda - Astro
+Content Maker - Astro
+[b]Dziękujemy wszystkim za wkład w tworzenie gry![/b]
+
+
+[b]Część grafik oraz utworów użytych w grze jest udostępnionych na licencji Creative Commons lub innej wolnej licencji:[/b]
+Milk bottle PNG - pngimg.com
+Stricken Commision - Bloo
+Good Luck - Bloo
+\"dead-ahead.ogg\" - Freedoom Contributors
+\"hard-trouble.ogg\" - Freedoom Contributors
+Explosion Animations Pack - ansimuz
+
+
+[b]Czcionki użyte w grze zostały udostępnione na licencji Open Font License:[/b]
+Pixelify Sans - Stefie Justprince
+OpenDyslexic - Abbie Gonzalez
+Noto Sans - The Noto Project Authors
+
+
+[b]W grze zostały wykorzystane grafiki z gry Lunar Conflict[/b]
+Copyright © 2023 Coco Jambo on a Century Old Organs
+https://skeletonek.com/aplikacje/archiwum/lunar-conflict
+[/center]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+
+[node name="Separator2" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="OnlineInfo" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(450, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("4_k2ykn")
+theme_override_font_sizes/font_size = 16
+text = "Funkcje online zapewnia: 
+"
+label_settings = SubResource("LabelSettings_xqss0")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="SilentwolfLogo" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+texture_filter = 2
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
+texture = ExtResource("9_tx77s")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BackButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Powrót"
+
+[connection signal="gui_input" from="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer" to="." method="_on_scroll_container_gui_input"]
+[connection signal="scroll_ended" from="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer" to="." method="_on_scroll_container_scroll_ended"]
+[connection signal="scroll_started" from="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer" to="." method="_on_scroll_container_scroll_started"]
+[connection signal="gui_input" from="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/SkeletonekContainer/Control/SkeletonekLogo" to="." method="_on_skeletonek_logo_click"]
+[connection signal="gui_input" from="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/GameEngineContainer/Control/GameEngineLogo" to="." method="_on_godot_logo_click"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

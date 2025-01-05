@@ -18,6 +18,7 @@ const DESKTOP_PLATFORM = ["Windows", "UWP", "macOS", "Linux", "FreeBSD", "NetBSD
 const API_KEY = ""
 
 var os_id = 1 if OS.get_name() == "Windows" else 0
+var first_boot := false
 
 var ui_shader_material_instance := preload("res://shaders/panel_shader_material.tres")
 
@@ -30,8 +31,9 @@ var ui_scaling := 1.0
 var touchscreen_control := TouchscreenControlMode.TAP
 var keyboard_up := KEY_W
 var keyboard_down := KEY_S
-var gamepad_deadzone := 1.0
+var gamepad_deadzone := 0.3
 var playername := "#" + OS.get_unique_id().substr(os_id, 8)
+var telemetry := false
 
 var volume := [1.0, 0.8, 1.0, 0.5, 1.0]
 var vsync_availability := [null, null, null, null]
@@ -64,6 +66,7 @@ var cfg = ConfigFile.new()
 
 func load_config() -> bool:
 	if not FileAccess.file_exists("user://config.cfg"):
+		first_boot = true
 		save_config()
 		return true
 	var file = FileAccess.open("user://config.cfg", FileAccess.READ)
@@ -96,6 +99,8 @@ func load_config() -> bool:
 	reduced_motion = data["reduced_motion"]
 	easier_font = data["easier_font"]
 	touchscreen_control = data["touchscreen_control"]
+	gamepad_deadzone = data["gamepad_deadzone"]
+	telemetry = data["telemetry"]
 	keyboard_up = data["keyboard_up"]
 	keyboard_down = data["keyboard_down"]
 	playername = data["playername"]
@@ -131,9 +136,11 @@ func save_config():
 		"reduced_motion": reduced_motion,
 		"easier_font": easier_font,
 		"touchscreen_control": touchscreen_control,
+		"gamepad_deadzone": gamepad_deadzone,
 		"keyboard_up": keyboard_up,
 		"keyboard_down": keyboard_down,
 		"playername": playername,
+		"telemetry": telemetry
 	}
 	var json = JSON.stringify(config_dict)
 	file.store_line(json)
@@ -182,6 +189,12 @@ func _enter_tree():
 	_configure_silentwolf()
 	print("DEVICE ID: %s" % OS.get_unique_id())
 
+	if OS.get_name() == "Linux":
+		if cfg_linux_window_system.to_lower() == "wayland" && \
+				DisplayServer.get_name().to_lower() != "wayland":
+			show_os_alert("WAYLAND INITIALIZATION ERROR", "Couldn't start a Wayland client\n" +
+				"Game will run in X11 mode."
+			)
 	# if OS.get_name() != "Android" and not OS.has_feature("editor"):
 	# 	var audioload = ProjectSettings.load_resource_pack("res://Resources/SLB2_Audio.pck")
 	# 	var videoload = ProjectSettings.load_resource_pack("res://Resources/SLB2_Video.pck")
@@ -193,34 +206,35 @@ func _enter_tree():
 	# 		get_tree().quit(404)
 
 
-# func _ready() -> void:
-# 	_check_vsync_availability()
-# 	vsync = _vsync_set_by_priority()
-# 	DisplayServer.window_set_vsync_mode(vsync)
-
-
 func _initialize_settings():
 	for bus in AudioBus.values():
 		set_audio_volume(bus, volume[bus])
+
 	get_tree().root.content_scale_factor = ui_scaling
+
 	var window_mode = (
 		DisplayServer.WINDOW_MODE_FULLSCREEN if SettingsBus.fullscreen
 		else DisplayServer.WINDOW_MODE_WINDOWED
 		)
 	DisplayServer.window_set_mode(window_mode)
+
 	await _check_vsync_availability()
 	DisplayServer.window_set_vsync_mode(SettingsBus.vsync)
-	set_ui_shader(ui_blur)
 	if (SettingsBus.vsync == DisplayServer.VSYNC_DISABLED or
 		SettingsBus.vsync == DisplayServer.VSYNC_MAILBOX
 	):
 		Engine.max_fps = SettingsBus.fps_max
 	else:
 		Engine.max_fps = 0
+
+	set_ui_shader(ui_blur)
+
 	if not narrator_speaking:
 		set_audio_volume(AudioBus.NARRATOR, 0.0)
+
 	if easier_font:
 		ThemeDB.get_project_theme().set_default_font(load("res://theme/fonts/OpenDyslexic-Regular.otf"))
+
 	var event = null
 	for action in ["move_up", "move_down"]:
 		event = InputEventKey.new()
@@ -239,8 +253,8 @@ func _initialize_debug_settings():
 
 
 func _check_vsync_availability() -> void:
-	# Yup, GDScript cannot iterate through enums... sad...
 	await get_tree().process_frame
+	# Yup, GDScript cannot iterate through enums... sad...
 	var vsyncs = [
 		DisplayServer.VSYNC_DISABLED,
 		DisplayServer.VSYNC_ENABLED,
@@ -288,7 +302,7 @@ func set_ui_shader(yes: bool):
 		ui_shader_material_instance.shader = load("res://shaders/panel.gdshader")
 	else:
 		ui_shader_material_instance.shader = null
-	# ui_blur = yes
+	ui_blur = yes
 	# ui_shader_material_instance.set_shader_parameter("apply", ui_blur)
 
 

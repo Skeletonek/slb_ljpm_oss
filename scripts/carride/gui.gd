@@ -6,14 +6,29 @@ const MINIMUM_SWIPE_DRAG = 60
 
 @export var label_time: Label
 @export var label_milk: Label
+@export var speedometer_gauge: Sprite2D
+@export var lives: Array[Sprite2D]
+@export var last_live_player: AudioStreamPlayer
+@export var powerup_holder: Sprite2D
+@export var powerup_ending_timer: Timer
+@export var powerup_ending_player: AudioStreamPlayer
 
 var diff_time: int = 0
 var swipe_start: Vector2
 var stop_processing := false
+var gauge_speed: float = -36
+# gdlint:ignore=duplicated-load
+var powerup_textures = [
+	load("res://sprites/SlowMotionPowerup.png"),
+	load("res://sprites/SlowMotionPowerup.png"),
+	load("res://sprites/SlowMotionPowerup.png"),
+	load("res://sprites/SlowMotionPowerup.png"),
+]
+var powerup_ending_tween
 
 @onready var speedometer: Label = $SpeedContainer/LabelSpeed
-@onready var game_over_panel := $PanelContainer
 @onready var score_label := $PanelContainer/MarginContainer/VBoxContainer/ScoreLabel
+@onready var game_over_panel := $PanelContainer
 @onready var play_again_button := $PanelContainer/MarginContainer/VBoxContainer/PlayAgainBtn
 
 
@@ -25,6 +40,7 @@ func _ready() -> void:
 	_cr_speedometer_value(SettingsBus.cr_speedometer_label)
 	if SettingsBus.touchscreen_control == SettingsBus.TouchscreenControlMode.VBUTTONS:
 		_enable_vbuttons(true)
+	powerup_ending_timer.timeout.connect(_blink_powerup)
 
 
 @warning_ignore("integer_division")
@@ -36,6 +52,7 @@ func _process(_delta: float) -> void:
 		var minutes: int = (diff_time / 1000000) / 60
 		label_time.text = ("%02d:%02d:%03d" % [minutes, seconds, miliseconds])
 		speedometer.text = ("%.3f" % [owner.speed])
+		speedometer_gauge.rotation_degrees = gauge_speed
 
 
 func update_points() -> void:
@@ -47,6 +64,64 @@ func game_over() -> void:
 	score_label.text = str(owner.final_score)
 	play_again_button.grab_focus()
 	game_over_panel.show()
+
+
+func show_powerup(powerup: PowerupClass.Powerups) -> void:
+	match(powerup):
+		PowerupClass.Powerups.RAM:
+			pass
+		PowerupClass.Powerups.SLOWMOTION:
+			powerup_holder.texture = powerup_textures[1]
+		PowerupClass.Powerups.SEMAGLUTIDE:
+			pass
+		PowerupClass.Powerups.MILKYWAY:
+			pass
+	powerup_holder.show()
+
+
+func hide_powerup() -> void:
+	powerup_holder.hide()
+
+
+func _blink_powerup() -> void:
+	powerup_ending_player.play()
+	if powerup_ending_tween:
+		powerup_ending_tween.kill()
+	powerup_ending_tween = create_tween()
+	powerup_ending_tween.tween_property(
+		powerup_holder,
+		"modulate",
+		Color.TRANSPARENT,
+		0.5
+	)
+	powerup_ending_tween.tween_property(
+		powerup_holder,
+		"modulate",
+		Color.WHITE,
+		0.5
+	)
+	powerup_ending_tween.set_loops(3)
+
+
+func hide_one_live() -> void:
+	lives[owner.lives].hide()
+	if owner.lives == 1:
+		last_live_player.play()
+		var tween = lives[0].create_tween()
+		tween.tween_property(
+				lives[0],
+				"modulate",
+				Color.TRANSPARENT,
+				0.5
+		)
+		tween.tween_property(
+				lives[0],
+				"modulate",
+				Color.WHITE,
+				0.5
+		)
+		tween.set_loops()
+
 
 
 func _gui_input(event: InputEvent) -> void:

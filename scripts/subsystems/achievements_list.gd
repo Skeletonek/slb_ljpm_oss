@@ -44,12 +44,12 @@ const ACHIEVEMENT_LIST = {
 		preload("res://images/achievement_icons/Speed150.webp"),
 		false
 		],
-	"volvo_combi": [
-		"Volvo pls fix",
-		"Ukończ jedną rozgrywkę w skórce Volvo",
-		preload("res://images/icons/slb2icon.png"),
-		false
-		],
+	# "volvo_combi": [
+	# 	"Volvo pls fix",
+	# 	"Ukończ jedną rozgrywkę w skórce Volvo",
+	# 	preload("res://images/icons/slb2icon.png"),
+	# 	false
+	# 	],
 	"real_panda": [
 		"Smacznego bambusa!",
 		"Ukończ jedną rozgrywkę w skórce Pandy",
@@ -60,6 +60,24 @@ const ACHIEVEMENT_LIST = {
 		"World of Pigtanks",
 		"Ukończ jedną rozgrywkę w skórce Świnioczołgu",
 		preload("res://images/achievement_icons/Pigtank.webp"),
+		false
+		],
+	"lunar_rover": [
+		"aeiou",
+		"Ukończ jedną rozgrywkę w Łaziku Księzycowym",
+		preload("res://images/icons/slb2icon.png"),
+		false
+		],
+	"content_maker": [
+		"Gwiazda internetu",
+		"Ukończ jedną rozgrywkę w skórce Kontenciarza",
+		preload("res://images/icons/slb2icon.png"),
+		false
+		],
+	"lukaszczyk_on_horse": [
+		"Jaskółka przeniosłaby orzech kokosowy?",
+		"Ukończ jedną rozgrywkę w skórce Łukaszczyka na koniu",
+		preload("res://images/icons/slb2icon.png"),
 		false
 		],
 	"serious_business": [

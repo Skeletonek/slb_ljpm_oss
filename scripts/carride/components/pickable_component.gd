@@ -9,7 +9,4 @@ func _on_area_2d_area_entered(area) -> void:
 		var player = area.get_node("PickupPlayer")
 		player.stream = pickup_sfx
 		player.play()
-		if owner is PowerupClass:
-			owner.picked_up(area)
-		else: # This is temporary
-			owner.queue_free()
+		owner.queue_free()

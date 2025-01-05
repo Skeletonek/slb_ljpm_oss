@@ -2,6 +2,7 @@ extends CanvasLayer
 
 @export_category("Graphics")
 @export var fullscreen_button: Button
+@export var fullscreen_android_info: Label
 @export var graphics_api_button: OptionButton
 @export var graphics_api_restart: Label
 @export var vsync_button: OptionButton
@@ -22,21 +23,28 @@ extends CanvasLayer
 @export var music_input: LineEdit
 
 @export_category("Gameplay")
-@export var devconsole_button: Button
-@export var devfps_button: Button
 @export var tch_tap_button: TextureButton
 @export var tch_swipe_button: TextureButton
 @export var tch_vbuttons_button: TextureButton
+@export var gamepad_deadzone_slider: Slider
 @export var playername_edit: LineEdit
 @export var playername_uuid: Label
+@export var telemetry_button: Button
+@export var devconsole_button: Button
+@export var devfps_button: Button
 
 @export_category("Accesibility")
 @export var narrator_button: Button
 @export var reduced_motion_button: Button
 @export var easier_font_button: Button
 
+@export_category("Technical help")
+@export var game_version_label: Label
+@export var device_data_label: Label
+@export var report_bug_forms_button: Button
+@export var report_bug_email_button: Button
+
 @export_category("Miscellaneous")
-@export var fullscreen_android_info: Label
 @export var back_button: Button
 
 @export_category("PopupInfo")
@@ -44,6 +52,7 @@ extends CanvasLayer
 @export var info_popup_title: Label
 @export var info_popup_content: RichTextLabel
 
+@onready var tab_container := $TabContainer
 
 func _ready(): # I'm starting to hate this code
 	master_slider.value = SettingsBus.volume[SettingsBus.AudioBus.MASTER]
@@ -54,7 +63,63 @@ func _ready(): # I'm starting to hate this code
 	music_input.text = str(music_slider.value * 100) + "%"
 	ui_scaling_slider.value = SettingsBus.ui_scaling
 	framerate_cap_spinbox.value = SettingsBus.fps_max
-	match(SettingsBus.vsync):
+	gamepad_deadzone_slider.value = SettingsBus.gamepad_deadzone
+
+	_init_vsync_settings()
+	_init_tab_names()
+
+	graphics_api_button.get_popup().id_pressed.connect(_on_graphics_api_pressed)
+	if SettingsBus.cfg_rendering_method == "gl_compatibility":
+		graphics_api_button.selected = 1
+
+	var playername_split = SettingsBus.playername.split("#")
+	playername_edit.text = playername_split[0]
+	playername_uuid.text = "#" + playername_split[1]
+
+	match(SettingsBus.touchscreen_control):
+		SettingsBus.TouchscreenControlMode.TAP:
+			tch_tap_button.set_pressed_no_signal(true)
+		SettingsBus.TouchscreenControlMode.SWIPE:
+			tch_swipe_button.set_pressed_no_signal(true)
+		SettingsBus.TouchscreenControlMode.VBUTTONS:
+			tch_vbuttons_button.set_pressed_no_signal(true)
+
+	SignalBus.enable_telemetry.connect(func(x): telemetry_button.set_pressed_no_signal_custom(x))
+	telemetry_button.set_pressed_no_signal_custom(SettingsBus.telemetry)
+	easier_font_button.set_pressed_no_signal_custom(SettingsBus.easier_font)
+	reduced_motion_button.set_pressed_no_signal_custom(SettingsBus.reduced_motion)
+	blur_button.set_pressed(SettingsBus.ui_blur)
+	devconsole_button.set_pressed(SettingsBus.dev_console)
+	devfps_button.set_pressed(SettingsBus.dev_show_fps)
+
+	if OS.get_name() == "Android":
+		fullscreen_button.disabled = true
+		fullscreen_android_info.visible = true
+	else:
+		fullscreen_button.set_pressed(SettingsBus.fullscreen)
+
+	if OS.get_name() != "Linux":
+		linux_windowing_system_info.show()
+		linux_windowing_system_button.disabled = true
+	match(SettingsBus.cfg_linux_window_system):
+		"x11":
+			linux_windowing_system_button.selected = 0
+		"wayland":
+			linux_windowing_system_button.selected = 1
+
+	game_version_label.text = "Wersja gry: " + \
+		ProjectSettings.get_setting("application/config/version")
+	device_data_label.text = DebugInfo.debug_info()
+
+
+func _init_vsync_settings():
+	var i = 0
+	for v in SettingsBus.vsync_availability:
+		vsync_button.set_item_disabled(i, !v)
+		if v == false:
+			vsync_info.show()
+		i += 1
+	match(DisplayServer.window_get_vsync_mode()):
 		DisplayServer.VSYNC_DISABLED:
 			vsync_button.selected = 0
 			framerate_cap_spinbox.editable = true
@@ -65,68 +130,23 @@ func _ready(): # I'm starting to hate this code
 		DisplayServer.VSYNC_MAILBOX:
 			vsync_button.selected = 3
 			framerate_cap_spinbox.editable = true
-	if OS.get_name() != "Linux":
-		linux_windowing_system_info.show()
-		linux_windowing_system_button.disabled = true
-	match(SettingsBus.cfg_linux_window_system):
-		"x11":
-			linux_windowing_system_button.selected = 0
-		"wayland":
-			linux_windowing_system_button.selected = 1
 
-	graphics_api_button.get_popup().id_pressed.connect(_on_graphics_api_pressed)
-	if SettingsBus.cfg_rendering_method == "gl_compatibility":
-		graphics_api_button.selected = 1
 
-	match(SettingsBus.touchscreen_control):
-		SettingsBus.TouchscreenControlMode.TAP:
-			tch_tap_button.set_pressed_no_signal(true)
-		SettingsBus.TouchscreenControlMode.SWIPE:
-			tch_swipe_button.set_pressed_no_signal(true)
-		SettingsBus.TouchscreenControlMode.VBUTTONS:
-			tch_vbuttons_button.set_pressed_no_signal(true)
-	var playername_split = SettingsBus.playername.split("#")
-	playername_edit.text = playername_split[0]
-	playername_uuid.text = "#" + playername_split[1]
-	easier_font_button.set_pressed_no_signal_custom(SettingsBus.easier_font)
-	reduced_motion_button.set_pressed_no_signal_custom(SettingsBus.reduced_motion)
-
-	var i = 0
-	for v in SettingsBus.vsync_availability:
-		vsync_button.set_item_disabled(i, !v)
-		if v == false:
-			vsync_info.show()
-		i += 1
-
-	if OS.get_name() == "Android":
-		fullscreen_button.disabled = true
-		fullscreen_android_info.visible = true
-		# Disable Off and Adaptive for Android as this platform most probably
-		# doesn't support it
-		# vsync_button.set_item_disabled(0, true)
-		# vsync_button.set_item_disabled(2, true)
-		# vsync_info.show()
-	else:
-		fullscreen_button.set_pressed(SettingsBus.fullscreen)
-
-	# Wayland (or at least KDE KWin) doesn't support Adaptive V-sync
-	# if DisplayServer.get_name() == "Wayland":
-	# 	vsync_button.set_item_disabled(2, true)
-		# vsync_info.show()
-
-	blur_button.set_pressed(SettingsBus.ui_blur)
-
-	devconsole_button.set_pressed(SettingsBus.dev_console)
-	devfps_button.set_pressed(SettingsBus.dev_show_fps)
+func _init_tab_names():
+	tab_container.set_tab_title(0, "Grafika")
+	tab_container.set_tab_title(1, "Audio")
+	tab_container.set_tab_title(2, "Rozgrywka")
+	tab_container.set_tab_title(3, "Dostępność")
+	tab_container.set_tab_title(4, "Pomoc techniczna")
 
 
 func _input(event):
 	if event.is_action_pressed("next_tab"):
-		if $TabContainer.current_tab < 3:
+		if $TabContainer.current_tab < 4:
 			$TabContainer.current_tab += 1
-		elif $TabContainer.current_tab == 3:
-			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MINIMIZED)
-			OS.shell_open("https://forms.gle/94hffgvFiSXHfA529")
+		# elif $TabContainer.current_tab == 3:
+		# 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MINIMIZED)
+		# 	OS.shell_open("https://forms.gle/94hffgvFiSXHfA529")
 	elif event.is_action_pressed("previous_tab"):
 		if $TabContainer.current_tab > 0:
 			$TabContainer.current_tab -= 1
@@ -256,8 +276,16 @@ func _unpress_tch_buttons():
 	SignalBus.enable_touchscreen_vbuttons.emit(false)
 
 
+func _on_deadzone_slider_value_changed(value: float) -> void:
+	SettingsBus.gamepad_deadzone = gamepad_deadzone_slider.value
+
+
 func _on_playername_button_pressed():
 	SettingsBus.playername = playername_edit.text.replace("\n", "") + SettingsBus.playername.right(9)
+
+
+func _on_telemetry_button_toggled(button_preseed):
+	SettingsBus.telemetry = button_preseed
 
 
 func _on_dev_console_button_toggled(button_pressed):
@@ -276,6 +304,24 @@ func _on_easier_font_button_toggled(button_pressed):
 		ThemeDB.get_project_theme().set_default_font(load("res://theme/fonts/OpenDyslexic-Regular.otf"))
 	else:
 		ThemeDB.get_project_theme().set_default_font(load("res://theme/fonts/PixelifySans_2-Bold.ttf"))
+
+
+func _on_report_bug_forms_button_pressed():
+	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MINIMIZED)
+	OS.shell_open("https://forms.gle/94hffgvFiSXHfA529")
+
+
+func _on_report_bug_email_button_pressed():
+	var version = "Game version: \n" + \
+		ProjectSettings.get_setting("application/config/version") + "\n\n"
+	var device_data = "Device info:\n" + DebugInfo.debug_info() + "\n"
+	var title = "Nie zapomnij wpisać krótkiego tytułu błędu w polu tematu wiadomości e-mail!\n\n"
+	var separator = "--------------------------------------------------\n"
+	var description = "Opis: \n<Wpisz opis błędu tutaj>\n\n"
+	var replication_steps = "Kroki do powtórzenia błędu: \n<Wpisz kroki tutaj>\n\n"
+	var body = description + replication_steps + separator + title + version + device_data
+	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MINIMIZED)
+	OS.shell_open("mailto:slb.ljpm@skeletonek.com?body={0}".format([body]))
 
 
 func _on_show_console_button_toggled(toggled_on):
@@ -372,8 +418,6 @@ func _on_tab_container_tab_changed(tab):
 		3:
 			back_button.focus_neighbor_top = easier_font_button.get_path()
 		4:
-			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MINIMIZED)
-			OS.shell_open("https://forms.gle/94hffgvFiSXHfA529")
-			$TabContainer.current_tab = 0
+			back_button.focus_neighbor_top = report_bug_email_button.get_path()
 	back_button.grab_focus()
 	GlobalMusic.button_sound(false, GlobalMusic.BtnType.STANDARD)

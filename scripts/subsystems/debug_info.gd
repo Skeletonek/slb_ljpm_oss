@@ -1,6 +1,7 @@
 extends Control
 
 const ERROR_MSG_PREFIX := "USER ERROR: "
+const ERROR_SCRIPT_MSG_PREFIX := "USER SCRIPT ERROR: "
 const WARNING_MSG_PREFIX := "USER WARNING: "
 
 @export var fps_label: Label
@@ -106,7 +107,12 @@ func debug_info() -> String:
 
 func append_error(text):
 	dev_errors_label.append_text("[color=red][ERR] " +
-	text.trim_prefix(ERROR_MSG_PREFIX) + "[/color]\n")
+		text.trim_prefix(
+			ERROR_MSG_PREFIX
+		).trim_prefix(
+			ERROR_SCRIPT_MSG_PREFIX
+		) + "[/color]\n"
+	)
 	dev_errors_cleaner.wait_time = 10.0
 	dev_errors_cleaner.start()
 

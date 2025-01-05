@@ -118,11 +118,14 @@ y_sort_enabled = true
 texture_filter = 1
 script = ExtResource("1_y5nnv")
 map = NodePath("ForestMap")
+version_2 = null
 speed_increment = 8.0
 speed = 300.0
+spawn_time_limit = null
+spawn_time_milk_limit = null
 metadata/_edit_vertical_guides_ = [-221.0, -650.0]
 
-[node name="GUI" type="Control" parent="." node_paths=PackedStringArray("label_time", "label_milk")]
+[node name="GUI" type="Control" parent="." node_paths=PackedStringArray("label_time", "label_milk", "speedometer_gauge")]
 z_index = 11
 layout_mode = 3
 anchors_preset = 15
@@ -137,6 +140,7 @@ grow_vertical = 2
 script = ExtResource("2_8a32l")
 label_time = NodePath("TimeContainer/LabelTime")
 label_milk = NodePath("MilkCountContainer/LabelMilk")
+speedometer_gauge = NodePath("../Camera2D/Speedometer/SpeedometerGauge")
 
 [node name="TimeContainer" type="HBoxContainer" parent="GUI"]
 layout_mode = 1

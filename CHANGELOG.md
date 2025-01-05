@@ -1,3 +1,27 @@
+#### 2.0-Beta+1
+ - Added lives mechanic for 2.0 gameplay
+ - Added countdown when powerup is about to end
+ - Added skins and maps buying
+ - Reworked Credits layer
+ - Changed "Report bug" tab to "Technical help" in settings layer
+ - Moved debug info to Technical help tab in settings layer
+ - Added gamepad deadzone setting
+ - Added telemetry notification when booting the game for first time
+ - Added "Community Made" badge for skins made by community
+ - Added community made Real Panda skin
+ - Added community made Content Maker skin
+ - Added community made Lukaszczyk on a Horse skin
+ - Added error popup when display server fails to initialize Wayland client for Linux systems
+ - Added achievements for all community made skins and Lunar Rover skin
+ - Added cheats for adding more milk
+ - Added cheats for instantly unlocking skins and maps
+ - Added easter egg for game, protagonist and Pandemonium birthday
+ - Implemented Serious Business and Globetrotter achievements
+ - Fixed player steering being not influenced by the slow motion power up
+ - Fixed V-Sync and UI blur setting not restoring properly after restart
+ - Fixed visible joint in Lunar Conflict map
+ - Standarized music files for 44.1KHz sample rate and compressed ever so slightly
+
 #### 2.0-Alpha+8
  - Added power up system
  - Added slow motion powerup

@@ -2,10 +2,12 @@ class_name Profile
 
 enum Skins {
 	FIAT_PANDA,
-	VOLVO_COMBI,
+	# VOLVO_COMBI,
 	REAL_PANDA,
 	PIGTANK,
 	LUNAR_ROVER,
+	CONTENT_MAKER,
+	LUKASZCZYK_ON_HORSE,
 }
 
 enum Maps {

@@ -10,7 +10,7 @@ extends Node2D
 	get:
 		return speed
 
-@export var spawn_time_limit: float = 20:
+@export var spawn_time_limit: float = 16:
 	get:
 		return spawn_time_limit
 
@@ -23,11 +23,17 @@ var milk_instance := preload("res://nodes/Milk.tscn")
 var milk_triple_instance := preload("res://nodes/MilkTriple.tscn")
 var powerup_slowmotion_instance := preload("res://nodes/Powerup_SlowMotion.tscn")
 
+var original_speed: float
 var stop_processing := false
 var spawn_time: float = 0
 var spawn_time_milk: float = 0
 var spawn_milk_count: int = 1
-var gauge_speed: float = -36
+
+var lives: int = 1:
+	get:
+		return lives
+	set(value):
+		lives = value
 
 var milks: int = 0:
 	get:
@@ -43,14 +49,13 @@ var time: int = 0:
 var time_scale: float = 1.0:
 	get:
 		return time_scale
-	set(x):
-		time_scale = x
+	set(value):
+		time_scale = value
 
 var final_score: int:
 	get:
 		return final_score
 
-@onready var speedometer_gauge: Sprite2D = $Camera2D/Speedometer/SpeedometerGauge
 @onready var gui: Control = $GUI
 # @onready var milk_spawner: Timer = $Timer
 @onready var bass_player: AudioStreamPlayer = $BassPlayer
@@ -66,6 +71,9 @@ func _ready():
 	# vehicle_reached_oob.connect(_respawn_vehicle)
 	GlobalMusic.change_track()
 	SignalBus.cr_map.connect(_set_map)
+	if version_2:
+		lives = 3
+		original_speed = speed
 
 
 func _process(delta):
@@ -81,7 +89,6 @@ func _physics_process(delta):
 
 
 func game_over():
-	time_scale = 1.0
 	final_score = (milks * 100000) + roundi((time) * 0.00001)
 	bass_player.stop()
 	$PauseLayer.process_mode = Node.PROCESS_MODE_DISABLED
@@ -97,8 +104,7 @@ func _speed_management(delta):
 		time += delta * 1000000
 		if speed < 1560:
 			speed += delta * speed_increment * time_scale
-			gauge_speed = (speed / 10) - 66
-			speedometer_gauge.rotation_degrees = gauge_speed
+			gui.gauge_speed = (speed / 10) - 66
 	else:
 		if speed > -300:
 			speed -= delta * 250.0
@@ -210,14 +216,16 @@ func _achievement_check():
 
 func _check_game_over_achievements():
 	match(ProfileBus.profile.chosen_skin):
-		Profile.Skins.VOLVO_COMBI:
-			AchievementSystem.call_achievement("volvo_combi")
+		# Profile.Skins.VOLVO_COMBI:
+		# 	AchievementSystem.call_achievement("volvo_combi")
 		Profile.Skins.REAL_PANDA:
 			AchievementSystem.call_achievement("real_panda")
 		Profile.Skins.PIGTANK:
 			AchievementSystem.call_achievement("pigtank")
-		# Profile.Skins.LUNAR_ROVER:
-		# 	AchievementSystem.call_achievement("lunar_rover")
+		Profile.Skins.LUNAR_ROVER:
+			AchievementSystem.call_achievement("lunar_rover")
+		Profile.Skins.CONTENT_MAKER:
+			AchievementSystem.call_achievement("content_maker")
 	match(ProfileBus.profile.chosen_map):
 		Profile.Maps.SAHARA:
 			AchievementSystem.call_achievement("sahara")

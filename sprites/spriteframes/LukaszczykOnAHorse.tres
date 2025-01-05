@@ -1,0 +1,18 @@
+[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://bd6i80g2domgy"]
+
+[ext_resource type="Texture2D" uid="uid://duphjacyo6sq" path="res://sprites/LukaszczykOnAHorse_0001.png" id="1_xktwc"]
+[ext_resource type="Texture2D" uid="uid://ske6tvbfxsnm" path="res://sprites/LukaszczykOnAHorse_0002.png" id="2_4qw7o"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_xktwc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_4qw7o")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]

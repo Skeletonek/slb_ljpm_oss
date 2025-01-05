@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dhg1bdg5yc1y1"]
+[gd_scene load_steps=11 format=3 uid="uid://dhg1bdg5yc1y1"]
 
 [ext_resource type="Script" path="res://scripts/main_menu_anim.gd" id="1_lo1uh"]
 [ext_resource type="PackedScene" uid="uid://7vvoan13ljn" path="res://nodes/maps/ForestMap.tscn" id="2_7vlv3"]
@@ -29,6 +29,18 @@ _data = {
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_io2uc"]
 size = Vector2(70, 40)
+
+[sub_resource type="Gradient" id="Gradient_7oas1"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1wdal"]
+gradient = SubResource("Gradient_7oas1")
+width = 16
+height = 8
+
+[sub_resource type="Gradient" id="Gradient_4sj67"]
+offsets = PackedFloat32Array(0, 0.173285, 0.382671, 0.610108, 0.819495, 1)
+colors = PackedColorArray(1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1)
 
 [node name="MainMenuAnim" type="Camera2D" node_paths=PackedStringArray("map")]
 texture_filter = 1
@@ -78,3 +90,24 @@ angular_velocity_min = -90.0
 angular_velocity_max = 90.0
 scale_amount_min = 0.5
 scale_amount_max = 0.8
+
+[node name="ConfettiRain" type="CPUParticles2D" parent="."]
+visible = false
+position = Vector2(0, -440)
+emitting = false
+amount = 256
+lifetime = 10.0
+local_coords = true
+texture = SubResource("GradientTexture2D_1wdal")
+emission_shape = 3
+emission_rect_extents = Vector2(720, 1)
+direction = Vector2(0, 1)
+spread = 10.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 300.0
+angular_velocity_min = -90.0
+angular_velocity_max = 90.0
+scale_amount_min = 0.5
+scale_amount_max = 1.2
+color_initial_ramp = SubResource("Gradient_4sj67")

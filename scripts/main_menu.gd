@@ -13,11 +13,13 @@ var changelog: String
 var easter_egg_clickable := false
 
 @onready var options_layer = $OptionsLayer
-@onready var http_request = $HTTPRequest
-@onready var http_request_changelog = $HTTPRequest2
+
 @onready var update_button = $MainMenuLayer/UpdateButton
 @onready var rick_player: VideoStreamPlayer = $Rick
 
+@onready var http_request = $HTTPRequest
+@onready var http_request_changelog = $HTTPRequest2
+@onready var player_name_input_popup = $PopupInput
 
 func _ready() -> void:
 	if GlobalMusic.stream.resource_path == "res://audio/music/the-great-rescue.ogg":
@@ -28,26 +30,10 @@ func _ready() -> void:
 
 	GlobalMusic.connect_buttons(self)
 
-	skeletonek_logo.gui_input.connect(_on_skeletonek_logo_click)
-	godot_logo.gui_input.connect(_on_godot_logo_click)
-
-#	GlobalMusic.finished.connect(_on_global_music_finished)
-#	if not GlobalMusic.is_playing():
-#		_on_global_music_finished()
 	focus_node.grab_focus()
 
-	# signal_debug_dev_buttons.connect(_enable_dev_buttons)
-	# Developer console is inaccessible on Android, unless you have plugged in a keyboard
-	# if OS.get_name() == "Android" and OS.is_debug_build():
-		# $MainMenuLayer/DevButtons.visible = true
-
-	var device_info_label = $CreditsLayer/PanelContainer/MarginContainer/\
-		VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer2/DeviceInfo
-	device_info_label.text = DebugInfo.debug_info() + "\n\n"
-	var game_info_label = $CreditsLayer/PanelContainer/MarginContainer/\
-		VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer2/GameInfo
-	game_info_label.text = "Wersja gry: " + \
-		ProjectSettings.get_setting("application/config/version") + "\n\n"
+	if SettingsBus.first_boot:
+		$PopupTelemetry.show()
 
 	# Check for update
 	http_request.request_completed.connect(_validate_update)
@@ -126,16 +112,16 @@ func _notification(what):
 
 func _on_continue_button_pressed():
 	if SettingsBus.playername.split("#")[0] == "":
-		$popup_input.show()
-		$popup_input.save_button.connect(_on_continue_button_pressed)
+		player_name_input_popup.show()
+		player_name_input_popup.save_button.connect(_on_continue_button_pressed)
 		return
 	get_tree().change_scene_to_file("res://scenes/carride.tscn")
 
 
 func _on_new_game_2_0_button_pressed():
 	if SettingsBus.playername.split("#")[0] == "":
-		$popup_input.show()
-		$popup_input.save_button.connect(_on_new_game_2_0_button_pressed)
+		player_name_input_popup.show()
+		player_name_input_popup.save_button.connect(_on_new_game_2_0_button_pressed)
 		return
 	get_tree().change_scene_to_file("res://scenes/carride2_0.tscn")
 
@@ -213,24 +199,12 @@ func _hide_all_layers():
 	easter_egg_clickable = false
 
 
-func _on_skeletonek_logo_click(event):
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			OS.shell_open("https://www.skeletonek.com")
-
-
-func _on_godot_logo_click(event):
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			OS.shell_open("https://godotengine.org")
-
-
 func switch_easter_egg_clickable(no: bool) -> void:
 	easter_egg_clickable = !no
 
 
 func _on_easter_egg_button_pressed():
-	if easter_egg_clickable && not $popup_input.visible && not $PopupChangelog.visible:
+	if easter_egg_clickable && not player_name_input_popup.visible && not $PopupChangelog.visible:
 		AchievementSystem.call_achievement("rick_roll")
 		GlobalMusic.stop()
 		rick_player.play()

@@ -11,6 +11,7 @@ var stop_processing := false
 @onready var luk_button: TouchScreenButton = $LukaszczykWPandzie/TouchScreenButton
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
 @onready var milk_rain: CPUParticles2D = $MilkRain
+@onready var confetti_rain: CPUParticles2D = $ConfettiRain
 
 
 func _enter_tree() -> void:
@@ -55,6 +56,10 @@ func _set_map():
 
 func _easter_egg() -> void:
 	var current_date = Time.get_date_dict_from_system()
+	var birthday_days = [24, 25, 26]
 	if current_date['month'] == Time.MONTH_JUNE and current_date['day'] == 1:
 		milk_rain.emitting = true
 		milk_rain.show()
+	elif current_date['month'] == Time.MONTH_NOVEMBER and current_date['day'] in birthday_days:
+		confetti_rain.emitting = true
+		confetti_rain.show()

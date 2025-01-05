@@ -38,10 +38,11 @@ func _enter_tree() -> void:
 
 func connect_buttons(root):
 	for child in root.get_children():
-		if child is BaseButton and child.toggle_mode == true:
-			child.toggled.connect(button_sound.bind(BtnType.SWITCH))
-		elif child is BaseButton:
-			child.pressed.connect(button_sound.bind(false,  BtnType.STANDARD))
+		if not child.is_in_group("NoAudio"):
+			if child is BaseButton and child.toggle_mode == true:
+				child.toggled.connect(button_sound.bind(BtnType.SWITCH))
+			elif child is BaseButton:
+				child.pressed.connect(button_sound.bind(false,  BtnType.STANDARD))
 		connect_buttons(child)
 
 

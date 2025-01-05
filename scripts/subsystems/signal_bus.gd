@@ -5,16 +5,23 @@ signal finished_loading
 signal load_specific_timeline(timeline_path)
 signal refresh_achievements_viewer
 
-signal reduce_motion(yes: bool)
 signal enable_touchscreen_vbuttons(yes: bool)
-signal call_achievement(name)
 signal dev_console(yes: bool)
+signal enable_telemetry(yes: bool)
+signal reduce_motion(yes: bool)
+
+signal call_achievement(name)
 
 signal cr_speedometer_value(yes: bool)
 signal cr_skin
 signal cr_map
+signal cr_update_milks_count
+signal cr_ch_unlock_maps
+signal cr_ch_unlock_skins
 
 var dialogic_path
+var ch_unlock_maps = false
+var ch_unlock_skins = false
 
 func _ready():
 	finished_loading.connect(_on_finished_loading)

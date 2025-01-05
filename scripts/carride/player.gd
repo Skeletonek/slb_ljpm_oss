@@ -6,18 +6,30 @@ extends Area2D
 
 var move_vector: Vector2
 var y_limit := position.y
-# Called when the node enters the scene tree for the first time.
-func _ready():
+var joystick_lock_up := false
+var joystick_lock_down := false
+var original_y_position: float
+
+var dont_collide := false
+
+var powerup_timer: Timer
+var explosion_tween: Tween
+
+
+func _ready() -> void:
 	SignalBus.reduce_motion.connect(_reduce_motion)
+	SignalBus.cr_skin.connect(_set_skin)
 	_set_skin()
 	if SettingsBus.reduced_motion:
 		$LukaszczykWPandzie.stop()
-	SignalBus.cr_skin.connect(_set_skin)
+	if owner.version_2:
+		original_y_position = position.y
+		powerup_timer = $PowerupTimer
+		powerup_timer.timeout.connect(_powerup_timer_timeout)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	position += move_vector * delta
+func _process(delta) -> void:
+	position += move_vector * delta * owner.time_scale
 	if move_vector.y > 0:
 		if position.y >= y_limit:
 			move_vector = Vector2(0,0)
@@ -29,14 +41,26 @@ func _process(delta):
 func _input(event):
 	if event.is_action_pressed("move_up"):
 		if event is InputEventJoypadMotion:
-			if event.get_action_strength("move_up") != SettingsBus.gamepad_deadzone:
+			if event.get_action_strength("move_up") < SettingsBus.gamepad_deadzone:
+				joystick_lock_up = false
 				return
+			if joystick_lock_up:
+				return
+			joystick_lock_up = true
 		move(true)
 	elif event.is_action_pressed("move_down"):
 		if event is InputEventJoypadMotion:
-			if event.get_action_strength("move_down") != SettingsBus.gamepad_deadzone:
+			if event.get_action_strength("move_down") < SettingsBus.gamepad_deadzone:
+				joystick_lock_down = false
 				return
+			if joystick_lock_down:
+				return
+			joystick_lock_down = true
 		move(false)
+	if event.is_action_released("move_down") and event is InputEventJoypadMotion:
+		joystick_lock_down = false
+	if event.is_action_released("move_up") and event is InputEventJoypadMotion:
+		joystick_lock_up = false
 #	elif event is InputEventScreenTouch:
 #		if event.pressed and event.index == 0:
 #			if event.position.y > (get_viewport().get_visible_rect().size.y / 2):
@@ -46,41 +70,79 @@ func _input(event):
 
 
 func _on_area_entered(area):
-	var ar = area.get_parent()
-	if ar.is_in_group("Milk"):
-		if process_mode != Node.PROCESS_MODE_DISABLED:
-			if ar.is_in_group("MilkTriple"):
-				owner.milks += 3
-			else:
-				owner.milks += 1
-			_milk_achievement_check()
-	if ar.is_in_group("Powerups"):
-		if ar.type == PowerupClass.Powerups.SLOWMOTION:
-			push_warning("Slowing down!")
-			owner.time_scale = 0.5
-			# owner.milk_spawner.wait_time *= 1 / owner.time_scale
-			await get_tree().create_timer(ar.time).timeout
-			owner.time_scale = 1.0
-			# owner.milk_spawner.wait_time *= 1 / owner.time_scale
-			push_warning("Restoring speed!")
-			return
-	if ar.is_in_group("Obstacles"):
-		$CrashPlayer.play()
-		if not SettingsBus.godmode:
-			$LukaszczykWPandzie.hide()
-			$Explosion.play()
-			var tween = get_tree().create_tween()
-			tween.tween_property(
-					$Explosion,
-					"position",
-					Vector2.LEFT * owner.speed,
-					explosion_anim_duration_multiplier
-			)
-			tween.tween_callback($Explosion.queue_free)
+	if not dont_collide:
+		var ar = area.get_parent()
+		if ar.is_in_group("Milk"):
+			_area_entered_milk(ar)
+		if ar.is_in_group("Powerups"):
+			_area_entered_powerup(ar)
+		if ar.is_in_group("Obstacles"):
+			_area_entered_obstacle(ar)
+
+
+func _area_entered_milk(ar):
+	if process_mode != Node.PROCESS_MODE_DISABLED:
+		if ar.is_in_group("MilkTriple"):
+			owner.milks += 3
+		else:
+			owner.milks += 1
+		_milk_achievement_check()
+
+
+func _area_entered_powerup(ar):
+	powerup_timer.stop()
+	_powerup_timer_timeout()
+	owner.gui.show_powerup(ar.type)
+	if ar.type == PowerupClass.Powerups.SLOWMOTION:
+		owner.time_scale = 0.5
+		owner.gui.powerup_ending_timer.start(ar.time-3)
+		powerup_timer.start(ar.time)
+		return
+
+
+func _area_entered_obstacle(ar):
+	$CrashPlayer.play()
+	if ar.is_in_group("OutOfBounds"):
+		AchievementSystem.call_achievement("offroad")
+	if not SettingsBus.godmode:
+		owner.lives -= 1
+		if owner.version_2:
+			owner.gui.hide_one_live()
+			_powerup_timer_timeout()
+			powerup_timer.stop()
+
+		$LukaszczykWPandzie.hide()
+		if explosion_tween:
+			explosion_tween.kill()
+		$Explosion.position = Vector2(0,0)
+		$Explosion.play()
+		explosion_tween = $Explosion.create_tween()
+		explosion_tween.tween_property(
+				$Explosion,
+				"position",
+				Vector2.LEFT * owner.speed,
+				explosion_anim_duration_multiplier
+		)
+
+		call_deferred("set", "process_mode", Node.PROCESS_MODE_DISABLED)
+		if owner.lives <= 0:
 			owner.game_over()
-			call_deferred("set", "process_mode", Node.PROCESS_MODE_DISABLED)
-		if ar.is_in_group("OutOfBounds"):
-			AchievementSystem.call_achievement("offroad")
+		else:
+			await get_tree().create_timer(2).timeout
+			position = Vector2(position.x, original_y_position)
+			y_limit = position.y
+			call_deferred("set", "process_mode", Node.PROCESS_MODE_INHERIT)
+			owner.speed = owner.original_speed
+			$LukaszczykWPandzie.show()
+			dont_collide = true
+			await get_tree().create_timer(1).timeout
+			dont_collide = false
+
+
+func _powerup_timer_timeout():
+	owner.gui.hide_powerup()
+	owner.gui.powerup_ending_timer.stop()
+	owner.time_scale = 1.0
 
 
 func move(dir_up: bool):

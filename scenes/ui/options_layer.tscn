@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dc3ntad11u0qu"]
+[gd_scene load_steps=35 format=3 uid="uid://dc3ntad11u0qu"]
 
 [ext_resource type="Script" path="res://scripts/ui/options_layer.gd" id="1_cahn6"]
 [ext_resource type="Material" uid="uid://cqn5rkmj7io2i" path="res://shaders/panel_shader_material.tres" id="2_4i7gj"]
@@ -24,6 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://34qot3tm0xfr" path="res://images/gamepad_controls/DPadUp.png" id="21_p61gg"]
 [ext_resource type="Texture2D" uid="uid://bbyp5mnkdt3ai" path="res://images/gamepad_controls/JoyDown.png" id="22_hr6iv"]
 [ext_resource type="Texture2D" uid="uid://blipcw147emwl" path="res://images/gamepad_controls/DPadDown.png" id="23_6rl4w"]
+[ext_resource type="FontFile" uid="uid://c08wcdbvxirl1" path="res://theme/fonts/NotoSans-Medium.ttf" id="24_kg86x"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_rskjs"]
 font_size = 12
@@ -47,38 +48,50 @@ gradient = SubResource("Gradient_tecms")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pyy0l"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_25glv"]
+font_size = 14
+
+[sub_resource type="LabelSettings" id="LabelSettings_7ly4a"]
+font_size = 14
+
 [sub_resource type="LabelSettings" id="LabelSettings_6iuel"]
 font_size = 24
 
-[node name="OptionsLayer" type="CanvasLayer" node_paths=PackedStringArray("fullscreen_button", "graphics_api_button", "graphics_api_restart", "vsync_button", "vsync_info", "linux_windowing_system_button", "linux_windowing_system_restart", "linux_windowing_system_info", "framerate_cap_spinbox", "blur_button", "ui_scaling_slider", "master_slider", "sfx_slider", "music_slider", "master_input", "sfx_input", "music_input", "devconsole_button", "devfps_button", "tch_tap_button", "tch_swipe_button", "tch_vbuttons_button", "playername_edit", "playername_uuid", "reduced_motion_button", "easier_font_button", "fullscreen_android_info", "back_button", "info_popup", "info_popup_title", "info_popup_content")]
+[node name="OptionsLayer" type="CanvasLayer" node_paths=PackedStringArray("fullscreen_button", "fullscreen_android_info", "graphics_api_button", "graphics_api_restart", "vsync_button", "vsync_info", "linux_windowing_system_button", "linux_windowing_system_restart", "linux_windowing_system_info", "framerate_cap_spinbox", "blur_button", "ui_scaling_slider", "master_slider", "sfx_slider", "music_slider", "master_input", "sfx_input", "music_input", "tch_tap_button", "tch_swipe_button", "tch_vbuttons_button", "gamepad_deadzone_slider", "playername_edit", "playername_uuid", "telemetry_button", "devconsole_button", "devfps_button", "reduced_motion_button", "easier_font_button", "game_version_label", "device_data_label", "report_bug_forms_button", "report_bug_email_button", "back_button", "info_popup", "info_popup_title", "info_popup_content")]
 script = ExtResource("1_cahn6")
-fullscreen_button = NodePath("TabContainer/Grafika/MarginContainer/VBoxContainer/FullScreen/FullScreenButton")
-graphics_api_button = NodePath("TabContainer/Grafika/MarginContainer/VBoxContainer/GraphicsAPI/GraphicsAPIButton")
-graphics_api_restart = NodePath("TabContainer/Grafika/MarginContainer/VBoxContainer/GraphicsAPI/GraphicsAPIRestartLabel")
-vsync_button = NodePath("TabContainer/Grafika/MarginContainer/VBoxContainer/VSync/VSyncButton")
-vsync_info = NodePath("TabContainer/Grafika/MarginContainer/VBoxContainer/VSync/VSyncLabelDesc")
-linux_windowing_system_button = NodePath("TabContainer/Grafika/MarginContainer/VBoxContainer/WindowingSystem/LinuxWindowingSystemButton")
-linux_windowing_system_restart = NodePath("TabContainer/Grafika/MarginContainer/VBoxContainer/WindowingSystem/LinuxWindowingSystemRestartLabel")
-linux_windowing_system_info = NodePath("TabContainer/Grafika/MarginContainer/VBoxContainer/WindowingSystem/LinuxWindowingSystemLabelDesc")
-framerate_cap_spinbox = NodePath("TabContainer/Grafika/MarginContainer/VBoxContainer/Framelimit/FramelimitSpinner")
-blur_button = NodePath("TabContainer/Grafika/MarginContainer/VBoxContainer/UIBlur/UIBlurButton")
-ui_scaling_slider = NodePath("TabContainer/Grafika/MarginContainer/VBoxContainer/UIScaling/Container/TextureRect/UIScalingSlider")
+fullscreen_button = NodePath("TabContainer/Graphics/MarginContainer/VBoxContainer/FullScreen/FullScreenButton")
+fullscreen_android_info = NodePath("TabContainer/Graphics/MarginContainer/VBoxContainer/FullScreen/FullScreenLabelDesc")
+graphics_api_button = NodePath("TabContainer/Graphics/MarginContainer/VBoxContainer/GraphicsAPI/GraphicsAPIButton")
+graphics_api_restart = NodePath("TabContainer/Graphics/MarginContainer/VBoxContainer/GraphicsAPI/GraphicsAPIRestartLabel")
+vsync_button = NodePath("TabContainer/Graphics/MarginContainer/VBoxContainer/VSync/VSyncButton")
+vsync_info = NodePath("TabContainer/Graphics/MarginContainer/VBoxContainer/VSync/VSyncLabelDesc")
+linux_windowing_system_button = NodePath("TabContainer/Graphics/MarginContainer/VBoxContainer/WindowingSystem/LinuxWindowingSystemButton")
+linux_windowing_system_restart = NodePath("TabContainer/Graphics/MarginContainer/VBoxContainer/WindowingSystem/LinuxWindowingSystemRestartLabel")
+linux_windowing_system_info = NodePath("TabContainer/Graphics/MarginContainer/VBoxContainer/WindowingSystem/LinuxWindowingSystemLabelDesc")
+framerate_cap_spinbox = NodePath("TabContainer/Graphics/MarginContainer/VBoxContainer/Framelimit/FramelimitSpinner")
+blur_button = NodePath("TabContainer/Graphics/MarginContainer/VBoxContainer/UIBlur/UIBlurButton")
+ui_scaling_slider = NodePath("TabContainer/Graphics/MarginContainer/VBoxContainer/UIScaling/Container/TextureRect/UIScalingSlider")
 master_slider = NodePath("TabContainer/Audio/VBoxContainer/HBoxContainer2/MasterSlider")
 sfx_slider = NodePath("TabContainer/Audio/VBoxContainer/HBoxContainer/SFXSlider")
 music_slider = NodePath("TabContainer/Audio/VBoxContainer/HBoxContainer4/MusicSlider")
 master_input = NodePath("TabContainer/Audio/VBoxContainer/HBoxContainer2/MasterInput")
 sfx_input = NodePath("TabContainer/Audio/VBoxContainer/HBoxContainer/SFXInput")
 music_input = NodePath("TabContainer/Audio/VBoxContainer/HBoxContainer4/MusicInput")
-devconsole_button = NodePath("TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/ShowConsole/ShowConsoleButton")
-devfps_button = NodePath("TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/ShowFPS/ShowFPSButton")
-tch_tap_button = NodePath("TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/TouchScreenControls/HBoxContainer/Tap/TCHTap")
-tch_swipe_button = NodePath("TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/TouchScreenControls/HBoxContainer/Swipe/TCHSwipe")
-tch_vbuttons_button = NodePath("TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/TouchScreenControls/HBoxContainer/VirtualButtons/TCHVButtons")
-playername_edit = NodePath("TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/PlayerName/HBoxContainer/PlayernameEdit")
-playername_uuid = NodePath("TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/PlayerName/HBoxContainer/PlayernameUUID")
-reduced_motion_button = NodePath("TabContainer/Dostępność/VBoxContainer/ReducedMotion/ReducedMotionButton")
-easier_font_button = NodePath("TabContainer/Dostępność/VBoxContainer/EasierFont/EasierFontButton")
-fullscreen_android_info = NodePath("TabContainer/Grafika/MarginContainer/VBoxContainer/FullScreen/FullScreenLabelDesc")
+tch_tap_button = NodePath("TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/TouchScreenControls/HBoxContainer/Tap/TCHTap")
+tch_swipe_button = NodePath("TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/TouchScreenControls/HBoxContainer/Swipe/TCHSwipe")
+tch_vbuttons_button = NodePath("TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/TouchScreenControls/HBoxContainer/VirtualButtons/TCHVButtons")
+gamepad_deadzone_slider = NodePath("TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/Controller/Controller/Deadzone/HBoxContainer/DeadzoneSlider")
+playername_edit = NodePath("TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/PlayerName/HBoxContainer/PlayernameEdit")
+playername_uuid = NodePath("TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/PlayerName/HBoxContainer/PlayernameUUID")
+telemetry_button = NodePath("TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/Telemetry/TelemetryButton")
+devconsole_button = NodePath("TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/ShowConsole/ShowConsoleButton")
+devfps_button = NodePath("TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/ShowFPS/ShowFPSButton")
+reduced_motion_button = NodePath("TabContainer/Accessibility/VBoxContainer/ReducedMotion/ReducedMotionButton")
+easier_font_button = NodePath("TabContainer/Accessibility/VBoxContainer/EasierFont/EasierFontButton")
+game_version_label = NodePath("TabContainer/Technical help/VBoxContainer/GameVersionLabel")
+device_data_label = NodePath("TabContainer/Technical help/VBoxContainer/DeviceDataLabel")
+report_bug_forms_button = NodePath("TabContainer/Technical help/VBoxContainer/ReportBug/ReportBugFormsButton")
+report_bug_email_button = NodePath("TabContainer/Technical help/VBoxContainer/ReportBug/ReportBugEmailButton")
 back_button = NodePath("MarginContainer/BackButton")
 info_popup = NodePath("PopupInfo")
 info_popup_title = NodePath("PopupInfo/Panel/VBoxContainer/HBoxContainer2/PopupInfoTitle")
@@ -95,11 +108,11 @@ size_flags_vertical = 4
 tab_alignment = 1
 current_tab = 0
 
-[node name="Grafika" type="Control" parent="TabContainer"]
+[node name="Graphics" type="Control" parent="TabContainer"]
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Grafika"]
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Graphics"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -111,58 +124,58 @@ theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 128
 theme_override_constants/margin_bottom = 96
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Grafika/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Graphics/MarginContainer"]
 custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
 alignment = 1
 
-[node name="FullScreen" type="HBoxContainer" parent="TabContainer/Grafika/MarginContainer/VBoxContainer"]
+[node name="FullScreen" type="HBoxContainer" parent="TabContainer/Graphics/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 
-[node name="FullScreenLabel" type="Label" parent="TabContainer/Grafika/MarginContainer/VBoxContainer/FullScreen"]
+[node name="FullScreenLabel" type="Label" parent="TabContainer/Graphics/MarginContainer/VBoxContainer/FullScreen"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Pełny ekran:"
 vertical_alignment = 1
 
-[node name="FullScreenLabelDesc" type="Label" parent="TabContainer/Grafika/MarginContainer/VBoxContainer/FullScreen"]
+[node name="FullScreenLabelDesc" type="Label" parent="TabContainer/Graphics/MarginContainer/VBoxContainer/FullScreen"]
 visible = false
 layout_mode = 2
 text = "Ta opcja jest niedostępna dla twojego systemu"
 label_settings = SubResource("LabelSettings_rskjs")
 horizontal_alignment = 1
 
-[node name="FullScreenButton" type="Button" parent="TabContainer/Grafika/MarginContainer/VBoxContainer/FullScreen"]
+[node name="FullScreenButton" type="Button" parent="TabContainer/Graphics/MarginContainer/VBoxContainer/FullScreen"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 toggle_mode = true
 text = "Wyłączony"
 script = ExtResource("3_uq6y0")
 
-[node name="GraphicsAPI" type="HBoxContainer" parent="TabContainer/Grafika/MarginContainer/VBoxContainer"]
+[node name="GraphicsAPI" type="HBoxContainer" parent="TabContainer/Graphics/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_constants/separation = 24
 
-[node name="GraphicsAPILabel" type="Label" parent="TabContainer/Grafika/MarginContainer/VBoxContainer/GraphicsAPI"]
+[node name="GraphicsAPILabel" type="Label" parent="TabContainer/Graphics/MarginContainer/VBoxContainer/GraphicsAPI"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "API graficzne:"
 vertical_alignment = 1
 
-[node name="GraphicsAPIRestartLabel" type="Label" parent="TabContainer/Grafika/MarginContainer/VBoxContainer/GraphicsAPI"]
+[node name="GraphicsAPIRestartLabel" type="Label" parent="TabContainer/Graphics/MarginContainer/VBoxContainer/GraphicsAPI"]
 visible = false
 layout_mode = 2
 text = "Zmiana tego ustawienia wymaga restartu gry"
 label_settings = SubResource("LabelSettings_p01vb")
 horizontal_alignment = 1
 
-[node name="GraphicsAPIInfoButton" type="Button" parent="TabContainer/Grafika/MarginContainer/VBoxContainer/GraphicsAPI"]
+[node name="GraphicsAPIInfoButton" type="Button" parent="TabContainer/Graphics/MarginContainer/VBoxContainer/GraphicsAPI"]
 layout_mode = 2
 text = "?"
 
-[node name="GraphicsAPIButton" type="OptionButton" parent="TabContainer/Grafika/MarginContainer/VBoxContainer/GraphicsAPI"]
+[node name="GraphicsAPIButton" type="OptionButton" parent="TabContainer/Graphics/MarginContainer/VBoxContainer/GraphicsAPI"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 selected = 0
@@ -171,18 +184,18 @@ popup/item_0/text = "Vulkan"
 popup/item_1/text = "OpenGL"
 popup/item_1/id = 1
 
-[node name="VSync" type="HBoxContainer" parent="TabContainer/Grafika/MarginContainer/VBoxContainer"]
+[node name="VSync" type="HBoxContainer" parent="TabContainer/Graphics/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_constants/separation = 24
 
-[node name="VSyncLabel" type="Label" parent="TabContainer/Grafika/MarginContainer/VBoxContainer/VSync"]
+[node name="VSyncLabel" type="Label" parent="TabContainer/Graphics/MarginContainer/VBoxContainer/VSync"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Synchronizacja pionowa (V-sync):"
 vertical_alignment = 1
 
-[node name="VSyncLabelDesc" type="Label" parent="TabContainer/Grafika/MarginContainer/VBoxContainer/VSync"]
+[node name="VSyncLabelDesc" type="Label" parent="TabContainer/Graphics/MarginContainer/VBoxContainer/VSync"]
 visible = false
 layout_mode = 2
 text = "Część ustawień jest niedostępna
@@ -190,11 +203,11 @@ dla twojego systemu."
 label_settings = SubResource("LabelSettings_rskjs")
 horizontal_alignment = 2
 
-[node name="VSyncInfoButton" type="Button" parent="TabContainer/Grafika/MarginContainer/VBoxContainer/VSync"]
+[node name="VSyncInfoButton" type="Button" parent="TabContainer/Graphics/MarginContainer/VBoxContainer/VSync"]
 layout_mode = 2
 text = "?"
 
-[node name="VSyncButton" type="OptionButton" parent="TabContainer/Grafika/MarginContainer/VBoxContainer/VSync"]
+[node name="VSyncButton" type="OptionButton" parent="TabContainer/Graphics/MarginContainer/VBoxContainer/VSync"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 selected = 1
@@ -207,36 +220,36 @@ popup/item_2/id = 2
 popup/item_3/text = "Mailbox"
 popup/item_3/id = 3
 
-[node name="WindowingSystem" type="HBoxContainer" parent="TabContainer/Grafika/MarginContainer/VBoxContainer"]
+[node name="WindowingSystem" type="HBoxContainer" parent="TabContainer/Graphics/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_constants/separation = 24
 
-[node name="LinuxWindowingSystemLabel" type="Label" parent="TabContainer/Grafika/MarginContainer/VBoxContainer/WindowingSystem"]
+[node name="LinuxWindowingSystemLabel" type="Label" parent="TabContainer/Graphics/MarginContainer/VBoxContainer/WindowingSystem"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "System wyświetlania okien:"
 vertical_alignment = 1
 
-[node name="LinuxWindowingSystemRestartLabel" type="Label" parent="TabContainer/Grafika/MarginContainer/VBoxContainer/WindowingSystem"]
+[node name="LinuxWindowingSystemRestartLabel" type="Label" parent="TabContainer/Graphics/MarginContainer/VBoxContainer/WindowingSystem"]
 visible = false
 layout_mode = 2
 text = "Zmiana tego ustawienia wymaga restartu gry"
 label_settings = SubResource("LabelSettings_f65hj")
 horizontal_alignment = 1
 
-[node name="LinuxWindowingSystemLabelDesc" type="Label" parent="TabContainer/Grafika/MarginContainer/VBoxContainer/WindowingSystem"]
+[node name="LinuxWindowingSystemLabelDesc" type="Label" parent="TabContainer/Graphics/MarginContainer/VBoxContainer/WindowingSystem"]
 visible = false
 layout_mode = 2
 text = "Ta opcja jest niedostępna dla twojego systemu"
 label_settings = SubResource("LabelSettings_rskjs")
 horizontal_alignment = 2
 
-[node name="LinuxWindowingSystemInfoButton" type="Button" parent="TabContainer/Grafika/MarginContainer/VBoxContainer/WindowingSystem"]
+[node name="LinuxWindowingSystemInfoButton" type="Button" parent="TabContainer/Graphics/MarginContainer/VBoxContainer/WindowingSystem"]
 layout_mode = 2
 text = "?"
 
-[node name="LinuxWindowingSystemButton" type="OptionButton" parent="TabContainer/Grafika/MarginContainer/VBoxContainer/WindowingSystem"]
+[node name="LinuxWindowingSystemButton" type="OptionButton" parent="TabContainer/Graphics/MarginContainer/VBoxContainer/WindowingSystem"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 selected = 0
@@ -245,24 +258,24 @@ popup/item_0/text = "X11"
 popup/item_1/text = "Wayland"
 popup/item_1/id = 1
 
-[node name="Framelimit" type="HBoxContainer" parent="TabContainer/Grafika/MarginContainer/VBoxContainer"]
+[node name="Framelimit" type="HBoxContainer" parent="TabContainer/Graphics/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 
-[node name="FramelimitLabel" type="Label" parent="TabContainer/Grafika/MarginContainer/VBoxContainer/Framelimit"]
+[node name="FramelimitLabel" type="Label" parent="TabContainer/Graphics/MarginContainer/VBoxContainer/Framelimit"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Limit klatek na sekundę: "
 vertical_alignment = 1
 
-[node name="FramelimitLabelDesc" type="Label" parent="TabContainer/Grafika/MarginContainer/VBoxContainer/Framelimit"]
+[node name="FramelimitLabelDesc" type="Label" parent="TabContainer/Graphics/MarginContainer/VBoxContainer/Framelimit"]
 visible = false
 layout_mode = 2
 text = "Ustawienia pełnego ekranu są niedostępne na platformie Android"
 label_settings = SubResource("LabelSettings_rskjs")
 horizontal_alignment = 1
 
-[node name="FramelimitSpinner" type="SpinBox" parent="TabContainer/Grafika/MarginContainer/VBoxContainer/Framelimit"]
+[node name="FramelimitSpinner" type="SpinBox" parent="TabContainer/Graphics/MarginContainer/VBoxContainer/Framelimit"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 min_value = 30.0
@@ -273,46 +286,46 @@ alignment = 1
 editable = false
 custom_arrow_step = 5.0
 
-[node name="UIBlur" type="HBoxContainer" parent="TabContainer/Grafika/MarginContainer/VBoxContainer"]
+[node name="UIBlur" type="HBoxContainer" parent="TabContainer/Graphics/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 
-[node name="UIBlurLabel" type="Label" parent="TabContainer/Grafika/MarginContainer/VBoxContainer/UIBlur"]
+[node name="UIBlurLabel" type="Label" parent="TabContainer/Graphics/MarginContainer/VBoxContainer/UIBlur"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Rozmycie interfejsu:"
 vertical_alignment = 1
 
-[node name="UIBlurLabelDesc" type="Label" parent="TabContainer/Grafika/MarginContainer/VBoxContainer/UIBlur"]
+[node name="UIBlurLabelDesc" type="Label" parent="TabContainer/Graphics/MarginContainer/VBoxContainer/UIBlur"]
 visible = false
 layout_mode = 2
 text = "Ustawienia pełnego ekranu są niedostępne na platformie Android"
 label_settings = SubResource("LabelSettings_rskjs")
 horizontal_alignment = 1
 
-[node name="UIBlurButton" type="Button" parent="TabContainer/Grafika/MarginContainer/VBoxContainer/UIBlur"]
+[node name="UIBlurButton" type="Button" parent="TabContainer/Graphics/MarginContainer/VBoxContainer/UIBlur"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 toggle_mode = true
 text = "Wyłączony"
 script = ExtResource("3_uq6y0")
 
-[node name="UIScaling" type="VBoxContainer" parent="TabContainer/Grafika/MarginContainer/VBoxContainer"]
+[node name="UIScaling" type="VBoxContainer" parent="TabContainer/Graphics/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 
-[node name="UIScalingLabel" type="Label" parent="TabContainer/Grafika/MarginContainer/VBoxContainer/UIScaling"]
+[node name="UIScalingLabel" type="Label" parent="TabContainer/Graphics/MarginContainer/VBoxContainer/UIScaling"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Skalowanie UI:"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Container" type="Control" parent="TabContainer/Grafika/MarginContainer/VBoxContainer/UIScaling"]
+[node name="Container" type="Control" parent="TabContainer/Graphics/MarginContainer/VBoxContainer/UIScaling"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="TabContainer/Grafika/MarginContainer/VBoxContainer/UIScaling/Container"]
+[node name="TextureRect" type="TextureRect" parent="TabContainer/Graphics/MarginContainer/VBoxContainer/UIScaling/Container"]
 custom_minimum_size = Vector2(0, 5)
 layout_mode = 1
 anchors_preset = 5
@@ -326,7 +339,7 @@ grow_horizontal = 2
 size_flags_horizontal = 3
 texture = SubResource("GradientTexture1D_8ausc")
 
-[node name="UIScalingSlider" type="HSlider" parent="TabContainer/Grafika/MarginContainer/VBoxContainer/UIScaling/Container/TextureRect"]
+[node name="UIScalingSlider" type="HSlider" parent="TabContainer/Graphics/MarginContainer/VBoxContainer/UIScaling/Container/TextureRect"]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -346,7 +359,7 @@ value = 1.0
 tick_count = 7
 ticks_on_borders = true
 
-[node name="Label" type="Label" parent="TabContainer/Grafika/MarginContainer/VBoxContainer/UIScaling/Container/TextureRect/UIScalingSlider"]
+[node name="Label" type="Label" parent="TabContainer/Graphics/MarginContainer/VBoxContainer/UIScaling/Container/TextureRect/UIScalingSlider"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 1
 offset_left = -8.0
@@ -355,7 +368,7 @@ offset_bottom = 50.0
 text = "0.7x"
 vertical_alignment = 2
 
-[node name="Label2" type="Label" parent="TabContainer/Grafika/MarginContainer/VBoxContainer/UIScaling/Container/TextureRect/UIScalingSlider"]
+[node name="Label2" type="Label" parent="TabContainer/Graphics/MarginContainer/VBoxContainer/UIScaling/Container/TextureRect/UIScalingSlider"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 1
 anchors_preset = 5
@@ -368,7 +381,7 @@ grow_horizontal = 2
 text = "1.0x"
 vertical_alignment = 2
 
-[node name="Label3" type="Label" parent="TabContainer/Grafika/MarginContainer/VBoxContainer/UIScaling/Container/TextureRect/UIScalingSlider"]
+[node name="Label3" type="Label" parent="TabContainer/Graphics/MarginContainer/VBoxContainer/UIScaling/Container/TextureRect/UIScalingSlider"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 1
 anchors_preset = 1
@@ -381,7 +394,7 @@ grow_horizontal = 0
 text = "1.3x*"
 vertical_alignment = 2
 
-[node name="UIScalingLabel2" type="Label" parent="TabContainer/Grafika/MarginContainer/VBoxContainer/UIScaling"]
+[node name="UIScalingLabel2" type="Label" parent="TabContainer/Graphics/MarginContainer/VBoxContainer/UIScaling"]
 layout_mode = 2
 text = "*Może spowodować że część elementów interfejsu zostanie umieszczona poza ekranem"
 label_settings = SubResource("LabelSettings_rskjs")
@@ -489,14 +502,14 @@ alignment = 2
 editable = false
 virtual_keyboard_type = 2
 
-[node name="Rozgrywka" type="Control" parent="TabContainer"]
+[node name="Gameplay" type="Control" parent="TabContainer"]
 visible = false
 layout_mode = 2
 focus_neighbor_left = NodePath("../Audio")
-focus_neighbor_right = NodePath("../Dostępność")
+focus_neighbor_right = NodePath("../Accessibility")
 metadata/_tab_index = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Rozgrywka"]
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Gameplay"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -508,39 +521,39 @@ theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 128
 theme_override_constants/margin_bottom = 96
 
-[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Rozgrywka/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Gameplay/MarginContainer"]
 layout_mode = 2
 horizontal_scroll_mode = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer"]
 custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 
-[node name="TouchScreenControls" type="HBoxContainer" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="TouchScreenControls" type="HBoxContainer" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_constants/separation = 24
 
-[node name="Label" type="Label" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/TouchScreenControls"]
+[node name="Label" type="Label" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/TouchScreenControls"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "Sposób sterowania dotykowego:"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/TouchScreenControls"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/TouchScreenControls"]
 custom_minimum_size = Vector2(0, 160)
 layout_mode = 2
 alignment = 1
 
-[node name="Tap" type="VBoxContainer" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/TouchScreenControls/HBoxContainer"]
+[node name="Tap" type="VBoxContainer" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/TouchScreenControls/HBoxContainer"]
 custom_minimum_size = Vector2(192, 0)
 layout_mode = 2
 alignment = 1
 
-[node name="TCHTap" type="TextureButton" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/TouchScreenControls/HBoxContainer/Tap"]
+[node name="TCHTap" type="TextureButton" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/TouchScreenControls/HBoxContainer/Tap"]
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 toggle_mode = true
@@ -552,17 +565,17 @@ texture_focused = ExtResource("6_bfxs0")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="TapLabel" type="Label" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/TouchScreenControls/HBoxContainer/Tap"]
+[node name="TapLabel" type="Label" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/TouchScreenControls/HBoxContainer/Tap"]
 layout_mode = 2
 text = "Dotknij"
 horizontal_alignment = 1
 
-[node name="Swipe" type="VBoxContainer" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/TouchScreenControls/HBoxContainer"]
+[node name="Swipe" type="VBoxContainer" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/TouchScreenControls/HBoxContainer"]
 custom_minimum_size = Vector2(192, 0)
 layout_mode = 2
 alignment = 1
 
-[node name="TCHSwipe" type="TextureButton" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/TouchScreenControls/HBoxContainer/Swipe"]
+[node name="TCHSwipe" type="TextureButton" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/TouchScreenControls/HBoxContainer/Swipe"]
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 toggle_mode = true
@@ -574,17 +587,17 @@ texture_focused = ExtResource("9_tbmhw")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="SwipeLabel" type="Label" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/TouchScreenControls/HBoxContainer/Swipe"]
+[node name="SwipeLabel" type="Label" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/TouchScreenControls/HBoxContainer/Swipe"]
 layout_mode = 2
 text = "Przewiń"
 horizontal_alignment = 1
 
-[node name="VirtualButtons" type="VBoxContainer" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/TouchScreenControls/HBoxContainer"]
+[node name="VirtualButtons" type="VBoxContainer" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/TouchScreenControls/HBoxContainer"]
 custom_minimum_size = Vector2(192, 0)
 layout_mode = 2
 alignment = 1
 
-[node name="TCHVButtons" type="TextureButton" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/TouchScreenControls/HBoxContainer/VirtualButtons"]
+[node name="TCHVButtons" type="TextureButton" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/TouchScreenControls/HBoxContainer/VirtualButtons"]
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 toggle_mode = true
@@ -596,44 +609,44 @@ texture_focused = ExtResource("12_dslu1")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="VButtonsLabel" type="Label" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/TouchScreenControls/HBoxContainer/VirtualButtons"]
+[node name="VButtonsLabel" type="Label" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/TouchScreenControls/HBoxContainer/VirtualButtons"]
 layout_mode = 2
 text = "Wirtualne przyciski"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Separator4" type="Control" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="Separator4" type="Control" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="KeyboardAndMouse" type="HBoxContainer" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="KeyboardAndMouse" type="HBoxContainer" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_constants/separation = 24
 
-[node name="Label" type="Label" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/KeyboardAndMouse"]
+[node name="Label" type="Label" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/KeyboardAndMouse"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "Klawiatura i mysz:"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/KeyboardAndMouse"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/KeyboardAndMouse"]
 custom_minimum_size = Vector2(460, 0)
 layout_mode = 2
 alignment = 2
 
-[node name="Up" type="HBoxContainer" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/KeyboardAndMouse/VBoxContainer"]
+[node name="Up" type="HBoxContainer" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/KeyboardAndMouse/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="Label" type="Label" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/KeyboardAndMouse/VBoxContainer/Up"]
+[node name="Label" type="Label" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/KeyboardAndMouse/VBoxContainer/Up"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Góra:"
 
-[node name="KBUpButton" type="Button" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/KeyboardAndMouse/VBoxContainer/Up"]
+[node name="KBUpButton" type="Button" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/KeyboardAndMouse/VBoxContainer/Up"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 focus_neighbor_bottom = NodePath("../../Down/KBDownButton")
@@ -641,18 +654,18 @@ text = "W"
 script = ExtResource("19_7a5jm")
 action = "move_up"
 
-[node name="Down" type="HBoxContainer" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/KeyboardAndMouse/VBoxContainer"]
+[node name="Down" type="HBoxContainer" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/KeyboardAndMouse/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="Label" type="Label" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/KeyboardAndMouse/VBoxContainer/Down"]
+[node name="Label" type="Label" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/KeyboardAndMouse/VBoxContainer/Down"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Dół:"
 
-[node name="KBDownButton" type="Button" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/KeyboardAndMouse/VBoxContainer/Down"]
+[node name="KBDownButton" type="Button" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/KeyboardAndMouse/VBoxContainer/Down"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 focus_neighbor_top = NodePath("../../Up/KBUpButton")
@@ -661,123 +674,125 @@ text = "S"
 script = ExtResource("19_7a5jm")
 action = "move_down"
 
-[node name="Separator3" type="Control" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="Separator3" type="Control" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="Controller" type="HBoxContainer" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="Controller" type="HBoxContainer" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 24
 alignment = 1
 
-[node name="Label" type="Label" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/Controller"]
+[node name="Label" type="Label" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/Controller"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "Kontroler:"
 
-[node name="Controller" type="VBoxContainer" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/Controller"]
+[node name="Controller" type="VBoxContainer" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/Controller"]
 custom_minimum_size = Vector2(460, 0)
 layout_mode = 2
 alignment = 2
 
-[node name="Up" type="HBoxContainer" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/Controller/Controller"]
+[node name="Up" type="HBoxContainer" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/Controller/Controller"]
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="Label" type="Label" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/Controller/Controller/Up"]
+[node name="Label" type="Label" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/Controller/Controller/Up"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Góra:"
 
-[node name="JoyUpIcon" type="TextureRect" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/Controller/Controller/Up"]
+[node name="JoyUpIcon" type="TextureRect" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/Controller/Controller/Up"]
 custom_minimum_size = Vector2(125, 48)
 layout_mode = 2
 texture = ExtResource("20_ivpag")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="DpadUpIcon" type="TextureRect" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/Controller/Controller/Up"]
+[node name="DpadUpIcon" type="TextureRect" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/Controller/Controller/Up"]
 custom_minimum_size = Vector2(125, 48)
 layout_mode = 2
 texture = ExtResource("21_p61gg")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="Down" type="HBoxContainer" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/Controller/Controller"]
+[node name="Down" type="HBoxContainer" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/Controller/Controller"]
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="Label" type="Label" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/Controller/Controller/Down"]
+[node name="Label" type="Label" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/Controller/Controller/Down"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Dół:"
 
-[node name="JoyDownIcon" type="TextureRect" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/Controller/Controller/Down"]
+[node name="JoyDownIcon" type="TextureRect" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/Controller/Controller/Down"]
 custom_minimum_size = Vector2(125, 48)
 layout_mode = 2
 texture = ExtResource("22_hr6iv")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="DpadDownIcon" type="TextureRect" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/Controller/Controller/Down"]
+[node name="DpadDownIcon" type="TextureRect" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/Controller/Controller/Down"]
 custom_minimum_size = Vector2(125, 48)
 layout_mode = 2
 texture = ExtResource("23_6rl4w")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="Separator" type="Control" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/Controller/Controller"]
+[node name="Separator" type="Control" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/Controller/Controller"]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="Deadzone" type="VBoxContainer" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/Controller/Controller"]
+[node name="Deadzone" type="VBoxContainer" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/Controller/Controller"]
 custom_minimum_size = Vector2(460, 0)
 layout_mode = 2
 alignment = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/Controller/Controller/Deadzone"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/Controller/Controller/Deadzone"]
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="Label" type="Label" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/Controller/Controller/Deadzone/HBoxContainer"]
+[node name="Label" type="Label" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/Controller/Controller/Deadzone/HBoxContainer"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Martwa strefa:"
 
-[node name="DeadzoneSlider" type="HSlider" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/Controller/Controller/Deadzone/HBoxContainer"]
+[node name="DeadzoneSlider" type="HSlider" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/Controller/Controller/Deadzone/HBoxContainer"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
+min_value = 0.1
 max_value = 1.0
 step = 0.1
+value = 0.1
 tick_count = 10
 
-[node name="Separator2" type="Control" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="Separator2" type="Control" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="PlayerName" type="HBoxContainer" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="PlayerName" type="HBoxContainer" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_constants/separation = 24
 
-[node name="Nazwa użytkownika" type="Label" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/PlayerName"]
+[node name="Nazwa użytkownika" type="Label" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/PlayerName"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Nazwa użytkownika:"
 vertical_alignment = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/PlayerName"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/PlayerName"]
 layout_mode = 2
 alignment = 1
 
-[node name="PlayernameEdit" type="LineEdit" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/PlayerName/HBoxContainer"]
+[node name="PlayernameEdit" type="LineEdit" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/PlayerName/HBoxContainer"]
 custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -787,33 +802,33 @@ focus_neighbor_bottom = NodePath("../../../ShowConsole/ShowConsoleButton")
 placeholder_text = "Nazwa użytkownika"
 max_length = 36
 
-[node name="PlayernameUUID" type="Label" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/PlayerName/HBoxContainer"]
+[node name="PlayernameUUID" type="Label" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/PlayerName/HBoxContainer"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 text = "#abcdef12"
 
-[node name="PlayernameButton" type="Button" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/PlayerName/HBoxContainer"]
+[node name="PlayernameButton" type="Button" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/PlayerName/HBoxContainer"]
 custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
 text = "Zatwierdź
 "
 
-[node name="Separator" type="Control" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="Separator" type="Control" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 
-[node name="ShowConsole" type="HBoxContainer" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="ShowConsole" type="HBoxContainer" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_constants/separation = 24
 
-[node name="ShowConsoleLabel" type="Label" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/ShowConsole"]
+[node name="ShowConsoleLabel" type="Label" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/ShowConsole"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Konsola deweloperska:"
 vertical_alignment = 2
 
-[node name="ShowConsoleButton" type="Button" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/ShowConsole"]
+[node name="ShowConsoleButton" type="Button" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/ShowConsole"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 focus_neighbor_top = NodePath("../../PlayerName/HBoxContainer/PlayernameEdit")
@@ -822,54 +837,54 @@ toggle_mode = true
 text = "Wyłączony"
 script = ExtResource("3_uq6y0")
 
-[node name="ShowFPS" type="HBoxContainer" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="ShowFPS" type="HBoxContainer" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_constants/separation = 24
 
-[node name="ShowFPSLabel" type="Label" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/ShowFPS"]
+[node name="ShowFPSLabel" type="Label" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/ShowFPS"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Pokaż liczbę klatek na sekundę:"
 vertical_alignment = 2
 
-[node name="ShowFPSButton" type="Button" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/ShowFPS"]
+[node name="ShowFPSButton" type="Button" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/ShowFPS"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 toggle_mode = true
 text = "Wyłączony"
 script = ExtResource("3_uq6y0")
 
-[node name="Telemetry" type="HBoxContainer" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="Telemetry" type="HBoxContainer" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_constants/separation = 24
 
-[node name="TelemetryLabel" type="Label" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/Telemetry"]
+[node name="TelemetryLabel" type="Label" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/Telemetry"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Telemetria:"
 vertical_alignment = 2
 
-[node name="TelemetryInfoButton" type="Button" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/Telemetry"]
+[node name="TelemetryInfoButton" type="Button" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/Telemetry"]
 layout_mode = 2
 text = "?"
 
-[node name="TelemetryButton" type="Button" parent="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/Telemetry"]
+[node name="TelemetryButton" type="Button" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/Telemetry"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 toggle_mode = true
 text = "Wyłączony"
 script = ExtResource("3_uq6y0")
 
-[node name="Dostępność" type="Control" parent="TabContainer"]
+[node name="Accessibility" type="Control" parent="TabContainer"]
 visible = false
 layout_mode = 2
-focus_neighbor_left = NodePath("../Rozgrywka")
-focus_neighbor_right = NodePath("../Zgłoś błąd")
+focus_neighbor_left = NodePath("../Gameplay")
+focus_neighbor_right = NodePath("../Technical help")
 metadata/_tab_index = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Dostępność"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Accessibility"]
 custom_minimum_size = Vector2(600, 0)
 layout_mode = 1
 anchors_preset = 8
@@ -884,17 +899,17 @@ offset_bottom = 115.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ReducedMotion" type="VBoxContainer" parent="TabContainer/Dostępność/VBoxContainer"]
+[node name="ReducedMotion" type="VBoxContainer" parent="TabContainer/Accessibility/VBoxContainer"]
 layout_mode = 2
 
-[node name="ReducedMotionLabel" type="Label" parent="TabContainer/Dostępność/VBoxContainer/ReducedMotion"]
+[node name="ReducedMotionLabel" type="Label" parent="TabContainer/Accessibility/VBoxContainer/ReducedMotion"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 text = "Redukcja ruchu:"
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="ReducedMotionButton" type="Button" parent="TabContainer/Dostępność/VBoxContainer/ReducedMotion"]
+[node name="ReducedMotionButton" type="Button" parent="TabContainer/Accessibility/VBoxContainer/ReducedMotion"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 focus_neighbor_bottom = NodePath("../../EasierFont/EasierFontButton")
@@ -902,24 +917,24 @@ toggle_mode = true
 text = "Wyłączony"
 script = ExtResource("3_uq6y0")
 
-[node name="ReducedMotionLabelDesc" type="Label" parent="TabContainer/Dostępność/VBoxContainer/ReducedMotion"]
+[node name="ReducedMotionLabelDesc" type="Label" parent="TabContainer/Accessibility/VBoxContainer/ReducedMotion"]
 layout_mode = 2
 text = "Podmienia niektóre grafiki lub wyłącza animacje aby wizualnie
 zredukować ruch na ekranie"
 label_settings = SubResource("LabelSettings_rskjs")
 horizontal_alignment = 1
 
-[node name="EasierFont" type="VBoxContainer" parent="TabContainer/Dostępność/VBoxContainer"]
+[node name="EasierFont" type="VBoxContainer" parent="TabContainer/Accessibility/VBoxContainer"]
 layout_mode = 2
 
-[node name="EasierFontLabel" type="Label" parent="TabContainer/Dostępność/VBoxContainer/EasierFont"]
+[node name="EasierFontLabel" type="Label" parent="TabContainer/Accessibility/VBoxContainer/EasierFont"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 text = "Prostsza czcionka:"
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="EasierFontButton" type="Button" parent="TabContainer/Dostępność/VBoxContainer/EasierFont"]
+[node name="EasierFontButton" type="Button" parent="TabContainer/Accessibility/VBoxContainer/EasierFont"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 focus_neighbor_top = NodePath("../../ReducedMotion/ReducedMotionButton")
@@ -928,17 +943,76 @@ toggle_mode = true
 text = "Wyłączony"
 script = ExtResource("3_uq6y0")
 
-[node name="EasierFontLabelDesc" type="Label" parent="TabContainer/Dostępność/VBoxContainer/EasierFont"]
+[node name="EasierFontLabelDesc" type="Label" parent="TabContainer/Accessibility/VBoxContainer/EasierFont"]
 layout_mode = 2
 text = "Zastępuje domyślną czcionkę gry na OpenDyslexic"
 label_settings = SubResource("LabelSettings_rskjs")
 horizontal_alignment = 1
 
-[node name="Zgłoś błąd" type="Control" parent="TabContainer"]
+[node name="Technical help" type="Control" parent="TabContainer"]
 visible = false
 layout_mode = 2
-focus_neighbor_left = NodePath("../Dostępność")
+focus_neighbor_left = NodePath("../Accessibility")
 metadata/_tab_index = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Technical help"]
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -155.5
+offset_right = 300.0
+offset_bottom = 155.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 32
+
+[node name="GameVersionLabel" type="Label" parent="TabContainer/Technical help/VBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("24_kg86x")
+theme_override_font_sizes/font_size = 16
+text = "Wersja gry: <GAME_VERSION>"
+label_settings = SubResource("LabelSettings_25glv")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="DeviceDataLabel" type="Label" parent="TabContainer/Technical help/VBoxContainer"]
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("24_kg86x")
+theme_override_font_sizes/font_size = 16
+text = "Godot Engine <ENGINE_VERSION>
+OS: <OS_TYPE> <DISTRIBUTION_NAME> <OS_VERSION>
+CPU: <CPU_NAME> <THREADS_COUNT> threads
+MEMORY: ALL: <MEM_PHYS>M | FREE: <MEM_FREE>M | AVAIL: <MEM_AVAIL>M | STACK: <MEM_STACK>M
+GPU: <GPU_VENDOR> <GPU_NAME>
+GPU API: <GPU_API_VERSION>
+DISPLAY: <DISPLAY_SERVER>
+LANG: <LOCALE>"
+label_settings = SubResource("LabelSettings_7ly4a")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="ReportBug" type="VBoxContainer" parent="TabContainer/Technical help/VBoxContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 16
+
+[node name="ReportBugFormsButton" type="Button" parent="TabContainer/Technical help/VBoxContainer/ReportBug"]
+layout_mode = 2
+text = "Zgłoś błąd przez formularz"
+
+[node name="ReportBugEmailButton" type="Button" parent="TabContainer/Technical help/VBoxContainer/ReportBug"]
+layout_mode = 2
+text = "Zgłoś błąd przez E-mail"
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 custom_minimum_size = Vector2(0, 100)
@@ -1026,29 +1100,32 @@ size_flags_horizontal = 4
 text = "Ok"
 
 [connection signal="tab_changed" from="TabContainer" to="." method="_on_tab_container_tab_changed"]
-[connection signal="toggled" from="TabContainer/Grafika/MarginContainer/VBoxContainer/FullScreen/FullScreenButton" to="." method="_on_full_screen_button_toggled"]
-[connection signal="pressed" from="TabContainer/Grafika/MarginContainer/VBoxContainer/GraphicsAPI/GraphicsAPIInfoButton" to="." method="_on_info_button_pressed" binds= ["api"]]
-[connection signal="item_selected" from="TabContainer/Grafika/MarginContainer/VBoxContainer/GraphicsAPI/GraphicsAPIButton" to="." method="_on_graphics_api_pressed"]
-[connection signal="pressed" from="TabContainer/Grafika/MarginContainer/VBoxContainer/VSync/VSyncInfoButton" to="." method="_on_info_button_pressed" binds= ["vsync"]]
-[connection signal="item_selected" from="TabContainer/Grafika/MarginContainer/VBoxContainer/VSync/VSyncButton" to="." method="_on_v_sync_button_item_selected"]
-[connection signal="pressed" from="TabContainer/Grafika/MarginContainer/VBoxContainer/WindowingSystem/LinuxWindowingSystemInfoButton" to="." method="_on_info_button_pressed" binds= ["linux_window_sys"]]
-[connection signal="item_selected" from="TabContainer/Grafika/MarginContainer/VBoxContainer/WindowingSystem/LinuxWindowingSystemButton" to="." method="_on_linux_windowing_system_button_item_selected"]
-[connection signal="value_changed" from="TabContainer/Grafika/MarginContainer/VBoxContainer/Framelimit/FramelimitSpinner" to="." method="_on_framelimit_button_value_changed"]
-[connection signal="toggled" from="TabContainer/Grafika/MarginContainer/VBoxContainer/UIBlur/UIBlurButton" to="." method="_on_ui_blur_button_toggled"]
-[connection signal="value_changed" from="TabContainer/Grafika/MarginContainer/VBoxContainer/UIScaling/Container/TextureRect/UIScalingSlider" to="." method="_on_ui_scaling_slider_value_changed"]
+[connection signal="toggled" from="TabContainer/Graphics/MarginContainer/VBoxContainer/FullScreen/FullScreenButton" to="." method="_on_full_screen_button_toggled"]
+[connection signal="pressed" from="TabContainer/Graphics/MarginContainer/VBoxContainer/GraphicsAPI/GraphicsAPIInfoButton" to="." method="_on_info_button_pressed" binds= ["api"]]
+[connection signal="item_selected" from="TabContainer/Graphics/MarginContainer/VBoxContainer/GraphicsAPI/GraphicsAPIButton" to="." method="_on_graphics_api_pressed"]
+[connection signal="pressed" from="TabContainer/Graphics/MarginContainer/VBoxContainer/VSync/VSyncInfoButton" to="." method="_on_info_button_pressed" binds= ["vsync"]]
+[connection signal="item_selected" from="TabContainer/Graphics/MarginContainer/VBoxContainer/VSync/VSyncButton" to="." method="_on_v_sync_button_item_selected"]
+[connection signal="pressed" from="TabContainer/Graphics/MarginContainer/VBoxContainer/WindowingSystem/LinuxWindowingSystemInfoButton" to="." method="_on_info_button_pressed" binds= ["linux_window_sys"]]
+[connection signal="item_selected" from="TabContainer/Graphics/MarginContainer/VBoxContainer/WindowingSystem/LinuxWindowingSystemButton" to="." method="_on_linux_windowing_system_button_item_selected"]
+[connection signal="value_changed" from="TabContainer/Graphics/MarginContainer/VBoxContainer/Framelimit/FramelimitSpinner" to="." method="_on_framelimit_button_value_changed"]
+[connection signal="toggled" from="TabContainer/Graphics/MarginContainer/VBoxContainer/UIBlur/UIBlurButton" to="." method="_on_ui_blur_button_toggled"]
+[connection signal="value_changed" from="TabContainer/Graphics/MarginContainer/VBoxContainer/UIScaling/Container/TextureRect/UIScalingSlider" to="." method="_on_ui_scaling_slider_value_changed"]
 [connection signal="drag_ended" from="TabContainer/Audio/VBoxContainer/HBoxContainer2/MasterSlider" to="." method="_on_master_slider_drag_ended"]
 [connection signal="value_changed" from="TabContainer/Audio/VBoxContainer/HBoxContainer2/MasterSlider" to="." method="_on_master_slider_value_changed"]
 [connection signal="drag_ended" from="TabContainer/Audio/VBoxContainer/HBoxContainer/SFXSlider" to="." method="_on_sfx_slider_drag_ended"]
 [connection signal="value_changed" from="TabContainer/Audio/VBoxContainer/HBoxContainer/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
 [connection signal="value_changed" from="TabContainer/Audio/VBoxContainer/HBoxContainer4/MusicSlider" to="." method="_on_music_slider_value_changed"]
-[connection signal="toggled" from="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/TouchScreenControls/HBoxContainer/Tap/TCHTap" to="." method="_on_tch_tap_toggled"]
-[connection signal="toggled" from="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/TouchScreenControls/HBoxContainer/Swipe/TCHSwipe" to="." method="_on_tch_swipe_toggled"]
-[connection signal="toggled" from="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/TouchScreenControls/HBoxContainer/VirtualButtons/TCHVButtons" to="." method="_on_tch_vbuttons_toggled"]
-[connection signal="pressed" from="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/PlayerName/HBoxContainer/PlayernameButton" to="." method="_on_playername_button_pressed"]
-[connection signal="toggled" from="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/ShowConsole/ShowConsoleButton" to="." method="_on_show_console_button_toggled"]
-[connection signal="toggled" from="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/ShowFPS/ShowFPSButton" to="." method="_on_show_fps_button_toggled"]
-[connection signal="pressed" from="TabContainer/Rozgrywka/MarginContainer/ScrollContainer/VBoxContainer/Telemetry/TelemetryInfoButton" to="." method="_on_info_button_pressed" binds= ["telemetry"]]
-[connection signal="toggled" from="TabContainer/Dostępność/VBoxContainer/ReducedMotion/ReducedMotionButton" to="." method="_on_reduced_motion_button_toggled"]
-[connection signal="toggled" from="TabContainer/Dostępność/VBoxContainer/EasierFont/EasierFontButton" to="." method="_on_easier_font_button_toggled"]
+[connection signal="toggled" from="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/TouchScreenControls/HBoxContainer/Tap/TCHTap" to="." method="_on_tch_tap_toggled"]
+[connection signal="toggled" from="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/TouchScreenControls/HBoxContainer/Swipe/TCHSwipe" to="." method="_on_tch_swipe_toggled"]
+[connection signal="toggled" from="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/TouchScreenControls/HBoxContainer/VirtualButtons/TCHVButtons" to="." method="_on_tch_vbuttons_toggled"]
+[connection signal="value_changed" from="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/Controller/Controller/Deadzone/HBoxContainer/DeadzoneSlider" to="." method="_on_deadzone_slider_value_changed"]
+[connection signal="pressed" from="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/PlayerName/HBoxContainer/PlayernameButton" to="." method="_on_playername_button_pressed"]
+[connection signal="toggled" from="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/ShowConsole/ShowConsoleButton" to="." method="_on_show_console_button_toggled"]
+[connection signal="toggled" from="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/ShowFPS/ShowFPSButton" to="." method="_on_show_fps_button_toggled"]
+[connection signal="pressed" from="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer/Telemetry/TelemetryInfoButton" to="." method="_on_info_button_pressed" binds= ["telemetry"]]
+[connection signal="toggled" from="TabContainer/Accessibility/VBoxContainer/ReducedMotion/ReducedMotionButton" to="." method="_on_reduced_motion_button_toggled"]
+[connection signal="toggled" from="TabContainer/Accessibility/VBoxContainer/EasierFont/EasierFontButton" to="." method="_on_easier_font_button_toggled"]
+[connection signal="pressed" from="TabContainer/Technical help/VBoxContainer/ReportBug/ReportBugFormsButton" to="." method="_on_report_bug_forms_button_pressed"]
+[connection signal="pressed" from="TabContainer/Technical help/VBoxContainer/ReportBug/ReportBugEmailButton" to="." method="_on_report_bug_email_button_pressed"]
 [connection signal="pressed" from="MarginContainer/BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="pressed" from="PopupInfo/Panel/VBoxContainer/HBoxContainer/AcceptButton" to="PopupInfo" method="hide"]
