@@ -1,9 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://dhg1bdg5yc1y1"]
+[gd_scene load_steps=7 format=3 uid="uid://dhg1bdg5yc1y1"]
 
 [ext_resource type="Script" path="res://scripts/main_menu_anim.gd" id="1_lo1uh"]
-[ext_resource type="PackedScene" uid="uid://7vvoan13ljn" path="res://nodes/Maps/ForestMap.tscn" id="2_7vlv3"]
-[ext_resource type="PackedScene" uid="uid://c7njf8rte5rfr" path="res://nodes/Maps/LunarConflictMap.tscn" id="3_3gkul"]
-[ext_resource type="PackedScene" uid="uid://bg5cxgxkbsi03" path="res://nodes/Maps/SaharaMap.tscn" id="3_dhdbh"]
+[ext_resource type="PackedScene" uid="uid://7vvoan13ljn" path="res://nodes/maps/ForestMap.tscn" id="2_7vlv3"]
 [ext_resource type="SpriteFrames" uid="uid://boenmxlf17kxm" path="res://sprites/spriteframes/Panda.tres" id="4_bcmsm"]
 
 [sub_resource type="Animation" id="Animation_dt7n6"]
@@ -13,14 +11,14 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
+tracks/0/path = NodePath("..:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 2, 3.5, 6, 9),
-"transitions": PackedFloat32Array(1.27456, 0.870551, 1, 1, 1.93187),
+"transitions": PackedFloat32Array(1.27456, 0.757859, 1, 1, 1.93187),
 "update": 0,
-"values": [Vector2(-79.5, 10), Vector2(47.205, 0.425), Vector2(5.875, 11.83), Vector2(-40.825, -11.905), Vector2(-79.5, 10)]
+"values": [Vector2(-140, 100), Vector2(150, 95), Vector2(50, 110), Vector2(-60, 90), Vector2(-140, 100)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_47kh2"]
@@ -29,45 +27,33 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_io2uc"]
-size = Vector2(60, 40)
+size = Vector2(70, 40)
 
-[node name="MainMenuAnim" type="Camera2D"]
+[node name="MainMenuAnim" type="Camera2D" node_paths=PackedStringArray("map")]
 texture_filter = 1
 position = Vector2(640, 360)
-scale = Vector2(2, 2)
 script = ExtResource("1_lo1uh")
 animation_speed = 400
 speed = 100
+map = NodePath("ForestMap")
 
-[node name="ForestMap" parent="." node_paths=PackedStringArray("root_node") instance=ExtResource("2_7vlv3")]
-position = Vector2(0, 68.5)
-scale = Vector2(0.515, 0.515)
-root_node = NodePath("..")
+[node name="ForestMap" parent="." instance=ExtResource("2_7vlv3")]
+position = Vector2(0, 150)
 
-[node name="SaharaMap" parent="." node_paths=PackedStringArray("root_node") instance=ExtResource("3_dhdbh")]
-visible = false
-position = Vector2(0, 68.5)
-scale = Vector2(0.515, 0.515)
-root_node = NodePath("..")
-
-[node name="LunarConflictMap" parent="." node_paths=PackedStringArray("root_node") instance=ExtResource("3_3gkul")]
-visible = false
-position = Vector2(0, 68.5)
-scale = Vector2(0.515, 0.515)
-root_node = NodePath("..")
-
-[node name="LukaszczykWPandzie" type="AnimatedSprite2D" parent="."]
-position = Vector2(-79.5, 0)
-scale = Vector2(0.75, 0.75)
-sprite_frames = ExtResource("4_bcmsm")
-autoplay = "default"
-flip_h = true
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="LukaszczykWPandzie"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../LukaszczykWPandzie/Sprite2D")
 libraries = {
 "": SubResource("AnimationLibrary_47kh2")
 }
 
+[node name="LukaszczykWPandzie" type="Node2D" parent="."]
+position = Vector2(-140, 100)
+scale = Vector2(1.5, 1.5)
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="LukaszczykWPandzie"]
+sprite_frames = ExtResource("4_bcmsm")
+autoplay = "default"
+flip_h = true
+
 [node name="TouchScreenButton" type="TouchScreenButton" parent="LukaszczykWPandzie"]
-position = Vector2(-5.33333, 0.666667)
 shape = SubResource("RectangleShape2D_io2uc")

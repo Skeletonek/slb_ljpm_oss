@@ -355,3 +355,4 @@ func _on_tab_container_tab_changed(tab):
 			OS.shell_open("https://forms.gle/94hffgvFiSXHfA529")
 			$TabContainer.current_tab = 0
 	back_button.grab_focus()
+	GlobalMusic.button_sound(false, GlobalMusic.BtnType.STANDARD)

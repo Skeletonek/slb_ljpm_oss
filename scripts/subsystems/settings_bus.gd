@@ -246,8 +246,12 @@ func set_audio_volume(bus: AudioBus, vol: float):
 
 
 func set_ui_shader(yes: bool):
-	ui_blur = yes
-	ui_shader_material_instance.set_shader_parameter("apply", ui_blur)
+	if yes:
+		ui_shader_material_instance.shader = load("res://shaders/panel.gdshader")
+	else:
+		ui_shader_material_instance.shader = null
+	# ui_blur = yes
+	# ui_shader_material_instance.set_shader_parameter("apply", ui_blur)
 
 
 

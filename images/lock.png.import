@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://crgu0b32ok5e5"
-path="res://.godot/imported/CarRideBG.png-bbc02283a726accbf2fffce43b94dcd7.ctex"
+uid="uid://wr8d14cxsrp2"
+path="res://.godot/imported/lock.png-78ccb117b05180c3254794d215fdccd4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/maps/forest/CarRideBG.png"
-dest_files=["res://.godot/imported/CarRideBG.png-bbc02283a726accbf2fffce43b94dcd7.ctex"]
+source_file="res://images/lock.png"
+dest_files=["res://.godot/imported/lock.png-78ccb117b05180c3254794d215fdccd4.ctex"]
 
 [params]
 

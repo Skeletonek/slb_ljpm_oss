@@ -1,3 +1,22 @@
+#### 2.0-Alpha+7
+ - Added basic 2_0 gameplay with milk bundles giving 3 points
+ - Added Lunar Rover skin
+ - Added shop layer
+ - Added real panda skin
+ - Added a light shadow to debug layer
+ - Added alerts about file corruption for achievements and
+ - Added sound effects to buttons
+ - Recolored restart notices to orange
+ - Improved easter egg button responsiveness
+ - Improved profile layer
+ - Optimized performance when using disabled UI blur
+ - Optimized map loading to reduce memory usage
+ - Fixed popup info sometimes being behind UI in pause menu
+ - Fixed texture filtering issues
+ - Fixed game over animation playing slower on higher FPS
+ - Fixed wrong graphics scale sometimes visible on first frame of loaded scene
+ - Dropped support for Windows 11 22H2
+
 #### 2.0-Alpha+6
  - Added Lunar Conflict map
  - Added Sahara map

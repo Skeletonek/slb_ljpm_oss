@@ -1,0 +1,186 @@
+[gd_scene load_steps=7 format=3 uid="uid://b7vga3h254d3i"]
+
+[ext_resource type="Script" path="res://scripts/ui/shop_layer.gd" id="1_gxe8y"]
+[ext_resource type="Material" uid="uid://cqn5rkmj7io2i" path="res://shaders/panel_shader_material.tres" id="1_vftsk"]
+[ext_resource type="Texture2D" uid="uid://1ybbxyuurtvd" path="res://sprites/Panda_0001.png" id="2_pnkc4"]
+[ext_resource type="Texture2D" uid="uid://ddivj5kfowxni" path="res://sprites/maps/forest/CarRideBG.webp" id="3_37tdi"]
+[ext_resource type="Texture2D" uid="uid://b1bqnsurkpd3o" path="res://sprites/Milk.png" id="4_43j7r"]
+[ext_resource type="Texture2D" uid="uid://wr8d14cxsrp2" path="res://images/lock.png" id="4_rltym"]
+
+[node name="ShopLayer" type="CanvasLayer" node_paths=PackedStringArray("skin_image", "skin_name", "skin_price", "map_image", "map_name", "map_price", "milks")]
+script = ExtResource("1_gxe8y")
+skin_image = NodePath("PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/SkinImageTextureRect")
+skin_name = NodePath("PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/SkinNameLabel")
+skin_price = NodePath("PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/SkinPriceLabel")
+map_image = NodePath("PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/MapImageTextureRect")
+map_name = NodePath("PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/MapNameLabel")
+map_price = NodePath("PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/MapPriceLabel")
+milks = NodePath("PanelContainer/VBoxContainer/HBoxContainer2/MilksLabel")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+material = ExtResource("1_vftsk")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="SkinLeftButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+text = "<-"
+
+[node name="SkinImageTextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+texture = ExtResource("2_pnkc4")
+expand_mode = 5
+stretch_mode = 5
+flip_h = true
+
+[node name="SkinImageLockedTextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/SkinImageTextureRect"]
+visible = false
+modulate = Color(1, 1, 1, 0.588235)
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_rltym")
+expand_mode = 5
+
+[node name="SkinRightButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+text = "->"
+
+[node name="SkinNameLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Lorem ipsum"
+horizontal_alignment = 1
+
+[node name="SkinPriceLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "The Price is Right"
+horizontal_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="MapLeftButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+text = "<-"
+
+[node name="MapImageTextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+texture = ExtResource("3_37tdi")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="MapImageLockedTextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/MapImageTextureRect"]
+visible = false
+modulate = Color(1, 1, 1, 0.588235)
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_rltym")
+expand_mode = 5
+
+[node name="MapRightButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+text = "->"
+
+[node name="MapNameLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Lorem ipsum"
+horizontal_alignment = 1
+
+[node name="MapPriceLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "The Price is Right"
+horizontal_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Posiadane mleka: "
+
+[node name="MilksLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "0"
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("4_43j7r")
+expand_mode = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="BackButton" type="Button" parent="PanelContainer/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Powrót"
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/SkinLeftButton" to="." method="switch_skin" binds= [-1]]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/SkinRightButton" to="." method="switch_skin" binds= [1]]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/MapLeftButton" to="." method="switch_map" binds= [-1]]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/MapRightButton" to="." method="switch_map" binds= [1]]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/MarginContainer/BackButton" to="." method="hide"]

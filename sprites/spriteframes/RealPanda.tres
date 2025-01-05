@@ -1,0 +1,18 @@
+[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://cfx8evl6dw152"]
+
+[ext_resource type="Texture2D" uid="uid://b0tuadn74lrhd" path="res://sprites/RealPanda_0001.png" id="1_4r6hl"]
+[ext_resource type="Texture2D" uid="uid://cgxm1r1pdbiw5" path="res://sprites/RealPanda_0002.png" id="2_ntnrx"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_4r6hl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ntnrx")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]

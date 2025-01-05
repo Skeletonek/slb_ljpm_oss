@@ -1,0 +1,26 @@
+[gd_resource type="SpriteFrames" load_steps=5 format=3 uid="uid://cbo1b4mpfpq78"]
+
+[ext_resource type="Texture2D" uid="uid://ewscnywesyqh" path="res://sprites/LunarRover_0001.png" id="1_w7b0l"]
+[ext_resource type="Texture2D" uid="uid://c3o5mkd0d7vxf" path="res://sprites/LunarRover_0002.png" id="2_b04ym"]
+[ext_resource type="Texture2D" uid="uid://db472tatabfs7" path="res://sprites/LunarRover_0003.png" id="3_7muoe"]
+[ext_resource type="Texture2D" uid="uid://do1i5ijw3ngco" path="res://sprites/LunarRover_0004.png" id="4_f2h8f"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_w7b0l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_b04ym")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_7muoe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_f2h8f")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://dc3ntad11u0qu"]
+[gd_scene load_steps=32 format=3 uid="uid://dc3ntad11u0qu"]
 
 [ext_resource type="Script" path="res://scripts/ui/options_layer.gd" id="1_cahn6"]
 [ext_resource type="Material" uid="uid://cqn5rkmj7io2i" path="res://shaders/panel_shader_material.tres" id="2_4i7gj"]
@@ -27,7 +27,14 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_rskjs"]
 font_size = 12
-font_color = Color(0.792157, 0.792157, 0.792157, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_p01vb"]
+font_size = 12
+font_color = Color(1, 0.75, 0.25, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_f65hj"]
+font_size = 12
+font_color = Color(1, 0.75, 0.25, 1)
 
 [sub_resource type="Gradient" id="Gradient_tecms"]
 interpolation_mode = 2
@@ -148,7 +155,7 @@ vertical_alignment = 1
 visible = false
 layout_mode = 2
 text = "Zmiana tego ustawienia wymaga restartu gry"
-label_settings = SubResource("LabelSettings_rskjs")
+label_settings = SubResource("LabelSettings_p01vb")
 horizontal_alignment = 1
 
 [node name="GraphicsAPIInfoButton" type="Button" parent="TabContainer/Grafika/MarginContainer/VBoxContainer/GraphicsAPI"]
@@ -215,7 +222,7 @@ vertical_alignment = 1
 visible = false
 layout_mode = 2
 text = "Zmiana tego ustawienia wymaga restartu gry"
-label_settings = SubResource("LabelSettings_rskjs")
+label_settings = SubResource("LabelSettings_f65hj")
 horizontal_alignment = 1
 
 [node name="LinuxWindowingSystemLabelDesc" type="Label" parent="TabContainer/Grafika/MarginContainer/VBoxContainer/WindowingSystem"]
@@ -875,6 +882,7 @@ stream = ExtResource("4_5hsqm")
 bus = &"SFX"
 
 [node name="PopupInfo" type="CanvasLayer" parent="."]
+layer = 51
 visible = false
 
 [node name="Panel" type="Panel" parent="PopupInfo"]

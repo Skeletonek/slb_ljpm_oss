@@ -18,7 +18,7 @@ var milks_total: int
 var milks_single_run: int
 var time_played_single_run: int
 var time_played_sum: int
-var top_speed: int
+var top_speed: float
 var avg_speed: int
 var meters_driven: int
 
@@ -26,8 +26,8 @@ var milks: int
 var skins: Array[bool]
 var maps: Array[bool]
 
-var chosen_skin: Skins
-var chosen_map: Maps
+var chosen_skin: Skins = Skins.FIAT_PANDA
+var chosen_map: Maps = Maps.FOREST
 
 # gdlint:ignore=function-arguments-number
 func _init(
@@ -35,7 +35,7 @@ func _init(
 		_milks_single_run: int,
 		_time_played_single_run: int,
 		_time_played_sum: int,
-		_top_speed: int,
+		_top_speed: float,
 		_avg_speed: int,
 		_meters_driven: int,
 		_milks: int,
@@ -60,6 +60,7 @@ func _init(
 
 func add_milks(_milks: int) -> void:
 	milks_total += _milks
+	milks += _milks
 	if milks_single_run < _milks:
 		milks_single_run = _milks
 
@@ -70,7 +71,7 @@ func add_time(_time: int) -> void:
 		time_played_single_run = _time
 
 
-func add_speed(_speed: int) -> void:
+func add_speed(_speed: float) -> void:
 	if top_speed < _speed:
 		top_speed = _speed
 

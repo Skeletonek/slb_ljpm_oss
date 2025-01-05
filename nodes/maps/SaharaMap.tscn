@@ -1,0 +1,97 @@
+[gd_scene load_steps=10 format=3 uid="uid://bg5cxgxkbsi03"]
+
+[ext_resource type="Script" path="res://scripts/carride/map_node.gd" id="1_5n7aw"]
+[ext_resource type="Texture2D" uid="uid://dq1w3wof7fnlc" path="res://sprites/maps/sahara/MapSahara_Parallax1.webp" id="2_te6m3"]
+[ext_resource type="Script" path="res://scripts/carride/road_scroll.gd" id="3_o6gfj"]
+[ext_resource type="Texture2D" uid="uid://bwr63ffhaw33" path="res://sprites/maps/sahara/MapSahara_Parallax2.webp" id="4_ryuxy"]
+[ext_resource type="Texture2D" uid="uid://b8y1bsnqp75wa" path="res://sprites/maps/sahara/MapSahara_Parallax3.webp" id="5_wlbpu"]
+[ext_resource type="Texture2D" uid="uid://mutgvwnjshgx" path="res://sprites/maps/sahara/MapSahara_Terrain.webp" id="6_wuq3t"]
+[ext_resource type="Texture2D" uid="uid://cx8sep1o18kvk" path="res://sprites/maps/sahara/MapSahara_Sky.webp" id="7_5wffb"]
+[ext_resource type="Texture2D" uid="uid://c57l262udunto" path="res://sprites/Road.png" id="8_n2aum"]
+[ext_resource type="Texture2D" uid="uid://btqhaxxyw1tvd" path="res://sprites/RoadRM.png" id="9_n11qu"]
+
+[node name="SaharaMap" type="Node2D"]
+script = ExtResource("1_5n7aw")
+
+[node name="Parallax1" type="Sprite2D" parent="."]
+z_index = -11
+position = Vector2(256, -67)
+scale = Vector2(2, 2)
+texture = ExtResource("2_te6m3")
+script = ExtResource("3_o6gfj")
+jump_point = -2048
+parallax_multiplier = 0.75
+mr_stopped = true
+
+[node name="Parallax1" type="Sprite2D" parent="Parallax1"]
+position = Vector2(1024, 0)
+texture = ExtResource("2_te6m3")
+
+[node name="Parallax2" type="Sprite2D" parent="."]
+z_index = -12
+position = Vector2(256, -51)
+scale = Vector2(2, 2)
+texture = ExtResource("4_ryuxy")
+script = ExtResource("3_o6gfj")
+jump_point = -2048
+parallax_multiplier = 0.5
+mr_stopped = true
+
+[node name="Parallax2" type="Sprite2D" parent="Parallax2"]
+position = Vector2(1024, 0)
+texture = ExtResource("4_ryuxy")
+
+[node name="Parallax3" type="Sprite2D" parent="."]
+z_index = -13
+position = Vector2(256, -49)
+scale = Vector2(2, 2)
+texture = ExtResource("5_wlbpu")
+script = ExtResource("3_o6gfj")
+jump_point = -2048
+parallax_multiplier = 0.25
+mr_stopped = true
+
+[node name="Parallax3" type="Sprite2D" parent="Parallax3"]
+position = Vector2(1024, 0)
+texture = ExtResource("5_wlbpu")
+
+[node name="Terrain" type="Sprite2D" parent="."]
+z_index = -10
+z_as_relative = false
+position = Vector2(0, -135)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("6_wuq3t")
+script = ExtResource("3_o6gfj")
+jump_point = -1536
+parallax_multiplier = 0.9
+mr_stopped = true
+
+[node name="Terrain" type="Sprite2D" parent="Terrain"]
+position = Vector2(1024, 0)
+texture = ExtResource("6_wuq3t")
+
+[node name="Sky" type="Sprite2D" parent="."]
+z_index = -14
+z_as_relative = false
+position = Vector2(0, -135)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("7_5wffb")
+script = ExtResource("3_o6gfj")
+jump_point = -1536
+mr_stopped = true
+
+[node name="Sky" type="Sprite2D" parent="Sky"]
+position = Vector2(1024, 0)
+texture = ExtResource("7_5wffb")
+
+[node name="Road" type="Sprite2D" parent="."]
+z_index = -9
+position = Vector2(10, -5)
+scale = Vector2(2, 2)
+texture = ExtResource("8_n2aum")
+script = ExtResource("3_o6gfj")
+mr_sprite = ExtResource("9_n11qu")
+
+[node name="Road" type="Sprite2D" parent="Road"]
+position = Vector2(720, 0)
+texture = ExtResource("8_n2aum")

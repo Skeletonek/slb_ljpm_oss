@@ -1,10 +1,11 @@
-[gd_scene load_steps=20 format=3 uid="uid://dg78sdxts17fs"]
+[gd_scene load_steps=21 format=3 uid="uid://dg78sdxts17fs"]
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_f7xwm"]
 [ext_resource type="PackedScene" uid="uid://dhg1bdg5yc1y1" path="res://scenes/ui/main_menu_anim.tscn" id="2_bk5ie"]
 [ext_resource type="Texture2D" uid="uid://cyo4rlihaqgrc" path="res://images/icons/SLB2Logo.webp" id="3_hn8g4"]
 [ext_resource type="Material" uid="uid://cqn5rkmj7io2i" path="res://shaders/panel_shader_material.tres" id="5_l01dg"]
 [ext_resource type="PackedScene" uid="uid://2sbxeymmsxu" path="res://scenes/ui/achievement_viewer.tscn" id="6_grvj1"]
+[ext_resource type="PackedScene" uid="uid://b7vga3h254d3i" path="res://scenes/ui/shop_layer.tscn" id="7_51vl4"]
 [ext_resource type="PackedScene" uid="uid://cex336ldxva3h" path="res://scenes/ui/profile_layer.tscn" id="7_d4g75"]
 [ext_resource type="PackedScene" uid="uid://dh4tjkoemf7aj" path="res://scenes/Leaderboard.tscn" id="8_y7sgj"]
 [ext_resource type="PackedScene" uid="uid://dc3ntad11u0qu" path="res://scenes/ui/options_layer.tscn" id="9_1nt05"]
@@ -130,7 +131,6 @@ size_flags_horizontal = 4
 size_flags_vertical = 8
 focus_neighbor_bottom = NodePath("../../../CreditsButton")
 focus_previous = NodePath("../../../CreditsButton")
-disabled = true
 text = "Sklep"
 
 [node name="AchievementsButton" type="Button" parent="MainMenuLayer/VBoxContainer/Profile/ProfileToggled"]
@@ -173,7 +173,6 @@ custom_minimum_size = Vector2(160, 70)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 5
-disabled = true
 text = "Tryb
 nowoczesny"
 
@@ -194,6 +193,7 @@ toggle_mode = true
 text = "Nowa gra"
 
 [node name="GameLogo" type="TextureRect" parent="MainMenuLayer"]
+texture_filter = 2
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -226,6 +226,9 @@ visible = false
 visible = false
 
 [node name="AchievementsLayer" parent="." instance=ExtResource("6_grvj1")]
+visible = false
+
+[node name="ShopLayer" parent="." instance=ExtResource("7_51vl4")]
 visible = false
 
 [node name="ProfileLayer" parent="." instance=ExtResource("7_d4g75")]
@@ -271,6 +274,7 @@ size_flags_horizontal = 3
 alignment = 1
 
 [node name="GameLogo" type="TextureRect" parent="CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer"]
+texture_filter = 2
 custom_minimum_size = Vector2(0, 190)
 layout_mode = 2
 texture = ExtResource("3_hn8g4")
@@ -305,6 +309,7 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.3
 
 [node name="SkeletonekLogo" type="TextureRect" parent="CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/SkeletonekContainer/Control"]
+texture_filter = 2
 custom_minimum_size = Vector2(70, 70)
 layout_mode = 1
 anchors_preset = 6
@@ -344,6 +349,7 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.3
 
 [node name="HalembarusLogo" type="TextureRect" parent="CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/HalembarusContainer/Control"]
+texture_filter = 2
 custom_minimum_size = Vector2(70, 70)
 layout_mode = 1
 anchors_preset = 6
@@ -391,6 +397,7 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.3
 
 [node name="GameEngineLogo" type="TextureRect" parent="CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/GameEngineContainer/Control"]
+texture_filter = 2
 custom_minimum_size = Vector2(170, 70)
 layout_mode = 1
 anchors_preset = 6
@@ -494,6 +501,7 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="GameEngineLogo" type="TextureRect" parent="CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer2"]
+texture_filter = 2
 custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -530,10 +538,14 @@ visible = false
 [connection signal="pressed" from="MainMenuLayer/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
 [connection signal="pressed" from="MainMenuLayer/VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
 [connection signal="pressed" from="MainMenuLayer/VBoxContainer/Profile/ProfileToggled/StatisticsButton" to="." method="_on_statistics_button_pressed"]
+[connection signal="pressed" from="MainMenuLayer/VBoxContainer/Profile/ProfileToggled/SkinShopButton" to="ShopLayer" method="show"]
 [connection signal="pressed" from="MainMenuLayer/VBoxContainer/Profile/ProfileToggled/AchievementsButton" to="." method="_on_achievements_button_pressed"]
+[connection signal="toggled" from="MainMenuLayer/VBoxContainer/Profile/ProfileToggleButton" to="." method="_switch_easter_egg_clickable"]
 [connection signal="toggled" from="MainMenuLayer/VBoxContainer/Profile/ProfileToggleButton" to="MainMenuLayer/VBoxContainer/Profile/ProfileToggled" method="set_visible"]
 [connection signal="pressed" from="MainMenuLayer/VBoxContainer/HiScoreButton" to="." method="_on_hi_score_button_pressed"]
+[connection signal="pressed" from="MainMenuLayer/VBoxContainer/Game/GameToggled/GameNewButton" to="." method="_on_new_game_2_0_button_pressed"]
 [connection signal="pressed" from="MainMenuLayer/VBoxContainer/Game/GameToggled/GameClassicButton" to="." method="_on_continue_button_pressed"]
+[connection signal="toggled" from="MainMenuLayer/VBoxContainer/Game/GameToggleButton" to="." method="_switch_easter_egg_clickable"]
 [connection signal="toggled" from="MainMenuLayer/VBoxContainer/Game/GameToggleButton" to="MainMenuLayer/VBoxContainer/Game/GameToggled" method="set_visible"]
 [connection signal="pressed" from="MainMenuLayer/UpdateButton" to="." method="_update_game"]
 [connection signal="pressed" from="CreditsLayer/PanelContainer/MarginContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

@@ -6,28 +6,39 @@ As of now, it is recommended to run the project in **Godot Engine 4.3**
 
 ## Supported platforms
 
-{- WARNING! -}
+### {- WARNING! -}
 {- As of 2.0-Alpha+6, support for ARMv7 devices with Android OS has been dropped -}
 
 - Microsoft Windows x86_64
   - Windows 10 22H2+
-  - Windows 11 22H2+
+  - Windows 11 23H2+
 - Linux x86_64 distributions with X11 or Wayland windowing system, OpenGL / Vulkan drivers and active support. (This excludes distros with only security support)
+  - Ubuntu 20.04 Focal Fossa
   - Ubuntu 22.04 Jammy Jellyfish
   - Ubuntu 24.04 Noble Numbat
-  - Linux Mint 21 'Vanessa'
+  - Linux Mint 21+ Vanessa, Vera, Victoria
+  - Linux Mint 22 Wilma
+  - Linux Mint Debian Edition 6
+  - Debian 12 Bookworm
   - Fedora 40
+  - Fedora 41
+  - OpenSUSE Leap 15.6
+  - OpenSUSE Tumbleweed
   - Arch Linux
+  - SteamOS 3.5+
+  - Other distributions based off the ones mentioned here
 - Android ARMv8a or x86_64
   - Android 7.0 Nougat
   - Android 8.0 Oreo
   - Android 8.1 Oreo
   - Android 9.0 Pie
-  - Android 10 Queen Cake
-  - Android 11 Red Velvet Cake
-  - Android 12 Snow Cone
-  - Android 13 Tiramisu
-  - Android 14 Upside Down Cake
+  - Android 10
+  - Android 11
+  - Android 12
+  - Android 13
+  - Android 14
+
+{- Windows 11 22H2+ and Linux distributions such as Fedora 39 are not supported because they will go EOL before LJPM 2.0 version release -}
 
 Technically it is possible to run the game on unsupported platforms such as MacOS or BSD-family systems, but no binaries are provided and developers won't help with developing fixes for these systems.
 

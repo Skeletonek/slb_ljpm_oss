@@ -49,7 +49,10 @@ func _on_area_entered(area):
 	if area.is_in_group("Milk"):
 		if process_mode != Node.PROCESS_MODE_DISABLED:
 			area.queue_free()
-			owner.milks += 1
+			if area.is_in_group("MilkTriple"):
+				owner.milks += 3
+			else:
+				owner.milks += 1
 			$MilkPlayer.play()
 			_milk_achievement_check()
 	elif area.is_in_group("Obstacles"):
@@ -77,13 +80,10 @@ func move(dir_up: bool):
 
 
 func _set_skin():
-	var skin
-	match(ProfileBus.profile.chosen_skin):
-		Profile.Skins.FIAT_PANDA:
-			skin = load("res://sprites/spriteframes/Panda.tres")
-		Profile.Skins.PIGTANK:
-			skin = load("res://sprites/spriteframes/Pigtank.tres")
-	$LukaszczykWPandzie.sprite_frames = skin
+	var skin_data = ProfileBus.get_skin_data(ProfileBus.profile.chosen_skin)
+	$LukaszczykWPandzie.sprite_frames = skin_data['spriteframe']
+	$LukaszczykWPandzie.scale = Vector2(skin_data['scale'], skin_data['scale'])
+	$LukaszczykWPandzie.offset = Vector2(0, skin_data['y_pos_offset'])
 	$LukaszczykWPandzie.play()
 
 

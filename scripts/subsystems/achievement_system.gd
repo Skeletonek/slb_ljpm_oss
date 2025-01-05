@@ -12,6 +12,8 @@ enum {
 	ACHV_DATE,
 }
 
+const ACHV_FILE = "user://achievements.dat"
+
 var data: Dictionary
 var completed: Dictionary
 var recently_completed: Dictionary
@@ -27,17 +29,23 @@ func _ready() -> void:
 	completed = _generate_achv_completed_array()
 	recently_completed = _generate_achv_recently_completed_array()
 	if not load_achievements():
+		if FileAccess.file_exists(ACHV_FILE):
+			SettingsBus.show_os_alert("ERROR WHILE LOADING ACHIEVEMENTS FILE",
+				"Couldn't load achievements file.\n" +
+				"All achievements will be erased!\n" +
+				"Terminate the game now if you don't want to override your achievements file!"
+			)
 		save_achievements()
 
 
 func load_achievements() -> bool:
-	if not FileAccess.file_exists("user://achievements.dat"):
+	if not FileAccess.file_exists(ACHV_FILE):
 		return false
-	var file = FileAccess.open("user://achievements.dat", FileAccess.READ)
+	var file = FileAccess.open(ACHV_FILE, FileAccess.READ)
 	var dat = file.get_var(true)
 	file.close()
 # Old JSON loading
-#	var file = FileAccess.open("user://achievements.json", FileAccess.READ)
+#	var file = FileAccess.open(ACHV_FILE, FileAccess.READ)
 #	var json_data = file.get_line()
 #	var json = JSON.new() # Helper
 #	var parse_result = json.parse(json_data)
@@ -53,11 +61,11 @@ func load_achievements() -> bool:
 
 
 func save_achievements() -> void:
-	var file = FileAccess.open("user://achievements.dat", FileAccess.WRITE)
+	var file = FileAccess.open(ACHV_FILE, FileAccess.WRITE)
 	file.store_var(completed, true)
 	file.close()
 # Old JSON saving
-#	var file = FileAccess.open("user://achievements.json", FileAccess.WRITE)
+#	var file = FileAccess.open(ACHV_FILE, FileAccess.WRITE)
 #	var json = JSON.stringify(achievement_completed)
 #	file.store_line(json)
 

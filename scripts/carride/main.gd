@@ -11,10 +11,15 @@ signal vehicle_reached_oob
 	get:
 		return speed
 
+@export var map: Node2D
+@export var version_2: bool
+
 var ai_vehicle_instance := preload("res://nodes/PandaAI.tscn")
 var milk_instance := preload("res://nodes/Milk.tscn")
+var milk_triple_instance := preload("res://nodes/MilkTriple.tscn")
 var stop_processing := false
 var spawn_time: int = 0
+var spawn_milk_count: int = 1
 var gauge_speed: float = -36
 
 var milks: int = 0:
@@ -45,6 +50,10 @@ var final_score: int:
 @onready var milk_spawner: Timer = $Timer
 
 
+func _enter_tree() -> void:
+	$ForestMap.hide()
+
+
 func _ready():
 	_change_scale_factor()
 	_set_map()
@@ -63,7 +72,7 @@ func _process(delta):
 			speedometer_gauge.rotation_degrees = gauge_speed
 	else:
 		if speed > -300:
-			speed -= pow(delta, 2) * 10000
+			speed -= delta * 250.0
 		else:
 			speed = -300
 	_achievement_check()
@@ -77,8 +86,7 @@ func _physics_process(_delta):
 		if not (marker.get_node("Area2D") as Area2D).has_overlapping_areas():
 			spawn_time = 0
 			var car: Area2D = ai_vehicle_instance.instantiate()
-			car.position = marker.position
-			car.position.x = marker.get_parent().position.x
+			car.position = marker.global_position
 			add_child(car)
 			car.owner = self
 
@@ -104,9 +112,18 @@ func _change_scale_factor():
 
 
 func _spawn_milk():
+	var milk: Area2D
+	if version_2:
+		if spawn_milk_count >= 5:
+			milk = milk_triple_instance.instantiate()
+			spawn_milk_count = 0
+		else:
+			milk = milk_instance.instantiate()
+		spawn_milk_count += 1
+	else:
+		milk = milk_instance.instantiate()
 	var loc_rnd = randi_range(0,4)
 	var marker: Node2D = $SpawnPoints.get_child(loc_rnd)
-	var milk: Area2D = milk_instance.instantiate()
 	milk.position = marker.position
 	milk.position.x = marker.get_parent().position.x
 	add_child(milk)
@@ -120,16 +137,11 @@ func _respawn_vehicle(): # Is this needed anymore?
 
 
 func _set_map():
-	$ForestMap.hide()
-	$SaharaMap.hide()
-	$LunarConflictMap.hide()
-	match(ProfileBus.profile.chosen_map):
-		Profile.Maps.FOREST:
-			$ForestMap.show()
-		Profile.Maps.SAHARA:
-			$SaharaMap.show()
-		Profile.Maps.LUNAR_CONFLICT:
-			$LunarConflictMap.show()
+	map.queue_free()
+	var data = ProfileBus.get_map_data(ProfileBus.profile.chosen_map)
+	map = data['scene'].instantiate()
+	map.position.y = 77
+	add_child(map)
 
 
 func _achievement_check():
@@ -143,16 +155,16 @@ func _achievement_check():
 
 func _check_game_over_achievements():
 	match(ProfileBus.profile.chosen_skin):
-		ProfileBus.profile.Skins.VOLVO_COMBI:
+		Profile.Skins.VOLVO_COMBI:
 			AchievementSystem.call_achievement("volvo_combi")
-		ProfileBus.profile.Skins.REAL_PANDA:
+		Profile.Skins.REAL_PANDA:
 			AchievementSystem.call_achievement("real_panda")
-		ProfileBus.profile.Skins.PIGTANK:
+		Profile.Skins.PIGTANK:
 			AchievementSystem.call_achievement("pigtank")
-		# ProfileBus.profile.Skins.LUNAR_ROVER:
+		# Profile.Skins.LUNAR_ROVER:
 		# 	AchievementSystem.call_achievement("lunar_rover")
 	match(ProfileBus.profile.chosen_map):
-		ProfileBus.profile.Maps.SAHARA:
+		Profile.Maps.SAHARA:
 			AchievementSystem.call_achievement("sahara")
-		ProfileBus.profile.Maps.LUNAR_CONFLICT:
+		Profile.Maps.LUNAR_CONFLICT:
 			AchievementSystem.call_achievement("lunar_conflict")

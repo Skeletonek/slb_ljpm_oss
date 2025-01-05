@@ -8,6 +8,7 @@ extends CanvasLayer
 func _ready():
 	if OS.get_name() == "Android":
 		$AndroidPauseLayer.show()
+	GlobalMusic.connect_buttons(self)
 
 
 func _process(_delta):
@@ -32,10 +33,12 @@ func _switch_visibility():
 	if get_tree().paused:
 		_hide_all_layers()
 		get_tree().paused = false
+		GlobalMusic.button_sound(false, GlobalMusic.BtnType.SWITCH)
 	elif not get_tree().paused:
 		show()
 		get_tree().paused = true
 		resume_button.grab_focus()
+		GlobalMusic.button_sound(true, GlobalMusic.BtnType.SWITCH)
 
 
 func _on_resume_button_pressed():

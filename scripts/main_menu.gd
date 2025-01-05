@@ -10,6 +10,7 @@ var build_number: int = ProjectSettings.get_setting("application/config/build_nu
 var version: String
 var download_url: String
 var changelog: String
+var easter_egg_clickable := false
 
 @onready var options_layer = $OptionsLayer
 @onready var http_request = $HTTPRequest
@@ -17,12 +18,14 @@ var changelog: String
 @onready var update_button = $MainMenuLayer/UpdateButton
 
 
-func _ready():
+func _ready() -> void:
 	if GlobalMusic.stream.resource_path == "res://audio/music/the-great-rescue.ogg":
 		var music_tick = GlobalMusic.get_playback_position()
 		GlobalMusic.stream = load("res://audio/music/the-greatest-rescue.ogg")
 		GlobalMusic.play()
 		GlobalMusic.seek(music_tick)
+
+	GlobalMusic.connect_buttons(self)
 
 	skeletonek_logo.gui_input.connect(_on_skeletonek_logo_click)
 	godot_logo.gui_input.connect(_on_godot_logo_click)
@@ -51,9 +54,10 @@ func _ready():
 	_check_update()
 
 	if not get_parent() is Window:
-		get_parent().animation.button.pressed.connect(_on_easter_egg_button_pressed)
+		get_parent().animation.luk_button.pressed.connect(_on_easter_egg_button_pressed)
 	else:
-		$MenuAnim.button.pressed.connect(_on_easter_egg_button_pressed)
+		$MenuAnim.luk_button.pressed.connect(_on_easter_egg_button_pressed)
+	easter_egg_clickable = true
 
 
 func _on_global_music_finished():
@@ -127,6 +131,14 @@ func _on_continue_button_pressed():
 	get_tree().change_scene_to_file("res://scenes/carride.tscn")
 
 
+func _on_new_game_2_0_button_pressed():
+	if SettingsBus.playername.split("#")[0] == "":
+		$popup_input.show()
+		$popup_input.save_button.connect(_on_new_game_2_0_button_pressed)
+		return
+	get_tree().change_scene_to_file("res://scenes/carride2_0.tscn")
+
+
 func _on_options_button_pressed():
 	_hide_all_layers()
 	$OptionsLayer.show()
@@ -168,6 +180,7 @@ func _on_back_button_pressed():
 	_hide_all_layers()
 	$MainMenuLayer.show()
 	focus_node.grab_focus()
+	easter_egg_clickable = true
 
 
 func _hide_all_layers():
@@ -177,6 +190,9 @@ func _hide_all_layers():
 	$AchievementsLayer.hide()
 	$CreditsLayer.hide()
 	$ProfileLayer.hide()
+	$MainMenuLayer/VBoxContainer/Profile/ProfileToggleButton.button_pressed = false
+	$MainMenuLayer/VBoxContainer/Game/GameToggleButton.button_pressed = false
+	easter_egg_clickable = false
 
 
 func _on_skeletonek_logo_click(event):
@@ -191,7 +207,11 @@ func _on_godot_logo_click(event):
 			OS.shell_open("https://godotengine.org")
 
 
+func _switch_easter_egg_clickable(no: bool) -> void:
+	easter_egg_clickable = !no
+
+
 func _on_easter_egg_button_pressed():
-	if $MainMenuLayer.visible && not $popup_input.visible && not $PopupChangelog.visible:
+	if easter_egg_clickable && not $popup_input.visible && not $PopupChangelog.visible:
 		AchievementSystem.call_achievement("rick_roll")
 		OS.shell_open("https://youtu.be/dQw4w9WgXcQ")

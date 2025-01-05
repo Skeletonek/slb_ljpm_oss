@@ -138,6 +138,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="GameLogo" type="TextureRect" parent="Splashscreen/Title screen"]
+texture_filter = 2
 layout_mode = 0
 offset_left = 383.0
 offset_top = 180.0
@@ -159,6 +160,7 @@ horizontal_alignment = 1
 vertical_alignment = 2
 
 [node name="GodotLogo" type="TextureRect" parent="Splashscreen/Title screen"]
+texture_filter = 2
 layout_mode = 0
 offset_left = 428.0
 offset_top = 598.0
@@ -168,6 +170,7 @@ scale = Vector2(0.166, 0.166)
 texture = ExtResource("3_ekstb")
 
 [node name="SkeletonekLogo" type="TextureRect" parent="Splashscreen/Title screen"]
+texture_filter = 2
 layout_mode = 0
 offset_left = 657.0
 offset_top = 598.0
@@ -177,6 +180,7 @@ scale = Vector2(0.166, 0.166)
 texture = ExtResource("4_v0hf0")
 
 [node name="HalembarusLogo" type="TextureRect" parent="Splashscreen/Title screen"]
+texture_filter = 2
 layout_mode = 0
 offset_left = 761.0
 offset_top = 598.0

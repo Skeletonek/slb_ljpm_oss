@@ -90,7 +90,10 @@ func _cr_speedometer_value(yes: bool) -> void:
 
 
 func _on_play_again_btn_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/carride.tscn")
+	if get_parent().version_2:
+		get_tree().change_scene_to_file("res://scenes/carride2_0.tscn")
+	else:
+		get_tree().change_scene_to_file("res://scenes/carride.tscn")
 
 
 func _on_menu_btn_pressed() -> void:

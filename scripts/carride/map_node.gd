@@ -1,11 +1,11 @@
 extends Node2D
 
-@export var root_node: Node
-
+var root_node: Node
 var speed: float
 var stop_processing: bool
 
 func _ready() -> void:
+	root_node = get_parent()
 	speed = root_node.speed
 	stop_processing = root_node.stop_processing
 

@@ -475,7 +475,7 @@ func _cr_skin(arg="") -> bool:
 		ProfileBus.profile.chosen_skin,
 		arg,
 		0,
-		ProfileBus.profile.Skins.size()-1
+		Profile.Skins.size()-1
 	)
 	if ret != null:
 		ProfileBus.profile.chosen_skin = ret
@@ -488,7 +488,7 @@ func _cr_map(arg="") -> bool:
 		ProfileBus.profile.chosen_map,
 		arg,
 		0,
-		ProfileBus.profile.Maps.size()-1
+		Profile.Maps.size()-1
 	)
 	if ret != null:
 		ProfileBus.profile.chosen_map = ret
