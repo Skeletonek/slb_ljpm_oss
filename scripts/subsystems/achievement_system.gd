@@ -80,6 +80,8 @@ func generate_achv_recently_completed_array() -> Dictionary:
 func call_achievement(achievement: String):
 	if completed[achievement][ACHV_COMPLETE]:
 		return true
+	if SettingsBus.cheats:
+		return false
 
 	completed[achievement][ACHV_COMPLETE] = true
 	completed[achievement][ACHV_DATE] = Time.get_datetime_string_from_system(false, true)

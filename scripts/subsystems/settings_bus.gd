@@ -30,6 +30,7 @@ var ui_scaling := 1.0
 var touchscreen_control := TouchscreenControlMode.TAP
 var keyboard_up := KEY_W
 var keyboard_down := KEY_S
+var gamepad_deadzone := 1.0
 var playername := "#" + OS.get_unique_id().substr(os_id, 8)
 
 var volume := [1.0, 0.8, 1.0, 0.5, 1.0]
@@ -40,6 +41,9 @@ var dev_error_sounds := false
 var dev_show_errors := false
 # ------------------------
 var dev_show_fps := false
+
+# Carride specific options || These values aren't saved
+var cr_speedometer_label := false
 
 var narrator_speaking := false
 var reduced_motion := false
@@ -223,6 +227,7 @@ func _initialize_debug_settings():
 		dev_error_sounds = true
 		dev_show_errors = true
 		dev_show_fps = true
+		cr_speedometer_label = true
 
 
 func show_os_alert(console_title: String, message: String):

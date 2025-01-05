@@ -85,14 +85,19 @@ func _ready(): # I'm starting to hate this code
 	easier_font_button.set_pressed_no_signal_custom(SettingsBus.easier_font)
 	reduced_motion_button.set_pressed_no_signal_custom(SettingsBus.reduced_motion)
 
-	if OS.get_name() != "Android":
-		fullscreen_button.set_pressed(SettingsBus.fullscreen)
-	else:
+	if OS.get_name() == "Android":
 		fullscreen_button.disabled = true
 		fullscreen_android_info.visible = true
 		# Disable Off and Adaptive for Android as this platform most probably
 		# doesn't support it
 		vsync_button.set_item_disabled(0, true)
+		vsync_button.set_item_disabled(2, true)
+		vsync_info.show()
+	else:
+		fullscreen_button.set_pressed(SettingsBus.fullscreen)
+
+	# Wayland (or at least KDE KWin) doesn't support Adaptive V-sync
+	if DisplayServer.get_name() == "Wayland":
 		vsync_button.set_item_disabled(2, true)
 		vsync_info.show()
 
@@ -101,11 +106,13 @@ func _ready(): # I'm starting to hate this code
 	devconsole_button.set_pressed(SettingsBus.dev_console)
 	devfps_button.set_pressed(SettingsBus.dev_show_fps)
 
+
 func _input(event):
 	if event.is_action_pressed("next_tab"):
 		if $TabContainer.current_tab < 3:
 			$TabContainer.current_tab += 1
 		elif $TabContainer.current_tab == 3:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MINIMIZED)
 			OS.shell_open("https://forms.gle/94hffgvFiSXHfA529")
 	elif event.is_action_pressed("previous_tab"):
 		if $TabContainer.current_tab > 0:
@@ -274,12 +281,6 @@ func _on_back_button_pressed():
 	$"../"._on_back_button_pressed()
 
 
-func _on_report_bug_pressed(tab):
-	if tab == 4:
-		OS.shell_open("https://forms.gle/94hffgvFiSXHfA529")
-		$TabContainer.current_tab = 0
-
-
 func _on_info_button_pressed(info):
 	var popup = AcceptDialog.new();
 	match(info):
@@ -297,7 +298,8 @@ Mogą pojawić się niewielkie opóźnienia obrazu.
 Adaptacyjny - Synchronizacja jest włączona, chyba że sprzęt nie będzie w stanie
 renderować dostateczenie szybko klatek. Wtedy synchronizacja zostaje wyłączona, aby
 ograniczyć ewentualne przycięcia obrazu.
-Opcja nie działa na urządzeniach z systemem Android.
+Opcja nie działa na urządzeniach z systemem Android, oraz systemach Linux z systemem
+okien Wayland.
 
 Mailbox - Wyświetla najnowszą klatkę w momencie odświeżenia ekranu.
 Nie powinien powodować rwania obrazu, a klatki mogą być renderowane tak szybko
@@ -340,4 +342,8 @@ func _on_tab_container_tab_changed(tab):
 			back_button.focus_neighbor_top = devconsole_button.get_path()
 		3:
 			back_button.focus_neighbor_top = easier_font_button.get_path()
+		4:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MINIMIZED)
+			OS.shell_open("https://forms.gle/94hffgvFiSXHfA529")
+			$TabContainer.current_tab = 0
 	back_button.grab_focus()

@@ -10,6 +10,8 @@ signal enable_touchscreen_vbuttons(yes: bool)
 signal call_achievement(name)
 signal dev_console(yes: bool)
 
+signal cr_speedometer_value(yes: bool)
+
 var dialogic_path
 
 func _ready():

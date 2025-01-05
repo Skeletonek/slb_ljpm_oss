@@ -8,6 +8,7 @@ const ANIMATION_SPEED := 300
 const ANIMATION_WAIT := 5
 
 @export var anim_max_y := 0
+var anim_min_y: float
 
 var animation_state := IDLE
 var animation_vector := Vector2.ZERO
@@ -24,6 +25,7 @@ var achv_icon = $HBoxContainer/MarginContainer/AchvIcon
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	anim_min_y = position.y
 	animation_timer.timeout.connect(_wait_for_achievement_end)
 	add_child(animation_timer)
 
@@ -38,10 +40,10 @@ func _process(delta):
 			animation_vector = Vector2.ZERO
 			position.y = anim_max_y
 			animation_timer.start(ANIMATION_WAIT)
-		elif position.y <= -85:
+		elif position.y <= anim_min_y:
 			animation_state = IDLE
 			animation_vector = Vector2.ZERO
-			position.y = -85
+			position.y = anim_min_y
 
 
 func show_achievement(achievement: Array):

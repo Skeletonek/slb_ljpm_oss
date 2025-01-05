@@ -1,3 +1,21 @@
+#### 2.0-Alpha+4
+ - Added enhanced version of forest map as the new main menu background
+ - Android builds are now built with custom engine build (ARM64 Release for now only)
+ - Added banner showing when player completes all achievements
+ - Added explosion animation when crashing player's car
+ - Improved parallax effect in forest map
+ - Added cr_speedometer_value command
+ - Added cr_playername command
+ - Achievements are now disabled when using cheats
+ - Game automaticly minimizes when choosing bug report button in options layer
+ - Slightly recolored road texture
+ - Disabled Adaptive V-sync option when using Linux Wayland
+ - Fixed achievement panel being visible in left-upper corner when using OpenDyslexia font
+ - Fixed time still passing after game over
+ - Fixed developer console not working on Linux when using Wayland
+ - Refactored carride code
+ - Fixed motion reduction not working correctly
+
 #### 2.0-Alpha+3
  - Upgraded Godot Engine to 4.3 stable
  - Added trees in the background using parallax effect

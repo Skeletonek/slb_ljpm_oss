@@ -116,7 +116,7 @@ vertical_alignment = 1
 [node name="FullScreenLabelDesc" type="Label" parent="TabContainer/Grafika/MarginContainer/VBoxContainer/FullScreen"]
 visible = false
 layout_mode = 2
-text = "Ustawienia pełnego ekranu są niedostępne na platformie Android"
+text = "Ta opcja jest niedostępna dla twojego systemu"
 label_settings = SubResource("LabelSettings_rskjs")
 horizontal_alignment = 1
 
@@ -172,9 +172,10 @@ vertical_alignment = 1
 [node name="VSyncLabelDesc" type="Label" parent="TabContainer/Grafika/MarginContainer/VBoxContainer/VSync"]
 visible = false
 layout_mode = 2
-text = "Część ustawień jest niedostępna na platformie Android"
+text = "Część ustawień jest niedostępna
+dla twojego systemu."
 label_settings = SubResource("LabelSettings_rskjs")
-horizontal_alignment = 1
+horizontal_alignment = 2
 
 [node name="VSyncInfoButton" type="Button" parent="TabContainer/Grafika/MarginContainer/VBoxContainer/VSync"]
 layout_mode = 2
@@ -214,8 +215,7 @@ horizontal_alignment = 1
 [node name="LinuxWindowingSystemLabelDesc" type="Label" parent="TabContainer/Grafika/MarginContainer/VBoxContainer/WindowingSystem"]
 visible = false
 layout_mode = 2
-text = "Ustawienia systemu wyświetlania okien 
-są dostępne tylko na systemach Linux"
+text = "Ta opcja jest niedostępna dla twojego systemu"
 label_settings = SubResource("LabelSettings_rskjs")
 horizontal_alignment = 2
 
@@ -868,6 +868,7 @@ text = "Zapisz i wróć"
 stream = ExtResource("4_5hsqm")
 bus = &"SFX"
 
+[connection signal="tab_changed" from="TabContainer" to="." method="_on_tab_container_tab_changed"]
 [connection signal="toggled" from="TabContainer/Grafika/MarginContainer/VBoxContainer/FullScreen/FullScreenButton" to="." method="_on_full_screen_button_toggled"]
 [connection signal="pressed" from="TabContainer/Grafika/MarginContainer/VBoxContainer/GraphicsAPI/GraphicsAPIInfoButton" to="." method="_on_info_button_pressed" binds= ["api"]]
 [connection signal="item_selected" from="TabContainer/Grafika/MarginContainer/VBoxContainer/GraphicsAPI/GraphicsAPIButton" to="." method="_on_graphics_api_pressed"]

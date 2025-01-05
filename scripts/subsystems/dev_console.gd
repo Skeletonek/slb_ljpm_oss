@@ -40,6 +40,9 @@ const SUPPORTED_COMMANDS = [
 	"fullscreen",
 	"ui_scale",
 	"ui_blur",
+	# Carride commands
+	"cr_speedometer_value",
+	"cr_playername",
 	]
 
 const UPDATE_INTERVAL := 0.1
@@ -180,6 +183,13 @@ func _process_bool(setting: bool, value) -> Variant:
 	return null
 
 
+func _process_string(setting: String, value) -> Variant:
+	if value != "":
+		return value
+	print("Value (string): " + setting)
+	return null
+
+
 func _help() -> bool:
 	var keys = commands.keys()
 	print(str(keys).replace(", ","\n").trim_prefix("[").trim_suffix("]"))
@@ -201,6 +211,10 @@ func _gamemap() -> bool:
 
 
 func _carride() -> bool:
+	if SettingsBus.playername.split("#")[0] == "":
+		push_error("Your name is not set! " +
+			 "Set your playername in gameplay page of game settings or via cr_playername command! ")
+		return true
 	get_tree().change_scene_to_file("res://scenes/carride.tscn")
 	return true
 
@@ -225,12 +239,10 @@ func _build_info() -> bool:
 
 
 func _god() -> bool:
-	if OS.is_debug_build():
-		SettingsBus.cheats = true
-		SettingsBus.godmode = !SettingsBus.godmode
-		print("Godmode " + ("enabled" if SettingsBus.godmode else "disabled"))
-	else:
-		push_error("This command is supported only in Debug build")
+	SettingsBus.cheats = true
+	SettingsBus.godmode = !SettingsBus.godmode
+	print("Godmode " + ("enabled" if SettingsBus.godmode else "disabled"))
+	push_warning("Saving scores and obtaining achievements are now disabled until game restart!")
 	return true
 
 
@@ -403,4 +415,19 @@ func _ui_blur(arg="") -> bool:
 	var ret = _process_bool(SettingsBus.ui_blur, arg)
 	if ret != null:
 		SettingsBus.set_ui_shader(ret)
+	return true
+
+
+func _cr_speedometer_value(arg="") -> bool:
+	var ret = _process_bool(SettingsBus.cr_speedometer_label, arg)
+	if ret != null:
+		SettingsBus.cr_speedometer_label = ret
+		SignalBus.emit_signal("cr_speedometer_value", ret)
+	return true
+
+
+func _cr_playername(arg="") -> bool:
+	var ret = _process_string(SettingsBus.playername.split("#")[0], arg)
+	if ret != null:
+		SettingsBus.playername = arg.replace("\n", "") + SettingsBus.playername.right(9)
 	return true

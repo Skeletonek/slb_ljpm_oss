@@ -19,12 +19,11 @@ var desaturate_material = preload("res://shaders/desaturation_material.tres")
 @onready var achv_panel = $PanelContainer/VBoxContainer/MarginContainer/\
 	ScrollContainer/HFlowContainer
 @onready var achv_details = $AchvDetailsView
+@onready var achv_all_container = $PanelContainer/VBoxContainer/AllAchvUnlockedContainer
 
 func _ready():
 	SignalBus.refresh_achievements_viewer.connect(_refresh)
-	_generate_unlocked_achievements()
-	_generate_locked_achievements()
-	_generate_hidden_achievements()
+	_refresh()
 
 
 func _refresh():
@@ -33,6 +32,8 @@ func _refresh():
 	_generate_unlocked_achievements()
 	_generate_locked_achievements()
 	_generate_hidden_achievements()
+	if _check_if_all_completed():
+		achv_all_container.show()
 
 
 func _generate_unlocked_achievements():
@@ -78,6 +79,13 @@ func _generate_hidden_achievements():
 					false,
 					true
 					)
+
+
+func _check_if_all_completed():
+	for x in AchievementSystem.data:
+		if not AchievementSystem.completed[x][ACHV_COMPLETE]:
+			return false
+	return true
 
 
 func _generate_achievement_containers(

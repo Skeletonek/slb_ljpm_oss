@@ -1,9 +1,11 @@
 extends Area2D
 
-@export var speed = 500
+@export var vertical_speed = 500
+@export var explosion_anim_duration_multiplier = 1
+@export var lane_y_diff = 80
 
 var move_vector: Vector2
-var y_limit = 60
+var y_limit := position.y
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	SignalBus.reduce_motion.connect(_reduce_motion)
@@ -25,12 +27,12 @@ func _process(delta):
 func _input(event):
 	if event.is_action_pressed("move_up"):
 		if event is InputEventJoypadMotion:
-			if event.get_action_strength("move_up") != 1.0:
+			if event.get_action_strength("move_up") != SettingsBus.gamepad_deadzone:
 				return
 		move(true)
 	elif event.is_action_pressed("move_down"):
 		if event is InputEventJoypadMotion:
-			if event.get_action_strength("move_down") != 1.0:
+			if event.get_action_strength("move_down") != SettingsBus.gamepad_deadzone:
 				return
 		move(false)
 #	elif event is InputEventScreenTouch:
@@ -50,18 +52,25 @@ func _on_area_entered(area):
 	elif area.is_in_group("Obstacles"):
 		$CrashPlayer.play()
 		if not SettingsBus.godmode:
-			hide()
-			call_deferred("set", "process_mode", Node.PROCESS_MODE_DISABLED)
-#			process_mode = Node.PROCESS_MODE_DISABLED
-			$CrashPlayer.process_mode = Node.PROCESS_MODE_ALWAYS
+			$LukaszczykWPandzie.hide()
+			$Explosion.play()
+			var tween = get_tree().create_tween()
+			tween.tween_property(
+					$Explosion,
+					"position",
+					Vector2.LEFT * owner.speed,
+					explosion_anim_duration_multiplier
+			)
+			tween.tween_callback($Explosion.queue_free)
 			owner.game_over()
+			call_deferred("set", "process_mode", Node.PROCESS_MODE_DISABLED)
 		if area.name.contains("OutOfBounds"):
 			AchievementSystem.call_achievement("offroad")
 
 
 func move(dir_up: bool):
-	move_vector = Vector2(0, (-speed if dir_up else speed))
-	y_limit += -80 if dir_up else 80
+	move_vector = Vector2(0, (-vertical_speed if dir_up else vertical_speed))
+	y_limit += -lane_y_diff if dir_up else lane_y_diff
 
 
 func _reduce_motion(yes):

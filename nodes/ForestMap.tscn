@@ -1,0 +1,84 @@
+[gd_scene load_steps=9 format=3 uid="uid://7vvoan13ljn"]
+
+[ext_resource type="Texture2D" uid="uid://bduar3walg2o0" path="res://sprites/CarRideBG_ForestParallax1.webp" id="1_gbirs"]
+[ext_resource type="Script" path="res://scripts/carride/map_node.gd" id="1_txrnv"]
+[ext_resource type="Script" path="res://scripts/carride/road_scroll.gd" id="2_apygt"]
+[ext_resource type="Texture2D" uid="uid://blvdg3xb6wyi6" path="res://sprites/CarRideBG_ForestParallax2.webp" id="3_a8fk0"]
+[ext_resource type="Texture2D" uid="uid://b6suagxemrthg" path="res://sprites/CarRideBG_ForestParallax3.webp" id="4_7rj0b"]
+[ext_resource type="Texture2D" uid="uid://c57l262udunto" path="res://sprites/Road.png" id="6_3sg2p"]
+[ext_resource type="Texture2D" uid="uid://ddivj5kfowxni" path="res://sprites/CarRideBG.webp" id="7_inapx"]
+[ext_resource type="Texture2D" uid="uid://btqhaxxyw1tvd" path="res://sprites/RoadRM.png" id="8_mwxxo"]
+
+[node name="ForestMap" type="Node2D"]
+script = ExtResource("1_txrnv")
+
+[node name="Parallax1" type="Sprite2D" parent="."]
+z_index = -6
+position = Vector2(0, -402.125)
+scale = Vector2(3, 3)
+texture = ExtResource("1_gbirs")
+script = ExtResource("2_apygt")
+jump_point = -1536
+parallax_multiplier = 0.99
+mr_hidden = true
+
+[node name="Parallax1" type="Sprite2D" parent="Parallax1"]
+position = Vector2(512, 0)
+texture = ExtResource("1_gbirs")
+
+[node name="Parallax2" type="Sprite2D" parent="."]
+z_index = -7
+position = Vector2(0, -372)
+scale = Vector2(2.7, 2.7)
+texture = ExtResource("3_a8fk0")
+script = ExtResource("2_apygt")
+jump_point = -1383
+parallax_multiplier = 0.97
+mr_hidden = true
+
+[node name="Parallax2" type="Sprite2D" parent="Parallax2"]
+position = Vector2(512, 0)
+texture = ExtResource("3_a8fk0")
+
+[node name="Parallax3" type="Sprite2D" parent="."]
+z_index = -8
+position = Vector2(0, -334.4)
+scale = Vector2(2.4, 2.4)
+texture = ExtResource("4_7rj0b")
+script = ExtResource("2_apygt")
+jump_point = -1229
+parallax_multiplier = 0.95
+mr_hidden = true
+
+[node name="Parallax3" type="Sprite2D" parent="Parallax3"]
+position = Vector2(512, 0)
+texture = ExtResource("4_7rj0b")
+
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -10
+z_as_relative = false
+position = Vector2(0, -135)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("7_inapx")
+script = ExtResource("2_apygt")
+jump_point = -1536
+parallax_multiplier = 0.1
+mr_stopped = true
+
+[node name="Background" type="Sprite2D" parent="Background"]
+z_index = -10
+z_as_relative = false
+position = Vector2(1024, 0)
+texture = ExtResource("7_inapx")
+
+[node name="Road" type="Sprite2D" parent="."]
+z_index = -9
+position = Vector2(10, -5)
+scale = Vector2(2, 2)
+texture = ExtResource("6_3sg2p")
+script = ExtResource("2_apygt")
+mr_sprite = ExtResource("8_mwxxo")
+
+[node name="Road" type="Sprite2D" parent="Road"]
+position = Vector2(720, 0)
+texture = ExtResource("6_3sg2p")

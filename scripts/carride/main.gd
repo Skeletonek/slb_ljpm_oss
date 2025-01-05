@@ -57,9 +57,9 @@ func _ready():
 
 
 func _process(delta):
-	time = Time.get_ticks_msec() - start_time
 	_change_scale_factor() #FIXME: Find better solution
 	if not stop_processing:
+		time = Time.get_ticks_msec() - start_time
 		if speed < 1560:
 			speed += delta * speed_increment
 			gauge_speed = (speed / 10) - 66
@@ -91,6 +91,7 @@ func game_over():
 	gui.game_over()
 	$PauseLayer.process_mode = Node.PROCESS_MODE_DISABLED
 	stop_processing = true
+	milk_spawner.stop()
 	if not SettingsBus.cheats:
 		var leaderboard_name = "dev" if OS.is_debug_build() else "main"
 		SilentWolf.Scores.save_score(SettingsBus.playername, final_score, leaderboard_name)
@@ -112,9 +113,9 @@ func _spawn_milk():
 
 
 func _respawn_vehicle(): # Is this needed anymore?
-	var y = 350
-	y += 100 * randi_range(0,2)
-	$"PandaBlue".position = Vector2(1450, y)
+	var loc_rnd = randi_range(0,4)
+	var marker: Node2D = $SpawnPoints.get_child(loc_rnd)
+	$"PandaBlue".position = marker.position
 
 
 func _achievement_check():
