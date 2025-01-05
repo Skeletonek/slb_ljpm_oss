@@ -1,3 +1,9 @@
+#### 1.1.1
+ - Modified '5', 'Z' and 'T' characters in default font
+ - Fixed leaderboards scrolling being diffcult on touch screen devices, again
+ - Updated copyright notices
+ - Added new music as an easter egg
+
 #### 1.1.0
  - Changed default mobile renderer to OpenGL
  - Added shortcuts to launch OpenGL version of the game to desktop builds

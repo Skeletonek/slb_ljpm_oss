@@ -57,7 +57,6 @@ size_flags_vertical = 4
 tab_alignment = 1
 
 [node name="Grafika" type="Control" parent="TabContainer"]
-visible = false
 layout_mode = 2
 focus_neighbor_right = NodePath("../Audio")
 
@@ -562,6 +561,7 @@ text = "Wyłączony"
 script = ExtResource("3_uq6y0")
 
 [node name="Dostępność" type="Control" parent="TabContainer"]
+visible = false
 layout_mode = 2
 focus_neighbor_left = NodePath("../Rozgrywka")
 focus_neighbor_right = NodePath("../Zgłoś błąd")

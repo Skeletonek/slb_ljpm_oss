@@ -23,8 +23,11 @@ func change_track():
 	if random == 0:
 		var rnd_remaster = randi_range(0,10)
 		if rnd_remaster == 0:
+			var pos = get_playback_position()
 			stream = stricken_remastered
-			pass
+			play()
+			seek(pos)
+			return
 	random = randi_range(0,5)
 	stream = musicfiles[random]
 	play()

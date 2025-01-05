@@ -4,12 +4,12 @@
 [ext_resource type="StyleBox" uid="uid://c4381l4nshdt8" path="res://theme/style_box_flat_focused.tres" id="2_tukea"]
 [ext_resource type="StyleBox" uid="uid://beouu0raqpik5" path="res://theme/style_box_flat_hover.tres" id="3_xtdnp"]
 [ext_resource type="StyleBox" uid="uid://cp1tbuafgojja" path="res://theme/style_box_flat_pressed.tres" id="4_yvq0w"]
-[ext_resource type="FontFile" uid="uid://bldge4o8plp5o" path="res://theme/fonts/PixelifySans-Bold.ttf" id="5_8o6v7"]
 [ext_resource type="StyleBox" uid="uid://cao42a6b8audp" path="res://theme/style_box_flat_no_border.tres" id="5_i0kmv"]
 [ext_resource type="StyleBox" uid="uid://cbeisib500lr6" path="res://theme/panel.tres" id="6_ygc60"]
+[ext_resource type="FontFile" uid="uid://bvlj3t1wrle3s" path="res://theme/fonts/PixelifySans_2-Bold.ttf" id="7_j3kit"]
 
 [resource]
-default_font = ExtResource("5_8o6v7")
+default_font = ExtResource("7_j3kit")
 default_font_size = 22
 Button/styles/disabled = ExtResource("1_mg7kw")
 Button/styles/focus = ExtResource("2_tukea")
