@@ -69,7 +69,7 @@ size = Vector2(250, 40)
 y_sort_enabled = true
 texture_filter = 1
 script = ExtResource("1_y5nnv")
-speed_increment = 500.0
+speed_increment = 8.0
 speed = 300.0
 metadata/_edit_vertical_guides_ = [-221.0, -650.0]
 

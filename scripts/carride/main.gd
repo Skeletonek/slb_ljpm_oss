@@ -65,7 +65,7 @@ func _process(delta):
 	_change_scale_factor() #FIXME: Find better solution
 	if not stop_processing:
 		if speed < 1560:
-			speed += pow(delta, 2) * speed_increment
+			speed += delta * speed_increment
 			gauge_speed = (speed / 10) - 66
 			SpeedometerGauge.rotation_degrees = gauge_speed
 	else:

@@ -1,3 +1,6 @@
+#### 1.0.2
+ - Fixed exploit connected to display refresh rate
+
 #### 1.0.1
  - Fixed removing newline characters from player names in leaderboard
  - Fixed easter egg button being clickable behind opaque menus

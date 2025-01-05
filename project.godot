@@ -20,9 +20,9 @@ boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/image="res://images/SplashScreen.png"
 config/icon="res://icon.svg"
 boot_splash/minimum_display_time=1000
-config/version="1.0.1"
-config/build_number=12
-config/date="2023-11-26 17:06"
+config/version="1.0.2"
+config/build_number=13
+config/date="2023-11-26 21:08"
 
 [autoload]
 
