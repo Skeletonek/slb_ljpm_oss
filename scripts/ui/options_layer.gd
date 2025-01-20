@@ -71,7 +71,10 @@ func _ready(): # I'm starting to hate this code
 	_init_vsync_settings()
 	_init_tab_names()
 
-	graphics_api_button.get_popup().id_pressed.connect(_on_graphics_api_pressed)
+	SignalBus.vsync_checked.connect(_init_vsync_settings)
+	graphics_api_button.get_popup().id_pressed.connect(
+		_on_graphics_api_pressed
+	)
 	if SettingsBus.cfg_rendering_method == "gl_compatibility":
 		graphics_api_button.selected = 1
 

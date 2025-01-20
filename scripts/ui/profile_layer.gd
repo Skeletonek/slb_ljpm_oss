@@ -45,7 +45,7 @@ func _on_back_button_pressed():
 func _time_to_friendly_string(time: int, show_hours: bool) -> String:
 	var miliseconds: int = (time / 1000) % 1000
 	var seconds: int = (time / 1000000) % 60
-	var minutes: int = (time / 1000000) / 60
+	var minutes: int = (time / 1000000) / 60 % 60
 	if show_hours:
 		var hours: int = (time / 1000000) / 3600
 		return ("%02d:%02d:%02d:%03d" % [hours, minutes, seconds, miliseconds])

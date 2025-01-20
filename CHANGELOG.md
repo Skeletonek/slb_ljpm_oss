@@ -1,3 +1,7 @@
+#### 2.1.2
+ - Fixed overall time elapsed in game showing more minutes than 60
+ - Fixed V-sync options being disabled after game launch
+
 #### 2.1.1
  - Changed checking for available to wait one second after game launch
  - Changed engine branch for Windows version from 4.3.0 to 4.3.1-dev

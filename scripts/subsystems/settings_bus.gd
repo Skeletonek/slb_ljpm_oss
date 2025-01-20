@@ -275,6 +275,7 @@ func _check_vsync_availability() -> void:
 			vsync_availability[v] = false
 	if vsync == null:
 		vsync = _vsync_set_by_priority()
+	SignalBus.vsync_checked.emit()
 
 
 func _vsync_set_by_priority() -> DisplayServer.VSyncMode:

@@ -6,6 +6,7 @@ signal load_specific_timeline(timeline_path)
 signal refresh_achievements_viewer
 signal reload_scale_factor
 
+signal vsync_checked
 signal enable_touchscreen_vbuttons(yes: bool)
 signal switch_touchscreen_mode
 signal dev_console(yes: bool)
